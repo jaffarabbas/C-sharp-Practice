@@ -1,0 +1,16 @@
+J:\C-sharp-Practice\Practise\pr1\bin\Debug\net5.0\pr1.exe
+J:\C-sharp-Practice\Practise\pr1\bin\Debug\net5.0\pr1.deps.json
+J:\C-sharp-Practice\Practise\pr1\bin\Debug\net5.0\pr1.runtimeconfig.json
+J:\C-sharp-Practice\Practise\pr1\bin\Debug\net5.0\pr1.runtimeconfig.dev.json
+J:\C-sharp-Practice\Practise\pr1\bin\Debug\net5.0\pr1.dll
+J:\C-sharp-Practice\Practise\pr1\bin\Debug\net5.0\ref\pr1.dll
+J:\C-sharp-Practice\Practise\pr1\bin\Debug\net5.0\pr1.pdb
+J:\C-sharp-Practice\Practise\pr1\obj\Debug\net5.0\pr1.csprojAssemblyReference.cache
+J:\C-sharp-Practice\Practise\pr1\obj\Debug\net5.0\pr1.GeneratedMSBuildEditorConfig.editorconfig
+J:\C-sharp-Practice\Practise\pr1\obj\Debug\net5.0\pr1.AssemblyInfoInputs.cache
+J:\C-sharp-Practice\Practise\pr1\obj\Debug\net5.0\pr1.AssemblyInfo.cs
+J:\C-sharp-Practice\Practise\pr1\obj\Debug\net5.0\pr1.csproj.CoreCompileInputs.cache
+J:\C-sharp-Practice\Practise\pr1\obj\Debug\net5.0\pr1.dll
+J:\C-sharp-Practice\Practise\pr1\obj\Debug\net5.0\ref\pr1.dll
+J:\C-sharp-Practice\Practise\pr1\obj\Debug\net5.0\pr1.pdb
+J:\C-sharp-Practice\Practise\pr1\obj\Debug\net5.0\pr1.genruntimeconfig.cache

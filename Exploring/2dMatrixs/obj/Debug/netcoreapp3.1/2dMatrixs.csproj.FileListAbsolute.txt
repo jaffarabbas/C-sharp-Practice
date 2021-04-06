@@ -1,0 +1,13 @@
+J:\c#Work\2dMatrixs\bin\Debug\netcoreapp3.1\2dMatrixs.exe
+J:\c#Work\2dMatrixs\bin\Debug\netcoreapp3.1\2dMatrixs.deps.json
+J:\c#Work\2dMatrixs\bin\Debug\netcoreapp3.1\2dMatrixs.runtimeconfig.json
+J:\c#Work\2dMatrixs\bin\Debug\netcoreapp3.1\2dMatrixs.runtimeconfig.dev.json
+J:\c#Work\2dMatrixs\bin\Debug\netcoreapp3.1\2dMatrixs.dll
+J:\c#Work\2dMatrixs\bin\Debug\netcoreapp3.1\2dMatrixs.pdb
+J:\c#Work\2dMatrixs\obj\Debug\netcoreapp3.1\2dMatrixs.csprojAssemblyReference.cache
+J:\c#Work\2dMatrixs\obj\Debug\netcoreapp3.1\2dMatrixs.AssemblyInfoInputs.cache
+J:\c#Work\2dMatrixs\obj\Debug\netcoreapp3.1\2dMatrixs.AssemblyInfo.cs
+J:\c#Work\2dMatrixs\obj\Debug\netcoreapp3.1\2dMatrixs.csproj.CoreCompileInputs.cache
+J:\c#Work\2dMatrixs\obj\Debug\netcoreapp3.1\2dMatrixs.dll
+J:\c#Work\2dMatrixs\obj\Debug\netcoreapp3.1\2dMatrixs.pdb
+J:\c#Work\2dMatrixs\obj\Debug\netcoreapp3.1\2dMatrixs.genruntimeconfig.cache
