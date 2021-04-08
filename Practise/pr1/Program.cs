@@ -17,6 +17,7 @@ namespace pr1
         static void Main(string[] args)
         {
             code.print100(1);
+            Console.WriteLine("kjgjhgjhjh");
         }
     }
 }
