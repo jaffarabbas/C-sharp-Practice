@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+@{ 
+
+    String[] a = { "sdfsdf", "asdasdasd", "asdsadasd", "asdasdas", "qwewe", "gdfgdfg" };
+
+}
+
+<h1>
+    <ul>
+        @{ 
+          foreach(String i in a) { 
+            <li>@i</li>
+          }
+        }
+    </ul>
+</h1>
