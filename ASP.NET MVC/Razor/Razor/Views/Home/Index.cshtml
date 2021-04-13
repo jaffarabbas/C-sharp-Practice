@@ -2,15 +2,19 @@
     ViewBag.Title = "Home Page";
 }
 
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css" />
 
-@{ 
+<blockquote>
 
-    var empp = ViewBag.Employee;
+    @{
 
-}
+        var empp = ViewBag.Employee;
 
-<h1>
-    <ul>
+    }
+
+    <h1>
+        <ul>
             <li>
 
                 <p>@empp.EmpID</p>
@@ -26,8 +30,66 @@
                 <p>@empp.EmpEmail</p>
 
             </li>
-    </ul>
+        </ul>
 
-    <h1>View Bag data : @ViewBag.Comit</h1>
-    <h1>View Data data : @ViewData["Comit"]</h1>
-</h1>
+        <h1>View Bag data : @ViewBag.Comit</h1>
+        <h1>View Data data : @ViewData["Comit"]</h1>
+
+        <ul>
+            @{
+                foreach (int i in (int[])ViewData["Arr"])
+                {
+                    <li>@i</li>
+                }
+            }
+        </ul>
+        <ul>
+            @{
+                foreach (int i in ViewBag.Arr)
+                {
+                    <li>@i</li>
+                }
+            }
+        </ul>
+    </h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <blockquote>
+                    Of all the inventions in the field of electronics like the radio and telephone, the programmable computer was the most significant one. It changed the world forever.
+
+                    If ever a certain device can be programmed the way we want it to behave, then we can simply instruct it to do things for us. That's very practical, isn't it?
+
+                    After the programmable computers, the next big question was how humans would program these computers. They began developing programming languages and the 1970s was a very remarkable period: the C language was invented.
+
+                    After the success, the great potential was unleashed and we are now seeing the things a programmable computer can do: the era of information, real-time data, almost realistic 3D games, artificial intelligence, etc.
+                </blockquote>
+            </div>
+            <div class="col-lg-4">
+                <blockquote>
+                    Of all the inventions in the field of electronics like the radio and telephone, the programmable computer was the most significant one. It changed the world forever.
+
+                    If ever a certain device can be programmed the way we want it to behave, then we can simply instruct it to do things for us. That's very practical, isn't it?
+
+                    After the programmable computers, the next big question was how humans would program these computers. They began developing programming languages and the 1970s was a very remarkable period: the C language was invented.
+
+                    After the success, the great potential was unleashed and we are now seeing the things a programmable computer can do: the era of information, real-time data, almost realistic 3D games, artificial intelligence, etc.
+                </blockquote>
+            </div>
+            <div class="col-lg-4">
+                <blockquote>
+                    Of all the inventions in the field of electronics like the radio and telephone, the programmable computer was the most significant one. It changed the world forever.
+
+                    If ever a certain device can be programmed the way we want it to behave, then we can simply instruct it to do things for us. That's very practical, isn't it?
+
+                    After the programmable computers, the next big question was how humans would program these computers. They began developing programming languages and the 1970s was a very remarkable period: the C language was invented.
+
+                    After the success, the great potential was unleashed and we are now seeing the things a programmable computer can do: the era of information, real-time data, almost realistic 3D games, artificial intelligence, etc.
+                </blockquote>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/bootstrap.min.js" />
+    <script src="~/Scripts/bootstrap.js" />
+</blockquote>
