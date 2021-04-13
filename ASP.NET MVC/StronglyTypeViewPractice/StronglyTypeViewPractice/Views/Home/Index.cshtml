@@ -1,0 +1,17 @@
+﻿@model List<StronglyTypeViewPractice.Models.Employee>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1>List</h1>
+<ul>
+    @{
+        foreach (var i in Model)
+        {
+            <li>@i.Id</li>
+            <li>@i.Name</li>
+            <li>@i.Email</li>
+        }
+    }
+</ul>
