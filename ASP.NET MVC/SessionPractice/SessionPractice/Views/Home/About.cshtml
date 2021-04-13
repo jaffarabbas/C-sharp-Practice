@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+<h1>@Session["first"]</h1>
+
+@*we need type cast for seesion in e.g arrays*@
+
+<ul>
+    @{
+        foreach (string i in (string[])Session["arr"])
+        {
+            <li>@i</li>
+        }
+    }
+</ul>
