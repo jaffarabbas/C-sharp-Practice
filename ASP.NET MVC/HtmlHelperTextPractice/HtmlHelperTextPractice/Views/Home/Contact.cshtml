@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <ul class="nav navbar-nav">
+        <li>
+            @Html.ActionLink("Home", "index", "Home")
+        </li>
+        <li>
+            @Html.ActionLink("About", "About", "Home")
+        </li>
+        <li>
+            @Html.ActionLink("Contact", "Contact", "Home")
+        </li>
+    </ul>
+</nav>
+
+<div class="container">
+    <div class="container">
+        <h1 class="text-center">Contact us</h1>
+        <div id="form1" class="text-center">
+            @Html.TextBox("Full Name", null, new { @class = "form-control" })
+            <br />
+            <br />
+            @Html.TextBox("Email", null, new { @class = "form-control" })
+            <br />
+            <br />
+            @Html.TextBox("number", null, new { @class = "form-control" })
+            <br />
+            <br />
+            @Html.TextBox("Class", null, new { @class = "form-control" })
+            <br />
+            <br />
+            @Html.TextBox("messae", null, new { @class = "form-control" })
+        </div>
+
+        <h1 class="text-center">New Logins</h1>
+
+        @{
+            Html.BeginForm("Contact", "Home");
+        }
+
+        @Html.Label("Username") &nbsp; @Html.TextBox("Username", null, new { @class = "form-control" })
+        <br />
+        <br />
+        @Html.Label("Password") &nbsp; @Html.Password("Password", null, new { @class = "form-control" })
+        <br />
+        <br />
+        @Html.Label("Male") &nbsp; @Html.RadioButton("Gender", "Male") &nbsp; @Html.Label("Female") &nbsp; @Html.RadioButton("Gender", "Female")
+        <br />
+        <br />
+        @Html.Label("Contry List") &nbsp; @Html.DropDownList("Contry List", new SelectList(new[] { "Pakistan", "India", "UK", "Canada" }), "Choose YOur Country", new { @class = "form-control" })
+        <br />
+        <br />
+        @Html.Label("Commenta") &nbsp; @Html.TextArea("Comments", new { @class = "form-control" })
+        <br />
+        <br />
+        @Html.CheckBox("AcceptTerms")  &nbsp; @Html.Label("accept the Terms and Condition") &nbsp;
+        @Html.Hidden("id")
+        <br />
+        <br />
+        <input type="submit" class="form-control btn btn-primary" value="Submit" />
+        <br />
+        <br />
+        @*Url.action links*@
+        <a href="@Url.Action("Index","Home")">Forget Password</a>
+        @{
+            Html.EndForm();
+        }
+    </div>
+</div>
