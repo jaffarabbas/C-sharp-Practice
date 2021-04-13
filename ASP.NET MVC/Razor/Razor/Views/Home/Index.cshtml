@@ -5,16 +5,29 @@
 
 @{ 
 
-    String[] a = { "sdfsdf", "asdasdasd", "asdsadasd", "asdasdas", "qwewe", "gdfgdfg" };
+    var empp = ViewBag.Employee;
 
 }
 
 <h1>
     <ul>
-        @{ 
-          foreach(String i in a) { 
-            <li>@i</li>
-          }
-        }
+            <li>
+
+                <p>@empp.EmpID</p>
+
+            </li>
+            <li>
+
+                <p>@empp.EmpName</p>
+
+            </li>
+            <li>
+
+                <p>@empp.EmpEmail</p>
+
+            </li>
     </ul>
+
+    <h1>View Bag data : @ViewBag.Comit</h1>
+    <h1>View Data data : @ViewData["Comit"]</h1>
 </h1>

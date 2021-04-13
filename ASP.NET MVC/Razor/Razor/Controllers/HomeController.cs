@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Razor.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,17 @@ namespace Razor.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Message = "Hello";
+
+            Employees emp = new Employees();
+            emp.EmpID = "fa19-bsse-0008";
+            emp.EmpName = "Jaffar";
+            emp.EmpEmail = "fa19-bsse-0008@maju.edu.pk";
+
+            ViewBag.Employee = emp;
+
+            ViewData["Comit"] = "New COmmit";
+
             return View();
         }
 
