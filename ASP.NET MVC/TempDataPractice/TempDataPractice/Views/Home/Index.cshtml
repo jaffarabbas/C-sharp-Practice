@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1>@TempData["Data"]</h1>
+
+<ul>
+    @{ 
+        foreach(int i in (int[])TempData["arry"])
+            {
+                <li>@i</li>
+            }
+    }
+</ul>
