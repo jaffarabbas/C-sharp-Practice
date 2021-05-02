@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<h1>Login</h1>
+
+@using (Html.BeginForm())
+{
+    <p>
+        @Html.Label("Name") @Html.TextBox("Username", null, new { @class = "form-control" })
+        <b class="text-danger">@ViewData["error"]</b>
+    </p>
+    @*<p>@Html.ValidationMessage("Username",new { @class="text-danger"})</p>*@
+    <br />
+    <p>
+        @Html.Label("Password") @Html.Password("Password", null, new { @class = "form-control" })
+        <b class="text-danger">@ViewData["error"]</b>
+    </p>
+    <p>
+        @Html.Label("Email") @Html.TextBox("Email", null, new { @class = "form-control" })
+        <b class="text-danger">@ViewData["error"]</b>
+    </p>
+    <br />
+    <br />
+    <input type="submit" class="form-control btn btn-danger" value="Submit" />
+    @Html.Raw(ViewData["success"]);
+}
+
+<h1>Validation Summery</h1>
+
+<h5>@Html.ValidationSummary("", new { @class = "text-danger" })</h5>
