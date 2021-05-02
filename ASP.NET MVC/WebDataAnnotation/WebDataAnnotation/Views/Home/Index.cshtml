@@ -1,31 +1,26 @@
-﻿@{
+﻿@model WebDataAnnotation.Models.Employee
+
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<h1>Employee Information</h1>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+@using (Html.BeginForm())
+{
+    <p>@Html.LabelFor(model => model.EmployeeID) @Html.TextBoxFor(model => model.EmployeeID, new { @class = "form-control" }) &nbsp; @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })</p>
+    <p>@Html.LabelFor(model => model.EmployeeName) @Html.TextBoxFor(model => model.EmployeeName, new { @class = "form-control" }) &nbsp; @Html.ValidationMessageFor(model => model.EmployeeName, "", new { @class = "text-danger" })</p>
+    <p>@Html.LabelFor(model => model.EmployeeAge) @Html.TextBoxFor(model => model.EmployeeAge, new { @class = "form-control" })&nbsp; @Html.ValidationMessageFor(model => model.EmployeeAge, "", new { @class = "text-danger" })</p>
+    <p>@Html.LabelFor(model => model.EmployeeGender) @Html.TextBoxFor(model => model.EmployeeGender, new { @class = "form-control" })&nbsp; @Html.ValidationMessageFor(model => model.EmployeeGender, "", new { @class = "text-danger" })</p>
+    <p>@Html.LabelFor(model => model.EmployeeEmail) @Html.TextBoxFor(model => model.EmployeeEmail, new { @class = "form-control" })&nbsp; @Html.ValidationMessageFor(model => model.EmployeeEmail, "", new { @class = "text-danger" })</p>
+    <p>@Html.LabelFor(model => model.EmployeePassword) @Html.EditorFor(model => model.EmployeePassword, new { htmlAttributes = new { @class = "form-control" } })&nbsp; @Html.ValidationMessageFor(model => model.EmployeePassword, "", new { @class = "text-danger" })</p>
+    <p>@Html.LabelFor(model => model.CompareEmployeePassword) @Html.EditorFor(model => model.CompareEmployeePassword, new { htmlAttributes = new { @class = "form-control" } })&nbsp; @Html.ValidationMessageFor(model => model.CompareEmployeePassword, "", new { @class = "text-danger" })</p>
+    <p>@Html.LabelFor(model => model.EmployeeOrganization) @Html.TextBoxFor(model => model.EmployeeOrganization, new { @class = "form-control", @VaLue = "Goggle Developers", @readonly = true })</p>
+    <p>@Html.LabelFor(model => model.EmployeeAddress) @Html.EditorFor(model => model.EmployeeAddress, new { htmlAttributes = new { @class = "form-control" } })&nbsp; @Html.ValidationMessageFor(model => model.EmployeeAddress, "", new { @class = "text-danger" })</p>
+    <p>@Html.LabelFor(model => model.EmployeeJoiningDate) @Html.EditorFor(model => model.EmployeeJoiningDate, new { htmlAttributes = new { @class = "form-control" } })&nbsp; @Html.ValidationMessageFor(model => model.EmployeeJoiningDate, "", new { @class = "text-danger" })</p>
+    <p>@Html.LabelFor(model => model.EmployeeJoiningTime) @Html.EditorFor(model => model.EmployeeJoiningTime, new { htmlAttributes = new { @class = "form-control" } })&nbsp; @Html.ValidationMessageFor(model => model.EmployeeJoiningTime, "", new { @class = "text-danger" })</p>
+    <br />
+    <input type="submit" value="Submit" class="form - control btn btn-primary" name="submit" />    
+
+    @Html.Raw(ViewData["success"]);
+}
