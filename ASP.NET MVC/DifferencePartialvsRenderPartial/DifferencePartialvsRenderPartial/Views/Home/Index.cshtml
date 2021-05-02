@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@{
+    var paratial_taker = Html.Partial("_PartialView");
+    //apending new html string in the partial view thats why we use Html.Partial
+    //Because it returns a HtmlString but rendor donot return
+    paratial_taker = new MvcHtmlString("<h1>Here is the new String from the Html.partial view</h1>" + paratial_taker.ToString() + "<h1>Here is the second new String from the Html.partial view</h1>");
+}
+
+@paratial_taker
+
+<h1>Rendor Partial</h1>
+@*Always in curly bracket and have a terminater*@
+@{ 
+    //Donot return like Html.Partial
+    Html.RenderPartial("_PartialView");
+}

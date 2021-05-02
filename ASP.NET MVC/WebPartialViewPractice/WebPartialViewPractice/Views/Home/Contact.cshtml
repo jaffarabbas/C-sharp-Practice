@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<h1>@ViewBag.Title</h1>
+<h2>Partial Method</h2>
+
+@Html.Partial("_Employees")
+
+<h2>Rendor Partial Method</h2>
+
+@{
+    Html.RenderPartial("_Employees");
+}

@@ -1,0 +1,18 @@
+﻿@model WebStringlyTypePartialViewHtmlHelper.Models.SignUp
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<h1>Form Helpers in strongly partial view </h1>
+<br />
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.UserId)
+    @Html.LabelFor(model => model.UserName) @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+    @Html.LabelFor(model => model.UserPassword) @Html.PasswordFor(model => model.UserPassword, new { @class = "form-control" })
+    @Html.LabelFor(model => model.UserGender) @Html.DropDownListFor(model => model.UserGender, new SelectList(new[] {"Male","Female"}),"Select",new { @class = "form-control" })
+    @Html.LabelFor(model => model.UserEmail) @Html.TextBoxFor(model => model.UserEmail, new { @class = "form-control" })
+    @Html.LabelFor(model => model.UserComments) @Html.TextAreaFor(model => model.UserComments, new { @class = "form-control" })
+    <br/><br />
+    <input type="submit" class="form-control btn-danger" value="Submit" name="Submit"/>
+}

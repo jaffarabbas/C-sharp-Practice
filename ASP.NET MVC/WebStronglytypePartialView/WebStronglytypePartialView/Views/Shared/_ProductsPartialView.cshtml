@@ -1,0 +1,24 @@
+﻿@model WebStronglytypePartialView.Models.Product
+
+<div class="card" style="width: 50rem;">
+    <div class="container"  style="box-shadow: 0px 0px 2px 0px #333; margin: 20px">
+        <div class="row">
+            <div class="col-lg-2">
+                <img class="card-img-top" height="180px" width="180px" src="@Url.Content(Model.image)" alt="Card image cap">
+            </div>
+            <div class="col-lg-6">
+                <div class="card-body">
+                    <h5 class="card-title text-danger">Product @Model.id</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">@Model.name</li>
+                    <li class="list-group-item">Rs @Model.price</li>
+                </ul>
+                <div class="card-body" style="padding-bottom:20px">
+                    <a href="#" class="card-link btn btn-primary">Buy this</a>
+                    <a href="#" class="card-link btn btn-primary">Share</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

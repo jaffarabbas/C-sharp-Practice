@@ -1,0 +1,14 @@
+﻿@model List<WebStronglytypePartialView.Models.Product>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1 class="text-center">Products</h1>
+
+@{ 
+    foreach (var item in Model)
+    {
+        Html.RenderPartial("_ProductsPartialView", item);
+    }
+}
