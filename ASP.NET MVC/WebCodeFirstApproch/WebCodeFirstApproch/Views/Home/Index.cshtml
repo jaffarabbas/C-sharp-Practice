@@ -4,6 +4,8 @@
     ViewBag.Title = "Index";
 }
 
+@Html.Raw(TempData["InsertMessage"]);
+
 <h2>Index</h2>
 
 <p>
@@ -23,23 +25,24 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StdName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StdGender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StdAge)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.StdId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.StdId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.StdId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StdName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StdGender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StdAge)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.StdId }) |
+                @Html.ActionLink("Details", "Detials", new { id = item.StdId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.StdId })
+            </td>
+        </tr>
+    }
 
 </table>
