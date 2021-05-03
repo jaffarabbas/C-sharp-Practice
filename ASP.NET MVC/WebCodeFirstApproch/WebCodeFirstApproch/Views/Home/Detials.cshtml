@@ -1,0 +1,50 @@
+﻿@model WebCodeFirstApproch.Models.Student
+
+@{
+    ViewBag.Title = "Detials";
+}
+
+<h2>Detials</h2>
+
+<div>
+    <h4>Student</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StdId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StdId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StdName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StdName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StdGender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StdGender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StdAge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StdAge)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.StdId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
