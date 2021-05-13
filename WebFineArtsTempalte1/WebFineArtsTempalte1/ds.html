@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Sulphur Point', sans-serif;
+        /*    background-color: #333634;*/
+    }
+    
+    .panel {
+        background-image: url('..\images\stabmenubghv.png');
+        text-align: center;
+    }
+    
+    .main-heading {
+        padding-top: 140px;
+        font-size: 100px;
+    }
+    
+    .gradint-layer {
+        background-image: url('..\images\photo-1460661419201-fd4cecdf8a8b.jpg');
+    }
+    
+    .button {
+        border: 1px solid #333;
+        width: 300px;
+        margin-left: 500px;
+        margin-top: 70px;
+        padding: 20px;
+    }
+    
+    .main-button {
+        text-decoration: none;
+        font-size: 20px;
+    }
+    /* pannel */
+    
+    .sec {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .main {
+        border: none;
+        margin-top: 120px;
+        height: 400px;
+        width: 800px;
+        box-shadow: 0px 0px 20px #333;
+    }
+    
+    .panel-student {
+        margin-left: -50px;
+        margin-top: 30px;
+        width: 450px;
+        height: 350px;
+    }
+    
+    .head-student {
+        font-size: 50px;
+        padding-top: 80px;
+        margin-left: 30px;
+    }
+    
+    .head-manager {
+        font-size: 50px;
+        padding-top: 80px;
+        margin-left: 30px;
+    }
+    
+    .head-admin {
+        font-size: 50px;
+        padding-top: 80px;
+        margin-left: 30px;
+    }
+    
+    .head-staff {
+        font-size: 50px;
+        padding-top: 80px;
+        margin-left: 30px;
+    }
+    
+    .into-student {
+        margin-top: 100px;
+        margin-left: 100px;
+    }
+    
+    .into-manager {
+        margin-top: 100px;
+        margin-left: 100px;
+    }
+    
+    .into-staff {
+        margin-top: 100px;
+        margin-left: 100px;
+    }
+    
+    .into-admin {
+        margin-top: 100px;
+        margin-left: 100px;
+    }
+    
+    .btn-student {
+        border: none;
+        padding: 20px 100px;
+        margin-left: -100px;
+        background-color: #333;
+        color: whitesmoke;
+        font-size: 30px;
+    }
+    
+    .btn-admin {
+        border: none;
+        padding: 20px 100px;
+        margin-left: -100px;
+        background-color: #333;
+        color: whitesmoke;
+        font-size: 30px;
+    }
+    
+    .btn-manager {
+        border: none;
+        padding: 20px 100px;
+        margin-left: -100px;
+        background-color: #333;
+        color: whitesmoke;
+        font-size: 30px;
+    }
+    
+    .btn-staff {
+        border: none;
+        padding: 20px 100px;
+        margin-left: -100px;
+        background-color: #333;
+        color: whitesmoke;
+        font-size: 30px;
+    }
+    
+    #form {
+        width: 300px;
+        padding: 10px;
+        margin-top: -40px;
+        transition: 1s;
+    }
+    
+    #login-btn {
+        background-color: #f5b907;
+    }
+    
+    #login-name {
+        margin-bottom: 30px;
+        padding: 10px;
+    }
+    
+    #login-pass {
+        margin-bottom: 30px;
+        padding: 10px;
+    }
+    
+    #login-btn {
+        margin-bottom: 30px;
+        padding: 10px;
+    }
+    
+    #cros {
+        font-size: 20px;
+        float: right;
+        padding-top: 20px;
+        margin-top: -80px;
+    }
+    
+    #man {
+        padding: 20px;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Title</title>
+</head>
+
+<body style="background-color: #f5b907;">
+    <section class="sec">
+        <div class="main card">
+            <div id="demo" class="carousel" data-ride="carousel">
+                <ul class="carousel-indicators" id="ind">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                    <li data-target="#demo" data-slide-to="3"></li>
+                </ul>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="img"><img src="..\images\panel3.png" class="panel-student animated lightSpeedIn"> </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="head">
+                                        <h1 class="head-manager animated fadeInRight" id="head-log"><b>Manager</b></h1>
+                                        <div class="into-manager"><a id="btn-man" href="#" class="btn-manager animated fadeInRight" onclick="mypop()">Click<a/></div>
+                                    <a id="form" style="display: none;">
+                                        <form class="form-login">
+                                            <div id="cros" onclick="mypop()" style="display: none;"><i class="fa fa-close"></i></div>
+                                            <h4 class="text-center" id="man"><b>Manager Login</b></h4>
+                                            <input type="text" id="login-name" class="form-control"/>
+                                            <input type="password" id="login-pass"  class="form-control"/>
+                                            <input type="submit" value="Submit" id="login-btn"  class="form-control"/>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                   
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="img"><img src="..\images\panel3.png" class="panel-student animated lightSpeedIn"> </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="head">
+                                    <h1 class="head-admin animated fadeInRight"><b>Admin</b></h1>      
+                                </div>
+                                <div class="into-admin"><button href="#" class="btn-admin animated fadeInRight">Click</button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="img"><img src="..\images\panel3.png" class="panel-student animated lightSpeedIn"> </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="head">
+                                        <h1 class="head-staff animated fadeInRight"><b>Staff</b></h1>
+                                    </div>
+                                    <div class="into-staff"><a href="#" class="btn-staff animated fadeInRight">Click</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="img"><img src="..\images\panel3.png" class="panel-student animated lightSpeedIn"> </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="head">
+                                            <h1 class="head-student animated fadeInRight"><b>STUDENT</b></h1>
+                                            <div class="into-student"><a href="#" class="btn-student animated fadeInRight">Click</a></div>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#demo" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </a>
+                </div>
+
+            </div>
+    </section>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="..\assets\bootstrap\js\bootstrap.min.js"></script>
+<script src="..\cdn\bootstrap.min.js"></script>
+<script src="../js/js.js"></script>
+<script>
+    function mypop() {
+        var x = document.getElementById("form");
+        var y = document.getElementById("cros");
+        var z = document.getElementById("btn-man");
+        var m = document.getElementById("head-log");
+        if (x.style.display === "none" || y.style.display === "none" || z.style.display === "inline" || m.style.display === "block") {
+            x.style.display = "block";
+            y.style.display = "block";
+            z.style.display = "none";
+            m.style.display = "none";
+        } else {
+            x.style.display = "none";
+            y.style.display = "none";
+            z.style.display = "inline";
+            m.style.display = "block";
+        }
+    }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</html>

@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/css.css">
+    <!-- <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="../cdn\animate.min.css">
+    <link rel="stylesheet" href="../cdn\font-awesome.min.css">
+    <link rel="stylesheet" href="../cdn\bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" > -->
+
+    <!-- BOOTSTRAP STYLES-->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="../assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- MORRIS CHART STYLES-->
+    <link href="../assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link href="../assets/css/css.css" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">ADMIN</a>
+            </div>
+            <div style="color: white;padding: 15px 50px 5px 50px;float: right;font-size: 16px;"> Last access : 30 May
+                2014 &nbsp; <a href="#" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+        </nav>
+        <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li class="text-center">
+                        <img src="../assets/img/find_user.png" class="user-image img-responsive" />
+                    </li>
+
+
+                    <li>
+                        <a class="active-menu" href="index.html"><i class="fa fa-dashboard fa-3x"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href=""><i class="fa fa-users fa-3x"></i>Staff<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#" onclick="mypop()">Insert Staff</a>
+                            </li>
+                            <li>
+                                <a href="#">View Staff</a>
+                            </li>
+                            <li>
+                                <a href="#">Search Staff</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="tab-panel.html"><i class="fa fa-user fa-3x"></i>Students<span
+                                class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#" onclick="mypop2()">Insert Students</a>
+                            </li>
+                            <li>
+                                <a href="#">View Students</a>
+                            </li>
+                            <li>
+                                <a href="#">Search Studnets</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="blank.html"><i class="fa fa-square-o fa-3x"></i> Blank Page</a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Admin Dashboard</h2>
+                        <h5>Welcome Jhon Deo , Love to see you back. </h5>
+                        <div class="Insert_main" id="staff_inser">
+                            <section class="sec_insert">
+                                <form class="form_inser">
+                                    <label class="Ins_staff text-center">Insert Staff</label><br><br>
+                                    <label>Name</label>
+                                    <input type="text" class="name form-control" id="name_reg" />
+                                    <label>Id</label>
+                                    <input type="text" class="Id form-control" id="ID_reg" />
+                                    <label>Email</label>
+                                    <input type="email" class="email form-control" id="email_reg" />
+                                    <label>Number</label>
+                                    <input type="tel" class="tele form-control" id="tele_reg" />
+                                    <label>Qualification</label>
+                                    <input type="text" class="Qual form-control" id="Qual_reg" />
+                                    <label>Class</label>
+                                    <input type="text" class="cla form-control" id="cla_reg" />
+                                    <label>Subject</label>
+                                    <input type="text" class="sub form-control" id="sub_reg" />
+                                    <label>Gender</label><br>
+                                    <input type="radio" id="male" name="gender" value="male">
+                                    <label for="male">Male</label><br>
+                                    <input type="radio" id="female" name="gender" value="female">
+                                    <label for="female">Female</label><br>
+                                    <input type="radio" id="other" name="gender" value="other">
+                                    <label for="other">Other</label><br>
+                                    <label for="pwd">Password</label>
+                                    <input type="password" id="pwd" name="pwd" class="form-control">
+                                    <label for="pwd">Confirm Password</label>
+                                    <input type="password" id="pwd" name="pwd" class="form-control"><br>
+                                    <input type="submit" class="btn btn-warning form-control" id="btn_reg" />
+                                </form>
+                            </section>
+                        </div>
+                        <div class="Insert_Student" id="Student_insert">
+                            <section class="sec_stu__insert">
+                                <form class="form_stu_inser">
+                                    <label class="Ins_stud text-center">Insert Students</label><br><br>
+                                    <label>Name</label>
+                                    <input type="text" class="name2 form-control" id="name_reg2" />
+                                    <label>Id</label>
+                                    <input type="text" class="Id2 form-control" id="ID_reg2" />
+                                    <label>Email</label>
+                                    <input type="email" class="email2 form-control" id="email_reg2" />
+                                    <label>age</label>
+                                    <input type="number" class="Qual2 form-control" id="Qual_reg2" />
+                                    <label>Phone</label>
+                                    <input type="tel" class="phone2 form-control" id="phone_reg2" />
+                                    <label>Class</label>
+                                    <input type="text" class="cla2 form-control" id="cla_reg2" />
+                                    <label>Subject</label>
+                                    <input type="text" class="sub2 form-control" id="sub_reg" />
+                                    <label>Gender</label><br>
+                                    <input type="radio" id="male2" name="gender" value="male">
+                                    <label for="male">Male</label><br>
+                                    <input type="radio" id="female2" name="gender" value="female">
+                                    <label for="female">Female</label><br>
+                                    <input type="radio" id="other2" name="gender" value="other">
+                                    <label for="other">Other</label><br>
+                                    <label for="pwd">Password</label>
+                                    <input type="password" id="pwd2" name="pwd" class="form-control">
+                                    <label for="pwd">Confirm Password</label>
+                                    <input type="password" id="pwd2" name="pwd" class="form-control"><br>
+                                    <input type="submit" class="btn btn-warning form-control" id="btn_reg2" />
+                                </form>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /. ROW  -->
+
+
+
+</body>
+<script>
+    function mypop() {
+        var x = document.getElementById("staff_inser");
+        var y = document.getElementById("Student_insert");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+            y.style.display = "none"
+        } else {
+            x.style.display = "none";
+        }
+    }
+    function mypop2() {
+        var x = document.getElementById("Student_insert");
+        var y = document.getElementById("staff_inser");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+            y.style.display = "none";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="..\assets\bootstrap\js\bootstrap.min.js"></script>
+<script src="..\cdn\bootstrap.min.js"></script>
+<script src="../js/js.js"></script> -->
+
+<script src="../assets/js/jquery-1.10.2.js"></script>
+<!-- BOOTSTRAP SCRIPTS -->
+<script src="../assets/js/bootstrap.min.js"></script>
+<!-- METISMENU SCRIPTS -->
+<script src="../assets/js/jquery.metisMenu.js"></script>
+<!-- MORRIS CHART SCRIPTS -->
+<script src="../assets/js/morris/raphael-2.1.0.min.js"></script>
+<script src="../assets/js/morris/morris.js"></script>
+<!-- CUSTOM SCRIPTS -->
+<script src="../assets/js/custom.js"></script>
+
+
+</html>

@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="../css/css.css">
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="../cdn/animate.min.css">
+    <link rel="stylesheet" href="../cdn/font-awesome.min.css">
+    <link rel="stylesheet" href="../cdn/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+
+
+    <title>Title</title>
+</head>
+
+<body style="background-color: #f5b907;">
+<section class="sec animated lightSpeedIn">
+  <div  id="cros_sec"><a href="index.html" style="text-decoration: none; color: #333;"><i class="fa fa-close"></i></a></div>
+      <div class="main card animated lightSpeedIn" id="card">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <div id="ind">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active" style="top: 120px;"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1" style="top: 120px;"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2" style="top: 120px;"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="3" style="top: 120px;"></li>
+            </ol>
+          </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+               
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="img"><img src="..\images\slider2.png" id="img1" class="panel-student animated lightSpeedIn"> </div>
+                               </div>
+                                <div class="col-md-6">
+                                <div class="head">
+                                <h1 class="head-manager animated fadeInRight" id="head-log"><b>Manager</b></h1>
+                                <div class="into-manager"><button  id="btn-man" href="#" class="btn-manager animated fadeInRight" onclick="mypop()">Click</button></div>
+                                <div id="form">
+                                    <form class="form-login">
+                                        <div id="cros" onclick="mypop()"><i class="fa fa-close"></i></div>
+                                        <h4 class="text-center" id="man"><b>Manager Login</b></h4>
+                                        <input type="text" id="login-name" class="form-control"/>
+                                        <input type="password" id="login-pass"  class="form-control"/>
+                                        <input type="submit" value="Submit" id="login-btn"  class="form-control"/>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="img"><img src="..\images\admin.png" id="img2"  class="panel-student animated lightSpeedIn"> </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="head">
+                                <h1 class="head-admin animated fadeInRight" id="head-log2"><b>Admin</b></h1>   
+                                <div class="into-admin"><button class="btn-admin animated fadeInRight" id="btn-man2" onclick="mypop2()">Click</button></div>
+                            </div>
+                            <div id="form2">
+                                <form class="form-login">
+                                    <div id="cros2" onclick="mypop2()"><i class="fa fa-close"></i></div>
+                                    <h4 class="text-center" id="man2"><b>Admin Login</b></h4>
+                                    <input type="text" id="login-name2" class="form-control"/>
+                                    <input type="password" id="login-pass2"  class="form-control"/>
+                                    <input type="submit" value="Submit" id="login-btn2"  class="form-control"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>     
+              </div>
+              <div class="carousel-item">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="img"><img src="..\images\student.png" class="panel-student animated lightSpeedIn"> </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="head">
+                                <h1 class="head-admin animated fadeInRight" id="head-log3"><b>Student</b></h1>   
+                                <div class="into-admin"><button class="btn-admin animated fadeInRight" id="btn-man3" onclick="mypop3()">Click</button></div>
+                            </div>
+                            <div id="form3">
+                                <form class="form-login">
+                                    <div id="cros3" onclick="mypop3()"><i class="fa fa-close"></i></div>
+                                    <h4 class="text-center" id="man3"><b>Student Login</b></h4>
+                                    <input type="text" id="login-name3" class="form-control"/>
+                                    <input type="password" id="login-pass3"  class="form-control"/>
+                                    <input type="submit" value="Submit" id="login-btn3"  class="form-control"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>     
+              </div>
+              <div class="carousel-item">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="img"><img src="..\images\slider4.png" class="panel-student animated lightSpeedIn"> </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="head">
+                                <h1 class="head-admin animated fadeInRight" id="head-log4"><b>Staff</b></h1>   
+                                <div class="into-admin"><button class="btn-admin animated fadeInRight" id="btn-man4" onclick="mypop4()">Click</button></div>
+                            </div>
+                            <div id="form4" id="f4">
+                                <form class="form-login">
+                                    <div id="cros4" onclick="mypop4()"><i class="fa fa-close"></i></div>
+                                    <h4 class="text-center" id="man4"><b>Staff Login</b></h4>
+                                    <input type="text" id="login-name4" class="form-control"/>
+                                    <input type="password" id="login-pass4"  class="form-control"/>
+                                    <input type="submit" value="Submit" id="login-btn4"  class="form-control"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>     
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+      </div>
+</section>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="..\assets\bootstrap\js\bootstrap.min.js"></script>
+<script src="..\cdn\bootstrap.min.js"></script>
+<script src="../js/js.js"></script>
+<script>
+function mypop()
+{
+  var x = document.getElementById("form");
+  var y = document.getElementById("cros");
+  var z = document.getElementById("btn-man");
+  var m = document.getElementById("head-log");
+  if (x.style.display === "none" ||  y.style.display==="none" || z.style.display==="inline" || m.style.display==="block") {
+    x.style.display = "block";
+    y.style.display="block";
+    z.style.display="none";
+    m.style.display="none";
+  } else {
+    x.style.display ="none";
+    y.style.display="none";
+    z.style.display="inline";
+    m.style.display="block";
+  } 
+}
+function mypop2()
+{
+  var x = document.getElementById("form2");
+  var y = document.getElementById("cros2");
+  var z = document.getElementById("btn-man2");
+  var m = document.getElementById("head-log2");
+  if (x.style.display === "none" ||  y.style.display==="none" || z.style.display==="inline" || m.style.display==="block") {
+    x.style.display = "block";
+    y.style.display="block";
+    z.style.display="none";
+    m.style.display="none";
+  } else {
+    x.style.display ="none";
+    y.style.display="none";
+    z.style.display="inline";
+    m.style.display="block";
+  } 
+}
+function mypop3()
+{
+  var x = document.getElementById("form3");
+  var y = document.getElementById("cros3");
+  var z = document.getElementById("btn-man3");
+  var m = document.getElementById("head-log3");
+  if (x.style.display === "none" ||  y.style.display==="none" || z.style.display==="inline" || m.style.display==="block") {
+    x.style.display = "block";
+    y.style.display="block";
+    z.style.display="none";
+    m.style.display="none";
+  } else {
+    x.style.display ="none";
+    y.style.display="none";
+    z.style.display="inline";
+    m.style.display="block";
+  } 
+}
+function mypop4()
+{
+  var x = document.getElementById("form4");
+  var y = document.getElementById("cros4");
+  var z = document.getElementById("btn-man4");
+  var m = document.getElementById("head-log4");
+  if (x.style.display === "none" ||  y.style.display==="none" || z.style.display==="inline" || m.style.display==="block") {
+    x.style.display = "block";
+    y.style.display="block";
+    z.style.display="none";
+    m.style.display="none";
+  } else {
+    x.style.display ="none";
+    y.style.display="none";
+    z.style.display="inline";
+    m.style.display="block";
+  } 
+}
+</script>
+
+</html>
