@@ -13,8 +13,23 @@ namespace WebCodeFirstApproch.Controllers
         StudentContext db = new StudentContext();
         public ActionResult Index()
         {
-            var datacollector = db.Students.ToList();
-            return View(datacollector);
+            var students = GetStudents();
+            var employees = GetEmployees();
+
+            MultiModelData data = new MultiModelData();
+
+            data.Students = students;
+            data.Employees = employees;
+
+            return View(data);
+        }
+        public List<Student> GetStudents()
+        {
+            return db.Students.ToList();
+        }
+        public List<Employee> GetEmployees()
+        {
+            return db.Employees.ToList();
         }
         public ActionResult Create()
         {
