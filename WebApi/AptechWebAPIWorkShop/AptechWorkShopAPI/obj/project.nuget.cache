@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "I9UR1aQsrpNfqo5ugpYeRZL9s55yG995dm7Zl6jWlz5c8BF3szzbhe/dgNecrJ6C2z/Vl9INF9tL5bWpl9x3wQ==",
+  "success": true,
+  "projectFilePath": "J:\\C-sharp-Practice\\WebApi\\AptechWebAPIWorkShop\\AptechWorkShopAPI\\AptechWorkShopAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\gamap\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\gamap\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\gamap\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\gamap\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\gamap\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\gamap\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}
