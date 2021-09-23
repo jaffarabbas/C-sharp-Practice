@@ -1,0 +1,16 @@
+J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\bin\Debug\net5.0\InterviewPractice.exe
+J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\bin\Debug\net5.0\InterviewPractice.deps.json
+J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\bin\Debug\net5.0\InterviewPractice.runtimeconfig.json
+J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\bin\Debug\net5.0\InterviewPractice.runtimeconfig.dev.json
+J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\bin\Debug\net5.0\InterviewPractice.dll
+J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\bin\Debug\net5.0\ref\InterviewPractice.dll
+J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\bin\Debug\net5.0\InterviewPractice.pdb
+J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\InterviewPractice.csprojAssemblyReference.cache
+J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\InterviewPractice.GeneratedMSBuildEditorConfig.editorconfig
+J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\InterviewPractice.AssemblyInfoInputs.cache
+J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\InterviewPractice.AssemblyInfo.cs
+J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\InterviewPractice.csproj.CoreCompileInputs.cache
+J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\InterviewPractice.dll
+J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\ref\InterviewPractice.dll
+J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\InterviewPractice.pdb
+J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\InterviewPractice.genruntimeconfig.cache
