@@ -1,0 +1,6 @@
+/home/darklord/Desktop/Github/C-sharp-Practice/Console-apps/rider_test_1/rider_test_1/bin/Debug/rider_test_1.exe
+/home/darklord/Desktop/Github/C-sharp-Practice/Console-apps/rider_test_1/rider_test_1/bin/Debug/rider_test_1.pdb
+/home/darklord/Desktop/Github/C-sharp-Practice/Console-apps/rider_test_1/rider_test_1/obj/Debug/rider_test_1.csprojAssemblyReference.cache
+/home/darklord/Desktop/Github/C-sharp-Practice/Console-apps/rider_test_1/rider_test_1/obj/Debug/rider_test_1.csproj.CoreCompileInputs.cache
+/home/darklord/Desktop/Github/C-sharp-Practice/Console-apps/rider_test_1/rider_test_1/obj/Debug/rider_test_1.exe
+/home/darklord/Desktop/Github/C-sharp-Practice/Console-apps/rider_test_1/rider_test_1/obj/Debug/rider_test_1.pdb
