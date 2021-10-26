@@ -1,0 +1,1 @@
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="rider_test_web_1.MvcApplication" Language="C#" %>
