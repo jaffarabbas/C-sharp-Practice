@@ -6,7 +6,11 @@ namespace rider_test_1
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("dsfsdf");
+            int a=2, b=3;
+            a += b - a;
+            Console.WriteLine(a);
+            b = a - a + b;
+            Console.WriteLine(b);
         }
     }
 }
