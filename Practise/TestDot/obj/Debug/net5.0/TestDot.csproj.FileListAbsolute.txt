@@ -1,0 +1,16 @@
+/home/darklord/Desktop/Github/C-sharp-Practice/Practise/TestDot/bin/Debug/net5.0/TestDot
+/home/darklord/Desktop/Github/C-sharp-Practice/Practise/TestDot/bin/Debug/net5.0/TestDot.deps.json
+/home/darklord/Desktop/Github/C-sharp-Practice/Practise/TestDot/bin/Debug/net5.0/TestDot.runtimeconfig.json
+/home/darklord/Desktop/Github/C-sharp-Practice/Practise/TestDot/bin/Debug/net5.0/TestDot.runtimeconfig.dev.json
+/home/darklord/Desktop/Github/C-sharp-Practice/Practise/TestDot/bin/Debug/net5.0/TestDot.dll
+/home/darklord/Desktop/Github/C-sharp-Practice/Practise/TestDot/bin/Debug/net5.0/ref/TestDot.dll
+/home/darklord/Desktop/Github/C-sharp-Practice/Practise/TestDot/bin/Debug/net5.0/TestDot.pdb
+/home/darklord/Desktop/Github/C-sharp-Practice/Practise/TestDot/obj/Debug/net5.0/TestDot.csproj.AssemblyReference.cache
+/home/darklord/Desktop/Github/C-sharp-Practice/Practise/TestDot/obj/Debug/net5.0/TestDot.GeneratedMSBuildEditorConfig.editorconfig
+/home/darklord/Desktop/Github/C-sharp-Practice/Practise/TestDot/obj/Debug/net5.0/TestDot.AssemblyInfoInputs.cache
+/home/darklord/Desktop/Github/C-sharp-Practice/Practise/TestDot/obj/Debug/net5.0/TestDot.AssemblyInfo.cs
+/home/darklord/Desktop/Github/C-sharp-Practice/Practise/TestDot/obj/Debug/net5.0/TestDot.csproj.CoreCompileInputs.cache
+/home/darklord/Desktop/Github/C-sharp-Practice/Practise/TestDot/obj/Debug/net5.0/TestDot.dll
+/home/darklord/Desktop/Github/C-sharp-Practice/Practise/TestDot/obj/Debug/net5.0/ref/TestDot.dll
+/home/darklord/Desktop/Github/C-sharp-Practice/Practise/TestDot/obj/Debug/net5.0/TestDot.pdb
+/home/darklord/Desktop/Github/C-sharp-Practice/Practise/TestDot/obj/Debug/net5.0/TestDot.genruntimeconfig.cache
