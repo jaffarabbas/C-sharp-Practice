@@ -1,0 +1,6 @@
+/home/darklord/Desktop/Github/C-sharp-Practice/Console-apps/EffortEstimation/EffortEstimation/bin/Debug/EffortEstimation.exe
+/home/darklord/Desktop/Github/C-sharp-Practice/Console-apps/EffortEstimation/EffortEstimation/bin/Debug/EffortEstimation.pdb
+/home/darklord/Desktop/Github/C-sharp-Practice/Console-apps/EffortEstimation/EffortEstimation/obj/Debug/EffortEstimation.csprojAssemblyReference.cache
+/home/darklord/Desktop/Github/C-sharp-Practice/Console-apps/EffortEstimation/EffortEstimation/obj/Debug/EffortEstimation.csproj.CoreCompileInputs.cache
+/home/darklord/Desktop/Github/C-sharp-Practice/Console-apps/EffortEstimation/EffortEstimation/obj/Debug/EffortEstimation.exe
+/home/darklord/Desktop/Github/C-sharp-Practice/Console-apps/EffortEstimation/EffortEstimation/obj/Debug/EffortEstimation.pdb
