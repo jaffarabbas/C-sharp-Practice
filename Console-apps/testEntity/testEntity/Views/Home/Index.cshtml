@@ -1,0 +1,37 @@
+@model List<testEntity.Models.Data>
+
+<br/>
+<br/>
+<br/>
+<br/>
+@using (Html.BeginForm("POST"))
+{
+    <p>
+        @Html.Label("Name") @Html.TextBox("Username", null, new { @class = "form-control" })
+    </p>
+    @*<p>@Html.ValidationMessage("Username",new { @class="text-danger"})</p>*@
+    <br />
+    <p>
+        @Html.Label("age") @Html.TextBox("Age", null, new { @class = "form-control" })
+    </p>
+    <br />
+    <br />
+    <input type="submit" class="form-control btn btn-danger" value="Submit" />
+    @Html.Raw(ViewData["success"]);
+}
+
+<h1>List</h1>
++
+<ul>
+    @{
+        foreach (var i in Model)
+        {
+            <li>
+                @i.NAME
+            </li>
+            <li>
+                @i.age
+            </li>
+        }
+    }
+</ul>
