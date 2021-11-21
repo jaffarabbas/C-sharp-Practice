@@ -77,3 +77,5 @@ J:\C-sharp-Practice\ASP.NET MVC\HtmlHelperTextPractice\HtmlHelperTextPractice\ob
 J:\C-sharp-Practice\ASP.NET MVC\HtmlHelperTextPractice\HtmlHelperTextPractice\obj\Debug\HtmlHelperTextPractice.csproj.CopyComplete
 J:\C-sharp-Practice\ASP.NET MVC\HtmlHelperTextPractice\HtmlHelperTextPractice\obj\Debug\HtmlHelperTextPractice.dll
 J:\C-sharp-Practice\ASP.NET MVC\HtmlHelperTextPractice\HtmlHelperTextPractice\obj\Debug\HtmlHelperTextPractice.pdb
+D:\Github\C-sharp-Practice\ASP.NET MVC\HtmlHelperTextPractice\HtmlHelperTextPractice\obj\Debug\HtmlHelperTextPractice.csproj.AssemblyReference.cache
+D:\Github\C-sharp-Practice\ASP.NET MVC\HtmlHelperTextPractice\HtmlHelperTextPractice\obj\Debug\HtmlHelperTextPractice.csproj.CoreCompileInputs.cache

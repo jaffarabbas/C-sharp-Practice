@@ -77,3 +77,5 @@ J:\C-sharp-Practice\ASP.NET MVC\StronglyTypeViewPractice\StronglyTypeViewPractic
 J:\C-sharp-Practice\ASP.NET MVC\StronglyTypeViewPractice\StronglyTypeViewPractice\obj\Debug\StronglyTypeViewPractice.csproj.CopyComplete
 J:\C-sharp-Practice\ASP.NET MVC\StronglyTypeViewPractice\StronglyTypeViewPractice\obj\Debug\StronglyTypeViewPractice.dll
 J:\C-sharp-Practice\ASP.NET MVC\StronglyTypeViewPractice\StronglyTypeViewPractice\obj\Debug\StronglyTypeViewPractice.pdb
+D:\Github\C-sharp-Practice\ASP.NET MVC\StronglyTypeViewPractice\StronglyTypeViewPractice\obj\Debug\StronglyTypeViewPractice.csproj.AssemblyReference.cache
+D:\Github\C-sharp-Practice\ASP.NET MVC\StronglyTypeViewPractice\StronglyTypeViewPractice\obj\Debug\StronglyTypeViewPractice.csproj.CoreCompileInputs.cache

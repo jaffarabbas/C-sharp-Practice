@@ -77,3 +77,5 @@ J:\C-sharp-Practice\ASP.NET MVC\WebValidationMessage\WebValidationMessage\obj\De
 J:\C-sharp-Practice\ASP.NET MVC\WebValidationMessage\WebValidationMessage\obj\Debug\WebValidationMessage.csproj.CopyComplete
 J:\C-sharp-Practice\ASP.NET MVC\WebValidationMessage\WebValidationMessage\obj\Debug\WebValidationMessage.dll
 J:\C-sharp-Practice\ASP.NET MVC\WebValidationMessage\WebValidationMessage\obj\Debug\WebValidationMessage.pdb
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebValidationMessage\WebValidationMessage\obj\Debug\WebValidationMessage.csproj.AssemblyReference.cache
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebValidationMessage\WebValidationMessage\obj\Debug\WebValidationMessage.csproj.CoreCompileInputs.cache

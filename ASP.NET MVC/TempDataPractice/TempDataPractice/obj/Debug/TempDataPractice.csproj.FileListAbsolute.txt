@@ -77,3 +77,5 @@ J:\C-sharp-Practice\ASP.NET MVC\TempDataPractice\TempDataPractice\obj\Debug\Temp
 J:\C-sharp-Practice\ASP.NET MVC\TempDataPractice\TempDataPractice\obj\Debug\TempDataPractice.csproj.CopyComplete
 J:\C-sharp-Practice\ASP.NET MVC\TempDataPractice\TempDataPractice\obj\Debug\TempDataPractice.dll
 J:\C-sharp-Practice\ASP.NET MVC\TempDataPractice\TempDataPractice\obj\Debug\TempDataPractice.pdb
+D:\Github\C-sharp-Practice\ASP.NET MVC\TempDataPractice\TempDataPractice\obj\Debug\TempDataPractice.csproj.AssemblyReference.cache
+D:\Github\C-sharp-Practice\ASP.NET MVC\TempDataPractice\TempDataPractice\obj\Debug\TempDataPractice.csproj.CoreCompileInputs.cache

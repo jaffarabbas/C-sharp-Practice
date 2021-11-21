@@ -1,0 +1,1 @@
+D:\Github\C-sharp-Practice\ASP.NET MVC\HtmlHelperTextPractice\HtmlHelperTextPractice\obj\x64\Release\HtmlHelperTextPractice.csproj.CoreCompileInputs.cache
