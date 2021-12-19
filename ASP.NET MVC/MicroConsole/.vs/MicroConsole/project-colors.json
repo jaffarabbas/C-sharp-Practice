@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "35f82fdb-98de-4fc4-b8a2-4cc12d532e11": {
+      "ProjectGuid": "35f82fdb-98de-4fc4-b8a2-4cc12d532e11",
+      "DisplayName": "MicroConsole",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

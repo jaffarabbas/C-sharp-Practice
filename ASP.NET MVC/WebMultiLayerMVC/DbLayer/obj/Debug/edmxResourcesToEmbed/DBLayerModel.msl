@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EmployeeDBModelStoreContainer" CdmEntityContainer="EmployeeDBEntities">
+    <EntitySetMapping Name="ADDRESSes">
+      <EntityTypeMapping TypeName="EmployeeDBModel.ADDRESS">
+        <MappingFragment StoreEntitySet="ADDRESS">
+          <ScalarProperty Name="AD_ID" ColumnName="AD_ID" />
+          <ScalarProperty Name="ADD_DETIALS" ColumnName="ADD_DETIALS" />
+          <ScalarProperty Name="ADD_STATE" ColumnName="ADD_STATE" />
+          <ScalarProperty Name="ADD_COUNTRY" ColumnName="ADD_COUNTRY" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EMPLOYEEs">
+      <EntityTypeMapping TypeName="EmployeeDBModel.EMPLOYEE">
+        <MappingFragment StoreEntitySet="EMPLOYEE">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EMP_NAME" ColumnName="EMP_NAME" />
+          <ScalarProperty Name="EMP_EMAIL" ColumnName="EMP_EMAIL" />
+          <ScalarProperty Name="EMP_ADDRESS_ID" ColumnName="EMP_ADDRESS_ID" />
+          <ScalarProperty Name="EMP_CODE" ColumnName="EMP_CODE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="logers">
+      <EntityTypeMapping TypeName="EmployeeDBModel.loger">
+        <MappingFragment StoreEntitySet="loger">
+          <ScalarProperty Name="Loggerfile" ColumnName="Loggerfile" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

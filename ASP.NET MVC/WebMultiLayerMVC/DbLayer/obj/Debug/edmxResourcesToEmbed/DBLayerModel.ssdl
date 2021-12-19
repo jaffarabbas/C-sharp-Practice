@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmployeeDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ADDRESS">
+    <Key>
+      <PropertyRef Name="AD_ID" />
+    </Key>
+    <Property Name="AD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ADD_DETIALS" Type="varchar" MaxLength="50" />
+    <Property Name="ADD_STATE" Type="varchar" MaxLength="40" />
+    <Property Name="ADD_COUNTRY" Type="varchar" MaxLength="40" />
+  </EntityType>
+  <EntityType Name="EMPLOYEE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EMP_NAME" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EMP_EMAIL" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="EMP_ADDRESS_ID" Type="int" Nullable="false" />
+    <Property Name="EMP_CODE" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'EmployeeDB.dbo.loger' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="loger">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Loggerfile" Type="varchar(max)" />
+  </EntityType>
+  <Association Name="FK_EMPLOYEE_TO_ADDRESS">
+    <End Role="ADDRESS" Type="Self.ADDRESS" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ADDRESS">
+        <PropertyRef Name="AD_ID" />
+      </Principal>
+      <Dependent Role="EMPLOYEE">
+        <PropertyRef Name="EMP_ADDRESS_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EmployeeDBModelStoreContainer">
+    <EntitySet Name="ADDRESS" EntityType="Self.ADDRESS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="loger" EntityType="Self.loger" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [loger].[id] AS [id], 
+    [loger].[Loggerfile] AS [Loggerfile]
+    FROM [dbo].[loger] AS [loger]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_EMPLOYEE_TO_ADDRESS" Association="Self.FK_EMPLOYEE_TO_ADDRESS">
+      <End Role="ADDRESS" EntitySet="ADDRESS" />
+      <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

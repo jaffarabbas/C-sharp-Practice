@@ -4,3 +4,10 @@
 /home/darklord/Desktop/Github/C-sharp-Practice/Console-apps/EffortEstimation/EffortEstimation/obj/Debug/EffortEstimation.csproj.CoreCompileInputs.cache
 /home/darklord/Desktop/Github/C-sharp-Practice/Console-apps/EffortEstimation/EffortEstimation/obj/Debug/EffortEstimation.exe
 /home/darklord/Desktop/Github/C-sharp-Practice/Console-apps/EffortEstimation/EffortEstimation/obj/Debug/EffortEstimation.pdb
+D:\Github\C-sharp-Practice\Console-apps\EffortEstimation\EffortEstimation\bin\Debug\EffortEstimation.exe
+D:\Github\C-sharp-Practice\Console-apps\EffortEstimation\EffortEstimation\bin\Debug\EffortEstimation.pdb
+D:\Github\C-sharp-Practice\Console-apps\EffortEstimation\EffortEstimation\obj\Debug\EffortEstimation.csproj.AssemblyReference.cache
+D:\Github\C-sharp-Practice\Console-apps\EffortEstimation\EffortEstimation\obj\Debug\EffortEstimation.csproj.SuggestedBindingRedirects.cache
+D:\Github\C-sharp-Practice\Console-apps\EffortEstimation\EffortEstimation\obj\Debug\EffortEstimation.csproj.CoreCompileInputs.cache
+D:\Github\C-sharp-Practice\Console-apps\EffortEstimation\EffortEstimation\obj\Debug\EffortEstimation.exe
+D:\Github\C-sharp-Practice\Console-apps\EffortEstimation\EffortEstimation\obj\Debug\EffortEstimation.pdb

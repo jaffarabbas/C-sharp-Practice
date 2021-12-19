@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DBModels.Employee>
+
+@{
+    ViewBag.Title = "GetAllRecords";
+}
+
+<h2>GetAllRecords</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EMP_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMP_EMAIL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMP_ADDRESS_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMP_CODE)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMP_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMP_EMAIL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMP_ADDRESS_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMP_CODE)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

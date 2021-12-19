@@ -1,0 +1,14 @@
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DbLayer\bin\Debug\DbLayer.dll
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DbLayer\bin\Debug\DbLayer.pdb
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DbLayer\obj\Debug\DbLayer.csproj.AssemblyReference.cache
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DbLayer\obj\Debug\DbLayer.csproj.CoreCompileInputs.cache
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DbLayer\obj\Debug\DbLayer.dll
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DbLayer\obj\Debug\DbLayer.pdb
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DbLayer\bin\Debug\DbLayer.dll.config
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DbLayer\bin\Debug\DBModels.dll
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DbLayer\bin\Debug\EntityFramework.dll
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DbLayer\bin\Debug\EntityFramework.SqlServer.dll
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DbLayer\bin\Debug\DBModels.pdb
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DbLayer\bin\Debug\EntityFramework.xml
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DbLayer\bin\Debug\EntityFramework.SqlServer.xml
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DbLayer\obj\Debug\DbLayer.csproj.CopyComplete

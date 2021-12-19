@@ -1,0 +1,6 @@
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DBModels\bin\Debug\DBModels.dll
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DBModels\bin\Debug\DBModels.pdb
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DBModels\obj\Debug\DBModels.csproj.AssemblyReference.cache
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DBModels\obj\Debug\DBModels.csproj.CoreCompileInputs.cache
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DBModels\obj\Debug\DBModels.dll
+D:\Github\C-sharp-Practice\ASP.NET MVC\WebMultiLayerMVC\DBModels\obj\Debug\DBModels.pdb
