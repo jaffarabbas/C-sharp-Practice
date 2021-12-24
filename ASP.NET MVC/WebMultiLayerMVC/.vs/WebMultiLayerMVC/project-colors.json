@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "89c98020-8f27-411d-8315-f89659e2ca49": {
+      "ProjectGuid": "89c98020-8f27-411d-8315-f89659e2ca49",
+      "DisplayName": "DbLayer",
+      "ColorIndex": 0
+    },
+    "9c1d543d-7a34-4d5d-b0cc-64d8eac2f69b": {
+      "ProjectGuid": "9c1d543d-7a34-4d5d-b0cc-64d8eac2f69b",
+      "DisplayName": "DBModels",
+      "ColorIndex": 1
+    },
+    "3847b38b-7c5e-4dcd-b316-5b042fe8e2bc": {
+      "ProjectGuid": "3847b38b-7c5e-4dcd-b316-5b042fe8e2bc",
+      "DisplayName": "WebMultiLayerMVC",
+      "ColorIndex": 2
+    }
+  },
+  "NextColorIndex": 3
+}
