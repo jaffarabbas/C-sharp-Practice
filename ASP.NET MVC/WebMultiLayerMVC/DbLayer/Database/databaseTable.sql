@@ -29,4 +29,12 @@ ALTER TABLE ADDRESS
 ALTER TABLE EMPLOYEE
     ADD CONSTRAINT FK_EMPLOYEE_TO_ADDRESS
     FOREIGN KEY (EMP_ADDRESS_ID) REFERENCES ADDRESS (AD_ID) ON DELETE CASCADE ON UPDATE CASCADE
- 
+
+select * from EMPLOYEE
+select * from ADDRESS
+
+create table loger
+(
+id int identity(1,1) not null,
+Loggerfile varchar(max) null
+)
