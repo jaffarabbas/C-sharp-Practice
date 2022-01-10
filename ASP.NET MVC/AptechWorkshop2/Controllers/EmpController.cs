@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AptechWorkshop2.Models.Database;
+using AptechWorkshop2.Models.Request;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AptechWorkshop2.Controllers
@@ -16,6 +18,18 @@ namespace AptechWorkshop2.Controllers
         public IActionResult Get() {
             var emp=_context.Employees.First();
             return Ok(emp);
+        }
+
+        [HttpPost("add")]
+        public IActionResult AddEmp([FromBody] EmployeeRequest EmployeeRequest) //frombody,fromheader,fromquery
+        {
+            var emp = new Employee { 
+            EmpName= EmployeeRequest.empname,
+            EmpEmail = EmployeeRequest.empemail,
+            EmpCode = EmployeeRequest.empcode,
+            EmpAddressId = EmployeeRequest.
+            };
+            return Ok();
         }
     }
 }
