@@ -77,6 +77,7 @@ namespace EffortEstimation
     {
         private double ExternalInput, ExternalOutput, ExternalInquiries, InternalFiles, ExternalInterface, F, CAF, UFP, FP;
         int scale;
+        int mainScale;
 
         public double CalculateF(int scale)
         {
@@ -94,11 +95,11 @@ namespace EffortEstimation
         }
         public double CalculateUFP()
         {
-            if (scale == 0 || scale == 1)
+            if (mainScale == 1)
             {
                 return ((3 * ExternalInput) + (4 * ExternalOutput) + (3 * ExternalInquiries) + (7 * InternalFiles) + (5 * ExternalInterface));
             }
-            else if (scale == 2 || scale == 3)
+            else if (mainScale == 2)
             {
                 return ((4 * ExternalInput) + (5 * ExternalOutput) + (4 * ExternalInquiries) + (10 * InternalFiles) + (7 * ExternalInterface));
             }
@@ -121,13 +122,15 @@ namespace EffortEstimation
             ExternalInterface = Convert.ToDouble(Console.ReadLine());
             Console.WriteLine("0-No-Influence\n1-Incidental\n2-Moderate\n3-Average\n4-Significant\n5-Essential");
             scale = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("\n\n1-Low\n2-Average\n3-High\n");
+            mainScale = Convert.ToInt32(Console.ReadLine());
         }
 
         public void Calculation()
         {
             GetValue();
             Console.WriteLine("Step 1 : F = 14 * scale");
-            F = CalculateF(scale);
+            F = CalculateF(mainScale);
             Console.WriteLine("F : " + F);
             Console.WriteLine("Step 2 : Calculate Complexity Adjustment Factor (CAF)\nCAF = 0.65 + ( 0.01 * F )");
             CAF = CalculateCAF(F);
@@ -146,34 +149,42 @@ namespace EffortEstimation
         public static void Main(string[] args)
         {
             int index;
-            Console.WriteLine("Enter your Estimation Algorithm\n1)SLIM (1)\n2)COCOMO (2)\n3)Functional Point (3)");
             while (true)
             {
-                Console.WriteLine("Enter : 1-2-3 and 0 to stop");
-                index = Convert.ToInt32(Console.ReadLine());
-                if (index == 0)
+                try
                 {
-                    break;
-                }
-                else
-                {
-                    switch (index)
+                    Console.WriteLine("=================================");
+                    Console.WriteLine("\n\nEnter your Estimation Algorithm\n1)SLIM (1)\n2)COCOMO (2)\n3)Functional Point (3)\n\n");
+                    Console.WriteLine("=================================");
+                    Console.WriteLine("Enter : 1-2-3 and 0 to stop");
+                    index = Convert.ToInt32(Console.ReadLine());
+                    if (index == 0)
                     {
-                        case 1:
-                            SLIM slimObj = new SLIM();
-                            slimObj.CalculateEstimetation();
-                            break;
-                        case 2:
-                            COCOMO cocomoObj = new COCOMO();
-                            cocomoObj.Runner();
-                            break;
-                        case 3:
-                            Functional_Point funcObj = new Functional_Point();
-                            funcObj.Calculation();
-                            break;
-                        default:
-                            break;
+                        break;
                     }
+                    else
+                    {
+                        switch (index)
+                        {
+                            case 1:
+                                SLIM slimObj = new SLIM();
+                                slimObj.CalculateEstimetation();
+                                break;
+                            case 2:
+                                COCOMO cocomoObj = new COCOMO();
+                                cocomoObj.Runner();
+                                break;
+                            case 3:
+                                Functional_Point funcObj = new Functional_Point();
+                                funcObj.Calculation();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
                 }
             }
         }
