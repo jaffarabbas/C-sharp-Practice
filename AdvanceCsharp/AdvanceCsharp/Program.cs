@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AdvanceCsharp.Classes;
+using AdvanceCsharp.Polimorphism;
+
 namespace AdvanceCsharp
 {
     internal class Program
@@ -12,9 +14,28 @@ namespace AdvanceCsharp
         {
             //we cannot make obj of a abstract class
             //AbstractClasses obj = new AbstractClasses();
-            Child obj = new Child();
-            obj.print();
-            obj.AbMethod();
+            //Child obj = new Child();
+            //obj.print();
+            //obj.AbMethod();
+            //partial classes
+            //PartialClass pr = new PartialClass();
+            //pr.add(1, "jaffar");
+            //pr.add(2, "akli");
+            //pr.view();
+            //Console.ReadLine();
+            //sealed
+            //SealedClass selClass = new SealedClass();
+            //selClass.Fname = 34;
+            //Console.WriteLine(selClass.Fname);
+            //Console.ReadLine();
+            PoliMorphicClass poli = new PoliMorphicClass();
+            ChildClass c = new ChildClass();
+            poli.tester();
+            c.tester();
+            poli.overLoad();
+            c.overLoad();
+            c.overLoad(2);
+            Console.ReadLine();
         }
     }
 }
