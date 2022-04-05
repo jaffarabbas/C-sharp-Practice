@@ -45,6 +45,9 @@
   <ItemGroup>
     <Compile Include="Classes\AbstractClasses.cs" />
     <Compile Include="Classes\InterfaceClass.cs" />
+    <Compile Include="Classes\PartialClass.cs" />
+    <Compile Include="Classes\SealedClass.cs" />
+    <Compile Include="Polimorphism\PoliMorphicClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
