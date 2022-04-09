@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AdvanceCsharp.Classes;
+using AdvanceCsharp.Delegates;
 using AdvanceCsharp.Polimorphism;
 
 namespace AdvanceCsharp
@@ -13,9 +14,7 @@ namespace AdvanceCsharp
         static void Main(string[] args)
         {
             //we cannot make obj of a abstract class
-            //AbstractClasses obj = new AbstractClasses();
-            //Child obj = new Child();
-            //obj.print();
+            //AbstractClasses obj = new Child();
             //obj.AbMethod();
             //partial classes
             //PartialClass pr = new PartialClass();
@@ -28,14 +27,16 @@ namespace AdvanceCsharp
             //selClass.Fname = 34;
             //Console.WriteLine(selClass.Fname);
             //Console.ReadLine();
-            PoliMorphicClass poli = new PoliMorphicClass();
-            ChildClass c = new ChildClass();
-            poli.tester();
-            c.tester();
-            poli.overLoad();
-            c.overLoad();
-            c.overLoad(2);
-            Console.ReadLine();
+            //PoliMorphicClass poli = new PoliMorphicClass();
+            //ChildClass c = new ChildClass();
+            //poli.tester();
+            //c.tester();
+            //poli.overLoad();
+            //c.overLoad();
+            //c.overLoad(2);
+            //Console.ReadLine();
+            //delegates
+            DelegatesClass.TestDelegates();
         }
     }
 }
