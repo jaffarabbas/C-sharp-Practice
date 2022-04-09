@@ -47,6 +47,7 @@
     <Compile Include="Classes\InterfaceClass.cs" />
     <Compile Include="Classes\PartialClass.cs" />
     <Compile Include="Classes\SealedClass.cs" />
+    <Compile Include="Delegates\DelegatesClass.cs" />
     <Compile Include="Polimorphism\PoliMorphicClass.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
