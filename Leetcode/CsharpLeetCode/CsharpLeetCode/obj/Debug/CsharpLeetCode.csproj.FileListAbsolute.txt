@@ -1,0 +1,8 @@
+J:\Github\C-sharp-Practice\Leetcode\CsharpLeetCode\CsharpLeetCode\bin\Debug\CsharpLeetCode.exe.config
+J:\Github\C-sharp-Practice\Leetcode\CsharpLeetCode\CsharpLeetCode\bin\Debug\CsharpLeetCode.exe
+J:\Github\C-sharp-Practice\Leetcode\CsharpLeetCode\CsharpLeetCode\bin\Debug\CsharpLeetCode.pdb
+J:\Github\C-sharp-Practice\Leetcode\CsharpLeetCode\CsharpLeetCode\obj\Debug\CsharpLeetCode.csproj.AssemblyReference.cache
+J:\Github\C-sharp-Practice\Leetcode\CsharpLeetCode\CsharpLeetCode\obj\Debug\CsharpLeetCode.csproj.SuggestedBindingRedirects.cache
+J:\Github\C-sharp-Practice\Leetcode\CsharpLeetCode\CsharpLeetCode\obj\Debug\CsharpLeetCode.csproj.CoreCompileInputs.cache
+J:\Github\C-sharp-Practice\Leetcode\CsharpLeetCode\CsharpLeetCode\obj\Debug\CsharpLeetCode.exe
+J:\Github\C-sharp-Practice\Leetcode\CsharpLeetCode\CsharpLeetCode\obj\Debug\CsharpLeetCode.pdb
