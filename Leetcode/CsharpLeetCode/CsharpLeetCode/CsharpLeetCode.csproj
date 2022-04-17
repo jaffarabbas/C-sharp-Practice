@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Palindrome Number.cs" />
     <Compile Include="Roman to Integer.cs" />
+    <Compile Include="Search Insert Position.cs" />
     <Compile Include="twoSum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
