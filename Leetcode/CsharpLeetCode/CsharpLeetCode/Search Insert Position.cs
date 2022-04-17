@@ -19,8 +19,8 @@ namespace CsharpLeetCode
         }
         static void Main(string[] args)
         {
-            Roman_to_Integer p = new Roman_to_Integer();
-            int a = p.RomanToInt("IV");
+            Search_Insert_Position p = new Search_Insert_Position();
+            int a = p.SearchInsert(new []{ 1,2,3,4},3);
             Console.WriteLine(a);
             Console.Read();
         }
