@@ -13,12 +13,12 @@ namespace CsharpLeetCode
             return x.ToString().SequenceEqual(x.ToString().Reverse());
         }
 
-        static void Main(string[] args)
-        {
-            Palindrome_Number p = new Palindrome_Number();
-            bool a  = p.IsPalindrome(121);
-            Console.WriteLine(a);
-            Console.Read();
-        }
+        //static void Main(string[] args)
+        //{
+        //    Palindrome_Number p = new Palindrome_Number();
+        //    bool a  = p.IsPalindrome(121);
+        //    Console.WriteLine(a);
+        //    Console.Read();
+        //}
     }
 }
