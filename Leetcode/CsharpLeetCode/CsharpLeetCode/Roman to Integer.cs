@@ -10,7 +10,7 @@ namespace CsharpLeetCode
     {
         public int RomanToInt(string s)
         {
-            int number;
+            int number = 0;
             Dictionary<string, int> map = new Dictionary<string, int>();
             map.Add("I", 1);
             map.Add("V", 5);
@@ -19,7 +19,7 @@ namespace CsharpLeetCode
             map.Add("C", 100);
             map.Add("D", 500);
             map.Add("M", 1000);
-            number = map.ToList().IndexOf("I");
+            //number = map.ToList().IndexOf();
             for (int i = s.Length - 2; i >= 0; i--)
             {
                 if(map.Values.ToList().IndexOf(s.ElementAt(i)) < map.Values.ToList().IndexOf(s.ElementAt(i + 1)))
@@ -33,13 +33,13 @@ namespace CsharpLeetCode
             }
             return number;
         }
-        static void Main(string[] args)
-        {
-            Roman_to_Integer p = new Roman_to_Integer();
-            int a = p.RomanToInt("IV");
-            Console.WriteLine(a);
-            Console.Read();
-        }
+        //static void Main(string[] args)
+        //{
+        //    Roman_to_Integer p = new Roman_to_Integer();
+        //    int a = p.RomanToInt("IV");
+        //    Console.WriteLine(a);
+        //    Console.Read();
+        //}
 
     }
 }
