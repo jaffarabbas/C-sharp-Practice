@@ -19,7 +19,7 @@ namespace CsharpLeetCode
             map.Add("C", 100);
             map.Add("D", 500);
             map.Add("M", 1000);
-            number = map.Values.ToList().IndexOf("I");
+            number = map.ToList().IndexOf("I");
             for (int i = s.Length - 2; i >= 0; i--)
             {
                 if(map.Values.ToList().IndexOf(s.ElementAt(i)) < map.Values.ToList().IndexOf(s.ElementAt(i + 1)))
