@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Majority Element.cs" />
     <Compile Include="Palindrome Number.cs" />
     <Compile Include="Roman to Integer.cs" />
     <Compile Include="Search Insert Position.cs" />
