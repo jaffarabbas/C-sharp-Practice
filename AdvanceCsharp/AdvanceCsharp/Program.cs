@@ -36,7 +36,14 @@ namespace AdvanceCsharp
             //c.overLoad(2);
             //Console.ReadLine();
             //delegates
-            DelegatesClass.TestDelegates();
+            //DelegatesClass.TestDelegates();
+            Dictionary<string, string> k = StaticClass.c("as", "a1");
+            Dictionary<string, string> k2 = StaticClass.c("as", "a2");
+            Dictionary<string, string> k3 = StaticClass.c("as", "a3");
+            Console.WriteLine(k["as"]);
+            Console.WriteLine(k2["as"]);
+            Console.WriteLine(k3["as"]);
+            Console.ReadLine();
         }
     }
 }
