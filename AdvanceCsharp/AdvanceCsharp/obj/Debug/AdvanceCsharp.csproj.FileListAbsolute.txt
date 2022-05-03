@@ -6,3 +6,11 @@ D:\Github\C-sharp-Practice\AdvanceCsharp\AdvanceCsharp\obj\Debug\AdvanceCsharp.c
 D:\Github\C-sharp-Practice\AdvanceCsharp\AdvanceCsharp\obj\Debug\AdvanceCsharp.csproj.CoreCompileInputs.cache
 D:\Github\C-sharp-Practice\AdvanceCsharp\AdvanceCsharp\obj\Debug\AdvanceCsharp.exe
 D:\Github\C-sharp-Practice\AdvanceCsharp\AdvanceCsharp\obj\Debug\AdvanceCsharp.pdb
+J:\Github\C-sharp-Practice\AdvanceCsharp\AdvanceCsharp\bin\Debug\AdvanceCsharp.exe.config
+J:\Github\C-sharp-Practice\AdvanceCsharp\AdvanceCsharp\bin\Debug\AdvanceCsharp.exe
+J:\Github\C-sharp-Practice\AdvanceCsharp\AdvanceCsharp\bin\Debug\AdvanceCsharp.pdb
+J:\Github\C-sharp-Practice\AdvanceCsharp\AdvanceCsharp\obj\Debug\AdvanceCsharp.csproj.AssemblyReference.cache
+J:\Github\C-sharp-Practice\AdvanceCsharp\AdvanceCsharp\obj\Debug\AdvanceCsharp.csproj.SuggestedBindingRedirects.cache
+J:\Github\C-sharp-Practice\AdvanceCsharp\AdvanceCsharp\obj\Debug\AdvanceCsharp.csproj.CoreCompileInputs.cache
+J:\Github\C-sharp-Practice\AdvanceCsharp\AdvanceCsharp\obj\Debug\AdvanceCsharp.exe
+J:\Github\C-sharp-Practice\AdvanceCsharp\AdvanceCsharp\obj\Debug\AdvanceCsharp.pdb
