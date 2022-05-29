@@ -44,8 +44,10 @@ namespace AdvanceCsharp
             //Console.WriteLine(k2["as"]);
             //Console.WriteLine(k3["as"]);
             //Console.ReadLine();
-            StaticClass.c("asd","asdt");
-            Console.WriteLine(StaticClass.getDictionary()["asd"]);
+            //StaticClass.c("asd","asdt");
+            //Console.WriteLine(StaticClass.getDictionary()["asd"]);
+            NestedClass obj = new NestedClass();
+            Console.WriteLine(obj.name);
         }
     }
 }
