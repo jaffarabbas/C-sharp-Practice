@@ -27,4 +27,20 @@ namespace AdvanceCsharp.Classes
             }
         }
     }
+
+    partial class a
+    {
+        public void oo()
+        {
+            Console.WriteLine("sa");
+        }
+    }
+
+    partial class a
+    {
+        public void s()
+        {
+            oo();
+        }
+    }
 }
