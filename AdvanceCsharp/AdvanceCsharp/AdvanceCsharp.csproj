@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Classes\AbstractClasses.cs" />
     <Compile Include="Classes\InterfaceClass.cs" />
+    <Compile Include="Classes\NestedClass.cs" />
     <Compile Include="Classes\PartialClass.cs" />
     <Compile Include="Classes\SealedClass.cs" />
     <Compile Include="Classes\StaticClass.cs" />
