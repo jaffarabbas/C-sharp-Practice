@@ -32,11 +32,35 @@ namespace GitCommiterMethodTester
             return data;
         }
 
+        private static void ShellRunner(string script,string message)
+        {
+            try
+            {
+                cmd = new Process();
+                cmd.StartInfo.FileName = "cmd.exe";
+                cmd.StartInfo.RedirectStandardInput = true;
+                cmd.StartInfo.RedirectStandardOutput = true;
+                cmd.StartInfo.CreateNoWindow = true;
+                cmd.StartInfo.UseShellExecute = false;
+                cmd.Start();
+                cmd.StandardInput.WriteLine(script);
+                cmd.StandardInput.Flush();
+                cmd.StandardInput.Close();
+                cmd.WaitForExit();
+                commitResult.Add(message);
+            }
+            catch(Exception error)
+            {
+                commitResult.Add(error.Message);
+            }
+        }
+
         public static void CommitData(string path,string item)
         {
-            string gitCommitCommand = "cd " + path + " & git add " + item + $"& git commit -m \"{CommitMessage(item)}\" ";
-            ShellRunner(gitCommitCommand, CommitMessage(item));
             countCommitedFiles++;
+            string gitCommitCommand = "cd " + path + " & git add " + item + $"& git commit -m \"{CommitMessage(item)}\" ";
+            string message = $"{countCommitedFiles} : {CommitMessage(item)}";
+            ShellRunner(gitCommitCommand, message);
         }
 
         public static void PushCommitData(string path)
@@ -69,22 +93,6 @@ namespace GitCommiterMethodTester
         private static string CommitMessage(string message)
         {
             return "Commited File : " + (string)message.Split('/').Last() + " at " + DateTime.Now;
-        }
-
-        private static void ShellRunner(string script,string message)
-        {
-            cmd = new Process();
-            cmd.StartInfo.FileName = "cmd.exe";
-            cmd.StartInfo.RedirectStandardInput = true;
-            cmd.StartInfo.RedirectStandardOutput = true;
-            cmd.StartInfo.CreateNoWindow = true;
-            cmd.StartInfo.UseShellExecute = false;
-            cmd.Start();
-            cmd.StandardInput.WriteLine(script);
-            cmd.StandardInput.Flush();
-            cmd.StandardInput.Close();
-            cmd.WaitForExit();
-            commitResult.Add(message);
         }
 
         static void Main(string[] args)
