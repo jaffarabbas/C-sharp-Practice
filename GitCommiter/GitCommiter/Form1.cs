@@ -33,7 +33,7 @@ namespace GitCommiter
 
         private void btnCommit_Click(object sender, EventArgs e)
         {
-            CommitData();
+            CommitAndPushData();
         }
 
         #region Methods
@@ -82,19 +82,27 @@ namespace GitCommiter
         }
 
 
-        private void CommitData()
+        private void CommitAndPushData()
         {
             lbCommitDetails.Items.Clear();
             BindingSource bindingSource = new BindingSource();
-
+            int count = 0;
             foreach (var item in Commiter.StageChanges(repoPathLabel.Text))
             {
                 Commiter.CommitData(repoPathLabel.Text, item);
                 foreach (var data in Commiter.commitResult)
                 {
-                    lbCommitDetails.Items.Add(data);
+                    count++;
+                    lbCommitDetails.Items.Add(count + " : " +data);
                     bindingSource.DataSource = Commiter.commitResult;
                 }
+            }
+            Commiter.PushCommitData(repoPathLabel.Text);
+
+            foreach (var data in Commiter.commitResult)
+            {
+                lbCommitDetails.Items.Add(data);
+                bindingSource.DataSource = Commiter.commitResult;
             }
         }
         #endregion
