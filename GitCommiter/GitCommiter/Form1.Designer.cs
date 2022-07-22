@@ -34,6 +34,8 @@
             this.repoPathLabel = new System.Windows.Forms.Label();
             this.btnCommit = new System.Windows.Forms.Button();
             this.lbCommitDetails = new System.Windows.Forms.ListBox();
+            this.fileCountForCommit = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gvDataView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,6 +46,7 @@
             this.gvDataView.Location = new System.Drawing.Point(432, 12);
             this.gvDataView.Name = "gvDataView";
             this.gvDataView.ReadOnly = true;
+            this.gvDataView.RowHeadersVisible = false;
             this.gvDataView.Size = new System.Drawing.Size(356, 426);
             this.gvDataView.TabIndex = 0;
             this.gvDataView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -88,18 +91,40 @@
             // 
             // lbCommitDetails
             // 
+            this.lbCommitDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCommitDetails.FormattingEnabled = true;
             this.lbCommitDetails.HorizontalScrollbar = true;
+            this.lbCommitDetails.ItemHeight = 15;
             this.lbCommitDetails.Location = new System.Drawing.Point(30, 89);
             this.lbCommitDetails.Name = "lbCommitDetails";
-            this.lbCommitDetails.Size = new System.Drawing.Size(387, 277);
+            this.lbCommitDetails.Size = new System.Drawing.Size(387, 274);
             this.lbCommitDetails.TabIndex = 6;
+            // 
+            // fileCountForCommit
+            // 
+            this.fileCountForCommit.AutoSize = true;
+            this.fileCountForCommit.Location = new System.Drawing.Point(408, 60);
+            this.fileCountForCommit.Name = "fileCountForCommit";
+            this.fileCountForCommit.Size = new System.Drawing.Size(0, 13);
+            this.fileCountForCommit.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(310, 60);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(92, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Commit Count: ";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.fileCountForCommit);
             this.Controls.Add(this.lbCommitDetails);
             this.Controls.Add(this.btnCommit);
             this.Controls.Add(this.repoPathLabel);
@@ -123,6 +148,8 @@
         private System.Windows.Forms.Label repoPathLabel;
         private System.Windows.Forms.Button btnCommit;
         private System.Windows.Forms.ListBox lbCommitDetails;
+        private System.Windows.Forms.Label fileCountForCommit;
+        private System.Windows.Forms.Label label3;
     }
 }
 
