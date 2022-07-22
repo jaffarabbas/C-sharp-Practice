@@ -15,29 +15,51 @@ namespace GitCommiter
 {
     public partial class Form1 : Form
     {
+        #region Form Methods
+
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Initialize Form method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
             FillList();
         }
 
+        /// <summary>
+        /// Grid View Item Selecter Method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             SelectRepo(e);
             PopulateListBoxWithStageChanges();
         }
 
+        /// <summary>
+        /// Commit button Click Method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCommit_Click(object sender, EventArgs e)
         {
             CommitAndPushData();
         }
 
+        #endregion
+
         #region Methods
 
+        /// <summary>
+        /// Fill DataGridView with Repository Path List using Commiter path List Methods
+        /// </summary>
         private void FillList()
         {
             DataTable table = new DataTable();
@@ -51,12 +73,19 @@ namespace GitCommiter
             gvDataView.Columns[0].Width = 20;
         }
 
+        /// <summary>
+        /// Select Repository Local Path for Commit and Push
+        /// </summary>
+        /// <param name="e"></param>
         private void SelectRepo(DataGridViewCellEventArgs e)
         {
             repoPathLabel.Text = gvDataView.Rows[e.RowIndex].Cells[1].Value.ToString();
             fileCountForCommit.Text = Commiter.StageChanges(repoPathLabel.Text).Count.ToString();
         }
 
+        /// <summary>
+        /// Populate List box with Staged File Information
+        /// </summary>
         private void PopulateListBoxWithStageChanges()
         {
             lbCommitDetails.Items.Clear();
@@ -79,7 +108,9 @@ namespace GitCommiter
             bindingSource.DataSource = dataList;
         }
 
-
+        /// <summary>
+        /// Commit Staged data and Push to using Commiter Functions
+        /// </summary>
         private void CommitAndPushData()
         {
             lbCommitDetails.Items.Clear();
@@ -103,6 +134,7 @@ namespace GitCommiter
                 bindingSource.DataSource = Commiter.commitResult;
             }
         }
+      
         #endregion
 
     }
