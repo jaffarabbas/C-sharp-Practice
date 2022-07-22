@@ -12,13 +12,22 @@ namespace GitCommiterMethodTester
 {
     public class Commiter
     {
+        #region Attributes 
+
         private static string path = @"J:\Github";
         private static Repository repo;
         private static Process cmd;
         private static int countCommitedFiles = 0;
         public static List<string> commitResult = new List<string>();
 
-        //get list of directory path
+        #endregion
+
+        #region Commiter Methods
+
+        /// <summary>
+        /// get list of directory path
+        /// </summary>
+        /// <returns></returns>
         public static Dictionary<int,string> GitPathList()
         {
             int count = 0;
@@ -33,6 +42,36 @@ namespace GitCommiterMethodTester
             return data;
         }
 
+        /// <summary>
+        /// returns List of Files for Commits
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static List<string> StageChanges(string path)
+        {
+            try
+            {
+                repo = new Repository(path);
+                RepositoryStatus status = repo.RetrieveStatus();
+                //new files
+                List<string> filePaths = status.Untracked.Select(mods => mods.FilePath).ToList();
+                //updated files
+                filePaths.AddRange(status.Modified.Select(mods => mods.FilePath).ToList());
+                //deleted files
+                filePaths.AddRange(status.Missing.Select(mods => mods.FilePath).ToList());
+                return filePaths;
+            }
+            catch (Exception ex)
+            {
+                return new List<string> { "Exception:RepoActions:StageChanges " + ex.Message };
+            }
+        }
+
+        /// <summary>
+        /// execute shell commands and append output to global file list
+        /// </summary>
+        /// <param name="script"></param>
+        /// <param name="message"></param>
         private static void ShellRunner(string script,string message)
         {
             try
@@ -56,6 +95,11 @@ namespace GitCommiterMethodTester
             }
         }
 
+        /// <summary>
+        /// commit files from satged list using Shell Runner
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="item"></param>
         public static void CommitData(string path,string item)
         {
             countCommitedFiles++;
@@ -63,7 +107,11 @@ namespace GitCommiterMethodTester
             string message = $"{countCommitedFiles} : {CommitMessage(item)}";
             ShellRunner(gitCommitCommand, message);
         }
-
+      
+        /// <summary>
+        /// Push commited files using Shell Runner
+        /// </summary>
+        /// <param name="path"></param>
         public static void PushCommitData(string path)
         {
             string gitPushCommand = "cd " + path + " & git push -u origin";
@@ -71,43 +119,16 @@ namespace GitCommiterMethodTester
             ShellRunner(gitPushCommand,message);
         }
 
-        public static List<string> StageChanges(string path)
-        {
-            try
-            {
-                repo = new Repository(path);
-                RepositoryStatus status = repo.RetrieveStatus();
-                //new files
-                List<string> filePaths = status.Untracked.Select(mods => mods.FilePath).ToList();
-                //updated files
-                filePaths.AddRange(status.Modified.Select(mods => mods.FilePath).ToList());
-                //deleted files
-                filePaths.AddRange(status.Missing.Select(mods => mods.FilePath).ToList());
-                return filePaths;
-            }
-            catch (Exception ex)
-            {
-                return new List<string> { "Exception:RepoActions:StageChanges " + ex.Message };
-            }
-        }
-
+        /// <summary>
+        /// Commit message generater
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         private static string CommitMessage(string message)
         {
             return "Commited File : " + (string)message.Split('/').Last() + " at " + DateTime.Now;
         }
 
-
-        static void Main(string[] args)
-        {
-            //Commiter.CommitData(@"J:\Github\C-sharp-Practice");
-            foreach (var item in StageChanges(@"J:\Github\C-sharp-Practice"))
-            {
-                CommitData(@"J:\Github\C-sharp-Practice",item);
-                foreach (var data in commitResult)
-                {
-                   MessageBox.Show(data); 
-                }
-            }
-        }
+        #endregion
     }
 }
