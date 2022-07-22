@@ -94,8 +94,8 @@ namespace GitCommiter
                 {
                     count++;
                     lbCommitDetails.Items.Add(count + " : " +data);
-                    bindingSource.DataSource = Commiter.commitResult;
                 }
+                bindingSource.DataSource = Commiter.commitResult;
             }
             lbCommitDetails.Items.Clear();
             lbCommitDetails.Refresh();
