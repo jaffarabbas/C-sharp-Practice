@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GitCommiterMethodTester;
@@ -26,12 +27,33 @@ namespace GitCommiter
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             SelectRepo(e);
-            PopulateListBoxWithStageChanges();
+            //PopulateListBoxWithStageChanges();
         }
 
         private void btnCommit_Click(object sender, EventArgs e)
         {
+            foreach (var item in Commiter.StageChanges(@"J:\Github\C-sharp-Practice"))
+            {
+                Commiter.CommitData(@"J:\Github\C-sharp-Practice", item);
+                foreach (var data in Commiter.commitResult)
+                {
+                    MessageBox.Show(data);
+                }
+            }
+            //lbCommitDetails.Items.Clear();
+            //List<string> dataList = new List<string>();
+            //BindingSource bindingSource = new BindingSource();
 
+            //foreach (var item in Commiter.StageChanges(repoPathLabel.Text))
+            //{
+            //    Commiter.CommitData(repoPathLabel.Text, item);
+            //    foreach (var data in Commiter.commitResult)
+            //    {
+            //        MessageBox.Show(data);
+            //        lbCommitDetails.Items.Add(data);
+            //        bindingSource.DataSource = Commiter.commitResult;
+            //    }
+            //}
         }
 
         #region Methods
