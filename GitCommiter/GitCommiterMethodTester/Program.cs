@@ -56,6 +56,8 @@ namespace GitCommiterMethodTester
                 RepositoryStatus status = repo.RetrieveStatus();
                 List<string> filePaths = status.Untracked.Select(mods => mods.FilePath).ToList();
                 filePaths.AddRange(status.Modified.Select(mods => mods.FilePath).ToList());
+                //filePaths.AddRange(status.Removed.Select(mods => mods.FilePath).ToList());
+                filePaths.AddRange(status.Missing.Select(mods => mods.FilePath).ToList());
                 return filePaths;
             }
             catch (Exception ex)
