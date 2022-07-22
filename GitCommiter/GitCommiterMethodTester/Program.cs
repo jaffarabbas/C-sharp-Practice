@@ -39,7 +39,7 @@ namespace GitCommiterMethodTester
             cmd.StartInfo.CreateNoWindow = true;
             cmd.StartInfo.UseShellExecute = false;
 
-            string gitCommand = "cd " + path + " & git add " + item + "& git commit -m ¨" + CommitMessage(item) + "¨ ";
+            string gitCommand = "cd " + path + " & git add " + item + $"& git commit -m \"{CommitMessage(item)}\" ";
             cmd.Start();
             cmd.StandardInput.WriteLine(gitCommand);
             cmd.StandardInput.Flush();
