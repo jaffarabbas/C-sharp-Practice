@@ -97,6 +97,8 @@ namespace GitCommiter
                     bindingSource.DataSource = Commiter.commitResult;
                 }
             }
+            lbCommitDetails.Items.Clear();
+            lbCommitDetails.Refresh();
             Commiter.PushCommitData(repoPathLabel.Text);
 
             foreach (var data in Commiter.commitResult)
