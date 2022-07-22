@@ -15,6 +15,7 @@ namespace GitCommiterMethodTester
         private static string path = @"J:\Github";
         private static Repository repo;
         private static Process cmd;
+        private static int countCommitedFiles = 0;
         public static List<string> commitResult = new List<string>();
         //get list of directory path
         public static Dictionary<int,string> GitPathList()
@@ -34,13 +35,15 @@ namespace GitCommiterMethodTester
         public static void CommitData(string path,string item)
         {
             string gitCommitCommand = "cd " + path + " & git add " + item + $"& git commit -m \"{CommitMessage(item)}\" ";
-            ShellRunner(gitCommitCommand);
+            ShellRunner(gitCommitCommand, CommitMessage(item));
+            countCommitedFiles++;
         }
 
         public static void PushCommitData(string path)
         {
             string gitPushCommand = "cd " + path + " & git push -u origin";
-            ShellRunner(gitPushCommand);
+            string message = $"{countCommitedFiles} Files are pushed";
+            ShellRunner(gitPushCommand,message);
         }
 
         public static List<string> StageChanges(string path)
@@ -68,7 +71,7 @@ namespace GitCommiterMethodTester
             return "Commited File : " + (string)message.Split('/').Last() + " at " + DateTime.Now;
         }
 
-        private static void ShellRunner(string script)
+        private static void ShellRunner(string script,string message)
         {
             cmd = new Process();
             cmd.StartInfo.FileName = "cmd.exe";
@@ -81,7 +84,7 @@ namespace GitCommiterMethodTester
             cmd.StandardInput.Flush();
             cmd.StandardInput.Close();
             cmd.WaitForExit();
-            commitResult.Add(script);
+            commitResult.Add(message);
         }
 
         static void Main(string[] args)
