@@ -15,7 +15,6 @@ namespace GitCommiter
 {
     public partial class Form1 : Form
     {
-        public static List<string> commitResult = new List<string>();
         public Form1()
         {
             InitializeComponent();
@@ -34,29 +33,7 @@ namespace GitCommiter
 
         private void btnCommit_Click(object sender, EventArgs e)
         {
-            foreach (var item in Commiter.StageChanges(@"J:\Github\C-sharp-Practice"))
-            {
-                //MessageBox.Show(item);
-                Commiter.CommitData(@"J:\Github\C-sharp-Practice", item);
-                foreach (var data in commitResult)
-                {
-                    MessageBox.Show(data);
-                }
-            }
-            //lbCommitDetails.Items.Clear();
-            //List<string> dataList = new List<string>();
-            //BindingSource bindingSource = new BindingSource();
-
-            //foreach (var item in Commiter.StageChanges(repoPathLabel.Text))
-            //{
-            //    Commiter.CommitData(repoPathLabel.Text, item);
-            //    foreach (var data in Commiter.commitResult)
-            //    {
-            //        MessageBox.Show(data);
-            //        lbCommitDetails.Items.Add(data);
-            //        bindingSource.DataSource = Commiter.commitResult;
-            //    }
-            //}
+            CommitData();
         }
 
         #region Methods
@@ -104,25 +81,22 @@ namespace GitCommiter
             return "Commited File : " + (string)message.Split('/').Last() + " at " + DateTime.Now;
         }
 
-        public static void CommitData(string path, string item)
+
+        private void CommitData()
         {
-            Process cmd = new Process();
-            cmd.StartInfo.FileName = "cmd.exe";
-            cmd.StartInfo.RedirectStandardInput = true;
-            cmd.StartInfo.RedirectStandardOutput = true;
-            cmd.StartInfo.CreateNoWindow = true;
-            cmd.StartInfo.UseShellExecute = false;
+            lbCommitDetails.Items.Clear();
+            BindingSource bindingSource = new BindingSource();
 
-            ///string gitCommand = 
-            cmd.Start();
-            cmd.StandardInput.WriteLine("cd " + path + " & git add " + item + " & git commit -m ¨" + CommitMessage(item) + "¨ ");
-            cmd.StandardInput.Flush();
-            cmd.StandardInput.Close();
-            cmd.WaitForExit();
-            commitResult.Add(cmd.StandardOutput.ReadToEnd());
+            foreach (var item in Commiter.StageChanges(repoPathLabel.Text))
+            {
+                Commiter.CommitData(repoPathLabel.Text, item);
+                foreach (var data in Commiter.commitResult)
+                {
+                    lbCommitDetails.Items.Add(data);
+                    bindingSource.DataSource = Commiter.commitResult;
+                }
+            }
         }
-
-
         #endregion
 
     }
