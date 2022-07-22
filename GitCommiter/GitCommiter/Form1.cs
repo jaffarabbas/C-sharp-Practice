@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace GitCommiter
 {
     public partial class Form1 : Form
     {
+        public static List<string> commitResult = new List<string>();
         public Form1()
         {
             InitializeComponent();
@@ -27,15 +29,16 @@ namespace GitCommiter
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             SelectRepo(e);
-            //PopulateListBoxWithStageChanges();
+            PopulateListBoxWithStageChanges();
         }
 
         private void btnCommit_Click(object sender, EventArgs e)
         {
             foreach (var item in Commiter.StageChanges(@"J:\Github\C-sharp-Practice"))
             {
+                //MessageBox.Show(item);
                 Commiter.CommitData(@"J:\Github\C-sharp-Practice", item);
-                foreach (var data in Commiter.commitResult)
+                foreach (var data in commitResult)
                 {
                     MessageBox.Show(data);
                 }
@@ -95,6 +98,30 @@ namespace GitCommiter
             }
             bindingSource.DataSource = dataList;
         }
+
+        private static string CommitMessage(string message)
+        {
+            return "Commited File : " + (string)message.Split('/').Last() + " at " + DateTime.Now;
+        }
+
+        public static void CommitData(string path, string item)
+        {
+            Process cmd = new Process();
+            cmd.StartInfo.FileName = "cmd.exe";
+            cmd.StartInfo.RedirectStandardInput = true;
+            cmd.StartInfo.RedirectStandardOutput = true;
+            cmd.StartInfo.CreateNoWindow = true;
+            cmd.StartInfo.UseShellExecute = false;
+
+            ///string gitCommand = 
+            cmd.Start();
+            cmd.StandardInput.WriteLine("cd " + path + " & git add " + item + " & git commit -m ¨" + CommitMessage(item) + "¨ ");
+            cmd.StandardInput.Flush();
+            cmd.StandardInput.Close();
+            cmd.WaitForExit();
+            commitResult.Add(cmd.StandardOutput.ReadToEnd());
+        }
+
 
         #endregion
 

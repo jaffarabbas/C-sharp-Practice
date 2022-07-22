@@ -54,9 +54,11 @@ namespace GitCommiterMethodTester
             {
                 repo = new Repository(path);
                 RepositoryStatus status = repo.RetrieveStatus();
+                //new files
                 List<string> filePaths = status.Untracked.Select(mods => mods.FilePath).ToList();
+                //updated files
                 filePaths.AddRange(status.Modified.Select(mods => mods.FilePath).ToList());
-                //filePaths.AddRange(status.Removed.Select(mods => mods.FilePath).ToList());
+                //deleted files
                 filePaths.AddRange(status.Missing.Select(mods => mods.FilePath).ToList());
                 return filePaths;
             }
@@ -74,12 +76,12 @@ namespace GitCommiterMethodTester
         static void Main(string[] args)
         {
             //Commiter.CommitData(@"J:\Github\C-sharp-Practice");
-            foreach (var item in Commiter.StageChanges(@"J:\Github\C-sharp-Practice"))
+            foreach (var item in StageChanges(@"J:\Github\C-sharp-Practice"))
             {
-                Commiter.CommitData(@"J:\Github\C-sharp-Practice",item);
-                foreach (var data in Commiter.commitResult)
+                CommitData(@"J:\Github\C-sharp-Practice",item);
+                foreach (var data in commitResult)
                 {
-                    Console.WriteLine(data); 
+                   MessageBox.Show(data); 
                 }
             }
         }
