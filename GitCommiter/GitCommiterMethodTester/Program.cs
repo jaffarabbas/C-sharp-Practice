@@ -17,6 +17,7 @@ namespace GitCommiterMethodTester
         private static Process cmd;
         private static int countCommitedFiles = 0;
         public static List<string> commitResult = new List<string>();
+
         //get list of directory path
         public static Dictionary<int,string> GitPathList()
         {
@@ -94,6 +95,7 @@ namespace GitCommiterMethodTester
         {
             return "Commited File : " + (string)message.Split('/').Last() + " at " + DateTime.Now;
         }
+
 
         static void Main(string[] args)
         {
