@@ -54,6 +54,7 @@ namespace GitCommiter
         private void SelectRepo(DataGridViewCellEventArgs e)
         {
             repoPathLabel.Text = gvDataView.Rows[e.RowIndex].Cells[1].Value.ToString();
+            fileCountForCommit.Text = Commiter.StageChanges(repoPathLabel.Text).Count.ToString();
         }
 
         private void PopulateListBoxWithStageChanges()
@@ -61,11 +62,13 @@ namespace GitCommiter
             lbCommitDetails.Items.Clear();
             List<string> dataList = Commiter.StageChanges(repoPathLabel.Text);
             BindingSource bindingSource = new BindingSource();
+            int count = 0;
             if (dataList.Count != 0)
             {
                 foreach (var item in dataList)
                 {
-                    lbCommitDetails.Items.Add(item.ToString());
+                    count++;
+                    lbCommitDetails.Items.Add(count + " : " +item.ToString());
                 }
             }
             else
@@ -74,11 +77,6 @@ namespace GitCommiter
                 lbCommitDetails.Items.Add(dataList.FirstOrDefault().ToString());
             }
             bindingSource.DataSource = dataList;
-        }
-
-        private static string CommitMessage(string message)
-        {
-            return "Commited File : " + (string)message.Split('/').Last() + " at " + DateTime.Now;
         }
 
 
