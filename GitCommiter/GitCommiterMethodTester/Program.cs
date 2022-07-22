@@ -14,6 +14,7 @@ namespace GitCommiterMethodTester
     {
         private static string path = @"J:\Github";
         private static Repository repo;
+        private static Process cmd;
         public static List<string> commitResult = new List<string>();
         //get list of directory path
         public static Dictionary<int,string> GitPathList()
@@ -32,20 +33,14 @@ namespace GitCommiterMethodTester
 
         public static void CommitData(string path,string item)
         {
-            Process cmd = new Process();
-            cmd.StartInfo.FileName = "cmd.exe";
-            cmd.StartInfo.RedirectStandardInput = true;
-            cmd.StartInfo.RedirectStandardOutput = true;
-            cmd.StartInfo.CreateNoWindow = true;
-            cmd.StartInfo.UseShellExecute = false;
+            string gitCommitCommand = "cd " + path + " & git add " + item + $"& git commit -m \"{CommitMessage(item)}\" ";
+            ShellRunner(gitCommitCommand);
+        }
 
-            string gitCommand = "cd " + path + " & git add " + item + $"& git commit -m \"{CommitMessage(item)}\" ";
-            cmd.Start();
-            cmd.StandardInput.WriteLine(gitCommand);
-            cmd.StandardInput.Flush();
-            cmd.StandardInput.Close();
-            cmd.WaitForExit();
-            commitResult.Add(cmd.StandardOutput.ReadToEnd());
+        public static void PushCommitData(string path)
+        {
+            string gitPushCommand = "cd " + path + " & git push -u origin";
+            ShellRunner(gitPushCommand);
         }
 
         public static List<string> StageChanges(string path)
@@ -71,6 +66,22 @@ namespace GitCommiterMethodTester
         private static string CommitMessage(string message)
         {
             return "Commited File : " + (string)message.Split('/').Last() + " at " + DateTime.Now;
+        }
+
+        private static void ShellRunner(string script)
+        {
+            cmd = new Process();
+            cmd.StartInfo.FileName = "cmd.exe";
+            cmd.StartInfo.RedirectStandardInput = true;
+            cmd.StartInfo.RedirectStandardOutput = true;
+            cmd.StartInfo.CreateNoWindow = true;
+            cmd.StartInfo.UseShellExecute = false;
+            cmd.Start();
+            cmd.StandardInput.WriteLine(script);
+            cmd.StandardInput.Flush();
+            cmd.StandardInput.Close();
+            cmd.WaitForExit();
+            commitResult.Add(script);
         }
 
         static void Main(string[] args)
