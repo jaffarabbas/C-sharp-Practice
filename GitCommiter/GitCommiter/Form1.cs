@@ -50,10 +50,11 @@ namespace GitCommiter
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-        private void btnCommit_Click_1(object sender, EventArgs e)
+        private void btnCommit_Click(object sender, EventArgs e)
         {
             CommitAndPushData();
         }
+
 
         #endregion
 
