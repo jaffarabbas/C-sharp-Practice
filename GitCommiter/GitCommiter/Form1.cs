@@ -123,6 +123,7 @@ namespace GitCommiter
                 Commiter.CommitData(repoPathLabel.Text, item);
                 foreach (var data in Commiter.commitResult)
                 {
+                    lbCommitDetails.Refresh();
                     lbCommitDetails.Items.Add(data);
                 }
             }
