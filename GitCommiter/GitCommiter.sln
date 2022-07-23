@@ -5,7 +5,7 @@ VisualStudioVersion = 17.2.32505.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitCommiter", "GitCommiter\GitCommiter.csproj", "{8E2BED9C-B9B3-4218-B79B-09589F675A51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitCommiterMethodTester", "GitCommiterMethodTester\GitCommiterMethodTester.csproj", "{E64A09AD-A4EB-4B29-925D-D20C1F8704A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitCommiterMethods", "GitCommiterMethodTester\GitCommiterMethods.csproj", "{E64A09AD-A4EB-4B29-925D-D20C1F8704A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
