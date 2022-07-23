@@ -74,7 +74,7 @@
             // repoPathLabel
             // 
             this.repoPathLabel.AutoSize = true;
-            this.repoPathLabel.Location = new System.Drawing.Point(112, 60);
+            this.repoPathLabel.Location = new System.Drawing.Point(112, 61);
             this.repoPathLabel.Name = "repoPathLabel";
             this.repoPathLabel.Size = new System.Drawing.Size(0, 13);
             this.repoPathLabel.TabIndex = 3;
@@ -103,7 +103,7 @@
             // fileCountForCommit
             // 
             this.fileCountForCommit.AutoSize = true;
-            this.fileCountForCommit.Location = new System.Drawing.Point(408, 60);
+            this.fileCountForCommit.Location = new System.Drawing.Point(408, 61);
             this.fileCountForCommit.Name = "fileCountForCommit";
             this.fileCountForCommit.Size = new System.Drawing.Size(0, 13);
             this.fileCountForCommit.TabIndex = 7;
@@ -112,7 +112,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(310, 60);
+            this.label3.Location = new System.Drawing.Point(310, 61);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(92, 13);
             this.label3.TabIndex = 8;
