@@ -119,16 +119,15 @@ namespace GitCommiter
             BindingSource bindingSource = new BindingSource();
             foreach (var item in Commiter.StageChanges(repoPathLabel.Text))
             {
+                lbCommitDetails.Items.Clear();
                 Commiter.CommitData(repoPathLabel.Text, item);
                 foreach (var data in Commiter.commitResult)
                 {
-                    lbCommitDetails.Items.Clear();
                     lbCommitDetails.Items.Add(data);
                 }
             }
             bindingSource.DataSource = Commiter.commitResult;
             lbCommitDetails.Items.Clear();
-            lbCommitDetails.Refresh();
             Commiter.PushCommitData(repoPathLabel.Text);
 
             foreach (var data in Commiter.commitResult)
