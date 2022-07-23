@@ -59,7 +59,7 @@ namespace GitCommiterMethods
                 filePaths.AddRange(status.Modified.Select(mods => mods.FilePath).ToList());
                 //deleted files
                 filePaths.AddRange(status.Missing.Select(mods => mods.FilePath).ToList());
-                //test
+                //files that not modified
                 filePaths.AddRange(status.Unaltered.Select(mods => mods.FilePath).ToList());
                 return filePaths;
             }
