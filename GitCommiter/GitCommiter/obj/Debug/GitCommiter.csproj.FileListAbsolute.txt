@@ -9,7 +9,6 @@ J:\Github\C-sharp-Practice\GitCommiter\GitCommiter\obj\Debug\GitCommiter.csproj.
 J:\Github\C-sharp-Practice\GitCommiter\GitCommiter\obj\Debug\GitCommiter.csproj.CoreCompileInputs.cache
 J:\Github\C-sharp-Practice\GitCommiter\GitCommiter\obj\Debug\GitCommiter.exe
 J:\Github\C-sharp-Practice\GitCommiter\GitCommiter\obj\Debug\GitCommiter.pdb
-J:\Github\C-sharp-Practice\GitCommiter\GitCommiter\bin\Debug\GitCommiterMethodTester.exe
 J:\Github\C-sharp-Practice\GitCommiter\GitCommiter\bin\Debug\GitCommiterMethodTester.pdb
 J:\Github\C-sharp-Practice\GitCommiter\GitCommiter\bin\Debug\GitCommiterMethodTester.exe.config
 J:\Github\C-sharp-Practice\GitCommiter\GitCommiter\obj\Debug\GitCommiter.csproj.CopyComplete
@@ -31,3 +30,5 @@ J:\Github\C-sharp-Practice\GitCommiter\GitCommiter\bin\Debug\lib\ubuntu.18.04-x6
 J:\Github\C-sharp-Practice\GitCommiter\GitCommiter\bin\Debug\LibGit2Sharp.dll
 J:\Github\C-sharp-Practice\GitCommiter\GitCommiter\bin\Debug\LibGit2Sharp.pdb
 J:\Github\C-sharp-Practice\GitCommiter\GitCommiter\bin\Debug\LibGit2Sharp.xml
+J:\Github\C-sharp-Practice\GitCommiter\GitCommiter\bin\Debug\GitCommiterMethodTester.dll
+J:\Github\C-sharp-Practice\GitCommiter\GitCommiter\bin\Debug\GitCommiterMethodTester.dll.config
