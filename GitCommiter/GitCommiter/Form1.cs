@@ -30,6 +30,7 @@ namespace GitCommiter
         private void Form1_Load(object sender, EventArgs e)
         {
             FillList();
+            WindowState = FormWindowState.Maximized;
         }
 
         /// <summary>
@@ -50,7 +51,7 @@ namespace GitCommiter
         /// <param name="e"></param>
         private void btnCommit_Click(object sender, EventArgs e)
         {
-            CommitAndPushData();
+            //CommitAndPushData();
         }
 
         #endregion
@@ -134,8 +135,12 @@ namespace GitCommiter
                 bindingSource.DataSource = Commiter.commitResult;
             }
         }
-      
+
         #endregion
 
+        private void btnCommit_Click_1(object sender, EventArgs e)
+        {
+            CommitAndPushData();
+        }
     }
 }
