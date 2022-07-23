@@ -124,8 +124,8 @@ namespace GitCommiter
                 {
                     lbCommitDetails.Items.Add(data);
                 }
-                bindingSource.DataSource = Commiter.commitResult;
             }
+            bindingSource.DataSource = Commiter.commitResult;
             lbCommitDetails.Items.Clear();
             lbCommitDetails.Refresh();
             Commiter.PushCommitData(repoPathLabel.Text);
