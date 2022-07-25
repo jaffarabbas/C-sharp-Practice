@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="~/scripts/jquery.js"></script>
+<h2>Index</h2>
+
+<input type="button" value="Get Employee" id="getAllEmployee" />
+<input type="button" value="Clear Employee" id="clearAllEmployee" /><br>
+<input type="text" placeholder="Get Employee By Id" id="getEmployeeId" />
+<input type="button" value="Get Employee By Id" id="getEmployeeById" />
+
+<div id="populateData">
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#getAllEmployee").click(function () {
+            $.getJSON('/api/EmployeeData', function (data) {
+                $.each(data, function (key, value) {
+                    var item = "<h2>" + value + "</h2>";
+                    $(item).appendTo("#populateData");
+                });
+            });
+        });
+    });
+    //clear employee
+    $(document).ready(function () {
+        $("#clearAllEmployee").click(function () {
+            $("#populateData").empty();
+        });
+    });
+    //get employee by id
+    $(document).ready(function () {
+        $("#getEmployeeById").click(function () {
+            $("#populateData").empty();
+            var id = $("#getEmployeeId").val();
+            $.getJSON('/api/EmployeeData/' + id, function (data) {
+                var item = "<h2>" + data + "</h2>";
+                $(item).appendTo("#populateData");
+            });
+        });
+    });
+</script>
