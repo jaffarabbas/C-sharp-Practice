@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WebAPIWithSQL.Models.STUDENT>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.STD_NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.STD_GENDER)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.STD_AGE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.STD_CLASS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_ID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.STD_NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.STD_GENDER)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.STD_AGE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.STD_CLASS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_ID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
