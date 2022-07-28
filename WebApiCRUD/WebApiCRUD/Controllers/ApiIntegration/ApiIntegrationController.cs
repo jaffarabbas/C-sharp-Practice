@@ -32,15 +32,15 @@ namespace WebApiCRUD.Controllers.ApiIntegration
 
         public ActionResult Create(Employee employee)
         {
-            apiHandler = new ApiHandler();
-            if (apiHandler.PostData(apiPath, employee, apiController))
-            {
-                return RedirectToAction("Index");
-            }
+            //apiHandler = new ApiHandler();
+            //if (apiHandler.PostData(apiPath, employee, apiController))
+            //{
+            //    return RedirectToAction("Index");
+            //}
 
             HttpClient httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri(apiPath);
-            var response = httpClient.PostAsJsonAsync<Employee>(apiController, employee);
+            var response = httpClient.PostAsXmlAsync(apiController, employee);
             response.Wait();
             var test = response.Result;
             if (test.IsSuccessStatusCode)
