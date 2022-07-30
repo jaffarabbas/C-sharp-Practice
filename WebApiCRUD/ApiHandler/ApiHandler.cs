@@ -21,6 +21,11 @@ namespace APIHandler
 
         private HttpClient httpClient;
         
+        /// <summary>
+        /// get all data from database api
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public IEnumerable<T> GetData<T>()
         {
             try
@@ -103,6 +108,28 @@ namespace APIHandler
                 httpClient = new HttpClient();
                 httpClient.BaseAddress = new Uri(apiUrl);
                 var response = httpClient.PutAsJsonAsync<T>(controller, obj);
+                response.Wait();
+                var test = response.Result;
+                return test.IsSuccessStatusCode;
+            }
+            catch (HttpRequestException error)
+            {
+                return (dynamic)error.Message;
+            }
+        }
+
+        /// <summary>
+        /// Delete spesific data from database api with id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool DeleteData(int id)
+        {
+            try
+            {
+                httpClient = new HttpClient();
+                httpClient.BaseAddress = new Uri(apiUrl);
+                var response = httpClient.DeleteAsync(controller + "?id=" + id.ToString());
                 response.Wait();
                 var test = response.Result;
                 return test.IsSuccessStatusCode;
