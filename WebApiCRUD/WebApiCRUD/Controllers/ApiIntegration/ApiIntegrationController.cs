@@ -18,36 +18,36 @@ namespace WebApiCRUD.Controllers.ApiIntegration
         // GET: ApiIntegration
         public ActionResult Index()
         {
-            apiHandler = new ApiHandler();
-            var empData = apiHandler.GetData(apiPath, apiController).Select(model => new Employee { 
-                id = model.id,
-                name = model.name,
-                age = model.age,
-                designation = model.designation,
-                gender = model.gender,
-                salary = model.salary 
-            });
+            apiHandler = new ApiHandler(apiPath, apiController);
+            IEnumerable<Employee> empData = apiHandler.GetData<Employee>();
             return View(empData);
         }
 
         public ActionResult Create(Employee employee)
         {
-            //apiHandler = new ApiHandler();
-            //if (apiHandler.PostData(apiPath, employee, apiController))
-            //{
-            //    return RedirectToAction("Index");
-            //}
-
-            HttpClient httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri(apiPath);
-            var response = httpClient.PostAsXmlAsync(apiController, employee);
-            response.Wait();
-            var test = response.Result;
-            if (test.IsSuccessStatusCode)
+            apiHandler = new ApiHandler(apiPath, apiController);
+            if (apiHandler.PostData(employee))
             {
                 return RedirectToAction("Index");
             }
-            return View();
+            return View("Create");
         }
+
+        public ActionResult Details(int id)
+        {
+            apiHandler = new ApiHandler(apiPath, apiController);
+            Employee empData = apiHandler.GetData<Employee>(id);
+            return View(empData);
+        }
+
+        public ActionResult Edit(Employee employee)
+        {
+            apiHandler = new ApiHandler(apiPath, apiController);
+            if (apiHandler.PutData(employee))
+            {
+                return RedirectToAction("Index");
+            }
+            return View("Edit");
+        }   
     }
 }
