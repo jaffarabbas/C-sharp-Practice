@@ -276,6 +276,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\ApiIntegration\Index.cshtml" />
     <Content Include="Views\ApiIntegration\Create.cshtml" />
+    <Content Include="Views\ApiIntegration\Details.cshtml" />
+    <Content Include="Views\ApiIntegration\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
