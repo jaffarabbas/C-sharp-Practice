@@ -278,6 +278,7 @@
     <Content Include="Views\ApiIntegration\Create.cshtml" />
     <Content Include="Views\ApiIntegration\Details.cshtml" />
     <Content Include="Views\ApiIntegration\Edit.cshtml" />
+    <Content Include="Views\ApiIntegration\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
