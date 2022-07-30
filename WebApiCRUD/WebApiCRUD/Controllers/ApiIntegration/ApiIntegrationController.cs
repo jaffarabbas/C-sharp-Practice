@@ -15,14 +15,16 @@ namespace WebApiCRUD.Controllers.ApiIntegration
         ApiHandler apiHandler;
         private string apiPath = "https://localhost:44316/api/Employee";
         private string apiController = "Employee";
-        // GET: ApiIntegration
+
+        [HttpGet]
         public ActionResult Index()
         {
             apiHandler = new ApiHandler(apiPath, apiController);
             IEnumerable<Employee> empData = apiHandler.GetData<Employee>();
             return View(empData);
         }
-
+        
+        [HttpPost]
         public ActionResult Create(Employee employee)
         {
             apiHandler = new ApiHandler(apiPath, apiController);
@@ -33,6 +35,7 @@ namespace WebApiCRUD.Controllers.ApiIntegration
             return View("Create");
         }
 
+        [HttpGet]
         public ActionResult Details(int id)
         {
             apiHandler = new ApiHandler(apiPath, apiController);
@@ -40,6 +43,7 @@ namespace WebApiCRUD.Controllers.ApiIntegration
             return View(empData);
         }
 
+        [HttpPost]
         public ActionResult Edit(Employee employee)
         {
             apiHandler = new ApiHandler(apiPath, apiController);
@@ -48,6 +52,24 @@ namespace WebApiCRUD.Controllers.ApiIntegration
                 return RedirectToAction("Index");
             }
             return View("Edit");
-        }   
+        }
+
+        public ActionResult Delete(int id)
+        {
+            apiHandler = new ApiHandler(apiPath, apiController);
+            Employee empData = apiHandler.GetData<Employee>(id);
+            return View(empData);
+        }
+
+        [HttpPost,ActionName("Delete")]
+        public ActionResult DeleteData(int id)
+        {
+            apiHandler = new ApiHandler(apiPath, apiController);
+            if (apiHandler.DeleteData(id))
+            {
+                return RedirectToAction("Index");
+            }
+            return View("Delete");
+        }
     }
 }
