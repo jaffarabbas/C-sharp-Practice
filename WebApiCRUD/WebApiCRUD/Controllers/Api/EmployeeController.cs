@@ -22,7 +22,7 @@ namespace WebApiCRUD.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetEmployee(int id)
         {
-            var employees = modelConnection.Employees.Where(model => model.id == id).FirstOrDefault();
+            var employees = modelConnection.Employees.FirstOrDefault(model => model.id == id);
             return Ok(employees);
         }
 
@@ -31,6 +31,27 @@ namespace WebApiCRUD.Controllers.Api
         {
             modelConnection.Employees.Add(employee);
             modelConnection.SaveChanges();
+            return Ok();
+        }
+
+        [HttpPut]
+        public IHttpActionResult PutEmployee(Employee employee)
+        {
+            var employees = modelConnection.Employees.FirstOrDefault(model => model.id == employee.id);
+            if(employees != null)
+            {
+                employees.id = employee.id;
+                employees.name = employee.name;
+                employees.gender = employee.gender;
+                employees.designation = employee.designation;
+                employees.age = employee.age;
+                employees.salary = employee.salary;
+                modelConnection.SaveChanges();
+            }
+            else
+            {
+                return NotFound();
+            }
             return Ok();
         }
     }
