@@ -37,21 +37,17 @@ namespace WebApiCRUD.Controllers.Api
         [HttpPut]
         public IHttpActionResult PutEmployee(Employee employee)
         {
-            var employees = modelConnection.Employees.FirstOrDefault(model => model.id == employee.id);
-            if(employees != null)
-            {
-                employees.id = employee.id;
-                employees.name = employee.name;
-                employees.gender = employee.gender;
-                employees.designation = employee.designation;
-                employees.age = employee.age;
-                employees.salary = employee.salary;
-                modelConnection.SaveChanges();
-            }
-            else
-            {
-                return NotFound();
-            }
+            modelConnection.Entry(employee).State = System.Data.Entity.EntityState.Modified;
+            modelConnection.SaveChanges();
+            return Ok();
+        }
+
+        [HttpDelete]
+        public IHttpActionResult DeleteEmployee(int id)
+        {
+            var employees = modelConnection.Employees.FirstOrDefault(model => model.id == id);
+            modelConnection.Entry(employees).State = System.Data.Entity.EntityState.Deleted;
+            modelConnection.SaveChanges();
             return Ok();
         }
     }
