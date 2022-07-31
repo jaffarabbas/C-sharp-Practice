@@ -5,9 +5,10 @@ namespace WebApiFromScratch
 {
     public class CustomeMiddleWare1 : IMiddleware
     {
-        public Task InvokeAsync(HttpContext context, RequestDelegate next)
+        public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
-            throw new System.NotImplementedException();
+            await context.Response.WriteAsync("middle custome file ware 1\n");
+            await next(context);
         }
     }
 }
