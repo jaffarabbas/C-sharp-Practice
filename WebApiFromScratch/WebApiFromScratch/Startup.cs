@@ -3,27 +3,40 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace WebApiFromScratch
 {
     public class Startup
     {
-        public void ConfigureService(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //app.Use(async (context, next) =>
-            //{
-            //    await context.Response.WriteAsync("asdsad");
-            //    await next();
-            //});
+            app.Use(async (context, next) =>
+            {
+                await context.Response.WriteAsync("middle 1\n");
+                await next();
+                await context.Response.WriteAsync("middle 2\n");
+            });
 
-            //app.Run(async context => {
-            //    await context.Response.WriteAsync("asdsad");
-            //});
-            
+            //map function
+            app.Map("/map", CustomeMiddleWare);
+
+            app.Use(async (context, next) =>
+            {
+                await context.Response.WriteAsync("middle 3\n");
+                await next();
+                await context.Response.WriteAsync("middle 4\n");
+            });
+
+            app.Run(async context =>
+            {
+                await context.Response.WriteAsync("run middle\n");
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -38,6 +51,14 @@ namespace WebApiFromScratch
                 //   await context.Response.WriteAsync("Hello World!");
                 //});
                 endpoints.MapControllers();
+            });
+        }
+
+        private void CustomeMiddleWare(IApplicationBuilder app)
+        {
+            app.Run(async context =>
+            {
+                await context.Response.WriteAsync("run custome middle\n");
             });
         }
     }
