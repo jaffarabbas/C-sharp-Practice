@@ -12,30 +12,35 @@ namespace WebApiFromScratch
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddTransient<CustomeMiddleWare1>();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.Use(async (context, next) =>
-            {
-                await context.Response.WriteAsync("middle 1\n");
-                await next();
-                await context.Response.WriteAsync("middle 2\n");
-            });
+            //app.Use(async (context, next) =>
+            //{
+            //    await context.Response.WriteAsync("middle 1\n");
+            //    await next();
+            //    await context.Response.WriteAsync("middle 2\n");
+            //});
 
-            //map function
-            app.Map("/map", CustomeMiddleWare);
+            ////map function
+            //app.Map("/map", CustomeMiddleWare);
 
-            app.Use(async (context, next) =>
-            {
-                await context.Response.WriteAsync("middle 3\n");
-                await next();
-                await context.Response.WriteAsync("middle 4\n");
-            });
+            ////custome middleware
 
-            app.Run(async context =>
-            {
-                await context.Response.WriteAsync("run middle\n");
-            });
+            //app.UseMiddleware<CustomeMiddleWare1>();
+            
+            //app.Use(async (context, next) =>
+            //{
+            //    await context.Response.WriteAsync("middle 3\n");
+            //    await next();
+            //    await context.Response.WriteAsync("middle 4\n");
+            //});
+
+            //app.Run(async context =>
+            //{
+            //    await context.Response.WriteAsync("run middle\n");
+            //});
 
             if (env.IsDevelopment())
             {
