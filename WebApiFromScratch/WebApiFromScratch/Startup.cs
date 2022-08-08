@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using WebApiFromScratch.Repository;
 
 namespace WebApiFromScratch
 {
@@ -13,6 +14,7 @@ namespace WebApiFromScratch
         {
             services.AddControllers();
             services.AddTransient<CustomeMiddleWare1>();
+            services.AddSingleton<IProductRepository, ProductRepository>();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
