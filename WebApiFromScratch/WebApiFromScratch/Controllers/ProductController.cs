@@ -9,11 +9,11 @@ namespace WebApiFromScratch.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly ProductRepository _productRepository;
+        private readonly IProductRepository _productRepository;
         
-        public ProductController()
+        public ProductController(IProductRepository productRepository)
         {
-            _productRepository = new ProductRepository();
+            _productRepository = productRepository;
         }
         
         [HttpPost("")]
