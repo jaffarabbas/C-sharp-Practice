@@ -4,7 +4,7 @@ using WebApiFromScratch.Models;
 
 namespace WebApiFromScratch.Repository
 {
-    public class ProductRepository
+    public class ProductRepository : IProductRepository
     {
         private List<ProductModel> list = new List<ProductModel>();
         public int AddProduct(ProductModel product)
