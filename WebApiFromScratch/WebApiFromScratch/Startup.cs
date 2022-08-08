@@ -7,14 +7,16 @@ using System;
 using WebApiFromScratch.Repository;
 
 namespace WebApiFromScratch
-{
+{           
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
             services.AddTransient<CustomeMiddleWare1>();
-            services.AddSingleton<IProductRepository, ProductRepository>();
+            //services.AddSingleton<IProductRepository, ProductRepository>();
+            //services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
