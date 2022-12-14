@@ -1,6 +1,7 @@
 ﻿using LibGit2Sharp;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace GitCommiterMethods
     {
         #region Attributes 
 
-        private static string path = @"J:\Github";
+        private static string path = ConfigurationManager.AppSettings.Get("filePath");
         private static Repository repo;
         private static Process cmd;
         private static int countCommitedFiles = 0;
