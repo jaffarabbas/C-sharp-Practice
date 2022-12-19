@@ -58,3 +58,11 @@ C:\Users\DARKLORD\Documents\GitHub\C-sharp-Practice\GitCommiter\GitCommiterMetho
 C:\Users\DARKLORD\Documents\GitHub\C-sharp-Practice\GitCommiter\GitCommiterMethodTester\bin\Debug\System.Security.AccessControl.xml
 C:\Users\DARKLORD\Documents\GitHub\C-sharp-Practice\GitCommiter\GitCommiterMethodTester\bin\Debug\System.Security.Permissions.xml
 C:\Users\DARKLORD\Documents\GitHub\C-sharp-Practice\GitCommiter\GitCommiterMethodTester\bin\Debug\System.Security.Principal.Windows.xml
+J:\GitHub\C-sharp-Practice\GitCommiter\GitCommiterMethodTester\bin\Debug\System.Configuration.ConfigurationManager.dll
+J:\GitHub\C-sharp-Practice\GitCommiter\GitCommiterMethodTester\bin\Debug\System.Security.AccessControl.dll
+J:\GitHub\C-sharp-Practice\GitCommiter\GitCommiterMethodTester\bin\Debug\System.Security.Permissions.dll
+J:\GitHub\C-sharp-Practice\GitCommiter\GitCommiterMethodTester\bin\Debug\System.Security.Principal.Windows.dll
+J:\GitHub\C-sharp-Practice\GitCommiter\GitCommiterMethodTester\bin\Debug\System.Configuration.ConfigurationManager.xml
+J:\GitHub\C-sharp-Practice\GitCommiter\GitCommiterMethodTester\bin\Debug\System.Security.AccessControl.xml
+J:\GitHub\C-sharp-Practice\GitCommiter\GitCommiterMethodTester\bin\Debug\System.Security.Permissions.xml
+J:\GitHub\C-sharp-Practice\GitCommiter\GitCommiterMethodTester\bin\Debug\System.Security.Principal.Windows.xml
