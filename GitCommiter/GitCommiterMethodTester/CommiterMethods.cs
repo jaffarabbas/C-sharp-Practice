@@ -15,11 +15,11 @@ namespace GitCommiterMethods
     {
         #region Attributes 
 
-        private static string path = ConfigurationManager.AppSettings.Get("filePath");
-        private static Repository repo;
-        private static Process cmd;
-        private static int countCommitedFiles = 0;
-        public static List<string> commitResult = new List<string>();
+        private string path = @"J:\\GitHub";
+        private Repository repo;
+        private Process cmd;
+        private int countCommitedFiles = 0;
+        public List<string> commitResult = new List<string>();
 
         #endregion
 
@@ -29,7 +29,7 @@ namespace GitCommiterMethods
         /// get list of directory path
         /// </summary>
         /// <returns></returns>
-        public static Dictionary<int,string> GitPathList()
+        public Dictionary<int,string> GitPathList()
         {
             int count = 0;
             DirectoryInfo directory = new DirectoryInfo(path);
@@ -48,7 +48,7 @@ namespace GitCommiterMethods
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static List<string> StageChanges(string path)
+        public List<string> StageChanges(string path)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace GitCommiterMethods
         /// </summary>
         /// <param name="script"></param>
         /// <param name="message"></param>
-        private static void ShellRunner(string script,string message)
+        private void ShellRunner(string script,string message)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace GitCommiterMethods
         /// </summary>
         /// <param name="path"></param>
         /// <param name="item"></param>
-        public static void CommitData(string path,string item)
+        public void CommitData(string path,string item)
         {
             countCommitedFiles++;
             string gitCommitCommand = "cd " + path + " & git add " + item + $"& git commit -m \"{CommitMessage(item)}\" ";
@@ -115,7 +115,7 @@ namespace GitCommiterMethods
         /// Push commited files using Shell Runner
         /// </summary>
         /// <param name="path"></param>
-        public static void PushCommitData(string path)
+        public void PushCommitData(string path)
         {
             string gitPushCommand = "cd " + path + " & git push -u origin";
             string message = $"{countCommitedFiles} Files are pushed";
@@ -127,7 +127,7 @@ namespace GitCommiterMethods
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        private static string CommitMessage(string message)
+        private string CommitMessage(string message)
         {
             return "Commited File : " + (string)message.Split('/').Last() + " at " + DateTime.Now;
         }
