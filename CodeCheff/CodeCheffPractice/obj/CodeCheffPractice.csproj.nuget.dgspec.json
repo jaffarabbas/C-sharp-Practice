@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "J:\\Github\\C-sharp-Practice\\CodeCheff\\CodeCheffPractice\\CodeCheffPractice.csproj": {}
+    "J:\\GitHub\\C-sharp-Practice\\CodeCheff\\CodeCheffPractice\\CodeCheffPractice.csproj": {}
   },
   "projects": {
-    "J:\\Github\\C-sharp-Practice\\CodeCheff\\CodeCheffPractice\\CodeCheffPractice.csproj": {
+    "J:\\GitHub\\C-sharp-Practice\\CodeCheff\\CodeCheffPractice\\CodeCheffPractice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "J:\\Github\\C-sharp-Practice\\CodeCheff\\CodeCheffPractice\\CodeCheffPractice.csproj",
+        "projectUniqueName": "J:\\GitHub\\C-sharp-Practice\\CodeCheff\\CodeCheffPractice\\CodeCheffPractice.csproj",
         "projectName": "CodeCheffPractice",
-        "projectPath": "J:\\Github\\C-sharp-Practice\\CodeCheff\\CodeCheffPractice\\CodeCheffPractice.csproj",
-        "packagesPath": "C:\\Users\\gamap\\.nuget\\packages\\",
-        "outputPath": "J:\\Github\\C-sharp-Practice\\CodeCheff\\CodeCheffPractice\\obj\\",
+        "projectPath": "J:\\GitHub\\C-sharp-Practice\\CodeCheff\\CodeCheffPractice\\CodeCheffPractice.csproj",
+        "packagesPath": "C:\\Users\\DARKLORD\\.nuget\\packages\\",
+        "outputPath": "J:\\GitHub\\C-sharp-Practice\\CodeCheff\\CodeCheffPractice\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "J:\\Programs\\Microsoft\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\gamap\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DARKLORD\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -49,7 +49,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -58,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
