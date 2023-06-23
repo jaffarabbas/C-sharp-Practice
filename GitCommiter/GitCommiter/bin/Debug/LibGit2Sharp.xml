@@ -359,6 +359,9 @@
             <summary>
             Stores the binary content of a tracked file.
             </summary>
+            <remarks>
+            Since the introduction of partially cloned repositories, blobs might be missing on your local repository (see https://git-scm.com/docs/partial-clone)
+            </remarks>
         </member>
         <member name="M:LibGit2Sharp.Blob.#ctor">
             <summary>
@@ -373,16 +376,19 @@
             can be used.
             </para>
             </summary>
+            <exception cref="T:LibGit2Sharp.NotFoundException">Throws if blob is missing</exception>
         </member>
         <member name="P:LibGit2Sharp.Blob.IsBinary">
             <summary>
              Determine if the blob content is most certainly binary or not.
             </summary>
+            <exception cref="T:LibGit2Sharp.NotFoundException">Throws if blob is missing</exception>
         </member>
         <member name="M:LibGit2Sharp.Blob.GetContentStream">
             <summary>
             Gets the blob content in a <see cref="T:System.IO.Stream"/>.
             </summary>
+            <exception cref="T:LibGit2Sharp.NotFoundException">Throws if blob is missing</exception>
         </member>
         <member name="M:LibGit2Sharp.Blob.GetContentStream(LibGit2Sharp.FilteringOptions)">
             <summary>
@@ -390,12 +396,14 @@
             checked out to the working directory.
             <param name="filteringOptions">Parameter controlling content filtering behavior</param>
             </summary>
+            <exception cref="T:LibGit2Sharp.NotFoundException">Throws if blob is missing</exception>
         </member>
         <member name="M:LibGit2Sharp.Blob.GetContentText">
             <summary>
             Gets the blob content, decoded with UTF8 encoding if the encoding cannot be detected from the byte order mark
             </summary>
             <returns>Blob content as text.</returns>
+            <exception cref="T:LibGit2Sharp.NotFoundException">Throws if blob is missing</exception>
         </member>
         <member name="M:LibGit2Sharp.Blob.GetContentText(System.Text.Encoding)">
             <summary>
@@ -404,6 +412,7 @@
             </summary>
             <param name="encoding">The encoding of the text to use, if it cannot be detected</param>
             <returns>Blob content as text.</returns>
+            <exception cref="T:LibGit2Sharp.NotFoundException">Throws if blob is missing</exception>
         </member>
         <member name="M:LibGit2Sharp.Blob.GetContentText(LibGit2Sharp.FilteringOptions)">
             <summary>
@@ -411,6 +420,7 @@
             </summary>
             <param name="filteringOptions">Parameter controlling content filtering behavior</param>
             <returns>Blob content as text.</returns>
+            <exception cref="T:LibGit2Sharp.NotFoundException">Throws if blob is missing</exception>
         </member>
         <member name="M:LibGit2Sharp.Blob.GetContentText(LibGit2Sharp.FilteringOptions,System.Text.Encoding)">
             <summary>
@@ -422,6 +432,7 @@
             <param name="filteringOptions">Parameter controlling content filtering behavior</param>
             <param name="encoding">The encoding of the text. (default: detected or UTF8)</param>
             <returns>Blob content as text.</returns>
+            <exception cref="T:LibGit2Sharp.NotFoundException">Throws if blob is missing</exception>
         </member>
         <member name="T:LibGit2Sharp.Branch">
             <summary>
@@ -515,7 +526,7 @@
               If this is a local branch, this will return the configured
               <see cref="T:LibGit2Sharp.Remote"/> to fetch from and push to. If this is a
               remote-tracking branch, this will return the name of the remote 
-              containing the tracked branch. If there no tracking information 
+              containing the tracked branch. If there is no tracking information, 
               this will return null.
             </para>
             </summary>
@@ -2029,6 +2040,19 @@
             <param name="key">The key to unset.</param>
             <param name="level">The configuration file which should be considered as the target of this operation</param>
         </member>
+        <member name="M:LibGit2Sharp.Configuration.UnsetAll(System.String)">
+            <summary>
+            Unset all configuration values in a multivar variable (key and value) in the local configuration.
+            </summary>
+            <param name="key">The key to unset.</param>
+        </member>
+        <member name="M:LibGit2Sharp.Configuration.UnsetAll(System.String,LibGit2Sharp.ConfigurationLevel)">
+            <summary>
+            Unset all configuration values in a multivar variable (key and value).
+            </summary>
+            <param name="key">The key to unset.</param>
+            <param name="level">The configuration file which should be considered as the target of this operation</param>
+        </member>
         <member name="M:LibGit2Sharp.Configuration.Dispose(System.Boolean)">
             <summary>
             Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
@@ -2296,6 +2320,41 @@
              <param name="value">The value</param>
              <param name="level">The configuration file which should be considered as the target of this operation</param>
         </member>
+        <member name="M:LibGit2Sharp.Configuration.Add(System.String,System.String)">
+             <summary>
+             Adds a configuration value for a multivalue key in the local configuration. Keys are in the form 'section.name'.
+             <para>
+               For example in order to add the value for this in a .git\config file:
+            
+               [test]
+               plugin = first
+            
+               You would call:
+            
+               repo.Config.Add("test.plugin", "first");
+             </para>
+             </summary>
+             <param name="key">The key parts</param>
+             <param name="value">The value</param>
+        </member>
+        <member name="M:LibGit2Sharp.Configuration.Add(System.String,System.String,LibGit2Sharp.ConfigurationLevel)">
+             <summary>
+             Adds a configuration value for a multivalue key. Keys are in the form 'section.name'.
+             <para>
+               For example in order to add the value for this in a .git\config file:
+            
+               [test]
+               plugin = first
+            
+               You would call:
+            
+               repo.Config.Add("test.plugin", "first");
+             </para>
+             </summary>
+             <param name="key">The key parts</param>
+             <param name="value">The value</param>
+             <param name="level">The configuration file which should be considered as the target of this operation</param>
+        </member>
         <member name="M:LibGit2Sharp.Configuration.Find(System.String)">
             <summary>
             Find configuration entries matching <paramref name="regexp"/>.
@@ -2546,6 +2605,16 @@
         <member name="P:LibGit2Sharp.ContentChanges.LinesDeleted">
             <summary>
             The number of lines deleted.
+            </summary>
+        </member>
+        <member name="P:LibGit2Sharp.ContentChanges.AddedLines">
+            <summary>
+            The list of added lines.
+            </summary>
+        </member>
+        <member name="P:LibGit2Sharp.ContentChanges.DeletedLines">
+            <summary>
+            The list of deleted lines.
             </summary>
         </member>
         <member name="P:LibGit2Sharp.ContentChanges.Patch">
@@ -4071,6 +4140,21 @@
             </summary>
             <param name="enabled">true to enable the strict_object_creation capabilty, false otherwise</param>
         </member>
+        <member name="M:LibGit2Sharp.Core.Proxy.git_libgit2_opts_set_user_agent(System.String)">
+            <summary>
+            Sets the user-agent string to be used by the HTTP(S) transport.
+            Note that "git/2.0" will be prepended for compatibility.
+            </summary>
+            <param name="userAgent">The user-agent string to use</param>
+        </member>
+        <member name="M:LibGit2Sharp.Core.Proxy.git_libgit2_opts_get_user_agent">
+            <summary>
+            Gets the user-agent string used by libgit2.
+            <returns>
+            The user-agent string.
+            </returns>
+            </summary>
+        </member>
         <member name="M:LibGit2Sharp.Core.Proxy.git_worktree_lookup(LibGit2Sharp.Core.Handles.RepositoryHandle,System.String)">
             <summary>
             Returns a handle to the corresponding worktree,
@@ -4922,7 +5006,7 @@
         </member>
         <member name="P:LibGit2Sharp.FetchOptionsBase.CertificateCheck">
             <summary>
-            This hanlder will be called to let the user make a decision on whether to allow
+            This handler will be called to let the user make a decision on whether to allow
             the connection to preoceed based on the certificate presented by the server.
             </summary>
         </member>
@@ -5351,6 +5435,14 @@
             Gets the id of this object
             </summary>
         </member>
+        <member name="P:LibGit2Sharp.GitObject.IsMissing">
+            <summary>
+             Determine if the object is missing
+            </summary>
+            <remarks>
+            This is common when dealing with partially cloned repositories as blobs or trees could be missing
+            </remarks>
+        </member>
         <member name="P:LibGit2Sharp.GitObject.Sha">
             <summary>
             Gets the 40 character sha1 of this object.
@@ -5436,10 +5528,9 @@
         <member name="M:LibGit2Sharp.GlobalSettings.RegisterSmartSubtransport``1(System.String)">
              <summary>
              Registers a new <see cref="T:LibGit2Sharp.SmartSubtransport"/> as a custom
-             smart-protocol transport with libgit2.  Any Git remote with
+             smart-protocol transport with libgit2. Any Git remote with
              the scheme registered will delegate to the given transport
-             for all communication with the server.  use this transport to communicate
-             with the server This is not commonly
+             for all communication with the server. This is not commonly
              used: some callers may want to re-use an existing connection to
              perform fetch / push operations to a remote.
             
@@ -5470,8 +5561,6 @@
              <summary>
              Sets a path for loading native binaries on .NET Framework or .NET Core.
              When specified, native library will first be searched under the given path.
-             On .NET Framework a subdirectory corresponding to the architecture  ("x86" or "x64") is appended,
-             otherwise the native library is expected to be found in the directory as specified.
             
              If the library is not found it will be searched in standard search paths:
              <see cref="F:System.Runtime.InteropServices.DllImportSearchPath.AssemblyDirectory"/>,
@@ -5480,10 +5569,6 @@
              <para>
              This must be set before any other calls to the library,
              and is not available on other platforms than .NET Framework and .NET Core.
-             </para>
-             <para>
-             If not specified on .NET Framework it defaults to lib/win32 subdirectory
-             of the directory where this assembly is loaded from.
              </para>
              </summary>
         </member>
@@ -5536,6 +5621,12 @@
                  The special string "$PATH" will be substituted with the current search path.
              </param>
         </member>
+        <member name="M:LibGit2Sharp.GlobalSettings.SetStrictHashVerification(System.Boolean)">
+            <summary>
+            Enable or disable strict hash verification.
+            </summary>
+            <param name="enabled">true to enable strict hash verification; false otherwise.</param>
+        </member>
         <member name="M:LibGit2Sharp.GlobalSettings.SetEnableCaching(System.Boolean)">
             <summary>
             Enable or disable the libgit2 cache
@@ -5553,6 +5644,39 @@
             Enable or disable the libgit2 strict_object_creation capability
             </summary>
             <param name="enabled">true to enable the strict_object_creation capability, false otherwise</param>
+        </member>
+        <member name="M:LibGit2Sharp.GlobalSettings.SetUserAgent(System.String)">
+            <summary>
+            Sets the user-agent string to be used by the HTTP(S) transport.
+            Note that "git/2.0" will be prepended for compatibility.
+            </summary>
+            <param name="userAgent">The user-agent string to use</param>
+        </member>
+        <member name="M:LibGit2Sharp.GlobalSettings.SetExtensions(System.String[])">
+            <summary>
+            Set that the given git extensions are supported by the caller.
+            </summary>
+            <remarks>
+            Extensions supported by libgit2 may be negated by prefixing them with a `!`.  For example: setting extensions to { "!noop", "newext" } indicates that the caller does not want
+            to support repositories with the `noop` extension but does want to support repositories with the `newext` extension.
+            </remarks>
+            <param name="extensions">Supported extensions</param>
+        </member>
+        <member name="M:LibGit2Sharp.GlobalSettings.GetExtensions">
+            <summary>
+            Returns the list of git extensions that are supported.
+            </summary>
+            <remarks>
+            This is the list of built-in extensions supported by libgit2 and custom extensions that have been added with `SetExtensions`. Extensions that have been negated will not be returned.
+            </remarks>
+        </member>
+        <member name="M:LibGit2Sharp.GlobalSettings.GetUserAgent">
+            <summary>
+            Gets the user-agent string used by libgit2.
+            <returns>
+            The user-agent string.
+            </returns>
+            </summary>
         </member>
         <member name="T:LibGit2Sharp.Handlers.ProgressHandler">
             <summary>
@@ -6595,7 +6719,7 @@
             </para>
             <para>
               Optionally, the <paramref name="options"/> parameter allow to tweak the
-              search strategy (considering lightweith tags, or even branches as reference points)
+              search strategy (considering lightweight tags, or even branches as reference points)
               and the formatting of the returned identifier.
             </para>
             </summary>
@@ -6648,6 +6772,21 @@
             </summary>
             <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
             <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="T:LibGit2Sharp.Line">
+            <summary>
+            Represents a line with line number and content.
+            </summary>
+        </member>
+        <member name="P:LibGit2Sharp.Line.LineNumber">
+            <summary>
+            The line number of the original line in the blob.
+            </summary>
+        </member>
+        <member name="P:LibGit2Sharp.Line.Content">
+            <summary>
+            The content of the line in the original blob.
+            </summary>
         </member>
         <member name="T:LibGit2Sharp.LockedFileException">
             <summary>
@@ -7195,6 +7334,16 @@
             </summary>
             <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
             <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="T:LibGit2Sharp.NativeException">
+            <summary>
+            An exception thrown that corresponds to a libgit2 (native library) error.
+            </summary>
+        </member>
+        <member name="M:LibGit2Sharp.NativeException.#ctor">
+            <summary>
+            Needed for mocking purposes.
+            </summary>
         </member>
         <member name="T:LibGit2Sharp.Network">
             <summary>
@@ -8667,7 +8816,7 @@
         </member>
         <member name="P:LibGit2Sharp.PushOptions.CertificateCheck">
             <summary>
-            This hanlder will be called to let the user make a decision on whether to allow
+            This handler will be called to let the user make a decision on whether to allow
             the connection to preoceed based on the certificate presented by the server.
             </summary>
         </member>
@@ -9825,6 +9974,11 @@
             Needed for mocking purposes.
             </summary>
         </member>
+        <member name="M:LibGit2Sharp.Remote.Finalize">
+            <summary>
+            The finalizer for the <see cref="T:LibGit2Sharp.Remote"/> class.
+            </summary>
+        </member>
         <member name="M:LibGit2Sharp.Remote.Dispose">
             <summary>
             Release the unmanaged remote object
@@ -10087,6 +10241,31 @@
         <member name="F:LibGit2Sharp.RemoteCompletionType.Error">
             <summary>
             Error.
+            </summary>
+        </member>
+        <member name="T:LibGit2Sharp.RemoteRedirectMode">
+            <summary>
+            Remote redirection settings; whether redirects to another
+            host are permitted. By default, git will follow a redirect
+            on the initial request (`/info/refs`) but not subsequent
+            requests.
+            </summary>
+        </member>
+        <member name="F:LibGit2Sharp.RemoteRedirectMode.None">
+            <summary>
+            Do not follow any off-site redirects at any stage of
+            the fetch or push.
+            </summary>
+        </member>
+        <member name="F:LibGit2Sharp.RemoteRedirectMode.Initial">
+            <summary>
+            Allow off-site redirects only upon the initial
+            request. This is the default.
+            </summary>
+        </member>
+        <member name="F:LibGit2Sharp.RemoteRedirectMode.All">
+            <summary>
+            Allow redirects at any stage in the fetch or push.
             </summary>
         </member>
         <member name="T:LibGit2Sharp.RemoteUpdater">
@@ -10697,7 +10876,7 @@
             </para>
             <para>
               Optionally, the <paramref name="options"/> parameter allow to tweak the
-              search strategy (considering lightweith tags, or even branches as reference points)
+              search strategy (considering lightweight tags, or even branches as reference points)
               and the formatting of the returned identifier.
             </para>
             </summary>
@@ -11676,6 +11855,21 @@
             <param name="valid">Whether we consider the certificate to be valid</param>
             <param name="hostname">The hostname we connected to</param>
         </member>
+        <member name="M:LibGit2Sharp.SmartSubtransport.AcquireCredentials(LibGit2Sharp.Credentials@,System.String,System.Type[])">
+            <summary>
+            Acquires credentials.
+            </summary>
+            <param name="cred">Receives the credentials if the operation is successful.</param>
+            <param name="user">The username.</param>
+            <param name="methods">The credential types allowed. The only supported one is <see cref="T:LibGit2Sharp.UsernamePasswordCredentials"/>. May be empty but should not be null.</param>
+            <returns>0 if successful; a non-zero error code that came from <see cref="M:LibGit2Sharp.Core.Proxy.git_transport_smart_credentials(System.IntPtr@,System.IntPtr,System.String,System.Int32)"/> otherwise.</returns>
+        </member>
+        <member name="P:LibGit2Sharp.SmartSubtransport.LastActionUrl">
+            <summary>
+            libgit2 will call an action back with a null url to indicate that
+            it should re-use the prior url; store the url so that we can replay.
+            </summary>
+        </member>
         <member name="M:LibGit2Sharp.SmartSubtransport.Action(System.String,LibGit2Sharp.GitSmartSubtransportAction)">
             <summary>
             Invoked by libgit2 to create a connection using this subtransport.
@@ -11710,9 +11904,14 @@
             </summary>
             <param name="scheme">The URL scheme (eg "http") to register</param>
         </member>
-        <member name="P:LibGit2Sharp.SmartSubtransportRegistration`1.Scheme">
+        <member name="T:LibGit2Sharp.SmartSubtransportRegistrationData">
             <summary>
-            The URI scheme (eg "http") for this transport.
+            Information about a smart subtransport registration.
+            </summary>
+        </member>
+        <member name="P:LibGit2Sharp.SmartSubtransportRegistrationData.Scheme">
+            <summary>
+            The URI scheme for this transport, for example "http" or "ssh".
             </summary>
         </member>
         <member name="T:LibGit2Sharp.SmartSubtransportStream">
@@ -11741,13 +11940,20 @@
         </member>
         <member name="M:LibGit2Sharp.SmartSubtransportStream.Read(System.IO.Stream,System.Int64,System.Int64@)">
             <summary>
-            Requests that the stream write the next length bytes of the stream to the provided Stream object.
+            Reads from the transport into the provided <paramref name="dataStream"/> object.
             </summary>
+            <param name="dataStream">The stream to copy the read bytes into.</param>
+            <param name="length">The number of bytes expected from the underlying transport.</param>
+            <param name="bytesRead">Receives the number of bytes actually read.</param>
+            <returns>The error code to propagate back to the native code that requested this operation. 0 is expected, and exceptions may be thrown.</returns>
         </member>
         <member name="M:LibGit2Sharp.SmartSubtransportStream.Write(System.IO.Stream,System.Int64)">
             <summary>
-            Requests that the stream write the first length bytes of the provided Stream object to the stream.
+            Writes the content of a given stream to the transport.
             </summary>
+            <param name="dataStream">The stream with the data to write to the transport.</param>
+            <param name="length">The number of bytes to read from <paramref name="dataStream"/>.</param>
+            <returns>The error code to propagate back to the native code that requested this operation. 0 is expected, and exceptions may be thrown.</returns>
         </member>
         <member name="P:LibGit2Sharp.SmartSubtransportStream.SmartTransport">
             <summary>
@@ -12930,6 +13136,9 @@
             <summary>
             A container which references a list of other <see cref="T:LibGit2Sharp.Tree"/>s and <see cref="T:LibGit2Sharp.Blob"/>s.
             </summary>
+            <remarks>
+            Since the introduction of partially cloned repositories, trees might be missing on your local repository (see https://git-scm.com/docs/partial-clone)
+            </remarks>
         </member>
         <member name="M:LibGit2Sharp.Tree.#ctor">
             <summary>
@@ -12940,6 +13149,7 @@
             <summary>
             Gets the number of <see cref="T:LibGit2Sharp.TreeEntry"/> immediately under this <see cref="T:LibGit2Sharp.Tree"/>.
             </summary>
+            <exception cref="T:LibGit2Sharp.NotFoundException">Throws if tree is missing</exception>
         </member>
         <member name="P:LibGit2Sharp.Tree.Item(System.String)">
             <summary>
@@ -12947,18 +13157,21 @@
             </summary>
             <param name="relativePath">The relative path to the <see cref="T:LibGit2Sharp.TreeEntry"/> from this instance.</param>
             <returns><c>null</c> if nothing has been found, the <see cref="T:LibGit2Sharp.TreeEntry"/> otherwise.</returns>
+            <exception cref="T:LibGit2Sharp.NotFoundException">Throws if tree is missing</exception>
         </member>
         <member name="M:LibGit2Sharp.Tree.GetEnumerator">
             <summary>
             Returns an enumerator that iterates through the collection.
             </summary>
             <returns>An <see cref="T:System.Collections.Generic.IEnumerator`1"/> object that can be used to iterate through the collection.</returns>
+            <exception cref="T:LibGit2Sharp.NotFoundException">Throws if tree is missing</exception>
         </member>
         <member name="M:LibGit2Sharp.Tree.System#Collections#IEnumerable#GetEnumerator">
             <summary>
             Returns an enumerator that iterates through the collection.
             </summary>
             <returns>An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.</returns>
+            <exception cref="T:LibGit2Sharp.NotFoundException">Throws if tree is missing</exception>
         </member>
         <member name="T:LibGit2Sharp.TreeChanges">
             <summary>
@@ -13597,7 +13810,7 @@
             </summary>
             <para>
               The format of the version number is as follows:
-              <para>Major.Minor.Patch[-previewTag]+g{LibGit2Sharp_abbrev_hash}.libgit2-{libgit2_abbrev_hash} (x86|x64 - features)</para>
+              <para>Major.Minor.Patch[-previewTag]+libgit2-{libgit2_abbrev_hash}.{LibGit2Sharp_hash} (arch - features)</para>
             </para>
             <returns></returns>
         </member>
