@@ -8,6 +8,13 @@ namespace ImterviewPractice
 {
     public abstract class Abstract
     {
-        public Abstract() { }
+        protected int n;
+        public int s = 3;
+        public Abstract(int n)
+        {
+            this.n = n;
+        }
+
+        public abstract int get();
     }
 }
