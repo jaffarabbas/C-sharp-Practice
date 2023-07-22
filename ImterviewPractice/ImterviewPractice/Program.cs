@@ -8,8 +8,12 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
         static void Main(string[] args)
         {
-            Test ob = new Test(10);
-            Console.WriteLine(ob.get());
+            Abstract obj = new Test(10);
+            Test obj2 = new Test(10);
+            //Console.WriteLine(obj.get());
+            //Console.WriteLine(obj.s);
+            Console.WriteLine(obj.calculate(4));
+            Console.WriteLine(obj2.calculate(3));
         }
     }
 }
