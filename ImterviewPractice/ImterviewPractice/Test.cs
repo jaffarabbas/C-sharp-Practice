@@ -29,5 +29,28 @@ namespace ImterviewPractice
         {
             return 4 * a;
         }
+
+        public void rec(int num)
+        {
+            if(num >= 0)
+            {
+                if(num % 2 == 0)
+                {
+                    Console.WriteLine(num);
+                }
+                rec(num-1);
+            }
+        }
+
+        public int feb(int[] arr,int n)
+        {
+            int v = 0;
+            foreach (var item in arr)
+            {
+                v += item;
+            }
+            if (n <= 0) return v+n;
+            return v + feb(arr, n - 1) + feb(arr, n - 2);
+        }
     }
 }
