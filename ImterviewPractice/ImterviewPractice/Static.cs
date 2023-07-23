@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace ImterviewPractice
 {
-    public static class Static
+    public class Static 
     {
+        private readonly static Static s = new Static();
+        private Static()
+        {
+            
+        }
+
+        public static Static get()
+        {
+            return s;
+        }
+
+        public int a = 4;
     }
 }
