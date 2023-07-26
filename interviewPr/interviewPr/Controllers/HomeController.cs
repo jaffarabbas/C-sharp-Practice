@@ -8,6 +8,10 @@ namespace interviewPr.Controllers
 {
     public class HomeController : Controller
     {
+        ~HomeController()
+        {
+
+        }
         public ActionResult Index()
         {
             return View();
