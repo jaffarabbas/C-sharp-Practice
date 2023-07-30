@@ -10,7 +10,14 @@ namespace SqlPractice.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            if(Session["email"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index","Login");
+            }
         }
 
         public ActionResult About()
