@@ -18,8 +18,8 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Sales", "Index", "Sales", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Item", "Index", "Item", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
                 @if (@Session["email"] != null) {
                   <ul>
