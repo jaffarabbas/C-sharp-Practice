@@ -134,6 +134,30 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\customer.cs">
+      <DependentUpon>SqlPracticeDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\item.cs">
+      <DependentUpon>SqlPracticeDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sale.cs">
+      <DependentUpon>SqlPracticeDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SqlPracticeDbModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SqlPracticeDbModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SqlPracticeDbModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SqlPracticeDbModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SqlPracticeDbModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SqlPracticeDbModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -156,12 +180,29 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\SqlPracticeDbModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SqlPracticeDbModel.edmx</DependentUpon>
+      <LastGenOutput>SqlPracticeDbModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\SqlPracticeDbModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SqlPracticeDbModel.edmx</DependentUpon>
+      <LastGenOutput>SqlPracticeDbModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\SqlPracticeDbModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SqlPracticeDbModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\SqlPracticeDbModel.edmx.diagram">
+      <DependentUpon>SqlPracticeDbModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -189,7 +230,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
