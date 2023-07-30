@@ -13,10 +13,10 @@ namespace DbLayer
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class dbMvcEntities2 : DbContext
+    public partial class dbMvcEntities3 : DbContext
     {
-        public dbMvcEntities2()
-            : base("name=dbMvcEntities2")
+        public dbMvcEntities3()
+            : base("name=dbMvcEntities3")
         {
         }
     

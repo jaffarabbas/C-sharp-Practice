@@ -130,7 +130,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="dbMvcEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="dbMvcEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="customers" EntityType="Self.customer" />
           <EntitySet Name="items" EntityType="Self.item" />
           <EntitySet Name="sales" EntityType="Self.sale" />
@@ -148,7 +148,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dbMvcModelStoreContainer" CdmEntityContainer="dbMvcEntities2">
+        <EntityContainerMapping StorageEntityContainer="dbMvcModelStoreContainer" CdmEntityContainer="dbMvcEntities3">
           <EntitySetMapping Name="customers">
             <EntityTypeMapping TypeName="dbMvcModel.customer">
               <MappingFragment StoreEntitySet="customer">
