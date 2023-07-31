@@ -1,15 +1,16 @@
 ﻿@model SqlPractice.Models.sale
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Sales";
 }
 
-<h2>Index</h2>
+@Html.Raw(TempData["InsertMessage"])
+@Html.Raw(TempData["ErrorMessage"])
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>sale</h4>
         <hr />
@@ -17,7 +18,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.sdate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.sdate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.sdate, new { @class = "form-control", type = "date" })
                 @Html.ValidationMessageFor(model => model.sdate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -25,7 +26,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.cid, "cid", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("cid", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.cid, ViewBag.CustomerList as SelectList, "Select Customer", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.cid, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -33,16 +34,21 @@
         <div class="form-group">
             @Html.LabelFor(model => model.iid, "iid", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("iid", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.iid, ViewBag.ItemList as SelectList, "Select Item", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.iid, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <br />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </div>
     </div>
 }
 
+<h1>Sales Table</h1>
+
+@{
+    Html.RenderAction("List", "Sales");
+}
