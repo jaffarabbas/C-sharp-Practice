@@ -12,14 +12,22 @@ namespace SqlPractice.Controllers
         // GET: Sales
         public ActionResult Index()
         {
-            using (dbMvcEntities db = new dbMvcEntities())
+            if (Session["email"] != null)
             {
-                var selectCustomer = db.customers.ToList();
-                var selectItems = db.items.ToList();
-                ViewBag.CustomerList = new SelectList(selectCustomer, "id", "name");
-                ViewBag.ItemList = new SelectList(selectItems, "itemId", "iname");
+                //populate dropdowns
+                using (dbMvcEntities db = new dbMvcEntities())
+                {
+                    var selectCustomer = db.customers.ToList();
+                    var selectItems = db.items.ToList();
+                    ViewBag.CustomerList = new SelectList(selectCustomer, "id", "name");
+                    ViewBag.ItemList = new SelectList(selectItems, "itemId", "iname");
+                }
+                return View();
             }
-            return View();
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
         }
 
         [HttpPost]
