@@ -55,8 +55,8 @@ namespace SqlPractice.Controllers
             using (dbMvcEntities db = new dbMvcEntities())
             {
                 var result =  db.sales
-                        .Include("customer") // Load the customer entity
-                        .Include("item") // Load the item entity
+                        .Include("customer") 
+                        .Include("item") 
                         .ToList();
                 return result;
             }
