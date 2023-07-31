@@ -6,11 +6,13 @@
 
 <h2>Login</h2>
 
+@Html.Raw(TempData["AccountCreated"])
+
 <div class="container">
     <div class="row">
         <div class="col-md-3 col-md-offset-5">
             <div class="login-form">
-                @using (Html.BeginForm("Index","Login",FormMethod.Post))
+                @using (Html.BeginForm("Index", "Login", FormMethod.Post))
                 {
                     <div>
                         <h1 class="text-center">Login</h1>
@@ -18,7 +20,7 @@
                     <div class="form-group">
                         <div>@Html.LabelFor(model => model.email)</div>
                         <div>@Html.TextBoxFor(model => model.email, new { @class = "form-control" })</div>
-                        <div>@Html.ValidationMessageFor(model => model.email,"", new { @class = "text-danger" })</div>
+                        <div>@Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })</div>
                     </div>
                     <br />
                     <div class="form-group">
@@ -32,4 +34,9 @@
             </div>
         </div>
     </div>
+</div>
+
+
+<div>
+    @Html.ActionLink("Don't Have Account?", "Index", "Register")
 </div>
