@@ -1,0 +1,49 @@
+﻿@model IEnumerable<SqlPractice.Models.sale>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.sdate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customer.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.item.iname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.item.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.item.quantity)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.sdate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.customer.name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.item.iname)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.item.price)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.item.quantity)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.sid }) |
+        @Html.ActionLink("Details", "Details", new { id = item.sid }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.sid })
+    </td>
+</tr>
+}
+
+</table>
