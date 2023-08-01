@@ -67,5 +67,20 @@ namespace SqlPractice.Controllers
             var data = GetSales();
             return PartialView(data);
         }
+
+        public ActionResult GetItemPrice(int itemId)
+        {
+            using (dbMvcEntities db = new dbMvcEntities())
+            {
+                // Assuming your items table has a 'price' column
+                var item = db.items.FirstOrDefault(i => i.itemId == itemId);
+                if (item != null)
+                {
+                    return Content(item.price.ToString());
+                }
+            }
+
+            return Content(string.Empty);
+        }
     }
 }
