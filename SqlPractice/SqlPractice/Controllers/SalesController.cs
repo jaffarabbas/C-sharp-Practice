@@ -30,6 +30,21 @@ namespace SqlPractice.Controllers
             }
         }
 
+        public ActionResult GetItemQuantity(int itemId)
+        {
+            using (dbMvcEntities db = new dbMvcEntities())
+            {
+                // Assuming your items table has a 'quantity' column
+                var item = db.items.FirstOrDefault(i => i.itemId == itemId);
+                if (item != null)
+                {
+                    return Content(item.quantity.ToString());
+                }
+            }
+
+            return Content(string.Empty);
+        }
+
         [HttpPost]
         public ActionResult Index(sale s)
         {
