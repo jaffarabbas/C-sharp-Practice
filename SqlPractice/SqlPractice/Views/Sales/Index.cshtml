@@ -11,49 +11,49 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>sale</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.sdate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(model => model.sdate, new { @class = "form-control", type = "date" })
-            @Html.ValidationMessageFor(model => model.sdate, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <h4>sale</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.sdate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.sdate, new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(model => model.sdate, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.cid, "cid", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.cid, ViewBag.CustomerList as SelectList, "Select Customer", htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.cid, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.cid, "cid", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.cid, ViewBag.CustomerList as SelectList, "Select Customer", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.cid, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.iid, "iid", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.iid, ViewBag.ItemList as SelectList, "Select Item", htmlAttributes: new { @class = "form-control" ,@id="item_list" })
-            @Html.ValidationMessageFor(model => model.iid, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.iid, "iid", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.iid, ViewBag.ItemList as SelectList, "Select Item", htmlAttributes: new { @class = "form-control", @id = "item_list" })
+                @Html.ValidationMessageFor(model => model.iid, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.item.quantity, "quantity", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.item.quantity, new { htmlAttributes = new { @class = "form-control", @id="quantity" } })
-            @Html.ValidationMessageFor(model => model.item.quantity, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.item.quantity, "quantity", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.item.quantity, new { htmlAttributes = new { @class = "form-control", @id = "quantity" } })
+                @Html.ValidationMessageFor(model => model.item.quantity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
         </div>
     </div>
-    <br />
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-primary" />
-        </div>
-    </div>
-</div>
 }
 
 <h1>Sales Table</h1>
@@ -62,10 +62,29 @@
     Html.RenderAction("List", "Sales");
 }
 
-@{ 
+@{
+    <!-- Add this script tag in your view to include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    //populating textbox with dropdown
     <script>
-        document.getElementById("item_list").addEventListener("change", function () {
-            document.getElementById("myForm").submit(); // Submit the form when the dropdown changes
+        $(document).ready(function () {
+        // Handle the dropdown change event using jQuery
+        $("#item_list").change(function () {
+            var selectedItemId = $(this).val();
+            // Send an AJAX request to get the quantity for the selected item
+            $.ajax({
+                url: '@Url.Action("GetItemQuantity", "Sales")',
+                type: 'GET',
+                data: { itemId: selectedItemId },
+                success: function (data) {
+                    // Update the quantity textbox with the quantity of the selected item
+                    $("#quantity").val(data);
+                },
+                error: function (error) {
+                    // Handle error if needed
+                }
+            });
         });
+    });
     </script>
 }
