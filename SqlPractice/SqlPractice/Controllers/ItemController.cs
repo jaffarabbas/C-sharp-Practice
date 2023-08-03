@@ -36,7 +36,7 @@ namespace SqlPractice.Controllers
                 }
                 else
                 {
-                    TempData["ErrorMessage"] = "<script>alert('Sales Data Is Not Inserted')</script>";
+                    TempData["ExceedQuantity"] = "<script>alert('Sales Data Is Not Inserted')</script>";
                     return View();
                 }
             }
