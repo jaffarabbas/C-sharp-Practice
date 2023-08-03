@@ -1,49 +1,67 @@
 ﻿@model IEnumerable<SqlPractice.Models.sale>
 
+<link href="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.css" rel="stylesheet">
+<table class="table" id="sales">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.sid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.customer.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.item.iname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.item.price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.item.quantity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.sdate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.customer.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.item.iname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.item.price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.item.quantity)
-        </th>
-        <th></th>
-    </tr>
-
+<tbody>
 @foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.sdate)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.customer.name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.item.iname)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.item.price)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.item.quantity)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.sid }) |
-        @Html.ActionLink("Details", "Details", new { id = item.sid }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.sid })
-    </td>
-</tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.sid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sdate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.customer.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.item.iname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.item.quantity)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.sid }) |
+            @Html.ActionLink("Details", "Details", new { id = item.sid }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.sid })
+        </td>
+    </tr>
 }
+</tbody>
 
 </table>
+@{ 
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.js"></script>
+    <script>
+        let table = new DataTable('#sales');
+    </script>
+}
