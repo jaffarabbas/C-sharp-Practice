@@ -6,6 +6,7 @@
 
 @Html.Raw(TempData["InsertMessage"])
 @Html.Raw(TempData["ErrorMessage"])
+@Html.Raw(TempData["ExceedQuantity"])
 
 @using (Html.BeginForm(Html.BeginForm("Index", "Sales", FormMethod.Post, new { id = "myForm" })))
 {
@@ -67,24 +68,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     //populating textbox with dropdown
     <script>
-        $(document).ready(function () {
-        // Handle the dropdown change event using jQuery
-        $("#item_list").change(function () {
-            var selectedItemId = $(this).val();
-            // Send an AJAX request to get the quantity for the selected item
-            $.ajax({
-                url: '@Url.Action("GetItemQuantity", "Sales")',
-                type: 'GET',
-                data: { itemId: selectedItemId },
-                success: function (data) {
-                    // Update the quantity textbox with the quantity of the selected item
-                    $("#quantity").val(data);
-                },
-                error: function (error) {
-                    // Handle error if needed
-                }
-            });
-        });
-    });
+
     </script>
 }
