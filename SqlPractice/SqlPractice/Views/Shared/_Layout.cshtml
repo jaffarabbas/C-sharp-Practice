@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
@@ -40,6 +41,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
