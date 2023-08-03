@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -50,7 +51,28 @@ namespace SqlPractice.Controllers
         {
             using (dbMvcEntities db = new dbMvcEntities())
             {
-                db.sales.Add(s);
+                var value = new sale()
+                {
+                    cid = s.cid,
+                    iid = s.iid,
+                    sdate = s.sdate
+                };
+                db.sales.Add(value);
+                //detecting quantity from items
+                var selectedItem = db.items.FirstOrDefault(m => m.itemId == s.iid);
+                if(s.item.quantity <= selectedItem.quantity)
+                {
+                    int? newQuantity = selectedItem.quantity - s.item.quantity;
+                    if(newQuantity > 0)
+                    {
+                        selectedItem.quantity = newQuantity;
+                        db.Entry(selectedItem).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        TempData["InsertMessage"] = "<script>alert('You are exceeding Quantity')</script>";
+                    }
+                }
                 var data = db.SaveChanges();
                 if(data > 0)
                 {
@@ -65,6 +87,15 @@ namespace SqlPractice.Controllers
             }
         }
 
+        [HttpPatch]
+        public void Update(item t)
+        {
+            using (dbMvcEntities db = new dbMvcEntities())
+            {
+                db.Entry(t).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
         public IEnumerable<sale> GetSales()
         {
             using (dbMvcEntities db = new dbMvcEntities())
