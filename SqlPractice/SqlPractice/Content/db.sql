@@ -7,8 +7,19 @@ create table customer
 id int identity(1,1) primary key,
 name varchar(40) not null,
 email varchar(100) not null unique,
+cid int,
+address varchar(100) null,
 password varchar(30) not null
 )
+
+create table country
+(
+	cid int identity(1,1) primary key,
+	cname varchar(20),
+)
+
+alter table customer
+add constraint fk_customer_country foreign key (cid) references country(cid)
 
 create table item
 (

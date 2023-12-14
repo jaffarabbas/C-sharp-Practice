@@ -5,8 +5,6 @@ VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlPractice", "SqlPractice\SqlPractice.csproj", "{8C307F4B-0345-495C-93C2-C49AE7CE6335}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbLayer", "DbLayer\DbLayer.csproj", "{478B4F3B-2B75-441C-BF1D-51E682C30D31}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{8C307F4B-0345-495C-93C2-C49AE7CE6335}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C307F4B-0345-495C-93C2-C49AE7CE6335}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C307F4B-0345-495C-93C2-C49AE7CE6335}.Release|Any CPU.Build.0 = Release|Any CPU
-		{478B4F3B-2B75-441C-BF1D-51E682C30D31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{478B4F3B-2B75-441C-BF1D-51E682C30D31}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{478B4F3B-2B75-441C-BF1D-51E682C30D31}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{478B4F3B-2B75-441C-BF1D-51E682C30D31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
