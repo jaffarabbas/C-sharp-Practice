@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using static DataTableRelation.Program;
 
 namespace DataTableRelation
 {
     class Program
     {
-        static void Main()
+        public static void checkDatatable()
         {
             // Create DataTables
             DataTable itemsTable = new DataTable("Items");
@@ -65,6 +67,93 @@ namespace DataTableRelation
             }
 
             return resultTable;
+        }
+        public class item
+        {
+            public int itemID { get; set; }
+            public string name { get; set; }
+        }
+        public class bom
+        {
+            public int id { get; set; }
+            public int itemID { get; set; }
+            public int quantity { get; set; }
+        }
+
+        public List<bom> boms = new List<bom>()
+            {
+                new bom()
+                {
+                    id = 1,
+                    itemID = 1,
+                    quantity = 2
+                },
+                new bom()
+                {
+                    id = 2,
+                    itemID = 2,
+                    quantity = 2
+                },
+                new bom()
+                {
+                    id = 3,
+                    itemID = 4,
+                    quantity = 2
+                },
+            };
+
+        public List<item> items = new List<item>()
+            {
+                new item()
+                {
+                    itemID = 1,
+                    name = "asdasd"
+                },new item()
+                {
+                    itemID = 2,
+                    name = "asdasd"
+                }
+                ,new item()
+                {
+                    itemID = 3,
+                    name = "asdasd"
+                },
+            };
+
+        public void test()
+        {
+
+            //bool allItemsPresent = boms.All(b => item.Any(i => i.itemID == b.itemID));
+
+            //if (allItemsPresent)
+            //{
+            //    Console.WriteLine("All bom itemIDs are present in the items list.");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Not all bom itemIDs are present in the items list.");
+            //}
+
+            List<bom> unmatchedBoms = boms
+            .Where(b => !items.Any(i => i.itemID == b.itemID))
+            .ToList();
+
+            if (unmatchedBoms.Count > 0)
+            {
+                Console.WriteLine("The following bom items do not have a corresponding match in the items list:");
+                unmatchedBoms.ForEach(unmatchedBom =>
+                    Console.WriteLine($"Bom ID: {unmatchedBom.id}, ItemID: {unmatchedBom.itemID}")
+                );
+            }
+            else
+            {
+                Console.WriteLine("All bom items have a corresponding match in the items list.");
+            }
+        }
+        static void Main()
+        {
+            Program obj = new Program();
+            obj.test();
         }
     }
 }
