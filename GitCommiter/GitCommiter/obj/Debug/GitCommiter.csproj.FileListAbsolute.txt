@@ -33,7 +33,6 @@ C:\Users\DARKLORD\Documents\GitHub\C-sharp-Practice\GitCommiter\GitCommiter\obj\
 C:\Users\DARKLORD\Documents\GitHub\C-sharp-Practice\GitCommiter\GitCommiter\obj\Debug\GitCommiter.exe
 C:\Users\DARKLORD\Documents\GitHub\C-sharp-Practice\GitCommiter\GitCommiter\obj\Debug\GitCommiter.pdb
 J:\GitHub\C-sharp-Practice\GitCommiter\GitCommiter\obj\Debug\GitCommiter.csproj.AssemblyReference.cache
-J:\GitHub\C-sharp-Practice\GitCommiter\GitCommiter\obj\Debug\GitCommiter.csproj.SuggestedBindingRedirects.cache
 J:\GitHub\C-sharp-Practice\GitCommiter\GitCommiter\obj\Debug\GitCommiter.Form1.resources
 J:\GitHub\C-sharp-Practice\GitCommiter\GitCommiter\obj\Debug\GitCommiter.Properties.Resources.resources
 J:\GitHub\C-sharp-Practice\GitCommiter\GitCommiter\obj\Debug\GitCommiter.csproj.GenerateResource.cache

@@ -117,7 +117,7 @@ namespace GitCommiterMethods
         /// <param name="path"></param>
         public static void PushCommitData(string path)
         {
-            string gitPushCommand = "cd " + path + " & git push -u origin";
+            string gitPushCommand = "cd " + path + " & git push -u origin main";
             string message = $"{countCommitedFiles} Files are pushed";
             ShellRunner(gitPushCommand,message);
         }
