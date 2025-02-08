@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "J:\\Github\\C-sharp-Practice\\DatatableTest\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{398CEB75-E2A9-48A7-8985-B4DF4BC974BA}|DatatableTest\\DatatableTest.vbproj|j:\\github\\c-sharp-practice\\datatabletest\\datatabletest\\program.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{398CEB75-E2A9-48A7-8985-B4DF4BC974BA}|DatatableTest\\DatatableTest.vbproj|solutionrelative:datatabletest\\program.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.vb",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\DatatableTest\\DatatableTest\\Program.vb",
+              "RelativeDocumentMoniker": "DatatableTest\\Program.vb",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\DatatableTest\\DatatableTest\\Program.vb",
+              "RelativeToolTip": "DatatableTest\\Program.vb",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAswGIAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-02-06T16:53:33.751Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
