@@ -1,59 +1,34 @@
-﻿using TestApi.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using TestApi.Dto;
+using TestApi.Models;
 
 namespace TestApi.Repository
 {
-    public class ItemRepository : IITemRepository
+    public class ItemRepository : GenericRepository<TblItem>, IITemRepository
     {
         private readonly TestContext _context;
-        public ItemRepository(TestContext context)
+        public ItemRepository(TestContext context) : base(context)
         {
             _context = context;
         }
-        public Task<TblItem> AddItem(TblItem item)
+
+        public async Task<List<TblItemDto>> GetAllItemsWithPricingTitle()
         {
-            var itemID = _context.TblItems.Max(x => x.TranId) + 1;
-            item.TranId = itemID;
-            _context.TblItems.Add(item);
-            _context.SaveChanges();
-            return Task.FromResult(item);
+            var result = await (from item in _context.TblItems
+                                join price in _context.TblPricingLists
+                                on item.TranId equals price.ItemId
+                                select new TblItemDto
+                                {
+                                    TranId = item.TranId,
+                                    ItemRefNo = item.ItemRefNo,
+                                    ItemTitle = item.ItemTitle,
+                                    SaleRate = item.SaleRate,
+                                    TransactionDate = item.TransactionDate,
+                                    PricingTitle = price.PricingTitle
+                                }).ToListAsync();
+
+            return result;
         }
 
-        public Task<bool> DeleteItem(int id)
-        {
-            var item = _context.TblItems.Find(id);
-            if (item != null)
-            {
-                _context.TblItems.Remove(item);
-                _context.SaveChanges();
-                return Task.FromResult(true);
-            }
-            return Task.FromResult(false);
-        }
-
-        public Task<List<TblItem>> GetAllItems()
-        {
-            var items = _context.TblItems.ToList();
-            return Task.FromResult(items);
-        }
-
-        public Task<TblItem> GetItemById(int id)
-        {
-            var item = _context.TblItems.Find(id);
-            return Task.FromResult(item);
-        }
-
-        public async Task<TblItem> UpdateItem(TblItem item)
-        {
-            var existingItem = _context.TblItems.Find(item.TranId);
-            if (existingItem != null)
-            {
-                existingItem.ItemRefNo = item.ItemRefNo;
-                existingItem.ItemTitle = item.ItemTitle;
-                existingItem.SaleRate = item.SaleRate;
-                existingItem.TransactionDate = item.TransactionDate;
-                _context.SaveChanges();
-            }
-            return await Task.FromResult(existingItem);
-        }
     }
 }
