@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Dapper;
+using Microsoft.EntityFrameworkCore;
+using System.Data;
 using TestApi.Dto;
 using TestApi.Models;
 
@@ -7,9 +9,14 @@ namespace TestApi.Repository
     public class ItemRepository : GenericRepository<TblItem>, IITemRepository
     {
         private readonly TestContext _context;
-        public ItemRepository(TestContext context) : base(context)
+        private readonly IDbConnection _connection;
+        private readonly IDbTransaction? _transaction;
+
+        public ItemRepository(TestContext context,IDbConnection connection, IDbTransaction? transaction) : base(context,connection,transaction)
         {
             _context = context;
+            _connection = connection;
+            _transaction = transaction;
         }
 
         public async Task<List<TblItemDto>> GetAllItemsWithPricingTitle()
@@ -30,5 +37,17 @@ namespace TestApi.Repository
             return result;
         }
 
+        public async Task<TblItemDto?> GetItemWithPricingTitleById(int id)
+        {
+            var result = _connection.QueryFirstOrDefaultAsync<TblItemDto>(
+                @"SELECT i.TranId, i.ItemRefNo, i.ItemTitle, i.SaleRate, i.TransactionDate, p.PricingTitle
+                  FROM tblItem i
+                  INNER JOIN tblPricingList p ON i.TranId = p.ItemId
+                  WHERE i.TranId = @Id",
+                new { Id = id },
+                transaction: _transaction);
+
+            return await result;
+        }
     }
 }

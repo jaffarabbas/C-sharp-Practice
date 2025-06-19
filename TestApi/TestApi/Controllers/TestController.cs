@@ -51,9 +51,6 @@ namespace TestApi.Controllers
                 var addedItem = await _unitOfWork.Repository<TblItem>().AddAsync(item);
                 await _unitOfWork.SaveAsync();
 
-                // simulate something going wrong
-                // throw new Exception("Something failed!");
-
                 await _unitOfWork.CommitAsync();
 
                 return CreatedAtAction(nameof(AddItemWithTransaction), new { id = addedItem.TranId }, addedItem);
@@ -73,6 +70,43 @@ namespace TestApi.Controllers
             {
                 var items = await _unitOfWork.iTemRepository.GetAllItemsWithPricingTitle();
                 return Ok(items);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error: {ex.Message}");
+            }
+        }
+
+        //dapper
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var repo = _unitOfWork.Repository<TblItem>();
+            var data = await repo.GetAllAsync("tblItem");
+            return Ok(data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody] TblItem item)
+        {
+            var repo = _unitOfWork.Repository<TblItem>();
+            await repo.AddAsync("tblItem", item);
+            _unitOfWork.Commit();
+            return Ok();
+        }
+
+        [HttpGet()]
+        [Route("GetItemWithPricingTitleByID/{id}")]
+        public async Task<IActionResult> GetItemWithPricingTitleByID(int id)
+        {
+            try
+            {
+                var item = await _unitOfWork.iTemRepository.GetItemWithPricingTitleById(id);
+                if (item == null)
+                {
+                    return NotFound();
+                }
+                return Ok(item);
             }
             catch (Exception ex)
             {

@@ -3,22 +3,31 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections;
 using TestApi.Repository;
 using TestApi.Models;
+using System.Data;
 
 public class UnitOfWork : IUnitOfWork
 {
     private readonly TestContext _context;
     private Hashtable _repositories;
     private IDbContextTransaction? _transaction;
+    private IDbConnection _connection;
+    private IDbTransaction _dapperTransaction;
 
     private IITemRepository? _itemRepository;
 
-    public UnitOfWork(TestContext context)
+    public UnitOfWork(TestContext context, IDbConnection connection)
     {
         _context = context;
+        _connection = connection;
+        _connection.Open();
+        _dapperTransaction = _connection.BeginTransaction();
     }
 
     public IITemRepository iTemRepository =>
-        _itemRepository ??= new ItemRepository(_context);
+        _itemRepository ??= new ItemRepository(_context,_connection,_dapperTransaction);
+
+    public IDbConnection Connection => _connection;
+    public IDbTransaction Transaction => _dapperTransaction;
 
     public IGenericRepository<T> Repository<T>() where T : class
     {
@@ -27,7 +36,7 @@ public class UnitOfWork : IUnitOfWork
 
         if (!_repositories.ContainsKey(type))
         {
-            var repoInstance = new GenericRepository<T>(_context);
+            var repoInstance = new GenericRepository<T>(_context,_connection,_dapperTransaction);
             _repositories.Add(type, repoInstance);
         }
 
@@ -66,5 +75,25 @@ public class UnitOfWork : IUnitOfWork
     {
         _transaction?.Dispose();
         _context.Dispose();
+    }
+
+    public void Commit()
+    {
+        _dapperTransaction.Commit();
+        _dapperTransaction.Dispose();
+        _dapperTransaction = _connection.BeginTransaction();
+    }
+
+    public void Rollback()
+    {
+        _dapperTransaction.Rollback();
+        _dapperTransaction.Dispose();
+        _dapperTransaction = _connection.BeginTransaction();
+    }
+
+    public void DisposeDapper()
+    {
+        _dapperTransaction?.Dispose();
+        _connection?.Dispose();
     }
 }

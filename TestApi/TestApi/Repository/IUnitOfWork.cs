@@ -1,4 +1,6 @@
-﻿namespace TestApi.Repository
+﻿using System.Data;
+
+namespace TestApi.Repository
 {
     public interface IUnitOfWork : IDisposable
     {
@@ -10,6 +12,12 @@
         Task BeginTransactionAsync();
         Task CommitAsync();
         Task RollbackAsync();
+
+        //dapper
+        IDbConnection Connection { get; }
+        IDbTransaction Transaction { get; }
+        void Commit();
+        void Rollback();
     }
 
 }

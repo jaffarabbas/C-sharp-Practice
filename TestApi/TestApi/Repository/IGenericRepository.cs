@@ -8,6 +8,11 @@
         void Update(T entity);
         void Delete(T entity);
         Task SaveAsync();
+        Task<IEnumerable<T>> GetAllAsync(string table);
+        Task<T?> GetByIdAsync(string table, string keyName, object id);
+        Task<int> AddAsync(string table, T entity);
+        Task<int> UpdateAsync(string table, T entity, string keyName);
+        Task<int> DeleteAsync(string table, string keyName, object id);
     }
 
 

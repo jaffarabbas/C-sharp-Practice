@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "J:\\Github\\C-sharp-Practice\\TestApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|j:\\github\\c-sharp-practice\\testapi\\testapi\\controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|solutionrelative:testapi\\controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|j:\\github\\c-sharp-practice\\testapi\\testapi\\repository\\itemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|solutionrelative:testapi\\repository\\itemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -23,6 +19,22 @@
       "RelativeMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|solutionrelative:testapi\\repository\\iunitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|j:\\github\\c-sharp-practice\\testapi\\testapi\\repository\\iitemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|solutionrelative:testapi\\repository\\iitemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|j:\\github\\c-sharp-practice\\testapi\\testapi\\repository\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|solutionrelative:testapi\\repository\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|j:\\github\\c-sharp-practice\\testapi\\testapi\\repository\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|solutionrelative:testapi\\repository\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|j:\\github\\c-sharp-practice\\testapi\\testapi\\controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|solutionrelative:testapi\\controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|j:\\github\\c-sharp-practice\\testapi\\testapi\\models\\testcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|solutionrelative:testapi\\models\\testcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -31,20 +43,8 @@
       "RelativeMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|solutionrelative:testapi\\models\\tblitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|j:\\github\\c-sharp-practice\\testapi\\testapi\\repository\\iitemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|solutionrelative:testapi\\repository\\iitemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|j:\\github\\c-sharp-practice\\testapi\\testapi\\dto\\tblitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|solutionrelative:testapi\\dto\\tblitemdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|j:\\github\\c-sharp-practice\\testapi\\testapi\\repository\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|solutionrelative:testapi\\repository\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|j:\\github\\c-sharp-practice\\testapi\\testapi\\repository\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|solutionrelative:testapi\\repository\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|j:\\github\\c-sharp-practice\\testapi\\testapi\\middleware\\authmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -86,21 +86,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 8,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "TblItem.cs",
-              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Models\\TblItem.cs",
-              "RelativeDocumentMoniker": "TestApi\\Models\\TblItem.cs",
-              "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Models\\TblItem.cs",
-              "RelativeToolTip": "TestApi\\Models\\TblItem.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-19T17:29:42.061Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
@@ -120,19 +107,110 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "IUnitOfWork.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\IUnitOfWork.cs",
+              "RelativeDocumentMoniker": "TestApi\\Repository\\IUnitOfWork.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\IUnitOfWork.cs",
+              "RelativeToolTip": "TestApi\\Repository\\IUnitOfWork.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAA5wBcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-19T17:14:54.437Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Program.cs",
+              "RelativeDocumentMoniker": "TestApi\\Program.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Program.cs",
+              "RelativeToolTip": "TestApi\\Program.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAcwBkAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-03T10:50:00.152Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "TestApi\\Repository\\GenericRepository.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\GenericRepository.cs",
+              "RelativeToolTip": "TestApi\\Repository\\GenericRepository.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAYwF4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-19T17:02:59.243Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "UnitOfWork.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\UnitOfWork.cs",
               "RelativeDocumentMoniker": "TestApi\\Repository\\UnitOfWork.cs",
               "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\UnitOfWork.cs",
               "RelativeToolTip": "TestApi\\Repository\\UnitOfWork.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAgwA0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAowGMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-19T17:15:11.587Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ItemRepository.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\ItemRepository.cs",
+              "RelativeDocumentMoniker": "TestApi\\Repository\\ItemRepository.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\ItemRepository.cs",
+              "RelativeToolTip": "TestApi\\Repository\\ItemRepository.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAnwCwAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-03T10:55:34.322Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IITemRepository.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\IITemRepository.cs",
+              "RelativeDocumentMoniker": "TestApi\\Repository\\IITemRepository.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\IITemRepository.cs",
+              "RelativeToolTip": "TestApi\\Repository\\IITemRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-03T10:54:56.945Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "IGenericRepository.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\IGenericRepository.cs",
+              "RelativeDocumentMoniker": "TestApi\\Repository\\IGenericRepository.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\IGenericRepository.cs",
+              "RelativeToolTip": "TestApi\\Repository\\IGenericRepository.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAA1wBQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-19T17:05:18.352Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TestController.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Controllers\\TestController.cs",
+              "RelativeDocumentMoniker": "TestApi\\Controllers\\TestController.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Controllers\\TestController.cs",
+              "RelativeToolTip": "TestApi\\Controllers\\TestController.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAswGoAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-03T10:54:29.194Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "TestContext.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Models\\TestContext.cs",
               "RelativeDocumentMoniker": "TestApi\\Models\\TestContext.cs",
@@ -145,72 +223,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ItemRepository.cs",
-              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\ItemRepository.cs",
-              "RelativeDocumentMoniker": "TestApi\\Repository\\ItemRepository.cs",
-              "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\ItemRepository.cs",
-              "RelativeToolTip": "TestApi\\Repository\\ItemRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABHAAAAAAAAAA==",
+              "DocumentIndex": 9,
+              "Title": "TblItem.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Models\\TblItem.cs",
+              "RelativeDocumentMoniker": "TestApi\\Models\\TblItem.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Models\\TblItem.cs",
+              "RelativeToolTip": "TestApi\\Models\\TblItem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T10:55:34.322Z",
+              "WhenOpened": "2025-06-19T17:29:42.061Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "IUnitOfWork.cs",
-              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\IUnitOfWork.cs",
-              "RelativeDocumentMoniker": "TestApi\\Repository\\IUnitOfWork.cs",
-              "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\IUnitOfWork.cs",
-              "RelativeToolTip": "TestApi\\Repository\\IUnitOfWork.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-19T17:14:54.437Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Program.cs",
-              "RelativeDocumentMoniker": "TestApi\\Program.cs",
-              "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Program.cs",
-              "RelativeToolTip": "TestApi\\Program.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAcwBQAAAA+AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T10:50:00.152Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TestController.cs",
-              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Controllers\\TestController.cs",
-              "RelativeDocumentMoniker": "TestApi\\Controllers\\TestController.cs",
-              "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Controllers\\TestController.cs",
-              "RelativeToolTip": "TestApi\\Controllers\\TestController.cs",
-              "ViewState": "AgIAADgAAAAAAAAAAAAIwFAAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T10:54:29.194Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "IITemRepository.cs",
-              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\IITemRepository.cs",
-              "RelativeDocumentMoniker": "TestApi\\Repository\\IITemRepository.cs",
-              "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\IITemRepository.cs",
-              "RelativeToolTip": "TestApi\\Repository\\IITemRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAcAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T10:54:56.945Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "TblItemDto.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Dto\\TblItemDto.cs",
               "RelativeDocumentMoniker": "TestApi\\Dto\\TblItemDto.cs",
@@ -231,7 +257,8 @@
               "RelativeToolTip": "TestApi\\Models\\Test1.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T10:48:19.45Z"
+              "WhenOpened": "2025-05-03T10:48:19.45Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -244,32 +271,6 @@
               "ViewState": "AgIAABEAAAAAAAAAAAAiwB0AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-20T16:31:23.916Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "GenericRepository.cs",
-              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\GenericRepository.cs",
-              "RelativeDocumentMoniker": "TestApi\\Repository\\GenericRepository.cs",
-              "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\GenericRepository.cs",
-              "RelativeToolTip": "TestApi\\Repository\\GenericRepository.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAgwAoAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-19T17:02:59.243Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "IGenericRepository.cs",
-              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\IGenericRepository.cs",
-              "RelativeDocumentMoniker": "TestApi\\Repository\\IGenericRepository.cs",
-              "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Repository\\IGenericRepository.cs",
-              "RelativeToolTip": "TestApi\\Repository\\IGenericRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-19T17:05:18.352Z",
               "EditorCaption": ""
             },
             {
@@ -308,7 +309,8 @@
               "RelativeToolTip": "TestApi\\Attributes\\CustomAuthAttribute.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-18T11:21:28.874Z"
+              "WhenOpened": "2025-05-18T11:21:28.874Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -320,7 +322,8 @@
               "RelativeToolTip": "TestApi\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-03T10:49:24.57Z"
+              "WhenOpened": "2025-05-03T10:49:24.57Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -330,9 +333,10 @@
               "RelativeDocumentMoniker": "TestApi\\Properties\\launchSettings.json",
               "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Properties\\launchSettings.json",
               "RelativeToolTip": "TestApi\\Properties\\launchSettings.json",
-              "ViewState": "AgIAAAUAAAAAAAAAAABRwBAAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAAAEAAAAAAAAAAABhwBAAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-04T09:27:30.452Z"
+              "WhenOpened": "2025-05-04T09:27:30.452Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -344,7 +348,8 @@
               "RelativeToolTip": "Repositories\\Class1.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-10T16:43:30.37Z"
+              "WhenOpened": "2025-05-10T16:43:30.37Z",
+              "EditorCaption": ""
             }
           ]
         }
