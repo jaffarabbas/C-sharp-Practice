@@ -7,17 +7,6 @@ builder.Services.AddRazorPages();
 builder.Services.AddHttpClient();
 builder.Services.AddSignalR(); // SignalR support
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowRazorClient", policy =>
-    {
-        policy.WithOrigins("https://localhost:7239")
-              .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials();
-    });
-});
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,8 +20,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
-app.UseCors("AllowRazorClient"); // Apply named policy
 
 app.UseAuthorization();
 

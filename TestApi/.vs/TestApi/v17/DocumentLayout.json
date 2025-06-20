@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "J:\\Github\\C-sharp-Practice\\TestApi\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{AB64994B-0E4B-4E58-9115-94A1D7DF3A03}|TestRazor\\TestRazor.csproj|j:\\github\\c-sharp-practice\\testapi\\testrazor\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AB64994B-0E4B-4E58-9115-94A1D7DF3A03}|TestRazor\\TestRazor.csproj|solutionrelative:testrazor\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{AB64994B-0E4B-4E58-9115-94A1D7DF3A03}|TestRazor\\TestRazor.csproj|j:\\github\\c-sharp-practice\\testapi\\testrazor\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{AB64994B-0E4B-4E58-9115-94A1D7DF3A03}|TestRazor\\TestRazor.csproj|solutionrelative:testrazor\\pages\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -13,10 +17,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|j:\\github\\c-sharp-practice\\testapi\\testapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|solutionrelative:testapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AB64994B-0E4B-4E58-9115-94A1D7DF3A03}|TestRazor\\TestRazor.csproj|j:\\github\\c-sharp-practice\\testapi\\testrazor\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AB64994B-0E4B-4E58-9115-94A1D7DF3A03}|TestRazor\\TestRazor.csproj|solutionrelative:testrazor\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1C49758D-EC1C-45C8-B4F9-C082728C47CA}|TestApi\\TestApi.csproj|j:\\github\\c-sharp-practice\\testapi\\testapi\\controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -102,7 +102,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -122,13 +122,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestRazor\\Program.cs",
               "RelativeDocumentMoniker": "TestRazor\\Program.cs",
               "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestRazor\\Program.cs",
               "RelativeToolTip": "TestRazor\\Program.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAgwA0AAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAgwBUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-20T18:36:36.407Z",
               "EditorCaption": ""
@@ -161,20 +161,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Index.cshtml",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestRazor\\Pages\\Index.cshtml",
               "RelativeDocumentMoniker": "TestRazor\\Pages\\Index.cshtml",
               "ToolTip": "J:\\Github\\C-sharp-Practice\\TestApi\\TestRazor\\Pages\\Index.cshtml",
               "RelativeToolTip": "TestRazor\\Pages\\Index.cshtml",
-              "ViewState": "AgIAABkAAAAAAAAAAAAIwCEAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAABYAAAAAAAAAAAAYwCoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-06-20T18:30:46.98Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestApi\\Program.cs",
               "RelativeDocumentMoniker": "TestApi\\Program.cs",
@@ -213,7 +213,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ItemModel.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\TestApi\\TestRazor\\ItemModel.cs",
               "RelativeDocumentMoniker": "TestRazor\\ItemModel.cs",
