@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using TestApi.Attributes;
+using TestApi.Hubs;
 using TestApi.Models;
 using TestApi.Repository; // Your generic repo namespace
 
@@ -11,9 +13,11 @@ namespace TestApi.Controllers
     public class TestController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-        public TestController(IGenericRepository<TblItem> repository, IUnitOfWork unitOfWork)
+        private readonly IHubContext<ItemNotificationHub> _hubContext;
+        public TestController(IUnitOfWork unitOfWork,IHubContext<ItemNotificationHub> hubContext)
         {
             _unitOfWork = unitOfWork;
+            _hubContext = hubContext;
         }
 
         [HttpGet]
@@ -35,7 +39,7 @@ namespace TestApi.Controllers
 
             var addedItem = await _unitOfWork.iTemRepository.AddAsync(item);
             await _unitOfWork.iTemRepository.SaveAsync(); // Ensure SaveChanges is called
-
+            await _hubContext.Clients.All.SendAsync("ItemAdded", addedItem); // Notify clients via SignalR
             return CreatedAtAction(nameof(GetAllItems), new { id = addedItem.TranId }, addedItem);
         }
 

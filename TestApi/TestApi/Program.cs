@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using System.Data;
 using TestApi.Attributes;
 using TestApi.BackgroundServices;
+using TestApi.Hubs;
 using TestApi.Middleware;
 using TestApi.Models;
 using TestApi.Repository;
@@ -36,14 +37,16 @@ builder.Services.AddHostedService<BGTest>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    options.AddPolicy("AllowRazorClient", policy =>
     {
-        policy
-            .AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader();
+        policy.WithOrigins("https://localhost:7239") // your Razor page's port
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials(); // REQUIRED for SignalR with cross-origin
     });
 });
+
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -54,7 +57,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowAll");
+app.UseCors("AllowRazorClient");
 
 app.UseHttpsRedirection();
 
@@ -63,5 +66,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseAuthMiddleware();
+
+app.MapHub<ItemNotificationHub>("/itemNotificationHub");
 
 app.Run();
