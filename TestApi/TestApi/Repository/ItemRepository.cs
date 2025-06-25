@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using System.Data;
 using TestApi.Dto;
 using TestApi.Models;
@@ -11,12 +12,14 @@ namespace TestApi.Repository
         private readonly TestContext _context;
         private readonly IDbConnection _connection;
         private readonly IDbTransaction? _transaction;
+        private readonly IMemoryCache _cache;
 
-        public ItemRepository(TestContext context,IDbConnection connection, IDbTransaction? transaction) : base(context,connection,transaction)
+        public ItemRepository(TestContext context,IDbConnection connection,IMemoryCache cache, IDbTransaction? transaction) : base(context,connection,cache,transaction)
         {
             _context = context;
             _connection = connection;
             _transaction = transaction;
+            _cache = cache;
         }
 
         public async Task<List<TblItemDto>> GetAllItemsWithPricingTitle()

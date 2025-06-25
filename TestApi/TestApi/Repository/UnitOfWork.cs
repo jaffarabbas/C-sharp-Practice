@@ -4,6 +4,7 @@ using System.Collections;
 using TestApi.Repository;
 using TestApi.Models;
 using System.Data;
+using Microsoft.Extensions.Caching.Memory;
 
 public class UnitOfWork : IUnitOfWork
 {
@@ -12,19 +13,21 @@ public class UnitOfWork : IUnitOfWork
     private IDbContextTransaction? _transaction;
     private IDbConnection _connection;
     private IDbTransaction _dapperTransaction;
+    private IMemoryCache _cache;
 
     private IITemRepository? _itemRepository;
 
-    public UnitOfWork(TestContext context, IDbConnection connection)
+    public UnitOfWork(TestContext context, IDbConnection connection,IMemoryCache cache)
     {
         _context = context;
         _connection = connection;
         _connection.Open();
         _dapperTransaction = _connection.BeginTransaction();
+        _cache = cache;
     }
 
     public IITemRepository iTemRepository =>
-        _itemRepository ??= new ItemRepository(_context,_connection,_dapperTransaction);
+        _itemRepository ??= new ItemRepository(_context,_connection,_cache, _dapperTransaction);
 
     public IDbConnection Connection => _connection;
     public IDbTransaction Transaction => _dapperTransaction;
@@ -36,7 +39,7 @@ public class UnitOfWork : IUnitOfWork
 
         if (!_repositories.ContainsKey(type))
         {
-            var repoInstance = new GenericRepository<T>(_context,_connection,_dapperTransaction);
+            var repoInstance = new GenericRepository<T>(_context,_connection,_cache,_dapperTransaction);
             _repositories.Add(type, repoInstance);
         }
 

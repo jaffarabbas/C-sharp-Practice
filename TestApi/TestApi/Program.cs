@@ -48,6 +48,13 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddSignalR();
 
+builder.Services.AddMemoryCache();
+
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -66,6 +73,8 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseAuthMiddleware();
+
+app.UseResponseCompression();
 
 app.MapHub<ItemNotificationHub>("/itemNotificationHub");
 
