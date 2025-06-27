@@ -1,0 +1,87 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|j:\\github\\c-sharp-practice\\apitemplate\\apitemplate\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|solutionrelative:apitemplate\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|j:\\github\\c-sharp-practice\\apitemplate\\apitemplate\\controllers\\invoicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|solutionrelative:apitemplate\\controllers\\invoicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|j:\\github\\c-sharp-practice\\apitemplate\\apitemplate\\apitemplate.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|solutionrelative:apitemplate\\apitemplate.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "InvoiceController.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Controllers\\InvoiceController.cs",
+              "RelativeDocumentMoniker": "ApiTemplate\\Controllers\\InvoiceController.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Controllers\\InvoiceController.cs",
+              "RelativeToolTip": "ApiTemplate\\Controllers\\InvoiceController.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAAABQAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-27T16:56:48.797Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Program.cs",
+              "RelativeDocumentMoniker": "ApiTemplate\\Program.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Program.cs",
+              "RelativeToolTip": "ApiTemplate\\Program.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAgwCsAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-27T16:44:08.342Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ApiTemplate",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\ApiTemplate.csproj",
+              "RelativeDocumentMoniker": "ApiTemplate\\ApiTemplate.csproj",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\ApiTemplate.csproj",
+              "RelativeToolTip": "ApiTemplate\\ApiTemplate.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAQwBwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-06-27T16:44:21.6Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
