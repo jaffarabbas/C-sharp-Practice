@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ApiTemplate.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using TestApi.Attributes;
 using TestApi.Hubs;
-using TestApi.Models;
 using TestApi.Repository; // Your generic repo namespace
 
 namespace TestApi.Controllers

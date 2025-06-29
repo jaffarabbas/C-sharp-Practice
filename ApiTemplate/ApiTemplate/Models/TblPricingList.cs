@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TestApi.Models;
+namespace ApiTemplate.Models;
 
 public partial class TblPricingList
 {

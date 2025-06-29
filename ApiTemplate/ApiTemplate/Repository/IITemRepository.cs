@@ -1,5 +1,5 @@
-﻿using TestApi.Dto;
-using TestApi.Models;
+﻿using ApiTemplate.Models;
+using TestApi.Dto;
 
 namespace TestApi.Repository
 {

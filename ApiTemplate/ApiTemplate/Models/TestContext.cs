@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace TestApi.Models;
+namespace ApiTemplate.Models;
 
 public partial class TestContext : DbContext
 {
@@ -15,20 +15,142 @@ public partial class TestContext : DbContext
     {
     }
 
+    public virtual DbSet<TblBranch> TblBranches { get; set; }
+
+    public virtual DbSet<TblCompany> TblCompanies { get; set; }
+
+    public virtual DbSet<TblCompanyUnit> TblCompanyUnits { get; set; }
+
+    public virtual DbSet<TblDepartment> TblDepartments { get; set; }
+
+    public virtual DbSet<TblDivision> TblDivisions { get; set; }
+
     public virtual DbSet<TblInvoice> TblInvoices { get; set; }
 
     public virtual DbSet<TblItem> TblItems { get; set; }
+
+    public virtual DbSet<TblOrganisation> TblOrganisations { get; set; }
 
     public virtual DbSet<TblPricingList> TblPricingLists { get; set; }
 
     public virtual DbSet<Test1> Test1s { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-RP4DU39\\SQLEXPRESS;Database=test;Trusted_Connection=True;TrustServerCertificate=True");
+//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+//        => optionsBuilder.UseSqlServer("Server=DESKTOP-RP4DU39\\SQLEXPRESS;Database=test;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<TblBranch>(entity =>
+        {
+            entity.HasKey(e => e.BranchId).HasName("PK__tblBranc__A1682FA549DC0CD4");
+
+            entity.ToTable("tblBranch");
+
+            entity.Property(e => e.BranchId)
+                .HasDefaultValue(-1L)
+                .HasColumnName("BranchID");
+            entity.Property(e => e.BranchRefNo)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasDefaultValue("");
+            entity.Property(e => e.BranchTitle)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasDefaultValue("");
+            entity.Property(e => e.CreationDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<TblCompany>(entity =>
+        {
+            entity.HasKey(e => e.CompanyId).HasName("PK__tblCompa__2D971C4C49A740A2");
+
+            entity.ToTable("tblCompany");
+
+            entity.Property(e => e.CompanyId)
+                .HasDefaultValue(-1L)
+                .HasColumnName("CompanyID");
+            entity.Property(e => e.CompanyRefNo)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasDefaultValue("");
+            entity.Property(e => e.CompanyTitle)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasDefaultValue("");
+            entity.Property(e => e.CreationDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<TblCompanyUnit>(entity =>
+        {
+            entity.HasKey(e => e.CompanyUnitId).HasName("PK__tblCompa__8942C15160273FA8");
+
+            entity.ToTable("tblCompanyUnit");
+
+            entity.Property(e => e.CompanyUnitId)
+                .HasDefaultValue(-1L)
+                .HasColumnName("CompanyUnitID");
+            entity.Property(e => e.CompanyUnitRefNo)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasDefaultValue("");
+            entity.Property(e => e.CompanyUnitTitle)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasDefaultValue("");
+            entity.Property(e => e.CreationDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<TblDepartment>(entity =>
+        {
+            entity.HasKey(e => e.DepartmentId).HasName("PK__tblDepar__B2079BCD048EDF58");
+
+            entity.ToTable("tblDepartment");
+
+            entity.Property(e => e.DepartmentId)
+                .HasDefaultValue(-1L)
+                .HasColumnName("DepartmentID");
+            entity.Property(e => e.CreationDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.DepartmentRefNo)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasDefaultValue("");
+            entity.Property(e => e.DepartmentTitle)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasDefaultValue("");
+        });
+
+        modelBuilder.Entity<TblDivision>(entity =>
+        {
+            entity.HasKey(e => e.DivisionId).HasName("PK__tblDivis__20EFC6880BD734EE");
+
+            entity.ToTable("tblDivision");
+
+            entity.Property(e => e.DivisionId)
+                .HasDefaultValue(-1L)
+                .HasColumnName("DivisionID");
+            entity.Property(e => e.CreationDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.DivisionRefNo)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasDefaultValue("");
+            entity.Property(e => e.DivisionTitle)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasDefaultValue("");
+        });
+
         modelBuilder.Entity<TblInvoice>(entity =>
         {
             entity.HasKey(e => e.TranId).HasName("PK__tblInvoi__F7089629B6D53D4A");
@@ -70,6 +192,28 @@ public partial class TestContext : DbContext
             entity.Property(e => e.TransactionDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<TblOrganisation>(entity =>
+        {
+            entity.HasKey(e => e.OrganisationId).HasName("PK__tblOrgan__722346BCA4BE2335");
+
+            entity.ToTable("tblOrganisation");
+
+            entity.Property(e => e.OrganisationId)
+                .HasDefaultValue(-1L)
+                .HasColumnName("OrganisationID");
+            entity.Property(e => e.CreationDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.OrganisationRefNo)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasDefaultValue("");
+            entity.Property(e => e.OrganisationTitle)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasDefaultValue("");
         });
 
         modelBuilder.Entity<TblPricingList>(entity =>

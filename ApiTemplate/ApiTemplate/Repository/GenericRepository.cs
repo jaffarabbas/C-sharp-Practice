@@ -1,20 +1,14 @@
-﻿using Dapper;
+﻿using ApiTemplate.Dto;
+using ApiTemplate.Helper.Enum;
+using ApiTemplate.Models;
+using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using System.Data;
-using TestApi.Models;
 
 namespace TestApi.Repository
 {
-    public class PagedResult<T>
-    {
-        public IEnumerable<T> Items { get; set; } = new List<T>();
-        public int TotalCount { get; set; }
-        public int PageNumber { get; set; }
-        public int PageSize { get; set; }
-    }
-
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepositoryWrapper<T> where T : class
     {
         private readonly TestContext _context;
         private readonly DbSet<T> _dbSet;
@@ -31,7 +25,142 @@ namespace TestApi.Repository
             _cache = cache;
         }
 
-        // EF Core + Cache
+        #region Wrapper CRUD Methods
+
+        public async Task<IEnumerable<T>> GetAllAsync(OrmType ormType, CrudOptions? options = null)
+        {
+            options ??= new CrudOptions();
+
+            return ormType switch
+            {
+                OrmType.EntityFramework => await GetAllAsync(),
+                OrmType.Dapper => await GetAllAsync(options.TableName ?? typeof(T).Name),
+                _ => throw new ArgumentException("Invalid ORM type")
+            };
+        }
+
+        public async Task<T?> GetByIdAsync(object id, OrmType ormType, CrudOptions? options = null)
+        {
+            options ??= new CrudOptions();
+
+            return ormType switch
+            {
+                OrmType.EntityFramework => await GetByIdAsync(id),
+                OrmType.Dapper => await GetByIdAsync(options.TableName ?? typeof(T).Name, options.KeyColumnName!, id),
+                _ => throw new ArgumentException("Invalid ORM type")
+            };
+        }
+
+        public async Task<PagedResult<T>> GetPagedAsync(int pageNumber, int pageSize, OrmType ormType, CrudOptions? options = null)
+        {
+            options ??= new CrudOptions();
+
+            return ormType switch
+            {
+                OrmType.EntityFramework => await GetEnityPagedAsync(pageNumber, pageSize),
+                OrmType.Dapper => await GetPagedDapperAsync(options.TableName ?? typeof(T).Name, pageNumber, pageSize, options.OrderBy!),
+                _ => throw new ArgumentException("Invalid ORM type")
+            };
+        }
+
+        public async Task<object> AddAsync(T entity, OrmType ormType, CrudOptions? options = null)
+        {
+            options ??= new CrudOptions();
+
+            return ormType switch
+            {
+                OrmType.EntityFramework => await AddAsync(entity),
+                OrmType.Dapper => await AddAsync(options.TableName ?? typeof(T).Name, entity),
+                _ => throw new ArgumentException("Invalid ORM type")
+            };
+        }
+
+        public async Task<bool> UpdateAsync(T entity, OrmType ormType, CrudOptions? options = null)
+        {
+            options ??= new CrudOptions();
+
+            try
+            {
+                switch (ormType)
+                {
+                    case OrmType.EntityFramework:
+                        Update(entity);
+                        return true;
+                    case OrmType.Dapper:
+                        var result = await UpdateAsync(options.TableName ?? typeof(T).Name, entity, options.KeyColumnName!);
+                        return result > 0;
+                    default:
+                        throw new ArgumentException("Invalid ORM type");
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteAsync(object id, OrmType ormType, CrudOptions? options = null)
+        {
+            options ??= new CrudOptions();
+
+            try
+            {
+                switch (ormType)
+                {
+                    case OrmType.EntityFramework:
+                        var entity = await GetByIdAsync(id);
+                        if (entity != null)
+                        {
+                            Delete(entity);
+                            return true;
+                        }
+                        return false;
+                    case OrmType.Dapper:
+                        var result = await DeleteAsync(options.TableName ?? typeof(T).Name, options.KeyColumnName!, id);
+                        return result > 0;
+                    default:
+                        throw new ArgumentException("Invalid ORM type");
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteEntityAsync(T entity, OrmType ormType, CrudOptions? options = null)
+        {
+            try
+            {
+                switch (ormType)
+                {
+                    case OrmType.EntityFramework:
+                        Delete(entity);
+                        return true;
+                    case OrmType.Dapper:
+                        options ??= new CrudOptions();
+                        // Get the ID value from the entity for Dapper deletion
+                        var idProperty = typeof(T).GetProperty(options.KeyColumnName!);
+                        if (idProperty != null)
+                        {
+                            var idValue = idProperty.GetValue(entity);
+                            var result = await DeleteAsync(options.TableName ?? typeof(T).Name, options.KeyColumnName!, idValue!);
+                            return result > 0;
+                        }
+                        return false;
+                    default:
+                        throw new ArgumentException("Invalid ORM type");
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        #endregion
+
+        #region Original Interface Implementation (EF Core + Cache)
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
@@ -117,7 +246,9 @@ namespace TestApi.Repository
             await _context.SaveChangesAsync();
         }
 
-        // Dapper (No cache applied here to keep it raw/flexible)
+        #endregion
+
+        #region Original Interface Implementation (Dapper - No cache)
 
         public async Task<IEnumerable<T>> GetAllAsync(string table)
         {
@@ -166,5 +297,36 @@ namespace TestApi.Repository
             var sql = $"DELETE FROM {table} WHERE {keyName} = @id";
             return await _connection.ExecuteAsync(sql, new { id }, _transaction);
         }
+
+        #endregion
+
+        #region Helper Methods for Wrapper
+
+        private async Task<PagedResult<T>> GetPagedDapperAsync(string table, int pageNumber, int pageSize, string orderBy = "")
+        {
+            if (pageNumber <= 0) pageNumber = 1;
+            if (pageSize <= 0) pageSize = 100;
+
+            int offset = (pageNumber - 1) * pageSize;
+
+            // Get total count
+            var countSql = $"SELECT COUNT(*) FROM {table}";
+            var totalCount = await _connection.QuerySingleAsync<int>(countSql, transaction: _transaction);
+            string strOrderByClause = String.Empty;
+            if (orderBy != String.Empty) strOrderByClause = $"ORDER BY {orderBy}";
+            // Get paged data
+            var sql = $"SELECT * FROM {table} {strOrderByClause} OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
+            var items = await _connection.QueryAsync<T>(sql, new { Offset = offset, PageSize = pageSize }, _transaction);
+
+            return new PagedResult<T>
+            {
+                Items = items,
+                TotalCount = totalCount,
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
+        }
+
+        #endregion
     }
 }

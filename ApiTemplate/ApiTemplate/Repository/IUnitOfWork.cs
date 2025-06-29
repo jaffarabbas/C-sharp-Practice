@@ -6,6 +6,7 @@ namespace TestApi.Repository
     {
         IITemRepository iTemRepository { get; }
         IGenericRepository<T> Repository<T>() where T : class;
+        IGenericRepositoryWrapper<T> RepositoryWrapper<T>() where T : class;
 
         Task<int> SaveAsync();
 

@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
 using TestApi.Repository;
-using TestApi.Models;
 using System.Data;
 using Microsoft.Extensions.Caching.Memory;
+using ApiTemplate.Models;
 
 public class UnitOfWork : IUnitOfWork
 {
@@ -45,6 +45,21 @@ public class UnitOfWork : IUnitOfWork
 
         return (IGenericRepository<T>)_repositories[type]!;
     }
+
+    public IGenericRepositoryWrapper<T> RepositoryWrapper<T>() where T : class
+    {
+        _repositories ??= new Hashtable();
+        var type = typeof(T).Name;
+
+        if (!_repositories.ContainsKey(type))
+        {
+            var repoInstance = new GenericRepository<T>(_context, _connection, _cache, _dapperTransaction);
+            _repositories.Add(type, repoInstance);
+        }
+
+        return (IGenericRepositoryWrapper<T>)_repositories[type]!;
+    }
+
 
     public async Task<int> SaveAsync() => await _context.SaveChangesAsync();
 

@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using TestApi.Models;
+﻿using ApiTemplate.Helper.Enum;
+using ApiTemplate.Models;
+using Microsoft.AspNetCore.Mvc;
 using TestApi.Repository;
 
 namespace TestApi.Controllers
@@ -15,8 +16,8 @@ namespace TestApi.Controllers
         [Route("GetAllInvoices")]
         public async Task<IActionResult> GetAllItems(int pageNumber = 1,int pageSize = 50)
         {
-            var invoicesRepo = _unitOfWork.Repository<TblInvoice>();
-            var data = await invoicesRepo.GetEnityPagedAsync(pageNumber,pageSize);
+            var invoicesRepo = _unitOfWork.RepositoryWrapper<TblInvoice>();
+            var data = await invoicesRepo.GetPagedAsync(pageNumber, pageSize,OrmType.Dapper);
             return Ok(data);
         }
     }

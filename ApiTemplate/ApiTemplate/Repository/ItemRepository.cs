@@ -1,9 +1,9 @@
-﻿using Dapper;
+﻿using ApiTemplate.Models;
+using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using System.Data;
 using TestApi.Dto;
-using TestApi.Models;
 
 namespace TestApi.Repository
 {
