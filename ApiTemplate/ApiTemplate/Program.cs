@@ -3,11 +3,11 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using System.Data;
-using TestApi.Attributes;
-using TestApi.BackgroundServices;
-using TestApi.Hubs;
-using TestApi.Middleware;
-using TestApi.Repository;
+using ApiTemplate.Attributes;
+using ApiTemplate.BackgroundServices;
+using ApiTemplate.Hubs;
+using ApiTemplate.Middleware;
+using ApiTemplate.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 

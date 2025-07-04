@@ -1,9 +1,10 @@
-﻿using ApiTemplate.Helper.Enum;
+﻿using ApiTemplate.Dto;
+using ApiTemplate.Helper.Enum;
 using ApiTemplate.Models;
 using Microsoft.AspNetCore.Mvc;
-using TestApi.Repository;
+using ApiTemplate.Repository;
 
-namespace TestApi.Controllers
+namespace ApiTemplate.Controllers
 {
     public class InvoiceController : Controller
     {
@@ -17,7 +18,11 @@ namespace TestApi.Controllers
         public async Task<IActionResult> GetAllItems(int pageNumber = 1,int pageSize = 50)
         {
             var invoicesRepo = _unitOfWork.RepositoryWrapper<TblInvoice>();
-            var data = await invoicesRepo.GetPagedAsync(pageNumber, pageSize,OrmType.Dapper);
+            CrudOptions options = new CrudOptions
+            {
+                OrderBy = "TranID DESC"
+            };
+            var data = await invoicesRepo.GetPagedAsync(pageNumber, pageSize,OrmType.Dapper, options);
             return Ok(data);
         }
     }

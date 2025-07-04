@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace TestApi.Repository
+namespace ApiTemplate.Repository
 {
     public interface IUnitOfWork : IDisposable
     {

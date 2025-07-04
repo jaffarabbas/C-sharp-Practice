@@ -1,9 +1,9 @@
 using ApiTemplate.Models;
 using Microsoft.AspNetCore.Mvc;
-using TestApi.Attributes;
-using TestApi.Repository;
+using ApiTemplate.Attributes;
+using ApiTemplate.Repository;
 
-namespace TestApi.Controllers
+namespace ApiTemplate.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

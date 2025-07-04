@@ -1,4 +1,4 @@
-﻿namespace TestApi.Dto
+﻿namespace ApiTemplate.Dto
 {
     public class TblItemDto
     {

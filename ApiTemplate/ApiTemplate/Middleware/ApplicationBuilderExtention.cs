@@ -1,4 +1,4 @@
-﻿namespace TestApi.Middleware
+﻿namespace ApiTemplate.Middleware
 {
     public static class ApplicationBuilderExtensions
     {

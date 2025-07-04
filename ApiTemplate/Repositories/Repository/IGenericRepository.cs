@@ -1,7 +1,7 @@
 ﻿using ApiTemplate.Dto;
 using ApiTemplate.Helper.Enum;
 
-namespace TestApi.Repository
+namespace ApiTemplate.Repository
 {
     public interface IGenericRepository<T> where T : class
     {

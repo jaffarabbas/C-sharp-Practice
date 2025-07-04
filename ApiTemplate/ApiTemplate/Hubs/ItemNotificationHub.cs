@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 
-namespace TestApi.Hubs
+namespace ApiTemplate.Hubs
 {
     public sealed class ItemNotificationHub : Hub
     {

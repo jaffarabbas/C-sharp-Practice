@@ -1,20 +1,20 @@
 ﻿using ApiTemplate.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using TestApi.Attributes;
-using TestApi.Hubs;
-using TestApi.Repository; // Your generic repo namespace
+using ApiTemplate.Attributes;
+using ApiTemplate.Hubs;
+using ApiTemplate.Repository; // Your generic repo namespace
 
-namespace TestApi.Controllers
+namespace ApiTemplate.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     [CustomAuth]
-    public class TestController : ControllerBase
+    public class ItemController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IHubContext<ItemNotificationHub> _hubContext;
-        public TestController(IUnitOfWork unitOfWork,IHubContext<ItemNotificationHub> hubContext)
+        public ItemController(IUnitOfWork unitOfWork,IHubContext<ItemNotificationHub> hubContext)
         {
             _unitOfWork = unitOfWork;
             _hubContext = hubContext;

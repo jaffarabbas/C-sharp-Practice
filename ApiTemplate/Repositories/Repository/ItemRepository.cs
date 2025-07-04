@@ -3,9 +3,9 @@ using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using System.Data;
-using TestApi.Dto;
+using ApiTemplate.Dto;
 
-namespace TestApi.Repository
+namespace ApiTemplate.Repository
 {
     public class ItemRepository : GenericRepository<TblItem>, IITemRepository
     {

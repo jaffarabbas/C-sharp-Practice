@@ -1,5 +1,5 @@
 ﻿
-namespace TestApi.BackgroundServices
+namespace ApiTemplate.BackgroundServices
 {
     public class BGTest : BackgroundService
     {

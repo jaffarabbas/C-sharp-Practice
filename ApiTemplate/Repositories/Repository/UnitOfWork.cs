@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
-using TestApi.Repository;
+using ApiTemplate.Repository;
 using System.Data;
 using Microsoft.Extensions.Caching.Memory;
 using ApiTemplate.Models;

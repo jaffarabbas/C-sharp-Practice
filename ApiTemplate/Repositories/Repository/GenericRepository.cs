@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using System.Data;
 
-namespace TestApi.Repository
+namespace ApiTemplate.Repository
 {
     public class GenericRepository<T> : IGenericRepositoryWrapper<T> where T : class
     {
@@ -61,7 +61,7 @@ namespace TestApi.Repository
                 OrmType.Dapper => await GetPagedDapperAsync(options.TableName ?? typeof(T).Name, pageNumber, pageSize, options.OrderBy!),
                 _ => throw new ArgumentException("Invalid ORM type")
             };
-        }
+        } 
 
         public async Task<object> AddAsync(T entity, OrmType ormType, CrudOptions? options = null)
         {
@@ -302,20 +302,24 @@ namespace TestApi.Repository
 
         #region Helper Methods for Wrapper
 
-        private async Task<PagedResult<T>> GetPagedDapperAsync(string table, int pageNumber, int pageSize, string orderBy = "")
+        private async Task<PagedResult<T>> GetPagedDapperAsync(string table, int pageNumber, int pageSize, string orderBy)
         {
             if (pageNumber <= 0) pageNumber = 1;
             if (pageSize <= 0) pageSize = 100;
 
+            if (string.IsNullOrWhiteSpace(orderBy))
+                throw new ArgumentException("You must provide a valid ORDER BY column for SQL Server OFFSET/FETCH to work.");
+
             int offset = (pageNumber - 1) * pageSize;
 
-            // Get total count
             var countSql = $"SELECT COUNT(*) FROM {table}";
             var totalCount = await _connection.QuerySingleAsync<int>(countSql, transaction: _transaction);
-            string strOrderByClause = String.Empty;
-            if (orderBy != String.Empty) strOrderByClause = $"ORDER BY {orderBy}";
-            // Get paged data
-            var sql = $"SELECT * FROM {table} {strOrderByClause} OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
+
+            var sql = $@"SELECT * FROM {table}
+                        ORDER BY {orderBy}
+                        OFFSET @Offset ROWS
+                        FETCH NEXT @PageSize ROWS ONLY";
+
             var items = await _connection.QueryAsync<T>(sql, new { Offset = offset, PageSize = pageSize }, _transaction);
 
             return new PagedResult<T>
@@ -326,6 +330,7 @@ namespace TestApi.Repository
                 PageSize = pageSize
             };
         }
+
 
         #endregion
     }

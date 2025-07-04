@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace TestApi.Attributes
+namespace ApiTemplate.Attributes
 {
     public class CustomAuthAttribute : ActionFilterAttribute
     {

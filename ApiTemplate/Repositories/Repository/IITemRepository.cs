@@ -1,7 +1,7 @@
 ﻿using ApiTemplate.Models;
-using TestApi.Dto;
+using ApiTemplate.Dto;
 
-namespace TestApi.Repository
+namespace ApiTemplate.Repository
 {
     public interface IITemRepository : IGenericRepository<TblItem>
     {
