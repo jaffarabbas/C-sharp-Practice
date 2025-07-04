@@ -70,13 +70,13 @@ app.UseCors("AllowRazorClient");
 
 app.UseHttpsRedirection();
 
+app.UseApiResponse();
+
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.UseAuthMiddleware();
-
-app.UseResponseCompression();
 
 app.MapHub<ItemNotificationHub>("/itemNotificationHub");
 

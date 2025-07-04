@@ -9,5 +9,7 @@
         /// <returns></returns>
         public static IApplicationBuilder UseAuthMiddleware(this IApplicationBuilder applicationBuilder)
             => applicationBuilder.UseMiddleware<AuthMiddleware>();
+        public static IApplicationBuilder UseApiResponse(this IApplicationBuilder applicationBuilder)
+            => applicationBuilder.UseMiddleware<ApiResponseMiddleware>();
     }
 }
