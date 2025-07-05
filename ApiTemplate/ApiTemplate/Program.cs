@@ -78,6 +78,8 @@ app.MapControllers();
 
 app.UseAuthMiddleware();
 
+app.UseExceptionMiddleware();
+
 app.MapHub<ItemNotificationHub>("/itemNotificationHub");
 
 app.Run();

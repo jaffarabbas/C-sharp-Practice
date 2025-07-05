@@ -47,7 +47,7 @@ namespace ApiTemplate.Middleware
                 {
                     StatusCode = context.Response.StatusCode.ToString(),
                     Message = ApiResponseMessage.GetMessageFromStatus(context.Response.StatusCode),
-                    Data = data
+                    Data = data!
                 };
 
                 var json = JsonConvert.SerializeObject(apiResponse);

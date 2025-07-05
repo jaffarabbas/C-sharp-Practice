@@ -3,8 +3,24 @@
   "WorkspaceRootPath": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|j:\\github\\c-sharp-practice\\apitemplate\\apitemplate\\controllers\\invoicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|solutionrelative:apitemplate\\controllers\\invoicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|j:\\github\\c-sharp-practice\\apitemplate\\apitemplate\\middleware\\apiresponsemiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|solutionrelative:apitemplate\\middleware\\apiresponsemiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|j:\\github\\c-sharp-practice\\apitemplate\\apitemplate\\middleware\\globalexceptionhandlermiddleware\\confriguations\\globalexceptionshandlingmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|solutionrelative:apitemplate\\middleware\\globalexceptionhandlermiddleware\\confriguations\\globalexceptionshandlingmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|j:\\github\\c-sharp-practice\\apitemplate\\apitemplate\\middleware\\globalexceptionhandlermiddleware\\exceptions\\keynotfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|solutionrelative:apitemplate\\middleware\\globalexceptionhandlermiddleware\\exceptions\\keynotfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|j:\\github\\c-sharp-practice\\apitemplate\\apitemplate\\middleware\\globalexceptionhandlermiddleware\\exceptions\\badreuestexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|solutionrelative:apitemplate\\middleware\\globalexceptionhandlermiddleware\\exceptions\\badreuestexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|j:\\github\\c-sharp-practice\\apitemplate\\apitemplate\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -13,6 +29,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|j:\\github\\c-sharp-practice\\apitemplate\\apitemplate\\middleware\\applicationbuilderextention.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|solutionrelative:apitemplate\\middleware\\applicationbuilderextention.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFADD046-7384-46F3-8A5F-BAD84052A37D}|Shared\\Shared.csproj|j:\\github\\c-sharp-practice\\apitemplate\\shared\\helper\\apiresponsemessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFADD046-7384-46F3-8A5F-BAD84052A37D}|Shared\\Shared.csproj|solutionrelative:shared\\helper\\apiresponsemessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AFADD046-7384-46F3-8A5F-BAD84052A37D}|Shared\\Shared.csproj|j:\\github\\c-sharp-practice\\apitemplate\\shared\\dto\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -83,10 +103,6 @@
       "RelativeMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|solutionrelative:apitemplate\\hubs\\itemnotificationhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|j:\\github\\c-sharp-practice\\apitemplate\\apitemplate\\controllers\\invoicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|solutionrelative:apitemplate\\controllers\\invoicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|j:\\github\\c-sharp-practice\\apitemplate\\apitemplate\\controllers\\itemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|solutionrelative:apitemplate\\controllers\\itemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -118,7 +134,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -138,20 +154,111 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
+              "Title": "BadReuestException.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Middleware\\GlobalExceptionHandlerMiddleware\\Exceptions\\BadReuestException.cs",
+              "RelativeDocumentMoniker": "ApiTemplate\\Middleware\\GlobalExceptionHandlerMiddleware\\Exceptions\\BadReuestException.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Middleware\\GlobalExceptionHandlerMiddleware\\Exceptions\\BadReuestException.cs",
+              "RelativeToolTip": "ApiTemplate\\Middleware\\GlobalExceptionHandlerMiddleware\\Exceptions\\BadReuestException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-05T18:05:05.865Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GlobalExceptionsHandlingMiddleware.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Middleware\\GlobalExceptionHandlerMiddleware\\Confriguations\\GlobalExceptionsHandlingMiddleware.cs",
+              "RelativeDocumentMoniker": "ApiTemplate\\Middleware\\GlobalExceptionHandlerMiddleware\\Confriguations\\GlobalExceptionsHandlingMiddleware.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Middleware\\GlobalExceptionHandlerMiddleware\\Confriguations\\GlobalExceptionsHandlingMiddleware.cs",
+              "RelativeToolTip": "ApiTemplate\\Middleware\\GlobalExceptionHandlerMiddleware\\Confriguations\\GlobalExceptionsHandlingMiddleware.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAowAsAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-05T18:04:50.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "ApiResponseMiddleware.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Middleware\\ApiResponseMiddleware.cs",
               "RelativeDocumentMoniker": "ApiTemplate\\Middleware\\ApiResponseMiddleware.cs",
               "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Middleware\\ApiResponseMiddleware.cs",
               "RelativeToolTip": "ApiTemplate\\Middleware\\ApiResponseMiddleware.cs",
-              "ViewState": "AgIAAEoAAAAAAAAAAAAUwFgAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAQwEkAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-04T19:26:13.54Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ApplicationBuilderExtention.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Middleware\\ApplicationBuilderExtention.cs",
+              "RelativeDocumentMoniker": "ApiTemplate\\Middleware\\ApplicationBuilderExtention.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Middleware\\ApplicationBuilderExtention.cs",
+              "RelativeToolTip": "ApiTemplate\\Middleware\\ApplicationBuilderExtention.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwBkAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T19:27:09.18Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Program.cs",
+              "RelativeDocumentMoniker": "ApiTemplate\\Program.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Program.cs",
+              "RelativeToolTip": "ApiTemplate\\Program.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAAFAAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-27T16:44:08.342Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "InvoiceController.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Controllers\\InvoiceController.cs",
+              "RelativeDocumentMoniker": "ApiTemplate\\Controllers\\InvoiceController.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Controllers\\InvoiceController.cs",
+              "RelativeToolTip": "ApiTemplate\\Controllers\\InvoiceController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAawBcAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-27T16:56:48.797Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "KeyNotFoundException.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Middleware\\GlobalExceptionHandlerMiddleware\\Exceptions\\KeyNotFoundException.cs",
+              "RelativeDocumentMoniker": "ApiTemplate\\Middleware\\GlobalExceptionHandlerMiddleware\\Exceptions\\KeyNotFoundException.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Middleware\\GlobalExceptionHandlerMiddleware\\Exceptions\\KeyNotFoundException.cs",
+              "RelativeToolTip": "ApiTemplate\\Middleware\\GlobalExceptionHandlerMiddleware\\Exceptions\\KeyNotFoundException.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-05T18:09:42.168Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 7,
+              "Title": "ApiResponseMessage.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Helper\\ApiResponseMessage.cs",
+              "RelativeDocumentMoniker": "Shared\\Helper\\ApiResponseMessage.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Helper\\ApiResponseMessage.cs",
+              "RelativeToolTip": "Shared\\Helper\\ApiResponseMessage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAoAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T19:53:53.123Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "HashPasswordTests.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\UnitTest\\Tests\\HashPasswordTests.cs",
               "RelativeDocumentMoniker": "UnitTest\\Tests\\HashPasswordTests.cs",
@@ -164,7 +271,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "ApiHitResponse.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Helper\\ApiHitResponse.cs",
               "RelativeDocumentMoniker": "Shared\\Helper\\ApiHitResponse.cs",
@@ -177,7 +284,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "BranchController.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Controllers\\BranchController.cs",
               "RelativeDocumentMoniker": "ApiTemplate\\Controllers\\BranchController.cs",
@@ -190,7 +297,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "ApiResponse.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Dto\\ApiResponse.cs",
               "RelativeDocumentMoniker": "Shared\\Dto\\ApiResponse.cs",
@@ -203,33 +310,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Program.cs",
-              "RelativeDocumentMoniker": "ApiTemplate\\Program.cs",
-              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Program.cs",
-              "RelativeToolTip": "ApiTemplate\\Program.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAgwEYAAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-27T16:44:08.342Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ApplicationBuilderExtention.cs",
-              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Middleware\\ApplicationBuilderExtention.cs",
-              "RelativeDocumentMoniker": "ApiTemplate\\Middleware\\ApplicationBuilderExtention.cs",
-              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Middleware\\ApplicationBuilderExtention.cs",
-              "RelativeToolTip": "ApiTemplate\\Middleware\\ApplicationBuilderExtention.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-04T19:27:09.18Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "GenericRepositoryDto.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Dto\\GenericRepositoryDto.cs",
               "RelativeDocumentMoniker": "Shared\\Dto\\GenericRepositoryDto.cs",
@@ -242,7 +323,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "ExceptionMessage.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Dto\\ExceptionMessage.cs",
               "RelativeDocumentMoniker": "Shared\\Dto\\ExceptionMessage.cs",
@@ -255,7 +336,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "HashPassword.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Helper\\HashPassword.cs",
               "RelativeDocumentMoniker": "Shared\\Helper\\HashPassword.cs",
@@ -268,7 +349,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 15,
               "Title": "ExceptionRefractor.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Helper\\ExceptionRefractor.cs",
               "RelativeDocumentMoniker": "Shared\\Helper\\ExceptionRefractor.cs",
@@ -281,7 +362,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 18,
               "Title": "Shared",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Shared.csproj",
               "RelativeDocumentMoniker": "Shared\\Shared.csproj",
@@ -294,7 +375,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 17,
               "Title": "TblItemDto.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Dto\\TblItemDto.cs",
               "RelativeDocumentMoniker": "Shared\\Dto\\TblItemDto.cs",
@@ -307,7 +388,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "CommonEnums.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Helper\\Enum\\CommonEnums.cs",
               "RelativeDocumentMoniker": "Shared\\Helper\\Enum\\CommonEnums.cs",
@@ -320,7 +401,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 20,
               "Title": "TblCompany.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\DBLayer\\Models\\TblCompany.cs",
               "RelativeDocumentMoniker": "DBLayer\\Models\\TblCompany.cs",
@@ -333,7 +414,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 21,
               "Title": "DBLayer",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\DBLayer\\DBLayer.csproj",
               "RelativeDocumentMoniker": "DBLayer\\DBLayer.csproj",
@@ -346,7 +427,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "GenericRepository.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\GenericRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\Repository\\GenericRepository.cs",
@@ -359,7 +440,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 22,
               "Title": "Repositories",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repositories.csproj",
               "RelativeDocumentMoniker": "Repositories\\Repositories.csproj",
@@ -372,7 +453,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 24,
               "Title": "ItemNotificationHub.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Hubs\\ItemNotificationHub.cs",
               "RelativeDocumentMoniker": "ApiTemplate\\Hubs\\ItemNotificationHub.cs",
@@ -385,20 +466,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "InvoiceController.cs",
-              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Controllers\\InvoiceController.cs",
-              "RelativeDocumentMoniker": "ApiTemplate\\Controllers\\InvoiceController.cs",
-              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Controllers\\InvoiceController.cs",
-              "RelativeToolTip": "ApiTemplate\\Controllers\\InvoiceController.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAvwBgAAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-27T16:56:48.797Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 23,
               "Title": "ApiTemplate",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\ApiTemplate.csproj",
               "RelativeDocumentMoniker": "ApiTemplate\\ApiTemplate.csproj",
@@ -411,7 +479,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 26,
               "Title": "CompanyUnitController.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Controllers\\CompanyUnitController.cs",
               "RelativeDocumentMoniker": "ApiTemplate\\Controllers\\CompanyUnitController.cs",
@@ -424,7 +492,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 25,
               "Title": "ItemController.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Controllers\\ItemController.cs",
               "RelativeDocumentMoniker": "ApiTemplate\\Controllers\\ItemController.cs",
@@ -437,7 +505,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 27,
               "Title": "CompanyController.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Controllers\\CompanyController.cs",
               "RelativeDocumentMoniker": "ApiTemplate\\Controllers\\CompanyController.cs",
@@ -450,7 +518,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 28,
               "Title": "OrganisationController.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Controllers\\OrganisationController.cs",
               "RelativeDocumentMoniker": "ApiTemplate\\Controllers\\OrganisationController.cs",
@@ -463,7 +531,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 30,
               "Title": "DepartmentController.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Controllers\\DepartmentController.cs",
               "RelativeDocumentMoniker": "ApiTemplate\\Controllers\\DepartmentController.cs",
@@ -476,7 +544,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 29,
               "Title": "DivisionController.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Controllers\\DivisionController.cs",
               "RelativeDocumentMoniker": "ApiTemplate\\Controllers\\DivisionController.cs",
