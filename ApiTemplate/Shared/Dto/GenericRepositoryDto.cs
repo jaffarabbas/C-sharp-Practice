@@ -1,4 +1,4 @@
-﻿namespace ApiTemplate.Dto
+﻿namespace ApiTemplate.Dtos
 {
     public class PagedResult<T>
     {

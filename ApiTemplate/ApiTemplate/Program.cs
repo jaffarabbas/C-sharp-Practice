@@ -8,6 +8,7 @@ using ApiTemplate.BackgroundServices;
 using ApiTemplate.Hubs;
 using ApiTemplate.Middleware;
 using ApiTemplate.Repository;
+using ApiTemplate.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,10 +24,7 @@ builder.Services.AddDbContext<TestContext>(options =>
 builder.Services.AddScoped<IDbConnection>(sp =>
     new SqlConnection(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-//builder.Services.AddScoped<IITemRepository, ItemRepository>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+builder.Services.AddDIContainer();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -52,10 +50,7 @@ builder.Services.AddSignalR();
 
 builder.Services.AddMemoryCache();
 
-builder.Services.AddResponseCompression(options =>
-{
-    options.EnableForHttps = true;
-});
+builder.Services.AddJWTAuthentication(builder.Configuration);
 
 var app = builder.Build();
 
@@ -79,6 +74,8 @@ app.MapControllers();
 app.UseAuthMiddleware();
 
 app.UseExceptionMiddleware();
+
+app.UseValidateTokenHandler();
 
 app.MapHub<ItemNotificationHub>("/itemNotificationHub");
 

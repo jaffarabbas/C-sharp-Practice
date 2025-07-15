@@ -1,4 +1,4 @@
-﻿using ApiTemplate.Dto;
+﻿using ApiTemplate.Dtos;
 using ApiTemplate.Helper.Enum;
 using ApiTemplate.Models;
 using Dapper;

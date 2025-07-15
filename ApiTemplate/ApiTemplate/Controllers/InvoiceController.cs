@@ -3,6 +3,7 @@ using ApiTemplate.Helper.Enum;
 using ApiTemplate.Models;
 using Microsoft.AspNetCore.Mvc;
 using ApiTemplate.Repository;
+using ApiTemplate.Dtos;
 
 namespace ApiTemplate.Controllers
 {
