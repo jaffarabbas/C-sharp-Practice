@@ -1,10 +1,12 @@
-﻿using System.Data;
+﻿using Repositories.Repository;
+using System.Data;
 
 namespace ApiTemplate.Repository
 {
     public interface IUnitOfWork : IDisposable
     {
         IITemRepository iTemRepository { get; }
+        IAuthRepository IAuthRepository { get; }
         IGenericRepository<T> Repository<T>() where T : class;
         IGenericRepositoryWrapper<T> RepositoryWrapper<T>() where T : class;
 

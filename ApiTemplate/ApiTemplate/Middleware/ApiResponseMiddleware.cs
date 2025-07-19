@@ -36,7 +36,7 @@ namespace ApiTemplate.Middleware
                 object data;
                 try
                 {
-                    data = JsonConvert.DeserializeObject<object>(bodyText);
+                    data = JsonConvert.DeserializeObject<object>(bodyText)!;
                 }
                 catch
                 {

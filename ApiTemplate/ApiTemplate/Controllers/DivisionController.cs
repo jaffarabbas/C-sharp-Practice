@@ -1,4 +1,4 @@
-using ApiTemplate.Models;
+using DBLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using ApiTemplate.Attributes;
 using ApiTemplate.Repository;

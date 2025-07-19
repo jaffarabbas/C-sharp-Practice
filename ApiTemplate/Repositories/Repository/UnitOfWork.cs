@@ -1,10 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore;
-using System.Collections;
+﻿using ApiTemplate.Dtos;
 using ApiTemplate.Repository;
-using System.Data;
+using DBLayer.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Caching.Memory;
-using ApiTemplate.Models;
+using Microsoft.Extensions.Options;
+using Repositories.Repository;
+using System.Collections;
+using System.Data;
+using static Dapper.SqlMapper;
 
 public class UnitOfWork : IUnitOfWork
 {
@@ -14,21 +18,28 @@ public class UnitOfWork : IUnitOfWork
     private IDbConnection _connection;
     private IDbTransaction _dapperTransaction;
     private IMemoryCache _cache;
+    private readonly IOptions<JWTSetting> _setting;
 
     private IITemRepository? _itemRepository;
+    private IAuthRepository? _authRepository;
 
-    public UnitOfWork(TestContext context, IDbConnection connection,IMemoryCache cache)
+    public UnitOfWork(TestContext context, IDbConnection connection,IMemoryCache cache,IOptions<JWTSetting> setting)
     {
         _context = context;
         _connection = connection;
         _connection.Open();
         _dapperTransaction = _connection.BeginTransaction();
         _cache = cache;
+        _setting = setting; 
     }
 
+    #region Bussniess Layer Repositories
     public IITemRepository iTemRepository =>
         _itemRepository ??= new ItemRepository(_context,_connection,_cache, _dapperTransaction);
 
+    public IAuthRepository IAuthRepository =>
+        _authRepository ??= new AuthRepository(_context, _connection, _cache, _dapperTransaction,_setting);
+    #endregion
     public IDbConnection Connection => _connection;
     public IDbTransaction Transaction => _dapperTransaction;
 

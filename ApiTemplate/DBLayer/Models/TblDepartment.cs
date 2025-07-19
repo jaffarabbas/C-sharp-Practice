@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ApiTemplate.Models;
+namespace DBLayer.Models;
 
 public partial class TblDepartment
 {

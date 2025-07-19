@@ -1,4 +1,4 @@
-﻿using ApiTemplate.Models;
+﻿using DBLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using ApiTemplate.Attributes;

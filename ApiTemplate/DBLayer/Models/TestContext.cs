@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApiTemplate.Models;
+namespace DBLayer.Models;
 
 public partial class TestContext : DbContext
 {
@@ -33,11 +33,13 @@ public partial class TestContext : DbContext
 
     public virtual DbSet<TblPricingList> TblPricingLists { get; set; }
 
+    public virtual DbSet<TblUser> TblUsers { get; set; }
+
     public virtual DbSet<Test1> Test1s { get; set; }
 
-//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("Server=DESKTOP-RP4DU39\\SQLEXPRESS;Database=test;Trusted_Connection=True;TrustServerCertificate=True");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-RP4DU39\\SQLEXPRESS;Database=Test;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -235,6 +237,36 @@ public partial class TestContext : DbContext
                 .IsUnicode(false)
                 .HasDefaultValue("");
             entity.Property(e => e.SaleRate).HasDefaultValue(0.0);
+        });
+
+        modelBuilder.Entity<TblUser>(entity =>
+        {
+            entity.HasKey(e => e.Userid).HasName("PK__tblUsers__1797D02499DA0056");
+
+            entity.ToTable("tblUsers");
+
+            entity.Property(e => e.Userid).ValueGeneratedNever();
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Email)
+                .HasMaxLength(233)
+                .IsUnicode(false);
+            entity.Property(e => e.Firstname)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.Lastname)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.Password)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.Salt)
+                .IsUnicode(false)
+                .HasDefaultValue("");
+            entity.Property(e => e.Username)
+                .HasMaxLength(100)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<Test1>(entity =>

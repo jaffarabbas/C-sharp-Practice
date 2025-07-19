@@ -1,9 +1,9 @@
-﻿using ApiTemplate.Models;
+﻿using DBLayer.Models;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using System.Data;
-using ApiTemplate.Dto;
+using ApiTemplate.Dtos;
 
 namespace ApiTemplate.Repository
 {

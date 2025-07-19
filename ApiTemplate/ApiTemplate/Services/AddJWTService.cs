@@ -7,6 +7,12 @@ namespace ApiTemplate.Services
 {
     public static class AddJWTService
     {
+        /// <summary>
+        /// Service for adding middleware for jwt authentication
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         public static IServiceCollection AddJWTAuthentication(this IServiceCollection services,IConfiguration configuration)
         {
             var _jwtSettng = configuration.GetSection("JWTSetting");

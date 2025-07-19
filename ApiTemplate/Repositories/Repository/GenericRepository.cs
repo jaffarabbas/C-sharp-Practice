@@ -1,6 +1,6 @@
 ﻿using ApiTemplate.Dtos;
 using ApiTemplate.Helper.Enum;
-using ApiTemplate.Models;
+using DBLayer.Models;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;

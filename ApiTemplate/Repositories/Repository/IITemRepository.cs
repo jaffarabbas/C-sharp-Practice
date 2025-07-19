@@ -1,5 +1,5 @@
-﻿using ApiTemplate.Models;
-using ApiTemplate.Dto;
+﻿using DBLayer.Models;
+using ApiTemplate.Dtos;
 
 namespace ApiTemplate.Repository
 {

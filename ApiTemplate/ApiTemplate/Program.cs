@@ -1,14 +1,16 @@
-using ApiTemplate.Models;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
-using System.Data;
 using ApiTemplate.Attributes;
 using ApiTemplate.BackgroundServices;
 using ApiTemplate.Hubs;
 using ApiTemplate.Middleware;
 using ApiTemplate.Repository;
 using ApiTemplate.Services;
+using AutoMapper;
+using DBLayer.Models;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
