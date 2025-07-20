@@ -4,7 +4,7 @@ using ApiTemplate.Repository;
 using DBLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Dtos;
-using System.Collections.Generic;
+using FluentValidation;
 
 namespace ApiTemplate.Controllers
 {
