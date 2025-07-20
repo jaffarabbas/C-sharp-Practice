@@ -11,6 +11,7 @@ namespace ApiTemplate.Repository
         void Update(T entity);
         void Delete(T entity);
         Task SaveAsync();
+        Task<long> GetMaxID(string tableName,string columnName);
         Task<IEnumerable<T>> GetAllAsync(string table);
         Task<PagedResult<T>> GetEnityPagedAsync(int pageNumber, int pageSize);
         Task<IEnumerable<T>> GetPagedAsync(string table, int pageNumber, int pageSize, string orderBy = "1");

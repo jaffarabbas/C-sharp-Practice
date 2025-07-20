@@ -298,6 +298,20 @@ namespace ApiTemplate.Repository
             return await _connection.ExecuteAsync(sql, new { id }, _transaction);
         }
 
+        public async Task<long> GetMaxID(string tableName, string columnName)
+        {
+            if (string.IsNullOrWhiteSpace(tableName))
+                throw new ArgumentException("Table name must be provided", nameof(tableName));
+
+            if (string.IsNullOrWhiteSpace(columnName))
+                throw new ArgumentException("Key column name must be provided", nameof(columnName));
+
+            var sql = $"SELECT ISNULL(MAX([{columnName}]), 0) FROM [{tableName}]";
+
+            var maxId = await _connection.ExecuteScalarAsync<long>(sql, transaction: _transaction);
+            return maxId + 1;
+        }
+
         #endregion
 
         #region Helper Methods for Wrapper

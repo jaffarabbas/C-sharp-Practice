@@ -8,7 +8,6 @@ namespace Shared.Dtos
 {
     public class TblUsersDto
     {
-        public long Userid { get; set; }
 
         public string Firstname { get; set; } = null!;
 
@@ -21,7 +20,5 @@ namespace Shared.Dtos
         public string Password { get; set; } = null!;
 
         public int AccountType { get; set; }
-
-        public bool Status { get; set; }
     }
 }

@@ -37,12 +37,13 @@ namespace ApiTemplate.Controllers
 
             try
             {
+                var repo = _unitOfWork.Repository<TblUser>();
                 //hashing password
                 var salt = HashPassword.GenerateSalt();
                 var encryptedPassword = HashPassword.Hash(user.Password,salt, "sha256");
                 var model = new TblUser
                 {
-                    Userid = user.Userid,
+                    Userid = await repo.GetMaxID("tblUsers","Userid"),
                     Username = user.Username,
                     Firstname = user.Firstname,
                     Lastname = user.Lastname,
@@ -51,14 +52,13 @@ namespace ApiTemplate.Controllers
                     Salt = Convert.ToBase64String(salt),
                     AccountType = user.AccountType,
                     CreatedAt = DateTime.UtcNow,
-                    Status = user.Status,
+                    Status = true,
                 };
-                var repo = _unitOfWork.Repository<TblUser>();
                 await repo.AddAsync("tblUsers", model);
                 _unitOfWork.Commit();
                 return Ok(new
                 {
-                    Userid = user.Userid,
+                    Userid = model.Userid,
                     UserCreatedDate = DateTime.UtcNow,
                     Message = "User Created Successfully"
                 });

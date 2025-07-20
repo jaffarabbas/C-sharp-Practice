@@ -3,24 +3,32 @@
   "WorkspaceRootPath": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C94B519B-C7F4-4503-A575-94667F56FDD4}|Repositories\\Repositories.csproj|j:\\github\\c-sharp-practice\\apitemplate\\repositories\\repository\\authrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C94B519B-C7F4-4503-A575-94667F56FDD4}|Repositories\\Repositories.csproj|solutionrelative:repositories\\repository\\authrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C94B519B-C7F4-4503-A575-94667F56FDD4}|Repositories\\Repositories.csproj|j:\\github\\c-sharp-practice\\apitemplate\\repositories\\repository\\iauthrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C94B519B-C7F4-4503-A575-94667F56FDD4}|Repositories\\Repositories.csproj|solutionrelative:repositories\\repository\\iauthrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C94B519B-C7F4-4503-A575-94667F56FDD4}|Repositories\\Repositories.csproj|j:\\github\\c-sharp-practice\\apitemplate\\repositories\\repository\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C94B519B-C7F4-4503-A575-94667F56FDD4}|Repositories\\Repositories.csproj|solutionrelative:repositories\\repository\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|j:\\github\\c-sharp-practice\\apitemplate\\apitemplate\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|solutionrelative:apitemplate\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{082E3448-F50A-427B-B7D3-A44D2F20F7F1}|DBLayer\\DBLayer.csproj|j:\\github\\c-sharp-practice\\apitemplate\\dblayer\\models\\tbluser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{082E3448-F50A-427B-B7D3-A44D2F20F7F1}|DBLayer\\DBLayer.csproj|solutionrelative:dblayer\\models\\tbluser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C94B519B-C7F4-4503-A575-94667F56FDD4}|Repositories\\Repositories.csproj|j:\\github\\c-sharp-practice\\apitemplate\\repositories\\repository\\authrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C94B519B-C7F4-4503-A575-94667F56FDD4}|Repositories\\Repositories.csproj|solutionrelative:repositories\\repository\\authrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C94B519B-C7F4-4503-A575-94667F56FDD4}|Repositories\\Repositories.csproj|j:\\github\\c-sharp-practice\\apitemplate\\repositories\\repository\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C94B519B-C7F4-4503-A575-94667F56FDD4}|Repositories\\Repositories.csproj|solutionrelative:repositories\\repository\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AFADD046-7384-46F3-8A5F-BAD84052A37D}|Shared\\Shared.csproj|j:\\github\\c-sharp-practice\\apitemplate\\shared\\dtos\\tblusers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AFADD046-7384-46F3-8A5F-BAD84052A37D}|Shared\\Shared.csproj|solutionrelative:shared\\dtos\\tblusers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C94B519B-C7F4-4503-A575-94667F56FDD4}|Repositories\\Repositories.csproj|j:\\github\\c-sharp-practice\\apitemplate\\repositories\\repository\\iauthrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C94B519B-C7F4-4503-A575-94667F56FDD4}|Repositories\\Repositories.csproj|solutionrelative:repositories\\repository\\iauthrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{082E3448-F50A-427B-B7D3-A44D2F20F7F1}|DBLayer\\DBLayer.csproj|j:\\github\\c-sharp-practice\\apitemplate\\dblayer\\models\\tbluser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{082E3448-F50A-427B-B7D3-A44D2F20F7F1}|DBLayer\\DBLayer.csproj|solutionrelative:dblayer\\models\\tbluser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|j:\\github\\c-sharp-practice\\apitemplate\\apitemplate\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -95,10 +103,6 @@
       "RelativeMoniker": "D:0:0:{C94B519B-C7F4-4503-A575-94667F56FDD4}|Repositories\\Repositories.csproj|solutionrelative:repositories\\repository\\itemrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C94B519B-C7F4-4503-A575-94667F56FDD4}|Repositories\\Repositories.csproj|j:\\github\\c-sharp-practice\\apitemplate\\repositories\\repository\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C94B519B-C7F4-4503-A575-94667F56FDD4}|Repositories\\Repositories.csproj|solutionrelative:repositories\\repository\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|j:\\github\\c-sharp-practice\\apitemplate\\apitemplate\\middleware\\validatetokenmiddleware\\confriguations\\validatejwttokenmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{815BCFA3-C4C1-46CD-9CBE-B0E807C68C3F}|ApiTemplate\\ApiTemplate.csproj|solutionrelative:apitemplate\\middleware\\validatetokenmiddleware\\confriguations\\validatejwttokenmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -117,10 +121,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{AFADD046-7384-46F3-8A5F-BAD84052A37D}|Shared\\Shared.csproj|j:\\github\\c-sharp-practice\\apitemplate\\shared\\dtos\\genericrepositorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AFADD046-7384-46F3-8A5F-BAD84052A37D}|Shared\\Shared.csproj|solutionrelative:shared\\dtos\\genericrepositorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C94B519B-C7F4-4503-A575-94667F56FDD4}|Repositories\\Repositories.csproj|j:\\github\\c-sharp-practice\\apitemplate\\repositories\\repository\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C94B519B-C7F4-4503-A575-94667F56FDD4}|Repositories\\Repositories.csproj|solutionrelative:repositories\\repository\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AFADD046-7384-46F3-8A5F-BAD84052A37D}|Shared\\Shared.csproj|j:\\github\\c-sharp-practice\\apitemplate\\shared\\dtos\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -218,7 +218,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
@@ -238,59 +238,72 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TblUsers.cs",
-              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Dtos\\TblUsers.cs",
-              "RelativeDocumentMoniker": "Shared\\Dtos\\TblUsers.cs",
-              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Dtos\\TblUsers.cs",
-              "RelativeToolTip": "Shared\\Dtos\\TblUsers.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAgwAcAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-19T18:01:53.654Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "TblUser.cs",
-              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\DBLayer\\Models\\TblUser.cs",
-              "RelativeDocumentMoniker": "DBLayer\\Models\\TblUser.cs",
-              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\DBLayer\\Models\\TblUser.cs",
-              "RelativeToolTip": "DBLayer\\Models\\TblUser.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAqwA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-19T17:39:03.764Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "IUnitOfWork.cs",
-              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\IUnitOfWork.cs",
-              "RelativeDocumentMoniker": "Repositories\\Repository\\IUnitOfWork.cs",
-              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\IUnitOfWork.cs",
-              "RelativeToolTip": "Repositories\\Repository\\IUnitOfWork.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAYwAwAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-19T13:15:06.519Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "AuthController.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "ApiTemplate\\Controllers\\AuthController.cs",
               "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Controllers\\AuthController.cs",
               "RelativeToolTip": "ApiTemplate\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAADgvxkAAAA+AAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAADwvzMAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-19T13:26:35.268Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "AuthRepository.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\AuthRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\Repository\\AuthRepository.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\AuthRepository.cs",
+              "RelativeToolTip": "Repositories\\Repository\\AuthRepository.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAswD8AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-19T13:14:42.528Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IGenericRepository.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\IGenericRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\Repository\\IGenericRepository.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\IGenericRepository.cs",
+              "RelativeToolTip": "Repositories\\Repository\\IGenericRepository.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAqwA0AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-14T18:04:39.045Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "Repositories\\Repository\\GenericRepository.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\GenericRepository.cs",
+              "RelativeToolTip": "Repositories\\Repository\\GenericRepository.cs",
+              "ViewState": "AgIAACABAAAAAAAAAAAwwDgBAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T18:24:21.687Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TblUsers.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Dtos\\TblUsers.cs",
+              "RelativeDocumentMoniker": "Shared\\Dtos\\TblUsers.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Dtos\\TblUsers.cs",
+              "RelativeToolTip": "Shared\\Dtos\\TblUsers.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAqwAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-19T18:01:53.654Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "IAuthRepository.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\IAuthRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\Repository\\IAuthRepository.cs",
@@ -303,20 +316,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AuthRepository.cs",
-              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\AuthRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\Repository\\AuthRepository.cs",
-              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\AuthRepository.cs",
-              "RelativeToolTip": "Repositories\\Repository\\AuthRepository.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAYwC0AAAB0AAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "IUnitOfWork.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\IUnitOfWork.cs",
+              "RelativeDocumentMoniker": "Repositories\\Repository\\IUnitOfWork.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\IUnitOfWork.cs",
+              "RelativeToolTip": "Repositories\\Repository\\IUnitOfWork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAYwAwAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-19T13:14:42.528Z",
+              "WhenOpened": "2025-07-19T13:15:06.519Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
+              "Title": "TblUser.cs",
+              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\DBLayer\\Models\\TblUser.cs",
+              "RelativeDocumentMoniker": "DBLayer\\Models\\TblUser.cs",
+              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\DBLayer\\Models\\TblUser.cs",
+              "RelativeToolTip": "DBLayer\\Models\\TblUser.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAqwA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-19T17:39:03.764Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "TestContext.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\DBLayer\\Models\\TestContext.cs",
               "RelativeDocumentMoniker": "DBLayer\\Models\\TestContext.cs",
@@ -329,7 +355,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "HashPassword.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Helper\\HashPassword.cs",
               "RelativeDocumentMoniker": "Shared\\Helper\\HashPassword.cs",
@@ -342,7 +368,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "Program.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Program.cs",
               "RelativeDocumentMoniker": "ApiTemplate\\Program.cs",
@@ -355,7 +381,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "HashPasswordTests.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\UnitTest\\Tests\\HashPasswordTests.cs",
               "RelativeDocumentMoniker": "UnitTest\\Tests\\HashPasswordTests.cs",
@@ -368,7 +394,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "UnitOfWork.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\UnitOfWork.cs",
               "RelativeDocumentMoniker": "Repositories\\Repository\\UnitOfWork.cs",
@@ -381,7 +407,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "BranchController.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Controllers\\BranchController.cs",
               "RelativeDocumentMoniker": "ApiTemplate\\Controllers\\BranchController.cs",
@@ -394,7 +420,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "TokenResponse.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Dtos\\TokenResponse.cs",
               "RelativeDocumentMoniker": "Shared\\Dtos\\TokenResponse.cs",
@@ -407,7 +433,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "InvoiceController.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Controllers\\InvoiceController.cs",
               "RelativeDocumentMoniker": "ApiTemplate\\Controllers\\InvoiceController.cs",
@@ -420,7 +446,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "AddJWTService.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Services\\AddJWTService.cs",
               "RelativeDocumentMoniker": "ApiTemplate\\Services\\AddJWTService.cs",
@@ -433,7 +459,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "GlobalExceptionsHandlingMiddleware.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Middleware\\GlobalExceptionHandlerMiddleware\\Confriguations\\GlobalExceptionsHandlingMiddleware.cs",
               "RelativeDocumentMoniker": "ApiTemplate\\Middleware\\GlobalExceptionHandlerMiddleware\\Confriguations\\GlobalExceptionsHandlingMiddleware.cs",
@@ -446,7 +472,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "LoginResponse.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Dtos\\LoginResponse.cs",
               "RelativeDocumentMoniker": "Shared\\Dtos\\LoginResponse.cs",
@@ -459,7 +485,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "ApiResponseMiddleware.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Middleware\\ApiResponseMiddleware.cs",
               "RelativeDocumentMoniker": "ApiTemplate\\Middleware\\ApiResponseMiddleware.cs",
@@ -472,7 +498,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "LoginDto.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Dtos\\LoginDto.cs",
               "RelativeDocumentMoniker": "Shared\\Dtos\\LoginDto.cs",
@@ -485,7 +511,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 21,
               "Title": "JWTSetting.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Dtos\\JWTSetting.cs",
               "RelativeDocumentMoniker": "Shared\\Dtos\\JWTSetting.cs",
@@ -498,7 +524,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 22,
               "Title": "TblItemDto.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Dtos\\TblItemDto.cs",
               "RelativeDocumentMoniker": "Shared\\Dtos\\TblItemDto.cs",
@@ -511,7 +537,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 24,
               "Title": "ItemRepository.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\ItemRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\Repository\\ItemRepository.cs",
@@ -524,7 +550,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 23,
               "Title": "IITemRepository.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\IITemRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\Repository\\IITemRepository.cs",
@@ -537,20 +563,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "GenericRepository.cs",
-              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\GenericRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\Repository\\GenericRepository.cs",
-              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\GenericRepository.cs",
-              "RelativeToolTip": "Repositories\\Repository\\GenericRepository.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAgwAYAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-04T18:24:21.687Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "ApplicationBuilderExtention.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Middleware\\ApplicationBuilderExtention.cs",
               "RelativeDocumentMoniker": "ApiTemplate\\Middleware\\ApplicationBuilderExtention.cs",
@@ -563,7 +576,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "AuthMiddleware.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Middleware\\AuthMiddleware.cs",
               "RelativeDocumentMoniker": "ApiTemplate\\Middleware\\AuthMiddleware.cs",
@@ -576,7 +589,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "ValidateJWTTokenMiddleware.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\Middleware\\ValidateTokenMiddleware\\Confriguations\\ValidateJWTTokenMiddleware.cs",
               "RelativeDocumentMoniker": "ApiTemplate\\Middleware\\ValidateTokenMiddleware\\Confriguations\\ValidateJWTTokenMiddleware.cs",
@@ -589,7 +602,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "appsettings.json",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\ApiTemplate\\appsettings.json",
               "RelativeDocumentMoniker": "ApiTemplate\\appsettings.json",
@@ -602,7 +615,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "GenericRepositoryDto.cs",
               "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Shared\\Dtos\\GenericRepositoryDto.cs",
               "RelativeDocumentMoniker": "Shared\\Dtos\\GenericRepositoryDto.cs",
@@ -611,19 +624,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-04T18:28:51.543Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "IGenericRepository.cs",
-              "DocumentMoniker": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\IGenericRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\Repository\\IGenericRepository.cs",
-              "ToolTip": "J:\\Github\\C-sharp-Practice\\ApiTemplate\\Repositories\\Repository\\IGenericRepository.cs",
-              "RelativeToolTip": "Repositories\\Repository\\IGenericRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-14T18:04:39.045Z",
               "EditorCaption": ""
             },
             {
