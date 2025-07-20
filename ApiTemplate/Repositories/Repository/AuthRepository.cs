@@ -2,23 +2,15 @@
 using ApiTemplate.Helper;
 using ApiTemplate.Repository;
 using DBLayer.Models;
-using DBLayer.Models;
-using EcommerceAppBackend.Helper;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Shared.Dtos;
-using Shared.Helper;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Repositories.Repository
 {
