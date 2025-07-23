@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angular 19 Login</title>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="login-container">
+        <div class="logo">
+            <div class="logo-icon">A</div>
+            <h1>Angular 19</h1>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <input 
+                    type="text" 
+                    class="form-input" 
+                    placeholder="Username"
+                    required
+                    id="username"
+                >
+            </div>
+
+            <div class="form-group">
+                <div class="password-container">
+                    <input 
+                        type="password" 
+                        class="form-input" 
+                        placeholder="Password"
+                        required
+                        id="password"
+                    >
+                    <button type="button" class="password-toggle" onclick="togglePassword()">
+                        👁️
+                    </button>
+                </div>
+            </div>
+
+            <div class="remember-forgot">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="remember" class="checkbox">
+                    <label for="remember" class="checkbox-label">Remember me</label>
+                </div>
+                <a href="#" class="forgot-link">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="login-btn">
+                Sign In
+            </button>
+        </form>
+
+        <div class="divider">
+            <span>or continue with</span>
+        </div>
+
+        <div class="social-login">
+            <a href="#" class="social-btn">
+                <span>G</span> Google
+            </a>
+            <a href="#" class="social-btn">
+                <span>f</span> Facebook
+            </a>
+        </div>
+
+        <div class="signup-link">
+            Don't have an account?<a href="#">Sign Up</a>
+        </div>
+    </div>
+
+    <!-- <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleBtn = document.querySelector('.password-toggle');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleBtn.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggleBtn.textContent = '👁️';
+            }
+        }
+
+        // Form submission with loading state
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const container = document.querySelector('.login-container');
+            const btn = document.querySelector('.login-btn');
+            const originalText = btn.textContent;
+            
+            // Add loading state
+            container.classList.add('loading');
+            btn.textContent = '';
+            
+            // Simulate API call
+            setTimeout(() => {
+                container.classList.remove('loading');
+                btn.textContent = originalText;
+                
+                // Show success message (in real app, redirect to dashboard)
+                alert('Login successful! 🎉\n\nIn a real Angular 19 app, this would:\n• Use Angular Reactive Forms\n• Implement proper authentication\n• Route to the dashboard\n• Use Angular Material or similar UI library');
+            }, 2000);
+        });
+
+        // Add floating animation to inputs on focus
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('button, .social-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script> -->
+</body>
+</html>
