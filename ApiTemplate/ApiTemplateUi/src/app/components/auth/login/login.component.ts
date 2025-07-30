@@ -1,4 +1,3 @@
-
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, NgModule, Renderer2, Inject, PLATFORM_ID, } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -14,14 +13,17 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements AfterViewInit {
-   username = '';
+  username = '';
   password = '';
   rememberMe = false;
   showPassword = false;
   loading = false;
   particles = Array(9).fill(0);
 
-  constructor(private renderer: Renderer2, @Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
@@ -35,7 +37,7 @@ export class LoginComponent implements AfterViewInit {
       // Ripple effect
       const rippleTargets = document.querySelectorAll('button, .social-btn');
       rippleTargets.forEach(btn => {
-        btn.addEventListener('click', (e: Event) => this.createRipple(e as MouseEvent, btn as HTMLElement));
+        btn.addEventListener('click', (e: Event) => this.createRipple(e as MouseEvent, btn as HTMLElement, this.renderer));
       });
 
       // Inject ripple keyframe style
@@ -64,8 +66,8 @@ export class LoginComponent implements AfterViewInit {
     }, 2000);
   }
 
-  private createRipple(event: MouseEvent, element: HTMLElement) {
-    const ripple = this.renderer.createElement('span');
+  public createRipple(event: MouseEvent, element: HTMLElement, renderer: Renderer2) {
+    const ripple = renderer.createElement('span');
     const rect = element.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
     const x = event.clientX - rect.left - size / 2;
@@ -84,7 +86,7 @@ export class LoginComponent implements AfterViewInit {
       pointerEvents: 'none'
     });
 
-    this.renderer.appendChild(element, ripple);
-    setTimeout(() => this.renderer.removeChild(element, ripple), 600);
+    renderer.appendChild(element, ripple);
+    setTimeout(() => renderer.removeChild(element, ripple), 600);
   }
 }

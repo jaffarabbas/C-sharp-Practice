@@ -2,8 +2,12 @@ using ApiTemplate.Dtos;
 using ApiTemplate.Helper;
 using ApiTemplate.Repository;
 using DBLayer.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Dtos;
+using System.Security.Claims;
 
 namespace ApiTemplate.Controllers
 {
@@ -19,7 +23,7 @@ namespace ApiTemplate.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [HttpPost("Login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
             var data = await _unitOfWork.IAuthRepository.Login(loginDto);
@@ -27,6 +31,27 @@ namespace ApiTemplate.Controllers
             {
                 return Unauthorized("Invalid User");
             }
+
+            // Create claims (add more as needed)
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, loginDto.Username),
+                // Add other claims if needed
+            };
+
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            var authProperties = new AuthenticationProperties
+            {
+                IsPersistent = true, // Set to true for persistent cookie
+                ExpiresUtc = DateTimeOffset.UtcNow.AddHours(1)
+            };
+
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties);
+
             return Ok(data);
         }
 
@@ -229,6 +254,21 @@ namespace ApiTemplate.Controllers
             {
                 return StatusCode(500, $"Error: {ex.Message}");
             }
+        }
+
+        [Authorize]
+        [HttpGet("profile")]
+        public IActionResult Profile()
+        {
+            var username = User.Identity?.Name;
+            return Ok(new { Username = username });
+        }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return Ok("Logged out successfully.");
         }
     }
 }

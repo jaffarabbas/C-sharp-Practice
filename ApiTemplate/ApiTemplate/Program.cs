@@ -37,6 +37,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddHostedService<BGTest>();
 
+builder.Services.AddAuthenticationSchemeService(builder.Configuration);
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowRazorClient", policy =>
