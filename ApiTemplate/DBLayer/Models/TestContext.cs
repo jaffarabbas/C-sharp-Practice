@@ -15,6 +15,8 @@ public partial class TestContext : DbContext
     {
     }
 
+    public virtual DbSet<TblActionType> TblActionTypes { get; set; }
+
     public virtual DbSet<TblBranch> TblBranches { get; set; }
 
     public virtual DbSet<TblCompany> TblCompanies { get; set; }
@@ -31,18 +33,47 @@ public partial class TestContext : DbContext
 
     public virtual DbSet<TblOrganisation> TblOrganisations { get; set; }
 
+    public virtual DbSet<TblPermission> TblPermissions { get; set; }
+
     public virtual DbSet<TblPricingList> TblPricingLists { get; set; }
 
+    public virtual DbSet<TblResource> TblResources { get; set; }
+
+    public virtual DbSet<TblRole> TblRoles { get; set; }
+
+    public virtual DbSet<TblRolePermission> TblRolePermissions { get; set; }
+
     public virtual DbSet<TblUser> TblUsers { get; set; }
+
+    public virtual DbSet<TblUserRole> TblUserRoles { get; set; }
 
     public virtual DbSet<Test1> Test1s { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-RP4DU39\\SQLEXPRESS;Database=Test;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-RP4DU39\\SQLEXPRESS;Database=test;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<TblActionType>(entity =>
+        {
+            entity.HasKey(e => e.ActionTypeId).HasName("PK__tblActio__62FE4C04B5ED9D4D");
+
+            entity.ToTable("tblActionType");
+
+            entity.Property(e => e.ActionTypeId)
+                .ValueGeneratedNever()
+                .HasColumnName("ActionTypeID");
+            entity.Property(e => e.ActionTypeCreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.ActionTypeIsActive).HasDefaultValue(true);
+            entity.Property(e => e.ActionTypeTitle)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasDefaultValue("");
+        });
+
         modelBuilder.Entity<TblBranch>(entity =>
         {
             entity.HasKey(e => e.BranchId).HasName("PK__tblBranc__A1682FA549DC0CD4");
@@ -218,6 +249,33 @@ public partial class TestContext : DbContext
                 .HasDefaultValue("");
         });
 
+        modelBuilder.Entity<TblPermission>(entity =>
+        {
+            entity.HasKey(e => e.PermissionId).HasName("PK__tblPermi__EFA6FB0F4AD1F430");
+
+            entity.ToTable("tblPermission");
+
+            entity.Property(e => e.PermissionId)
+                .ValueGeneratedNever()
+                .HasColumnName("PermissionID");
+            entity.Property(e => e.ActionTypeId).HasColumnName("ActionTypeID");
+            entity.Property(e => e.PermissionCreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.PermissionIsActive).HasDefaultValue(true);
+            entity.Property(e => e.ResourceId).HasColumnName("ResourceID");
+
+            entity.HasOne(d => d.ActionType).WithMany(p => p.TblPermissions)
+                .HasForeignKey(d => d.ActionTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Permission_Action");
+
+            entity.HasOne(d => d.Resource).WithMany(p => p.TblPermissions)
+                .HasForeignKey(d => d.ResourceId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Permission_Resource");
+        });
+
         modelBuilder.Entity<TblPricingList>(entity =>
         {
             entity.HasKey(e => e.TranId).HasName("PK__tblPrici__F7089629E1C238BE");
@@ -237,6 +295,108 @@ public partial class TestContext : DbContext
                 .IsUnicode(false)
                 .HasDefaultValue("");
             entity.Property(e => e.SaleRate).HasDefaultValue(0.0);
+        });
+
+        modelBuilder.Entity<TblResource>(entity =>
+        {
+            entity.HasKey(e => e.ResourceId).HasName("PK__tblResou__4ED1814FFC50535C");
+
+            entity.ToTable("tblResource");
+
+            entity.Property(e => e.ResourceId)
+                .ValueGeneratedNever()
+                .HasColumnName("ResourceID");
+            entity.Property(e => e.ResourceCreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.ResourceIsActive).HasDefaultValue(true);
+            entity.Property(e => e.ResourceName)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<TblRole>(entity =>
+        {
+            entity.HasKey(e => e.RoleId).HasName("PK__tblRole__8AFACE3A3A043175");
+
+            entity.ToTable("tblRole");
+
+            entity.Property(e => e.RoleId)
+                .ValueGeneratedNever()
+                .HasColumnName("RoleID");
+            entity.Property(e => e.RoleCreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.RoleIsActive).HasDefaultValue(true);
+            entity.Property(e => e.RoleTitle)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasDefaultValue("");
+
+            entity.HasMany(d => d.ChildRoles).WithMany(p => p.ParentRoles)
+                .UsingEntity<Dictionary<string, object>>(
+                    "TblRoleHierarchy",
+                    r => r.HasOne<TblRole>().WithMany()
+                        .HasForeignKey("ChildRoleId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_RoleHierarchy_Child"),
+                    l => l.HasOne<TblRole>().WithMany()
+                        .HasForeignKey("ParentRoleId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_RoleHierarchy_Parent"),
+                    j =>
+                    {
+                        j.HasKey("ParentRoleId", "ChildRoleId").HasName("PK_RoleHierarchy");
+                        j.ToTable("tblRoleHierarchy");
+                        j.IndexerProperty<int>("ParentRoleId").HasColumnName("ParentRoleID");
+                        j.IndexerProperty<int>("ChildRoleId").HasColumnName("ChildRoleID");
+                    });
+
+            entity.HasMany(d => d.ParentRoles).WithMany(p => p.ChildRoles)
+                .UsingEntity<Dictionary<string, object>>(
+                    "TblRoleHierarchy",
+                    r => r.HasOne<TblRole>().WithMany()
+                        .HasForeignKey("ParentRoleId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_RoleHierarchy_Parent"),
+                    l => l.HasOne<TblRole>().WithMany()
+                        .HasForeignKey("ChildRoleId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK_RoleHierarchy_Child"),
+                    j =>
+                    {
+                        j.HasKey("ParentRoleId", "ChildRoleId").HasName("PK_RoleHierarchy");
+                        j.ToTable("tblRoleHierarchy");
+                        j.IndexerProperty<int>("ParentRoleId").HasColumnName("ParentRoleID");
+                        j.IndexerProperty<int>("ChildRoleId").HasColumnName("ChildRoleID");
+                    });
+        });
+
+        modelBuilder.Entity<TblRolePermission>(entity =>
+        {
+            entity.HasKey(e => e.RolePermissionId).HasName("PK__tblRoleP__120F469A84A97AB2");
+
+            entity.ToTable("tblRolePermission");
+
+            entity.Property(e => e.RolePermissionId)
+                .ValueGeneratedNever()
+                .HasColumnName("RolePermissionID");
+            entity.Property(e => e.PermissionId).HasColumnName("PermissionID");
+            entity.Property(e => e.RoleId).HasColumnName("RoleID");
+            entity.Property(e => e.RolePermissionCreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.RolePermissionIsActive).HasDefaultValue(true);
+
+            entity.HasOne(d => d.Permission).WithMany(p => p.TblRolePermissions)
+                .HasForeignKey(d => d.PermissionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_RolePermission_Permission");
+
+            entity.HasOne(d => d.Role).WithMany(p => p.TblRolePermissions)
+                .HasForeignKey(d => d.RoleId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_RolePermission_Role");
         });
 
         modelBuilder.Entity<TblUser>(entity =>
@@ -267,6 +427,33 @@ public partial class TestContext : DbContext
             entity.Property(e => e.Username)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<TblUserRole>(entity =>
+        {
+            entity.HasKey(e => e.UserRoleId).HasName("PK__tblUserR__3D978A55AEDF4DB3");
+
+            entity.ToTable("tblUserRole");
+
+            entity.Property(e => e.UserRoleId)
+                .ValueGeneratedNever()
+                .HasColumnName("UserRoleID");
+            entity.Property(e => e.RoleId).HasColumnName("RoleID");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.UserRoleCreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.UserRoleIsActive).HasDefaultValue(true);
+
+            entity.HasOne(d => d.Role).WithMany(p => p.TblUserRoles)
+                .HasForeignKey(d => d.RoleId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_UserRole_Role");
+
+            entity.HasOne(d => d.User).WithMany(p => p.TblUserRoles)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_UserRole_User");
         });
 
         modelBuilder.Entity<Test1>(entity =>

@@ -64,8 +64,7 @@ namespace ApiTemplate.Tests
                 Password = "pass",
                 Firstname = "First",
                 Lastname = "Last",
-                Email = "email@test.com",
-                AccountType = 1
+                Email = "email@test.com"
             };
             _userRepoMock.Setup(r => r.GetMaxID("tblUsers", "Userid")).ReturnsAsync(1L);
             _userRepoMock.Setup(r => r.AddAsync("tblUsers", It.IsAny<TblUser>())).ReturnsAsync(1);
@@ -131,8 +130,7 @@ namespace ApiTemplate.Tests
                 Username = "updated",
                 Firstname = "First",
                 Lastname = "Last",
-                Email = "email@test.com",
-                AccountType = 1
+                Email = "email@test.com"
             };
             var user = new TblUser { Userid = 1, Username = "user" };
             _userRepoMock.Setup(r => r.GetByIdAsync("tblUser", "UserID", 1L)).ReturnsAsync(user);

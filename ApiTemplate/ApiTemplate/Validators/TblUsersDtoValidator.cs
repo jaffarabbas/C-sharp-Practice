@@ -24,8 +24,5 @@ public class TblUsersDtoValidator : AbstractValidator<TblUsersDto>
         RuleFor(x => x.Password)
             .NotEmpty().WithMessage("Password is required.")
             .MinimumLength(6).WithMessage("Password must be at least 6 characters.");
-
-        RuleFor(x => x.AccountType)
-            .GreaterThanOrEqualTo(0).WithMessage("AccountType is required.");
     }
 }

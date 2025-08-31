@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Dtos;
+using System.DirectoryServices;
+using System.Reflection.PortableExecutable;
 using System.Security.Claims;
 
 namespace ApiTemplate.Controllers
@@ -26,71 +28,32 @@ namespace ApiTemplate.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
-            var data = await _unitOfWork.IAuthRepository.Login(loginDto);
-            if (data == null)
+            var result = await _unitOfWork.IAuthRepository.LoginAsync(loginDto);
+            if (result == null)
             {
                 return Unauthorized("Invalid User");
             }
 
-            // Create claims (add more as needed)
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, loginDto.Username),
-                // Add other claims if needed
-            };
-
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-            var authProperties = new AuthenticationProperties
-            {
-                IsPersistent = true, // Set to true for persistent cookie
-                ExpiresUtc = DateTimeOffset.UtcNow.AddHours(1)
-            };
-
-            await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity),
-                authProperties);
-
-            return Ok(data);
+            return Ok(result);
         }
 
-        [HttpPost("")]
-        public async Task<IActionResult> Register([FromBody] TblUsersDto user)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterUserDto userDto)
         {
-            if (user == null)
-                return BadRequest("User cannot be null");
-
             try
             {
-                var repo = _unitOfWork.Repository<TblUser>();
-                // Hashing password
-                var salt = HashPassword.GenerateSalt();
-                var encryptedPassword = HashPassword.Hash(user.Password, salt, "sha256");
-                var model = new TblUser
-                {
-                    Userid = await repo.GetMaxID("tblUsers", "Userid"),
-                    Username = user.Username,
-                    Firstname = user.Firstname,
-                    Lastname = user.Lastname,
-                    Email = user.Email,
-                    Password = Convert.ToBase64String(encryptedPassword),
-                    Salt = Convert.ToBase64String(salt),
-                    AccountType = user.AccountType,
-                    CreatedAt = DateTime.UtcNow,
-                    Status = true,
-                };
-                await repo.AddAsync("tblUsers", model);
+                var response = await _unitOfWork.IAuthRepository.RegisterAsync(userDto);
                 _unitOfWork.Commit();
-                return Ok(new
-                {
-                    Userid = model.Userid,
-                    UserCreatedDate = DateTime.UtcNow,
-                    Message = "User Created Successfully"
-                });
+                return Ok(response);
+            }
+            catch (ArgumentException ex)
+            {
+                _unitOfWork.Rollback();
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
+                _unitOfWork.Rollback();
                 return StatusCode(500, $"Error: {ex.Message}");
             }
         }
@@ -144,7 +107,6 @@ namespace ApiTemplate.Controllers
                 existingUser.Firstname = user.Firstname;
                 existingUser.Lastname = user.Lastname;
                 existingUser.Email = user.Email;
-                existingUser.AccountType = user.AccountType;
 
                 await repo.UpdateAsync("tblUser", existingUser, "UserID");
                 _unitOfWork.Commit();
@@ -269,6 +231,55 @@ namespace ApiTemplate.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return Ok("Logged out successfully.");
+        }
+
+        [HttpGet("TestKeyPress")]
+        public async Task<IActionResult> TestKeyPress()
+        {
+            return Ok("Key Pressed Successfully");
+        }
+
+        // Simplify the 'using' statement for 'DirectoryEntry' and 'DirectorySearcher'
+        [Authorize] // Requires Windows Authentication
+        [HttpGet("ldap-samaccountname")]
+        public IActionResult GetSamAccountNameFromLdap()
+        {
+            // Get current Windows username (DOMAIN\username)
+            var windowsUsername = User.Identity?.Name;
+            if (string.IsNullOrWhiteSpace(windowsUsername))
+                return Unauthorized("No Windows user found.");
+
+            // Extract username part
+            var username = windowsUsername.Contains("\\") ? windowsUsername.Split('\\')[1] : windowsUsername;
+
+            // LDAP path and domain (customize as needed)
+            var ldapPath = "LDAP://your-ad-server"; // e.g., LDAP://DC=yourdomain,DC=com
+            var domain = "yourdomain"; // e.g., "MYDOMAIN"
+
+            try
+            {
+                using var entry = new System.DirectoryServices.DirectoryEntry(ldapPath);
+                using var searcher = new DirectorySearcher(entry)
+                {
+                    Filter = $"(&(objectClass=user)(sAMAccountName={username}))"
+                };
+                searcher.PropertiesToLoad.Add("sAMAccountName");
+
+                var result = searcher.FindOne();
+                if (result != null && result.Properties["sAMAccountName"].Count > 0)
+                {
+                    var samAccountName = result.Properties["sAMAccountName"][0].ToString();
+                    return Ok(new { samAccountName });
+                }
+                else
+                {
+                    return NotFound("sAMAccountName not found in LDAP.");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"LDAP error: {ex.Message}");
+            }
         }
     }
 }

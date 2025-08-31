@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DBLayer.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,6 @@ namespace Shared.Dtos
     {
         public string? Token { get; set; }
         public DateTime? LoginDate { get; set; }
-        public String? UserType { get; set; }
+        public List<string>? Roles { get; set; }
     }
 }

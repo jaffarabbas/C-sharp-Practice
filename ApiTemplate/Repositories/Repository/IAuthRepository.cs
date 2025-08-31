@@ -10,6 +10,7 @@ namespace Repositories.Repository
 {
     public interface IAuthRepository
     {
-        public Task<LoginResponse> Login(LoginDto loginDto);
+        public Task<LoginResponse> LoginAsync(LoginDto loginDto);
+        public Task<object> RegisterAsync(RegisterUserDto userDto);
     }
 }

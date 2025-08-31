@@ -22,7 +22,12 @@ namespace Repositories.Repository
         private readonly IMemoryCache _cache;
         private readonly JWTSetting _setting;
 
-        public AuthRepository(TestContext context, IDbConnection connection, IMemoryCache cache, IDbTransaction? transaction, IOptions<JWTSetting> settings) : base(context, connection, cache, transaction)
+        public AuthRepository(
+            TestContext context,
+            IDbConnection connection,
+            IMemoryCache cache,
+            IDbTransaction? transaction,
+            IOptions<JWTSetting> settings) : base(context, connection, cache, transaction)
         {
             _context = context;
             _connection = connection;
@@ -31,63 +36,138 @@ namespace Repositories.Repository
             _setting = settings.Value;
         }
 
-        public async Task<LoginResponse?> Login(LoginDto loginDto)
+        public async Task<LoginResponse?> LoginAsync(LoginDto loginDto)
         {
-            try
+            var user = await _context.TblUsers
+                .FirstOrDefaultAsync(u => u.Username == loginDto.Username);
+
+            if (user == null)
+                return null;
+
+            var saltBytes = Convert.FromBase64String(user.Salt);
+            var inputHash = HashPassword.Hash(loginDto.Password!, saltBytes);
+            if (Convert.ToBase64String(inputHash) != user.Password)
+                return null;
+
+            var tokenResponse = GenerateToken(user);
+
+            var roles = (from ur in _context.TblUserRoles
+                         join r in _context.TblRoles on ur.RoleId equals r.RoleId
+                         where ur.UserId == user.Userid
+                         select r.RoleTitle).ToList();
+
+            return new LoginResponse
             {
-                var _user = await _context.TblUsers.FirstOrDefaultAsync(data => data.Username == loginDto.Username);
-                if (_user == null)
+                Token = tokenResponse.JWTToken,
+                LoginDate = DateTime.Now,
+                Roles = roles
+            };
+        }
+
+        public async Task<object> RegisterAsync(RegisterUserDto userDto)
+        {
+            if (userDto == null)
+                throw new ArgumentException("User cannot be null");
+
+            // Manual repository instances (avoiding UnitOfWork dependency)
+            var userRepo = new GenericRepository<TblUser>(_context, _connection, _cache, _transaction);
+            var roleRepo = new GenericRepository<TblUserRole>(_context, _connection, _cache, _transaction);
+
+            // Get next IDs
+            long newUserId = await userRepo.GetMaxID("tblUsers", "Userid");
+
+            var salt = HashPassword.GenerateSalt();
+            var encryptedPassword = HashPassword.Hash(userDto.Password, salt, "sha256");
+
+            var newUser = new TblUser
+            {
+                Userid = newUserId,
+                Username = userDto.Username,
+                Firstname = userDto.Firstname,
+                Lastname = userDto.Lastname,
+                Email = userDto.Email,
+                Password = Convert.ToBase64String(encryptedPassword),
+                Salt = Convert.ToBase64String(salt),
+                CreatedAt = DateTime.UtcNow,
+                Status = true
+            };
+
+            await userRepo.AddAsync("tblUsers", newUser);
+
+            if (userDto.Roles != null && userDto.Roles.Any())
+            {
+                foreach (var roleDto in userDto.Roles)
                 {
-                    return null;
-                }
-                else
-                {
-                    var saltBytes = Convert.FromBase64String(_user.Salt);
-                    var inputHash = HashPassword.Hash(loginDto.Password!, saltBytes);
-                    bool isValid = Convert.ToBase64String(inputHash) == _user.Password;
-                    if (isValid) { 
-                        var responce = GenerateToken(_user!);
-                        var loginResponse = new LoginResponse()
-                        {
-                            Token = responce.JWTToken,
-                            LoginDate = DateTime.Now,
-                            UserType = _user.AccountType.ToString(),
-                        };
-                        return loginResponse;
-                    }
-                    else
+                    var userRole = new TblUserRole
                     {
-                        return null;
-                    }
+                        UserRoleId = (int)await roleRepo.GetMaxID("tblUserRole", "UserRoleId"),
+                        UserId = newUser.Userid,
+                        RoleId = roleDto.RoleId,
+                        UserRoleIsActive = roleDto.UserRoleIsActive,
+                        UserRoleCreatedAt = DateTime.UtcNow
+                    };
+                    await roleRepo.AddAsync("tblUserRole", userRole);
                 }
             }
-            catch (Exception error)
+            else
             {
-                throw;
+                var defaultRole = new TblUserRole
+                {
+                    UserRoleId = (int)await roleRepo.GetMaxID("tblUserRole", "UserRoleId"),
+                    UserId = newUser.Userid,
+                    RoleId = 1,
+                    UserRoleIsActive = true,
+                    UserRoleCreatedAt = DateTime.UtcNow
+                };
+                await roleRepo.AddAsync("tblUserRole", defaultRole);
             }
+
+            // No commit here; caller (controller/service) will call UnitOfWork.Commit()
+            return new
+            {
+                Userid = newUser.Userid,
+                Username = newUser.Username,
+                Email = newUser.Email,
+                Roles = userDto.Roles?.Select(r => r.RoleId).ToList() ?? new List<int> { 1 },
+                UserCreatedDate = DateTime.UtcNow,
+                Message = "User created successfully"
+            };
         }
 
         private TokenResponse GenerateToken(TblUser user)
         {
-            var tokenResponce = new TokenResponse();
             var tokenHandler = new JwtSecurityTokenHandler();
-            var tokenkey = Encoding.UTF8.GetBytes(this._setting.securitykey);
+            var tokenKey = Encoding.UTF8.GetBytes(_setting.securitykey);
+
+            var roles = (from ur in _context.TblUserRoles
+                         join r in _context.TblRoles on ur.RoleId equals r.RoleId
+                         where ur.UserId == user.Userid
+                         select r.RoleTitle).ToList();
+
+            var permissions = (from ur in _context.TblUserRoles
+                               join rp in _context.TblRolePermissions on ur.RoleId equals rp.RoleId
+                               join p in _context.TblPermissions on rp.PermissionId equals p.PermissionId
+                               join res in _context.TblResources on p.ResourceId equals res.ResourceId
+                               join at in _context.TblActionTypes on p.ActionTypeId equals at.ActionTypeId
+                               where ur.UserId == user.Userid
+                               select res.ResourceName + ":" + at.ActionTypeTitle).ToList();
+
+            var claims = new List<Claim> { new(ClaimTypes.Name, user.Username!) };
+            claims.AddRange(roles.Select(r => new Claim(ClaimTypes.Role, r)));
+            claims.AddRange(permissions.Select(p => new Claim("Permission", p)));
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(
-                    new Claim[]
-                    {
-                        new Claim(ClaimTypes.Name,user.Username!),
-                    }
-                ),
+                Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.Now.AddHours(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenkey), SecurityAlgorithms.HmacSha256)
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(tokenKey),
+                    SecurityAlgorithms.HmacSha256Signature)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            string finaltoken = tokenHandler.WriteToken(token);
-            tokenResponce.JWTToken = finaltoken;
-            return tokenResponce;
+            return new TokenResponse { JWTToken = tokenHandler.WriteToken(token) };
         }
     }
 }
+    

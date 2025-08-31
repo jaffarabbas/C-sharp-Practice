@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  api:
+    image: apitemplate
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+      - "8081:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=db;Database=Test;User Id=sa;Password=YourStrongPassword!;TrustServerCertificate=True;
+    depends_on:
+      - db
+    networks:
+      - app-network
+    volumes:
+      - app-data:/app/data
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrongPassword!
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql-data:/var/opt/mssql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  app-data:
+  sql-data:

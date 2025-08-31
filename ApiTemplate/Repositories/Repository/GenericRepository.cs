@@ -275,7 +275,13 @@ namespace ApiTemplate.Repository
 
         public async Task<int> AddAsync(string table, T entity)
         {
-            var props = typeof(T).GetProperties().Where(p => p.Name.ToLower() != "id").ToList();
+            var props = typeof(T).GetProperties()
+                .Where(p =>
+                    p.Name.ToLower() != "id" &&
+                    p.CanRead &&
+                    IsSimpleType(p.PropertyType)) // exclude navigation / complex / collections
+                .ToList();
+
             var columns = string.Join(", ", props.Select(p => p.Name));
             var parameters = string.Join(", ", props.Select(p => "@" + p.Name));
 
@@ -285,9 +291,14 @@ namespace ApiTemplate.Repository
 
         public async Task<int> UpdateAsync(string table, T entity, string keyName)
         {
-            var props = typeof(T).GetProperties().Where(p => p.Name != keyName).ToList();
-            var setClause = string.Join(", ", props.Select(p => $"{p.Name} = @{p.Name}"));
+            var props = typeof(T).GetProperties()
+                .Where(p =>
+                    p.Name != keyName &&
+                    p.CanRead &&
+                    IsSimpleType(p.PropertyType))
+                .ToList();
 
+            var setClause = string.Join(", ", props.Select(p => $"{p.Name} = @{p.Name}"));
             var sql = $"UPDATE {table} SET {setClause} WHERE {keyName} = @{keyName}";
             return await _connection.ExecuteAsync(sql, entity, _transaction);
         }
@@ -345,7 +356,24 @@ namespace ApiTemplate.Repository
             };
         }
 
+        private static bool IsSimpleType(Type type)
+        {
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+                type = Nullable.GetUnderlyingType(type)!;
+
+            return type.IsPrimitive
+                   || type.IsEnum
+                   || type == typeof(string)
+                   || type == typeof(decimal)
+                   || type == typeof(DateTime)
+                   || type == typeof(Guid)
+                   || type == typeof(byte[])
+                   || type == typeof(bool)
+                   || type == typeof(double)
+                   || type == typeof(float);
+        }
 
         #endregion
+
     }
 }

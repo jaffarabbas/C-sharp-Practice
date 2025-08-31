@@ -17,11 +17,11 @@ public partial class TblUser
 
     public string Password { get; set; } = null!;
 
-    public int AccountType { get; set; }
-
     public bool Status { get; set; }
 
     public DateTime CreatedAt { get; set; }
 
     public string Salt { get; set; } = null!;
+
+    public virtual ICollection<TblUserRole> TblUserRoles { get; set; } = new List<TblUserRole>();
 }
