@@ -1,6 +1,6 @@
 using ApiTemplate.Repository;
 using Microsoft.Extensions.DependencyInjection;
-using Scrutor;
+using Repositories.Services;
 
 namespace Repositories
 {
@@ -19,21 +19,10 @@ namespace Repositories
             // Register the generic repository interface and its implementation
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             
+            services.AddScoped<ITableOperationService, TableOperationService>(); // used by UnitOfWork
             // Register UnitOfWork
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            // Use Scrutor to automatically scan and register all repository implementations
-            services.Scan(scan => scan
-                .FromAssemblyOf<UnitOfWork>()
-                .AddClasses(classes => classes
-                    .Where(type => 
-                        type.Name.EndsWith("Repository") && 
-                        !type.Name.StartsWith("Generic") &&
-                        !type.IsGenericTypeDefinition &&
-                        type.IsClass && 
-                        !type.IsAbstract))
-                .AsImplementedInterfaces()
-                .WithScopedLifetime());
 
             return services;
         }

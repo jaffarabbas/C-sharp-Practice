@@ -1,4 +1,5 @@
 ﻿using Repositories.Repository;
+using Repositories.Services;              // + added
 using System.Data;
 
 namespace ApiTemplate.Repository
@@ -10,17 +11,18 @@ namespace ApiTemplate.Repository
         IGenericRepository<T> Repository<T>() where T : class;
         IGenericRepositoryWrapper<T> RepositoryWrapper<T>() where T : class;
 
-        Task<int> SaveAsync();
+        // Dynamic table operations (added)
+        ITableOperationService TableOperations { get; }
 
+        Task<int> SaveAsync();
         Task BeginTransactionAsync();
         Task CommitAsync();
         Task RollbackAsync();
 
-        //dapper
+        // dapper
         IDbConnection Connection { get; }
         IDbTransaction Transaction { get; }
         void Commit();
         void Rollback();
     }
-
 }

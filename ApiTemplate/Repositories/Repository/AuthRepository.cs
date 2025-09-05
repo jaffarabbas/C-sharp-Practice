@@ -103,8 +103,8 @@ namespace Repositories.Repository
                         UserRoleId = (int)await roleRepo.GetMaxID("tblUserRole", "UserRoleId"),
                         UserId = newUser.Userid,
                         RoleId = roleDto.RoleId,
-                        UserRoleIsActive = roleDto.UserRoleIsActive,
-                        UserRoleCreatedAt = DateTime.UtcNow
+                        UserRoleIsActive = true,
+                        UserRoleCreatedAt = DateTime.UtcNow,
                     };
                     await roleRepo.AddAsync("tblUserRole", userRole);
                 }
@@ -144,20 +144,12 @@ namespace Repositories.Repository
                          where ur.UserId == user.Userid
                          select r.RoleTitle).ToList();
 
-            var permissions = (from ur in _context.TblUserRoles
-                               join rp in _context.TblRolePermissions on ur.RoleId equals rp.RoleId
-                               join p in _context.TblPermissions on rp.PermissionId equals p.PermissionId
-                               join res in _context.TblResources on p.ResourceId equals res.ResourceId
-                               join at in _context.TblActionTypes on p.ActionTypeId equals at.ActionTypeId
-                               where ur.UserId == user.Userid
-                               select res.ResourceName + ":" + at.ActionTypeTitle).ToList();
-
             var claims = new List<Claim> { new(ClaimTypes.Name, user.Username!) };
             claims.AddRange(roles.Select(r => new Claim(ClaimTypes.Role, r)));
-            claims.AddRange(permissions.Select(p => new Claim("Permission", p)));
+            claims.Add(new Claim("userid",user.Userid.ToString()));
 
             var tokenDescriptor = new SecurityTokenDescriptor
-            {
+            {  
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.Now.AddHours(1),
                 SigningCredentials = new SigningCredentials(

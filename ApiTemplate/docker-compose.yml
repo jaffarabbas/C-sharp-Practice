@@ -2,13 +2,14 @@ version: '3.8'
 
 services:
   api:
-    image: apitemplate
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ApiTemplate/Dockerfile   # Updated path to your Dockerfile
+    image: apitemplate
     ports:
-      - "8080:80"
-      - "8081:443"
+      - "8080:8080"   # Map host 8080 to container 8080
+      - "8081:8081"   # Map host 8081 to container 8081
+      - "9229:9229"   # <-- Add this line
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=db;Database=Test;User Id=sa;Password=YourStrongPassword!;TrustServerCertificate=True;

@@ -35,7 +35,7 @@ namespace ApiTemplate.Tests
         {
             var loginDto = new LoginDto { Username = "test", Password = "pass" };
             var loginResponse = new LoginResponse { Token = "token" };
-            _authRepoMock.Setup(r => r.Login(loginDto)).ReturnsAsync(loginResponse);
+            _authRepoMock.Setup(r => r.LoginAsync(loginDto)).ReturnsAsync(loginResponse);
 
             var result = await _controller.Login(loginDto);
 
@@ -48,7 +48,7 @@ namespace ApiTemplate.Tests
         public async Task Login_ReturnsUnauthorized_WhenUserIsInvalid()
         {
             var loginDto = new LoginDto { Username = "test", Password = "wrong" };
-            _authRepoMock.Setup(r => r.Login(loginDto))!.ReturnsAsync((LoginResponse?)null); // Fix for CS8620 and CS8600
+            _authRepoMock.Setup(r => r.LoginAsync(loginDto))!.ReturnsAsync((LoginResponse?)null); // Fix for CS8620 and CS8600
 
             var result = await _controller.Login(loginDto);
 
@@ -58,7 +58,7 @@ namespace ApiTemplate.Tests
         [Test]
         public async Task Register_ReturnsOk_WhenUserIsValid()
         {
-            var userDto = new TblUsersDto
+            var registerUserDto = new RegisterUserDto
             {
                 Username = "user",
                 Password = "pass",
@@ -69,7 +69,7 @@ namespace ApiTemplate.Tests
             _userRepoMock.Setup(r => r.GetMaxID("tblUsers", "Userid")).ReturnsAsync(1L);
             _userRepoMock.Setup(r => r.AddAsync("tblUsers", It.IsAny<TblUser>())).ReturnsAsync(1);
 
-            var result = await _controller.Register(userDto);
+            var result = await _controller.Register(registerUserDto);
 
             var okResult = result as OkObjectResult;
             Assert.IsNotNull(okResult);
