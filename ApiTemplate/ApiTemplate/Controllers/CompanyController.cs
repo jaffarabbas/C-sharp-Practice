@@ -2,10 +2,12 @@ using DBLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using ApiTemplate.Attributes;
 using ApiTemplate.Repository;
+using ApiTemplate.Shared.Helper.Constants;
 
 namespace ApiTemplate.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion(ApiVersioningConstants.CurrentVersion)]
+    [Route(ApiVersioningConstants.versionRoute)]
     [ApiController]
     [CustomAuth]
     public class CompanyController : ControllerBase

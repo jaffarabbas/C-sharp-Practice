@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-using ApiTemplate.Shared; // Adjust namespace if needed
+using ApiTemplate.Shared.Dtos; // Adjust namespace if needed
+using ApiTemplate.Shared.Helper.Constants;
 
 namespace ApiTemplate.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
+    [ApiVersion(ApiVersioningConstants.CurrentVersion)]
+    [Route(ApiVersioningConstants.versionRoute)]
     [SkipJwtValidation]
     public class TestController : ControllerBase
     {
@@ -24,7 +25,7 @@ namespace ApiTemplate.Controllers
 
         // POST: api/test/body
         [HttpPost("body")]
-        public IActionResult PostFromBody([FromBody] MessageDto dto)
+        public IActionResult PostFromBody([FromBody] TestMessage dto)
         {
             if (dto == null || string.IsNullOrWhiteSpace(dto.Message))
                 return BadRequest(new { source = "body", message = "No body message provided" });
@@ -34,7 +35,7 @@ namespace ApiTemplate.Controllers
 
         // PUT: api/test/put
         [HttpPut("put")]
-        public IActionResult PutTest([FromBody] MessageDto dto)
+        public IActionResult PutTest([FromBody] TestMessage dto)
         {
             return Ok(new { source = "put", message = dto?.Message ?? "No put message provided" });
         }

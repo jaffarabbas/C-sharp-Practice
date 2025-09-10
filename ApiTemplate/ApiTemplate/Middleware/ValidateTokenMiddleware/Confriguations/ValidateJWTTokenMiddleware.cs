@@ -29,6 +29,13 @@ namespace CustomMiddlewareCollection.ValidateTokenMiddleware.Confriguations
         }
         public async Task InvokeAsync(HttpContext context)
         {
+            var path = context.Request.Path.Value;
+            if (!string.IsNullOrEmpty(path) && (path.StartsWith("/swagger") || path.StartsWith("/favicon.ico")))
+            {
+                await _next(context);
+                return;
+            }
+
             if (ShouldSkipValidation(context))
             {
                 // no JWT check – just continue

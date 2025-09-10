@@ -1,6 +1,7 @@
 using ApiTemplate.Dtos;
 using ApiTemplate.Helper;
 using ApiTemplate.Repository;
+using ApiTemplate.Shared.Helper.Constants;
 using DBLayer.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -8,12 +9,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Dtos;
 using System.DirectoryServices;
-using System.Reflection.PortableExecutable;
-using System.Security.Claims;
 
 namespace ApiTemplate.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion(ApiVersioningConstants.CurrentVersion)]
+    [Route(ApiVersioningConstants.versionRoute)]
     [ApiController]
     [SkipJwtValidation]
     public class AuthController : ControllerBase

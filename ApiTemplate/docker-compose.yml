@@ -2,37 +2,34 @@ version: '3.8'
 
 services:
   api:
-    build:
-      context: .
-      dockerfile: ApiTemplate/Dockerfile   # Updated path to your Dockerfile
-    image: apitemplate
-    ports:
-      - "8080:8080"   # Map host 8080 to container 8080
-      - "8081:8081"   # Map host 8081 to container 8081
-      - "9229:9229"   # <-- Add this line
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=db;Database=Test;User Id=sa;Password=YourStrongPassword!;TrustServerCertificate=True;
-    depends_on:
-      - db
-    networks:
-      - app-network
-    volumes:
-      - app-data:/app/data
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-
+      build:
+        context: .
+        dockerfile: ApiTemplate/Dockerfile
+      container_name: apitemplate_api
+      depends_on:
+        - db
+      environment:
+        - ConnectionStrings__DefaultConnection=Server=db,1433;Database=test2;User Id=sa;Password=YourStrongPassword!;TrustServerCertificate=True;
+        - ASPNETCORE_ENVIRONMENT=Development
+      ports:
+        - "8080:8080"
+        - "8081:8081"
+      networks:
+        - app-network
+      restart: on-failure
+      
   db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=YourStrongPassword!
-    ports:
-      - "1433:1433"
-    volumes:
-      - sql-data:/var/opt/mssql
-    networks:
-      - app-network
+      image: mcr.microsoft.com/mssql/server:2022-latest
+      container_name: sqlserver_db
+      environment:
+        - ACCEPT_EULA=Y
+        - SA_PASSWORD=YourStrongPassword!
+      ports:
+        - "1433:1433"
+      networks:
+        - app-network
+      volumes:
+        - sql-data:/var/opt/mssql
 
 networks:
   app-network:

@@ -257,3 +257,6 @@ join tblPermission p on rp.PermissionID = p.PermissionID
 join tblResource res on p.ResourceID = res.ResourceID
 join tblActionType at on p.ActionTypeID = at.ActionTypeID
 where u.UserID = 1;
+
+
+select * from tblUsers

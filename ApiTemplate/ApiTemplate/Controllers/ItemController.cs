@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.SignalR;
 using ApiTemplate.Attributes;
 using ApiTemplate.Hubs;
 using ApiTemplate.Repository; // Your generic repo namespace
+using ApiTemplate.Shared.Helper.Constants;
 
 namespace ApiTemplate.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion(ApiVersioningConstants.CurrentVersion)]
+    [Route(ApiVersioningConstants.versionRoute)]
     [ApiController]
     [CustomAuth]
     public class ItemController : ControllerBase

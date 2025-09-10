@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using Repositories.Services;
 using Shared.Dtos;
 using System.Text.Json;
+using ApiTemplate.Shared.Helper.Constants;
 
 namespace ApiTemplate.Controllers
 {
+    [ApiVersion(ApiVersioningConstants.CurrentVersion)]
+    [Route("api/v{version:apiVersion}/table")]
     [ApiController]
-    [Route("api/table")]
     public class GenericTableController : ControllerBase
     {
         private readonly IUnitOfWork _uow;
