@@ -53,6 +53,7 @@ namespace ApiTemplate.Services
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseAuthMiddleware();
+            app.UseRateLimiter();
             app.MapControllers();
             // SignalR hubs
             app.MapHub<ItemNotificationHub>("/itemNotificationHub");

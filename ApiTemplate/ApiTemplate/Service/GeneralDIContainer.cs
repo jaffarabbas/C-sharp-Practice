@@ -3,6 +3,7 @@ using FluentValidation.AspNetCore;
 using DBLayer;
 using Repositories;
 using ApiTemplate.BackgroundServices;
+using ApiTemplate.Shared.Services;
 
 namespace ApiTemplate.Services
 {
@@ -49,6 +50,9 @@ namespace ApiTemplate.Services
             services.AddValidatorsFromAssemblyContaining<ChangePasswordDtoValidator>();
             services.AddValidatorsFromAssemblyContaining<TblUsersDtoValidator>();
             services.AddFluentValidationAutoValidation();
+
+            //ratelimiting
+            services.AddRateLimiting(configuration);
 
             return services;
         }
