@@ -6,12 +6,14 @@ using Shared.Dtos;
 using System.Text.Json;
 using ApiTemplate.Shared.Helper.Constants;
 using Asp.Versioning;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace ApiTemplate.Controllers
 {
     [ApiVersion(ApiVersioningConstants.CurrentVersion)]
     [Route("api/v{version:apiVersion}/table")]
     [ApiController]
+    [EnableRateLimiting("FixedPolicy")]
     public class GenericTableController : ControllerBase
     {
         private readonly IUnitOfWork _uow;

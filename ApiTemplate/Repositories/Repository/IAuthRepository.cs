@@ -12,5 +12,6 @@ namespace Repositories.Repository
     {
         public Task<LoginResponse> LoginAsync(LoginDto loginDto);
         public Task<object> RegisterAsync(RegisterUserDto userDto);
+        public Task<bool> ChangePasswordAsync(long userId, ChangePasswordDto passwordDto);
     }
 }

@@ -46,7 +46,7 @@ public class UnitOfWork : IUnitOfWork
         _itemRepository ??= new ItemRepository(_context, _connection, _cache, _dapperTransaction);
 
     public IAuthRepository IAuthRepository =>
-        _authRepository ??= new AuthRepository(_context, _connection, _cache, _dapperTransaction, _setting);
+        _authRepository ??= new AuthRepository(_context, _connection, _cache, _dapperTransaction, _setting,this);
     #endregion
 
     // Dynamic table operations exposed through UnitOfWork (lazy resolve to avoid circular constructor)
