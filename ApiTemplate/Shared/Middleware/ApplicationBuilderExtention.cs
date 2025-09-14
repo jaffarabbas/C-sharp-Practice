@@ -1,5 +1,6 @@
 ﻿using ApiTemplate.GlobalExceptionHandler.Confriguations;
 using CustomMiddlewareCollection.ValidateTokenMiddleware.Confriguations;
+using Microsoft.AspNetCore.Builder;
 
 namespace ApiTemplate.Middleware
 {
@@ -26,13 +27,5 @@ namespace ApiTemplate.Middleware
         /// <returns></returns>
         public static IApplicationBuilder UseExceptionMiddleware(this IApplicationBuilder applicationBuilder)
             => applicationBuilder.UseMiddleware<GlobalExceptionsHandlingMiddleware>();
-
-        /// <summary>
-        /// Checking token on http request
-        /// </summary>
-        /// <param name="applicationBuilder"></param>
-        /// <returns></returns>
-        public static IApplicationBuilder UseValidateTokenHandler(this IApplicationBuilder applicationBuilder)
-            => applicationBuilder.UseMiddleware<ValidateJWTTokenMiddleware>();
     }
 }

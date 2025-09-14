@@ -5,6 +5,7 @@ using Repositories.Services;
 using Shared.Dtos;
 using System.Text.Json;
 using ApiTemplate.Shared.Helper.Constants;
+using Asp.Versioning;
 
 namespace ApiTemplate.Controllers
 {

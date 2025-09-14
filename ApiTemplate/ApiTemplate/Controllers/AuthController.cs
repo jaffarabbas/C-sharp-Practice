@@ -2,6 +2,7 @@ using ApiTemplate.Dtos;
 using ApiTemplate.Helper;
 using ApiTemplate.Repository;
 using ApiTemplate.Shared.Helper.Constants;
+using Asp.Versioning;
 using DBLayer.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -15,7 +16,6 @@ namespace ApiTemplate.Controllers
     [ApiVersion(ApiVersioningConstants.CurrentVersion)]
     [Route(ApiVersioningConstants.versionRoute)]
     [ApiController]
-    [SkipJwtValidation]
     public class AuthController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -25,6 +25,7 @@ namespace ApiTemplate.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [SkipJwtValidation]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
@@ -37,6 +38,7 @@ namespace ApiTemplate.Controllers
             return Ok(result);
         }
 
+        [SkipJwtValidation]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserDto userDto)
         {

@@ -1,50 +1,97 @@
+// V1 Controller
 using Microsoft.AspNetCore.Mvc;
 using ApiTemplate.Shared.Dtos; // Adjust namespace if needed
 using ApiTemplate.Shared.Helper.Constants;
+using Asp.Versioning;
 
-namespace ApiTemplate.Controllers
+namespace ApiTemplate.Controllers.V1
 {
-    [ApiVersion(ApiVersioningConstants.CurrentVersion)]
-    [Route(ApiVersioningConstants.versionRoute)]
+    [ApiController]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiExplorerSettings(GroupName = "v1")]
     [SkipJwtValidation]
     public class TestController : ControllerBase
     {
-        // GET: api/test/query?msg=hello
+        // GET: api/v1/test/query?msg=hello
         [HttpGet("query")]
         public IActionResult GetFromQuery([FromQuery] string msg)
         {
-            return Ok(new { source = "query", message = msg ?? "No query message provided" });
+            return Ok(new { source = "query v1", message = msg ?? "No query message provided", version = "1.0" });
         }
 
-        // GET: api/test/direct/hello
+        // GET: api/v1/test/direct/hello
         [HttpGet("direct/{msg}")]
         public IActionResult GetDirect(string msg)
         {
-            return Ok(new { source = "direct", message = msg ?? "No direct message provided" });
+            return Ok(new { source = "direct v1", message = msg ?? "No direct message provided", version = "1.0" });
         }
 
-        // POST: api/test/body
+        // POST: api/v1/test/body
         [HttpPost("body")]
         public IActionResult PostFromBody([FromBody] TestMessage dto)
         {
             if (dto == null || string.IsNullOrWhiteSpace(dto.Message))
-                return BadRequest(new { source = "body", message = "No body message provided" });
+                return BadRequest(new { source = "body v1", message = "No body message provided" });
 
-            return Ok(new { source = "body", message = dto.Message });
+            return Ok(new { source = "body v1", message = dto.Message, version = "1.0" });
         }
 
-        // PUT: api/test/put
+        // PUT: api/v1/test/put
         [HttpPut("put")]
         public IActionResult PutTest([FromBody] TestMessage dto)
         {
-            return Ok(new { source = "put", message = dto?.Message ?? "No put message provided" });
+            return Ok(new { source = "put v1", message = dto?.Message ?? "No put message provided", version = "1.0" });
         }
 
-        // DELETE: api/test/delete?msg=bye
+        // DELETE: api/v1/test/delete?msg=bye
         [HttpDelete("delete")]
         public IActionResult DeleteTest([FromQuery] string msg)
         {
-            return Ok(new { source = "delete", message = msg ?? "No delete message provided" });
+            return Ok(new { source = "delete v1", message = msg ?? "No delete message provided", version = "1.0" });
+        }
+    }
+}
+
+// V2 Controller - Same name but different namespace
+namespace ApiTemplate.Controllers.V2
+{
+    [ApiController]
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiExplorerSettings(GroupName = "v2")]
+    [SkipJwtValidation]
+    public class TestController : ControllerBase  // Same name as V1
+    {
+        // GET: api/v2/test/query?msg=hello
+        [HttpGet("query")]
+        public IActionResult GetFromQuery([FromQuery] string msg)
+        {
+            return Ok(new { source = "query v2", message = $"v2: {msg ?? "No query message provided"}", version = "2.0" });
+        }
+
+        // GET: api/v2/test/direct/hello
+        [HttpGet("direct/{msg}")]
+        public IActionResult GetDirect(string msg)
+        {
+            return Ok(new { source = "direct v2", message = $"v2: {msg ?? "No direct message provided"}", version = "2.0" });
+        }
+
+        // POST: api/v2/test/body
+        [HttpPost("body")]
+        public IActionResult PostFromBody([FromBody] TestMessage dto)
+        {
+            if (dto == null || string.IsNullOrWhiteSpace(dto.Message))
+                return BadRequest(new { source = "body v2", message = "No body message provided" });
+
+            return Ok(new { source = "body v2", message = $"v2: {dto.Message}", version = "2.0" });
+        }
+
+        // New endpoint only available in V2
+        [HttpGet("newfeature")]
+        public IActionResult GetNewFeature()
+        {
+            return Ok(new { source = "new feature", message = "This endpoint is only available in v2", version = "2.0" });
         }
     }
 }

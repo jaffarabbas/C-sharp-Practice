@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ApiTemplate.Attributes;
 using ApiTemplate.Repository;
 using ApiTemplate.Shared.Helper.Constants;
+using Asp.Versioning;
 
 namespace ApiTemplate.Controllers
 {

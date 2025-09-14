@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ApiTemplate.Attributes;
 using ApiTemplate.Repository;
 using ApiTemplate.Shared.Helper.Constants;
+using Asp.Versioning;
 
 namespace ApiTemplate.Controllers
 {
@@ -79,7 +80,7 @@ namespace ApiTemplate.Controllers
             try
             {
                 var repo = _unitOfWork.Repository<TblCompany>();
-                await repo.UpdateAsync("tblCompany", company,"CompanyID");
+                await repo.UpdateAsync("tblCompany", company, "CompanyID");
                 _unitOfWork.Commit();
                 return NoContent();
             }

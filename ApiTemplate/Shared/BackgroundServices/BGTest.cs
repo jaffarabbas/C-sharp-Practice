@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.Extensions.Hosting;
+
 namespace ApiTemplate.BackgroundServices
 {
     public class BGTest : BackgroundService

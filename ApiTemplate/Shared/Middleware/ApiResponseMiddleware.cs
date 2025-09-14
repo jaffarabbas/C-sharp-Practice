@@ -1,4 +1,5 @@
 ﻿using ApiTemplate.Dtos;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Shared.Helper;
 using System.IO.Compression;

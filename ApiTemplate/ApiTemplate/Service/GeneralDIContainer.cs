@@ -1,8 +1,3 @@
-using ApiTemplate.Repository;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.SwaggerGen;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using DBLayer;
@@ -31,8 +26,8 @@ namespace ApiTemplate.Services
             services.AddApiVersioning(configuration);
 
             // Swagger
-            services.AddSwaggerGen();
-            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+            services.AddSwaggerGeneration();
+            // services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 
             // Controllers & Endpoints
             services.AddControllers();

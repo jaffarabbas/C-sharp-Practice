@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,12 @@ using UnAuthorizedAccessException = ApiTemplate.GlobalExceptionHandler.Exception
 
 namespace CustomMiddlewareCollection.ValidateTokenMiddleware.Confriguations
 {
-    public class ValidateJWTTokenMiddleware
+    public class AuthMiddleware
     {
         private readonly RequestDelegate _next;
         private readonly string _authkey;
         private readonly IConfiguration _configuration;
-        public ValidateJWTTokenMiddleware(RequestDelegate next,IConfiguration configuration)
+        public AuthMiddleware(RequestDelegate next,IConfiguration configuration)
         {
             _next = next;
             _configuration = configuration;
@@ -25,7 +26,12 @@ namespace CustomMiddlewareCollection.ValidateTokenMiddleware.Confriguations
         private bool ShouldSkipValidation(HttpContext context)
         {
             var endpoint = context.GetEndpoint();
-            return endpoint?.Metadata.GetMetadata<SkipJwtValidationAttribute>() != null;
+            if (endpoint == null)
+                return true;
+
+            // Check for attribute on method or controller (class)
+            var skipAttr = endpoint.Metadata.GetMetadata<SkipJwtValidationAttribute>();
+            return skipAttr != null;
         }
         public async Task InvokeAsync(HttpContext context)
         {
@@ -99,7 +105,7 @@ namespace CustomMiddlewareCollection.ValidateTokenMiddleware.Confriguations
             }
             catch (Exception)
             {
-                throw new UnAuthorizedAccessException("Invalid Token");
+                return false; // Token validation failed
             }
         }
     }

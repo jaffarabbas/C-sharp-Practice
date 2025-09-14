@@ -1,7 +1,9 @@
 using ApiTemplate.Hubs;
 using ApiTemplate.Middleware;
+using Asp.Versioning.ApiExplorer;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace ApiTemplate.Services
 {
@@ -23,33 +25,35 @@ namespace ApiTemplate.Services
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(options =>
-                {
-                    foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
                     {
-                        options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
-                    }
-                });
+                        // Configure Swagger UI for each API version
+                        foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
+                        {
+                            options.SwaggerEndpoint(
+                                $"/swagger/{description.GroupName}/swagger.json", 
+                                $"API {description.GroupName.ToUpperInvariant()}"
+                            );
+                        }
+                        
+                        // Optional: Set default version
+                        options.DefaultModelsExpandDepth(-1); // Hide models section
+                        options.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
+                        options.DisplayRequestDuration();
+                    });
             }
             // Swagger (kept outside so Program.cs can still control env gating if desired)
             // CORS
             app.UseCors(CorsPolicies.Default);
-
             app.UseHttpsRedirection();
-
             // Custom response wrapper
             app.UseApiResponse();
-
-            // (Your current order) Authorization BEFORE custom auth/token middlewares
-            app.UseAuthorization();
-
-            // Map controllers early (kept as you had it, though typically placed later)
-            app.MapControllers();
-
             // Custom middlewares
-            app.UseAuthMiddleware();
             app.UseExceptionMiddleware();
-            app.UseValidateTokenHandler();
-
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseAuthMiddleware();
+            app.MapControllers();
             // SignalR hubs
             app.MapHub<ItemNotificationHub>("/itemNotificationHub");
 

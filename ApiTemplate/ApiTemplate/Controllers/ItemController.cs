@@ -5,6 +5,7 @@ using ApiTemplate.Attributes;
 using ApiTemplate.Hubs;
 using ApiTemplate.Repository; // Your generic repo namespace
 using ApiTemplate.Shared.Helper.Constants;
+using Asp.Versioning;
 
 namespace ApiTemplate.Controllers
 {

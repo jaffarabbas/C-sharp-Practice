@@ -1,4 +1,8 @@
+using Asp.Versioning;
+using Asp.Versioning.ApiExplorer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ApiTemplate.Services
 {
@@ -12,18 +16,25 @@ namespace ApiTemplate.Services
             var defaultMajor = configuration.GetValue<int>("Version:DefaultMajor", 1);
             var defaultMinor = configuration.GetValue<int>("Version:DefaultMinor", 0);
 
-            services.AddApiVersioning(options =>
+            var apiVersioningBuilder = services.AddApiVersioning(options =>
             {
                 options.DefaultApiVersion = new ApiVersion(defaultMajor, defaultMinor);
                 options.AssumeDefaultVersionWhenUnspecified = true;
                 options.ReportApiVersions = true;
+                
+                // Support multiple versioning methods
+                options.ApiVersionReader = ApiVersionReader.Combine(
+                    new UrlSegmentApiVersionReader(), // api/v1/test
+                    new QueryStringApiVersionReader("version"), // ?version=1.0
+                    new HeaderApiVersionReader("X-Version") // Header: X-Version: 1.0
+                );
             });
 
-            // Add API Explorer (for Swagger/Versioning integration)
-            services.AddVersionedApiExplorer(options =>
+            apiVersioningBuilder.AddApiExplorer(options =>
             {
-                options.GroupNameFormat = "'v'VVV"; // e.g. v1, v1.1, v2
+                options.GroupNameFormat = "'v'VVV"; // e.g. v1, v2
                 options.SubstituteApiVersionInUrl = true;
+                options.AssumeDefaultVersionWhenUnspecified = true;
             });
 
             return services;
