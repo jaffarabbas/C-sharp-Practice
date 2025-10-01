@@ -3,7 +3,7 @@ using ApiTemplate.Dtos;
 
 namespace ApiTemplate.Repository
 {
-    public interface IITemRepository : IGenericRepository<TblItem>
+    public interface IITemRepository
     {
         Task<List<TblItemDto>> GetAllItemsWithPricingTitle();
         Task<TblItemDto?> GetItemWithPricingTitleById(int id);

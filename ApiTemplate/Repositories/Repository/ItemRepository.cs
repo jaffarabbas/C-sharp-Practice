@@ -2,24 +2,27 @@
 using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using Repositories.Attributes;
 using System.Data;
 using ApiTemplate.Dtos;
 
 namespace ApiTemplate.Repository
 {
-    public class ItemRepository : GenericRepository<TblItem>, IITemRepository
+    [AutoRegisterRepository(typeof(IITemRepository))]
+    public class ItemRepository :  IITemRepository
     {
-        private readonly TestContext _context;
         private readonly IDbConnection _connection;
         private readonly IDbTransaction? _transaction;
-        private readonly IMemoryCache _cache;
+        private readonly TestContext _context;
 
-        public ItemRepository(TestContext context,IDbConnection connection,IMemoryCache cache, IDbTransaction? transaction) : base(context,connection,cache,transaction)
+        public ItemRepository(
+            TestContext context,
+            IDbConnection connection,
+            IDbTransaction? transaction)
         {
             _context = context;
             _connection = connection;
             _transaction = transaction;
-            _cache = cache;
         }
 
         public async Task<List<TblItemDto>> GetAllItemsWithPricingTitle()

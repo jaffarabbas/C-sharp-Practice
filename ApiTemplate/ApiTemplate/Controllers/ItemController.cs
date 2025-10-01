@@ -27,7 +27,8 @@ namespace ApiTemplate.Controllers
         [Route("GetAllItems")]
         public async Task<IActionResult> GetAllItems()
         {
-            var items = await _unitOfWork.iTemRepository.GetAllAsync();
+            var repository = _unitOfWork.Repository<TblItem>();
+            var items = await repository.GetAllAsync();
             return Ok(items);
         }
 
@@ -39,9 +40,9 @@ namespace ApiTemplate.Controllers
             {
                 return BadRequest("Item cannot be null");
             }
-
-            var addedItem = await _unitOfWork.iTemRepository.AddAsync(item);
-            await _unitOfWork.iTemRepository.SaveAsync(); // Ensure SaveChanges is called
+            var repository = _unitOfWork.Repository<TblItem>();
+            var addedItem = await repository.AddAsync(item);
+            await _unitOfWork.SaveAsync(); // Ensure SaveChanges is called
             await _hubContext.Clients.All.SendAsync("ItemAdded", addedItem); // Notify clients via SignalR
             return CreatedAtAction(nameof(GetAllItems), new { id = addedItem.TranId }, addedItem);
         }
@@ -53,9 +54,9 @@ namespace ApiTemplate.Controllers
 
             try
             {
+                var repository = _unitOfWork.Repository<TblItem>();
                 await _unitOfWork.BeginTransactionAsync();
-
-                var addedItem = await _unitOfWork.Repository<TblItem>().AddAsync(item);
+                var addedItem = await repository.AddAsync(item);
                 await _unitOfWork.SaveAsync();
 
                 await _unitOfWork.CommitAsync();
@@ -75,11 +76,12 @@ namespace ApiTemplate.Controllers
         {
             try
             {
-                var items = await _unitOfWork.iTemRepository.GetAllItemsWithPricingTitle();
+                var repository = _unitOfWork.GetRepository<IITemRepository>();
+                var items = await repository.GetAllItemsWithPricingTitle();
                 return Ok(items);
             }
             catch (Exception ex)
-            {
+            {   
                 return StatusCode(500, $"Error: {ex.Message}");
             }
         }
@@ -96,8 +98,9 @@ namespace ApiTemplate.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromBody] TblItem item)
         {
-            var repo = _unitOfWork.Repository<TblItem>();
-            await repo.AddAsync("tblItem", item);
+            var repository = _unitOfWork.Repository<TblItem>();
+            _unitOfWork.BeginTransactionAsync().Wait();
+            await repository.AddAsync(item);
             _unitOfWork.Commit();
             return Ok();
         }
@@ -108,7 +111,8 @@ namespace ApiTemplate.Controllers
         {
             try
             {
-                var item = await _unitOfWork.iTemRepository.GetItemWithPricingTitleById(id);
+                var repository = _unitOfWork.GetRepository<IITemRepository>();
+                var item = await repository.GetItemWithPricingTitleById(id);
                 if (item == null)
                 {
                     return NotFound();

@@ -13,5 +13,9 @@ namespace Repositories.Repository
         public Task<LoginResponse> LoginAsync(LoginDto loginDto);
         public Task<object> RegisterAsync(RegisterUserDto userDto);
         public Task<bool> ChangePasswordAsync(long userId, ChangePasswordDto passwordDto);
+        public Task<string> GeneratePasswordResetTokenAsync(ForgotPasswordDto forgotPasswordDto);
+        public Task<bool> ResetPasswordAsync(ResetPasswordDto resetPasswordDto);
+        public Task<string> GenerateJwtResetTokenAsync(long userId);
+        public Task<TokenResponse?> RefreshTokenWithResetTokenAsync(string resetToken);
     }
 }

@@ -4,6 +4,7 @@ using DBLayer;
 using Repositories;
 using ApiTemplate.BackgroundServices;
 using ApiTemplate.Shared.Services;
+using Shared.Services;
 
 namespace ApiTemplate.Services
 {
@@ -53,6 +54,9 @@ namespace ApiTemplate.Services
 
             //ratelimiting
             services.AddRateLimiting(configuration);
+
+            // Email Services
+            services.AddEmailServices(configuration);
 
             return services;
         }

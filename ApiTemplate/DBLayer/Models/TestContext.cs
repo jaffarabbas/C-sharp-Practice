@@ -47,6 +47,10 @@ public partial class TestContext : DbContext
 
     public virtual DbSet<TblUserRole> TblUserRoles { get; set; }
 
+    public virtual DbSet<TblResetToken> TblResetTokens { get; set; }
+
+    public virtual DbSet<TblTokenType> TblTokenTypes { get; set; }
+
     public virtual DbSet<Test1> Test1s { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -422,6 +426,52 @@ public partial class TestContext : DbContext
                 .HasDefaultValue("");
             entity.Property(e => e.Username)
                 .HasMaxLength(100)
+                .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<TblResetToken>(entity =>
+        {
+            entity.HasKey(e => e.ResetTokenId);
+
+            entity.ToTable("tblResetToken");
+
+            entity.Property(e => e.ResetTokenId).ValueGeneratedNever();
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.TokenType)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Token)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.ExpiresAt)
+                .HasColumnType("datetime");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.IsUsed).HasDefaultValue(false);
+
+            entity.HasOne(d => d.User).WithMany()
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ResetToken_User");
+
+            entity.HasOne(d => d.TokenTypeNavigation).WithMany(p => p.TblResetTokens)
+                .HasForeignKey(d => d.TokenType)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ResetToken_TokenType");
+        });
+
+        modelBuilder.Entity<TblTokenType>(entity =>
+        {
+            entity.HasKey(e => e.TokenType);
+
+            entity.ToTable("tblTokenType");
+
+            entity.Property(e => e.TokenType)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Description)
+                .HasMaxLength(255)
                 .IsUnicode(false);
         });
 

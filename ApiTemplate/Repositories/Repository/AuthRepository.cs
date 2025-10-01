@@ -6,7 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Repositories.Attributes;
 using Shared.Dtos;
+using Shared.Services;
 using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -14,11 +16,16 @@ using System.Text;
 
 namespace Repositories.Repository
 {
-    public class AuthRepository : GenericRepository<LoginDto>, IAuthRepository
+    [AutoRegisterRepository(typeof(IAuthRepository))]
+    public class AuthRepository : BaseRepository<LoginDto>, IAuthRepository
     {
         private readonly TestContext _context;
         private readonly IUnitOfWork _unitOfWork;
         private readonly JWTSetting _setting;
+
+        // Lazy-loaded email service - only resolved when needed
+        private IEmailService? _emailService;
+        private IEmailService EmailService => _emailService ??= GetService<IEmailService>();
 
         public AuthRepository(
             TestContext context,
@@ -26,7 +33,8 @@ namespace Repositories.Repository
             IMemoryCache cache,
             IDbTransaction? transaction,
             IOptions<JWTSetting> settings,
-            IUnitOfWork unitOfWork) : base(context, connection, cache, transaction)
+            IUnitOfWork unitOfWork,
+            IServiceProvider serviceProvider) : base(context, connection, cache, transaction, serviceProvider)
         {
             _context = context;
             _unitOfWork = unitOfWork;
@@ -265,6 +273,179 @@ namespace Repositories.Repository
             {
                 JWTToken = tokenHandler.WriteToken(token)
             };
+        }
+
+        public async Task<string> GeneratePasswordResetTokenAsync(ForgotPasswordDto forgotPasswordDto)
+        {
+            try
+            {
+                var user = await _context.TblUsers
+                    .FirstOrDefaultAsync(u => u.Email == forgotPasswordDto.Email && u.Status);
+
+                if (user == null)
+                    return string.Empty; // Don't reveal if email exists or not
+
+                // Invalidate any existing password reset tokens for this user
+                var existingTokens = await _context.TblResetTokens
+                    .Where(t => t.UserId == user.Userid && t.TokenType == "PASSWORD_RESET" && !t.IsUsed && t.ExpiresAt > DateTime.UtcNow)
+                    .ToListAsync();
+
+                foreach (var token in existingTokens)
+                {
+                    token.IsUsed = true;
+                }
+
+                // Generate new reset token
+                var resetToken = Guid.NewGuid().ToString("N");
+                var tokenRepo = _unitOfWork.Repository<TblResetToken>();
+                var resetTokenId = await tokenRepo.GetMaxID("tblResetToken", "ResetTokenId");
+
+                var passwordResetToken = new TblResetToken
+                {
+                    ResetTokenId = (int)resetTokenId,
+                    UserId = user.Userid,
+                    TokenType = "PASSWORD_RESET",
+                    Token = resetToken,
+                    ExpiresAt = DateTime.UtcNow.AddHours(1), // Token expires in 1 hour
+                    CreatedAt = DateTime.UtcNow,
+                    IsUsed = false
+                };
+
+                await tokenRepo.AddAsync("tblResetToken", passwordResetToken);
+
+                // Send password reset email
+                var userName = $"{user.Firstname} {user.Lastname}".Trim();
+                await EmailService.SendPasswordResetEmailAsync(user.Email, userName, resetToken);
+
+                return resetToken;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<bool> ResetPasswordAsync(ResetPasswordDto resetPasswordDto)
+        {
+            try
+            {
+                // Find and validate the reset token
+                var resetTokenRecord = await _context.TblResetTokens
+                    .Include(t => t.User)
+                    .FirstOrDefaultAsync(t => t.Token == resetPasswordDto.ResetToken
+                        && t.TokenType == "PASSWORD_RESET"
+                        && !t.IsUsed
+                        && t.ExpiresAt > DateTime.UtcNow
+                        && t.User.Email == resetPasswordDto.Email
+                        && t.User.Status);
+
+                if (resetTokenRecord == null)
+                    return false;
+
+                var userRepo = _unitOfWork.Repository<TblUser>();
+                var user = resetTokenRecord.User;
+
+                // Update password
+                var salt = HashPassword.GenerateSalt();
+                var encryptedPassword = HashPassword.Hash(resetPasswordDto.NewPassword, salt, "sha256");
+                user.Password = Convert.ToBase64String(encryptedPassword);
+                user.Salt = Convert.ToBase64String(salt);
+
+                await userRepo.UpdateAsync("tblUsers", user, "Userid");
+
+                // Mark token as used
+                var tokenRepo = _unitOfWork.Repository<TblResetToken>();
+                resetTokenRecord.IsUsed = true;
+                await tokenRepo.UpdateAsync("tblResetToken", resetTokenRecord, "ResetTokenId");
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<string> GenerateJwtResetTokenAsync(long userId)
+        {
+            try
+            {
+                var userRepo = _unitOfWork.Repository<TblUser>();
+                var user = await userRepo.GetByIdAsync("tblUsers", "Userid", userId);
+
+                if (user == null || !user.Status)
+                    return string.Empty;
+
+                // Invalidate any existing JWT reset tokens for this user
+                var existingTokens = await _context.TblResetTokens
+                    .Where(t => t.UserId == userId && t.TokenType == "JWT_RESET" && !t.IsUsed && t.ExpiresAt > DateTime.UtcNow)
+                    .ToListAsync();
+
+                foreach (var token in existingTokens)
+                {
+                    token.IsUsed = true;
+                }
+
+                // Generate new JWT reset token
+                var jwtResetToken = Guid.NewGuid().ToString("N");
+                var tokenRepo = _unitOfWork.Repository<TblResetToken>();
+                var resetTokenId = await tokenRepo.GetMaxID("tblResetToken", "ResetTokenId");
+
+                var resetTokenRecord = new TblResetToken
+                {
+                    ResetTokenId = (int)resetTokenId,
+                    UserId = userId,
+                    TokenType = "JWT_RESET",
+                    Token = jwtResetToken,
+                    ExpiresAt = DateTime.UtcNow.AddMinutes(15), // JWT reset token expires in 15 minutes
+                    CreatedAt = DateTime.UtcNow,
+                    IsUsed = false
+                };
+
+                await tokenRepo.AddAsync("tblResetToken", resetTokenRecord);
+
+                // Send JWT reset token email
+                var userName = $"{user.Firstname} {user.Lastname}".Trim();
+                await EmailService.SendJwtResetTokenEmailAsync(user.Email, userName, jwtResetToken);
+
+                return jwtResetToken;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<TokenResponse?> RefreshTokenWithResetTokenAsync(string resetToken)
+        {
+            try
+            {
+                // Find and validate the JWT reset token
+                var resetTokenRecord = await _context.TblResetTokens
+                    .Include(t => t.User)
+                    .FirstOrDefaultAsync(t => t.Token == resetToken
+                        && t.TokenType == "JWT_RESET"
+                        && !t.IsUsed
+                        && t.ExpiresAt > DateTime.UtcNow
+                        && t.User.Status);
+
+                if (resetTokenRecord == null)
+                    return null;
+
+                // Generate new JWT token
+                var newJwtToken = GenerateToken(resetTokenRecord.User);
+
+                // Mark reset token as used
+                var tokenRepo = _unitOfWork.Repository<TblResetToken>();
+                resetTokenRecord.IsUsed = true;
+                await tokenRepo.UpdateAsync("tblResetToken", resetTokenRecord, "ResetTokenId");
+
+                return newJwtToken;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private async Task<IEnumerable<string>> GetUserRolesAsync(long userId)
