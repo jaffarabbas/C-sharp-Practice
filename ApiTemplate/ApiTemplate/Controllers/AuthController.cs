@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.RateLimiting;
 using Repositories.Repository;
 using Shared.Dtos;
 using Shared.Services;
-using System.DirectoryServices;
 
 namespace ApiTemplate.Controllers
 {
