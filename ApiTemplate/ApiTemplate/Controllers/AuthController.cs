@@ -20,7 +20,7 @@ namespace ApiTemplate.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IEmailService _emailService;
-
+        private readonly string mergeString = "merges";
         public AuthController(IUnitOfWork unitOfWork, IEmailService emailService)
         {
             _unitOfWork = unitOfWork;
