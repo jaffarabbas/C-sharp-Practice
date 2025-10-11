@@ -15,6 +15,14 @@ public partial class TestContext : DbContext
     {
     }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer("Server=127.0.0.1,1433;Database=test2;User Id=sa;Password=YourStrongPassword!;TrustServerCertificate=True;");
+        }
+    }
+
     public virtual DbSet<TblActionType> TblActionTypes { get; set; }
 
     public virtual DbSet<TblBranch> TblBranches { get; set; }

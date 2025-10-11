@@ -151,6 +151,11 @@ insert into tblResource (ResourceID, ResourceName) values
 (2, 'Invoice'),
 (3, 'Project');
 
+insert into tblResource (ResourceID, ResourceName) values
+(5, 'UserManagement')
+
+
+
 select * from tblPermission
 
 -- Employee Permissions
@@ -174,6 +179,18 @@ insert into tblPermission (PermissionID, ResourceID, ActionTypeID) values
 (11, 3, 3), -- Project + Delete
 (12, 3, 4); -- Project + Edit
 
+insert into tblPermission (PermissionID, ResourceID, ActionTypeID) values
+(13, 4, 1),
+(14, 4, 2),
+(15, 4, 3),
+(16, 4, 4);
+
+INSERT into tblPermission (PermissionID, ResourceID, ActionTypeID) values
+(17, 5, 1),
+(18, 5, 2),
+(19, 5, 3),
+(20, 5, 4);
+
 
 -- Admin gets all permissions
 insert into tblRolePermission (RolePermissionID, RoleID, PermissionID) values
@@ -195,6 +212,20 @@ insert into tblRolePermission (RolePermissionID, RoleID, PermissionID) values
 insert into tblRolePermission (RolePermissionID, RoleID, PermissionID) values
 (19, 4, 1),(20, 4, 5),(21, 4, 9); -- View Employee, Invoice, Project
 
+insert into tblRolePermission (RolePermissionID, RoleID, PermissionID) values
+(22, 1, 14);
+
+insert into tblRolePermission (RolePermissionID, RoleID, PermissionID) values
+(23, 1, 13),
+(24, 1, 15),
+(25, 1, 16);
+
+INSERT into tblRolePermission (RolePermissionID, RoleID, PermissionID) values
+(26, 1, 17),
+(27, 1, 18),
+(28, 1, 19),
+(29, 1, 20);
+
 select * from tblUsers
 -- User 101 = Admin
 insert into tblUserRole (UserRoleID, UserID, RoleID) values (1, 1, 1);
@@ -207,7 +238,6 @@ insert into tblUserRole (UserRoleID, UserID, RoleID) values (3, 3, 3);
 
 -- User 104 = CEO
 insert into tblUserRole (UserRoleID, UserID, RoleID) values (4, 4, 4);
-
 
 
 insert into tblRoleHierarchy (ParentRoleID, ChildRoleID) values
@@ -227,14 +257,14 @@ join tblRolePermission rp on r.RoleID = rp.RoleID
 join tblPermission p on rp.PermissionID = p.PermissionID
 join tblResource res on p.ResourceID = res.ResourceID
 join tblActionType at on p.ActionTypeID = at.ActionTypeID
-where u.UserID = 1; -- change UserID here
+where u.UserID = 2; -- change UserID here
 
 
 ;with RoleCTE as (
     -- Start with direct roles of the user
     select ur.RoleID
     from tblUserRole ur
-    where ur.UserID = 1 -- Example: CEO user
+    where ur.UserID = 2 -- Example: CEO user
 
     union all
 
@@ -256,7 +286,7 @@ join tblRolePermission rp on r.RoleID = rp.RoleID
 join tblPermission p on rp.PermissionID = p.PermissionID
 join tblResource res on p.ResourceID = res.ResourceID
 join tblActionType at on p.ActionTypeID = at.ActionTypeID
-where u.UserID = 1;
+where u.UserID = 2;
 
 
 select * from tblUsers

@@ -4,6 +4,7 @@ using ApiTemplate.Attributes;
 using ApiTemplate.Repository;
 using ApiTemplate.Shared.Helper.Constants;
 using Asp.Versioning;
+using Repositories.Attributes;
 
 namespace ApiTemplate.Controllers
 {
@@ -21,6 +22,7 @@ namespace ApiTemplate.Controllers
         }
 
         [HttpGet]
+        [RequirePermission("Branch", "view")]
         public async Task<IActionResult> GetAll()
         {
             try
@@ -36,6 +38,7 @@ namespace ApiTemplate.Controllers
         }
 
         [HttpGet("{id}")]
+        [RequirePermission("Branch", "view")]
         public async Task<IActionResult> GetById(long id)
         {
             try
@@ -53,6 +56,7 @@ namespace ApiTemplate.Controllers
         }
 
         [HttpPost]
+        [RequirePermission("Branch", "add")]
         public async Task<IActionResult> Add([FromBody] TblBranch branch)
         {
             if (branch == null)
@@ -72,6 +76,7 @@ namespace ApiTemplate.Controllers
         }
 
         [HttpPut("{id}")]
+        [RequirePermission("Branch", "edit")]
         public async Task<IActionResult> Update(long id, [FromBody] TblBranch branch)
         {
             if (branch == null || branch.BranchId != id)
@@ -80,7 +85,7 @@ namespace ApiTemplate.Controllers
             try
             {
                 var repo = _unitOfWork.Repository<TblBranch>();
-                await repo.UpdateAsync("tblBranch", branch,"BranchID");
+                await repo.UpdateAsync("tblBranch", branch, "BranchID");
                 _unitOfWork.Commit();
                 return NoContent();
             }
@@ -91,6 +96,7 @@ namespace ApiTemplate.Controllers
         }
 
         [HttpDelete("{id}")]
+        [RequirePermission("Branch", "delete")]
         public async Task<IActionResult> Delete(long id)
         {
             try

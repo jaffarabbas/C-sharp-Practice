@@ -1,5 +1,6 @@
 using ApiTemplate.Repository;
 using Microsoft.Extensions.DependencyInjection;
+using Repositories.Repository;
 using Repositories.Services;
 
 namespace Repositories
@@ -18,11 +19,17 @@ namespace Repositories
         {
             // Register the generic repository interface and its implementation
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            
+
             services.AddScoped<ITableOperationService, TableOperationService>(); // used by UnitOfWork
             // Register UnitOfWork
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            #region Service Scanning
+            // Authorization Service
+            services.AddScoped<IAuthorizationService, AuthorizationService>();
+            // Register User Management Repository
+            services.AddScoped<IUserManagementRepository, UserManagementRepository>();
+            #endregion
 
             return services;
         }
