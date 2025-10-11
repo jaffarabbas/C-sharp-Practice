@@ -11,6 +11,7 @@ namespace ApiTemplate.Repository
         void Update(T entity);
         void Delete(T entity);
         Task SaveAsync();
+        Task<long> GetMaxID(object id);
         Task<long> GetMaxID(string tableName,string columnName);
         Task<IEnumerable<T>> GetAllAsync(string table);
         Task<PagedResult<T>> GetEnityPagedAsync(int pageNumber, int pageSize);
@@ -31,6 +32,7 @@ namespace ApiTemplate.Repository
         Task<bool> UpdateAsync(T entity, OrmType ormType, CrudOptions? options = null);
         Task<bool> DeleteAsync(object id, OrmType ormType, CrudOptions? options = null);
         Task<bool> DeleteEntityAsync(T entity, OrmType ormType, CrudOptions? options = null);
+        Task<long> GetMaxID(object id, OrmType ormType, CrudOptions? options = null);
     }
 
 }

@@ -158,6 +158,18 @@ namespace ApiTemplate.Repository
             }
         }
 
+        public async Task<long> GetMaxID(object id, OrmType ormType, CrudOptions? options = null)
+        {
+            options ??= new CrudOptions();
+
+            return ormType switch
+            {
+                OrmType.EntityFramework => await GetMaxID(id),
+                OrmType.Dapper => await GetMaxID(options.TableName ?? typeof(T).Name, options.KeyColumnName!),
+                _ => throw new ArgumentException("Invalid ORM type")
+            };
+        }
+
         #endregion
 
         #region Original Interface Implementation (EF Core + Cache)
@@ -244,6 +256,43 @@ namespace ApiTemplate.Repository
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Gets the next available ID for the specified column (MAX + 1) using Entity Framework
+        /// </summary>
+        /// <param name="columnName">The name of the ID column (e.g., "PermissionID", "ResourceID")</param>
+        /// <returns>The next available ID (already incremented)</returns>
+        public async Task<long> GetMaxID(string columnName)
+        {
+            try
+            {
+                // Get max value of the specified column using EF.Property
+                var maxId = await _dbSet
+                    .Select(e => (long?)EF.Property<long>(e, columnName))
+                    .MaxAsync() ?? 0;
+
+                // Return incremented value (next available ID)
+                return maxId + 1;
+            }
+            catch (ArgumentException)
+            {
+                // Column doesn't exist or invalid property name
+                throw new ArgumentException($"Column '{columnName}' does not exist in entity {typeof(T).Name}");
+            }
+        }
+
+        /// <summary>
+        /// Overload for backward compatibility - uses object parameter but expects string
+        /// </summary>
+        public async Task<long> GetMaxID(object id)
+        {
+            if (id is string columnName)
+            {
+                return await GetMaxID(columnName);
+            }
+
+            throw new ArgumentException("Parameter must be a string column name (e.g., 'PermissionID')");
         }
 
         #endregion

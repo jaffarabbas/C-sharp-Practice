@@ -23,17 +23,11 @@ namespace Repositories.Repository
             using var transaction = await _context.Database.BeginTransactionAsync();
             try
             {
-                // 1. Check if resource already exists using UnitOfWork
-                var existingResource = await _unitOfWork.Repository<TblResource>().GetByIdAsync(dto.ResourceId);
-                if (existingResource != null)
-                {
-                    throw new ArgumentException($"Resource with ID {dto.ResourceId} already exists");
-                }
-
+                var resourceID = await _unitOfWork.Repository<TblResource>().GetMaxID("ResourceId");
                 // 2. Add the resource using UnitOfWork
                 var resource = new TblResource
                 {
-                    ResourceId = dto.ResourceId,
+                    ResourceId = Convert.ToInt32(resourceID),
                     ResourceName = dto.ResourceName,
                     ResourceIsActive = true,
                     ResourceCreatedAt = DateTime.UtcNow
@@ -53,13 +47,19 @@ namespace Repositories.Repository
                 }
 
                 // 4. Create permissions (Resource + ActionType combinations) using UnitOfWork
-                long permissionIdStart = await _unitOfWork.Repository<TblPermission>().GetMaxID("tblPermission", "PermissionID") + 1;
+                var permissionOptions = new ApiTemplate.Dtos.CrudOptions
+                {
+                    TableName = "tblPermission",
+                    KeyColumnName = "PermissionID"
+                };
+                long permissionIdStart = await _unitOfWork.RepositoryWrapper<TblPermission>()
+                    .GetMaxID(0, ApiTemplate.Helper.Enum.OrmType.Dapper, permissionOptions);
 
                 foreach (var actionTypeId in dto.ActionTypeIds)
                 {
                     var permission = new TblPermission
                     {
-                        PermissionId = Convert.ToInt32(permissionIdStart++),
+                        PermissionId = Convert.ToInt32(permissionIdStart),
                         ResourceId = dto.ResourceId,
                         ActionTypeId = actionTypeId,
                         PermissionIsActive = true,
@@ -70,7 +70,13 @@ namespace Repositories.Repository
                 await _unitOfWork.Repository<TblPermission>().SaveAsync();
 
                 // 5. Map permissions to roles (RolePermission) using UnitOfWork
-                long rolePermissionIdStart = await _unitOfWork.Repository<TblRolePermission>().GetMaxID("tblRolePermission", "RolePermissionID") + 1;
+                var rolePermissionOptions = new ApiTemplate.Dtos.CrudOptions
+                {
+                    TableName = "tblRolePermission",
+                    KeyColumnName = "RolePermissionID"
+                };
+                long rolePermissionIdStart = await _unitOfWork.RepositoryWrapper<TblRolePermission>()
+                    .GetMaxID(0, ApiTemplate.Helper.Enum.OrmType.Dapper, rolePermissionOptions);
 
                 // Get permissions we just created
                 var allPermissions = await _unitOfWork.Repository<TblPermission>().GetAllAsync();
@@ -99,7 +105,7 @@ namespace Repositories.Repository
                     {
                         var rolePermissionEntry = new TblRolePermission
                         {
-                            RolePermissionId = Convert.ToInt32(rolePermissionIdStart++),
+                            RolePermissionId = Convert.ToInt32(rolePermissionIdStart),
                             RoleId = roleId,
                             PermissionId = permission.PermissionId,
                             RolePermissionIsActive = true,
@@ -159,7 +165,13 @@ namespace Repositories.Repository
             }
 
             // Create new user role assignment using UnitOfWork
-            var userRoleId = await _unitOfWork.Repository<TblUserRole>().GetMaxID("tblUserRole", "UserRoleID") + 1;
+            var userRoleOptions = new ApiTemplate.Dtos.CrudOptions
+            {
+                TableName = "tblUserRole",
+                KeyColumnName = "UserRoleID"
+            };
+            var userRoleId = await _unitOfWork.RepositoryWrapper<TblUserRole>()
+                .GetMaxID(0, ApiTemplate.Helper.Enum.OrmType.Dapper, userRoleOptions);
             var userRole = new TblUserRole
             {
                 UserRoleId = Convert.ToInt32(userRoleId),
