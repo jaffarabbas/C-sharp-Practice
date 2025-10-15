@@ -59,6 +59,10 @@ namespace ApiTemplate.Services
             // Email Services
             services.AddEmailServices(configuration);
 
+            // Audit Logging Service
+            services.AddHttpContextAccessor();
+            services.AddScoped<IAuditLoggingService, AuditLoggingService>();
+
             return services;
         }
     }

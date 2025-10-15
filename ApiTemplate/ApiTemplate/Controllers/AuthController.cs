@@ -20,10 +20,19 @@ namespace ApiTemplate.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IEmailService _emailService;
-        public AuthController(IUnitOfWork unitOfWork, IEmailService emailService)
+        private readonly IAuditLoggingService _auditLogger;
+        private readonly ILogger<AuthController> _logger;
+
+        public AuthController(
+            IUnitOfWork unitOfWork,
+            IEmailService emailService,
+            IAuditLoggingService auditLogger,
+            ILogger<AuthController> logger)
         {
             _unitOfWork = unitOfWork;
             _emailService = emailService;
+            _auditLogger = auditLogger;
+            _logger = logger;
         }
 
         /// <summary>
@@ -34,23 +43,37 @@ namespace ApiTemplate.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
+            var ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "Unknown";
+
             try
             {
                 if (!ModelState.IsValid)
+                {
+                    await _auditLogger.LogLoginAttempt(loginDto.Username!, false, ipAddress, "Invalid model state");
                     return BadRequest(ModelState);
+                }
 
                 var report = _unitOfWork.GetRepository<IAuthRepository>();
                 var result = await report.LoginAsync(loginDto);
+
                 if (result == null)
                 {
+                    await _auditLogger.LogLoginAttempt(loginDto.Username!, false, ipAddress, "Invalid credentials or inactive account");
+                    _logger.LogWarning("Failed login attempt for username: {Username} from IP: {IPAddress}", loginDto.Username, ipAddress);
                     return Unauthorized("Invalid credentials or inactive account");
                 }
+
+                await _auditLogger.LogLoginAttempt(loginDto.Username!, true, ipAddress);
+                _logger.LogInformation("Successful login for username: {Username} from IP: {IPAddress}", loginDto.Username, ipAddress);
 
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Login failed: {ex.Message}");
+                await _auditLogger.LogSecurityEvent("LoginException", $"Exception during login for {loginDto.Username}",
+                    new Dictionary<string, object> { { "Exception", ex.Message } });
+                _logger.LogError(ex, "Login failed for username: {Username}", loginDto.Username);
+                return StatusCode(500, "Login failed. Please try again later.");
             }
         }
 

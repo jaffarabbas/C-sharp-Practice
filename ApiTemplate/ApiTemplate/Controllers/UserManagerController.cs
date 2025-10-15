@@ -15,7 +15,6 @@ namespace ApiTemplate.Controllers
     public class UserManagerController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-
         public UserManagerController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
