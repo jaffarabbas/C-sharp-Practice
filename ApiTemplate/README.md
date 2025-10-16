@@ -13,6 +13,7 @@ A production-ready, enterprise-grade ASP.NET Core Web API template with authenti
 - [Database Setup](#-database-setup)
 - [Configuration](#️-configuration)
 - [Authentication & Authorization](#-authentication--authorization)
+- [Generic Repository Pattern](#-generic-repository-pattern) ⭐
 - [Logging System](#-logging-system)
 - [API Documentation](#-api-documentation)
 - [Development Guide](#-development-guide)
@@ -574,6 +575,247 @@ public class SalaryController : ControllerBase
 
 ---
 
+## 🏗️ Generic Repository Pattern
+
+This is the **heart of the codebase** - a powerful, flexible data access layer that supports both Entity Framework Core and Dapper.
+
+### Quick Overview
+
+The Generic Repository pattern provides:
+- ✅ **Dual ORM Support** - Switch between EF Core and Dapper at runtime
+- ✅ **Automatic Caching** - Built-in performance optimization
+- ✅ **Transaction Management** - Coordinated EF + Dapper transactions
+- ✅ **Auto-Discovery** - Repositories automatically registered via attributes
+- ✅ **Dependency Injection** - Services resolved only when needed
+
+### Three Ways to Access Data
+
+#### 1. Direct Generic Access (Simple CRUD)
+
+Perfect for basic operations without custom logic:
+
+```csharp
+public class ProductController : ControllerBase
+{
+    private readonly IUnitOfWork _unitOfWork;
+
+    public ProductController(IUnitOfWork unitOfWork)
+    {
+        _unitOfWork = unitOfWork;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        // Get generic repository for any entity
+        var productRepo = _unitOfWork.Repository<Product>();
+
+        // EF Core with automatic caching
+        var products = await productRepo.GetAllAsync();
+
+        return Ok(products);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] Product product)
+    {
+        var productRepo = _unitOfWork.Repository<Product>();
+
+        await productRepo.AddAsync(product);
+        await _unitOfWork.SaveAsync();  // EF: Save changes
+
+        return Ok();
+    }
+}
+```
+
+#### 2. ORM Wrapper (Choose EF or Dapper)
+
+Flexibility to choose the best ORM for each operation:
+
+```csharp
+[HttpGet("paged")]
+public async Task<IActionResult> GetPaged(int page = 1, int pageSize = 10)
+{
+    var productRepo = _unitOfWork.RepositoryWrapper<Product>();
+
+    // Option 1: Entity Framework (with navigation properties)
+    var productsEF = await productRepo.GetAllAsync(OrmType.EntityFramework);
+
+    // Option 2: Dapper (faster for large datasets)
+    var productsDapper = await productRepo.GetPagedAsync(
+        page,
+        pageSize,
+        OrmType.Dapper,
+        new CrudOptions
+        {
+            TableName = "Products",
+            OrderBy = "ProductId"
+        }
+    );
+
+    return Ok(productsDapper);
+}
+```
+
+#### 3. Custom Repositories (Complex Business Logic)
+
+For operations requiring custom logic, multiple services, or complex queries:
+
+```csharp
+// Step 1: Create Interface
+public interface IProductRepository
+{
+    Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId);
+    Task<Product?> GetProductWithDetailsAsync(int productId);
+}
+
+// Step 2: Implement Repository
+[AutoRegisterRepository(typeof(IProductRepository))]  // ← Auto-discovered!
+public class ProductRepository : BaseRepository<Product>, IProductRepository
+{
+    private readonly TestContext _context;
+    private readonly IUnitOfWork _unitOfWork;
+
+    // Lazy-load services only when needed
+    private IEmailService? _emailService;
+    private IEmailService EmailService => _emailService ??= GetService<IEmailService>();
+
+    public ProductRepository(
+        TestContext context,
+        IDbConnection connection,
+        IMemoryCache cache,
+        IDbTransaction? transaction,
+        IUnitOfWork unitOfWork,
+        IServiceProvider serviceProvider)  // ← Enables GetService<T>()
+        : base(context, connection, cache, transaction, serviceProvider)
+    {
+        _context = context;
+        _unitOfWork = unitOfWork;
+    }
+
+    public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(int categoryId)
+    {
+        // Complex EF Core query with includes
+        return await _context.Products
+            .Include(p => p.Category)
+            .Include(p => p.Supplier)
+            .Where(p => p.CategoryId == categoryId)
+            .ToListAsync();
+    }
+
+    public async Task<Product?> GetProductWithDetailsAsync(int productId)
+    {
+        var product = await _context.Products
+            .Include(p => p.Category)
+            .Include(p => p.OrderDetails)
+            .FirstOrDefaultAsync(p => p.ProductId == productId);
+
+        // Use additional services
+        if (product != null && product.Stock < 10)
+        {
+            await EmailService.SendEmailAsync(new EmailDto
+            {
+                To = "admin@example.com",
+                Subject = "Low Stock Alert",
+                Body = $"Product {product.Name} is running low on stock"
+            });
+        }
+
+        return product;
+    }
+}
+
+// Step 3: Use in Controller
+[HttpGet("category/{categoryId}")]
+public async Task<IActionResult> GetByCategory(int categoryId)
+{
+    var productRepo = _unitOfWork.GetRepository<IProductRepository>();
+    var products = await productRepo.GetProductsByCategoryAsync(categoryId);
+    return Ok(products);
+}
+```
+
+### Understanding the Architecture
+
+```
+UnitOfWork (Single entry point)
+    │
+    ├── Repository<T>()           → GenericRepository → Direct CRUD
+    ├── RepositoryWrapper<T>()    → GenericRepository → Choose ORM at runtime
+    └── GetRepository<ICustom>()  → BaseRepository    → Custom logic + DI
+            │
+            └── GetService<T>()   → Resolve additional dependencies
+                    │
+                    ├── IEmailService
+                    ├── ILogger<T>
+                    ├── IAuditLoggingService
+                    └── Any other service
+```
+
+### Transaction Management
+
+```csharp
+public async Task<IActionResult> CreateOrderWithItems([FromBody] OrderDto orderDto)
+{
+    try
+    {
+        // Start transaction
+        await _unitOfWork.BeginTransactionAsync();
+
+        var orderRepo = _unitOfWork.Repository<Order>();
+        var itemRepo = _unitOfWork.Repository<OrderItem>();
+
+        // Create order
+        var order = new Order { /* ... */ };
+        await orderRepo.AddAsync(order);
+        await _unitOfWork.SaveAsync();
+
+        // Create items
+        foreach (var item in orderDto.Items)
+        {
+            await itemRepo.AddAsync(new OrderItem { /* ... */ });
+        }
+        await _unitOfWork.SaveAsync();
+
+        // Commit both operations
+        await _unitOfWork.CommitAsync();
+
+        return Ok(order);
+    }
+    catch (Exception ex)
+    {
+        // Rollback on error
+        await _unitOfWork.RollbackAsync();
+        return StatusCode(500, ex.Message);
+    }
+}
+```
+
+### Key Benefits
+
+| Feature | Benefit |
+|---------|---------|
+| **BaseRepository** | Provides `GetService<T>()` for dependency injection |
+| **UnitOfWork** | Single entry point, manages all repositories |
+| **Auto-Discovery** | `[AutoRegisterRepository]` attribute auto-registers repos |
+| **Dual ORM** | Use EF Core for complex queries, Dapper for performance |
+| **Caching** | Automatic 5-10 minute cache for reads |
+| **Transactions** | Coordinate multiple operations atomically |
+
+### 📖 Complete Guide
+
+For detailed information including:
+- How dependencies flow through the system
+- Creating complex custom repositories
+- Mixing EF Core and Dapper in single operations
+- Best practices and common patterns
+- Advanced examples and troubleshooting
+
+**See:** [GENERIC_REPOSITORY_GUIDE.md](./GENERIC_REPOSITORY_GUIDE.md) - Complete 50+ page guide
+
+---
+
 ## 📊 Logging System
 
 The API includes a comprehensive logging system powered by **Serilog**.
@@ -1011,9 +1253,18 @@ dotnet run
 
 ## 📖 Additional Documentation
 
-- [LOGGING_DOCUMENTATION.md](./LOGGING_DOCUMENTATION.md) - Complete logging guide
+### Core Documentation
+- **[GENERIC_REPOSITORY_GUIDE.md](./GENERIC_REPOSITORY_GUIDE.md)** - ⭐ Complete guide to the repository pattern (50+ pages)
+  - Understanding the architecture
+  - Creating custom repositories
+  - Using UnitOfWork and dependency injection
+  - Best practices and advanced examples
+
+### Logging Documentation
+- [LOGGING_DOCUMENTATION.md](./LOGGING_DOCUMENTATION.md) - Complete logging system guide
 - [LOGGING_QUICK_START.md](./LOGGING_QUICK_START.md) - Quick start for logging
-- [FINAL_REFACTORING_SUMMARY.md](./FINAL_REFACTORING_SUMMARY.md) - Architecture details
+- [LOGGING_REFACTORING_SUMMARY.md](./LOGGING_REFACTORING_SUMMARY.md) - Logging architecture
+- [FINAL_REFACTORING_SUMMARY.md](./FINAL_REFACTORING_SUMMARY.md) - Overall architecture details
 
 ---
 
