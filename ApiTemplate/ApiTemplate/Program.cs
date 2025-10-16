@@ -1,19 +1,14 @@
 using ApiTemplate.Services;
-using Shared.Services;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure Serilog early in the pipeline
-builder.ConfigureSerilog();
-
-builder.Services.AddGeneralDIContainer(builder.Configuration);
+// Register all application services (includes Serilog configuration)
+builder.AddGeneralDIContainer();
 
 var app = builder.Build();
 
-// Ensure Serilog is properly closed on shutdown
-app.EnsureSerilogClosed();
-
+// Configure middleware pipeline (includes Serilog shutdown handling)
 app.UseApplicationPipeline();
 
 Log.Information("Application started successfully");

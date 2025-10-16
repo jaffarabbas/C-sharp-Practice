@@ -289,4 +289,4 @@ join tblActionType at on p.ActionTypeID = at.ActionTypeID
 where u.UserID = 2;
 
 
-select * from tblUsers
+select * from tblResource
