@@ -32,6 +32,9 @@ namespace ApiTemplate.Services
             // Repositories / UoW
             services.AddRepositoryDI();
 
+            // Permission Service (from Shared)
+            services.AddPermissionService();
+
             // CORS
             services.AddConfiguredCors(configuration);
 
@@ -87,6 +90,9 @@ namespace ApiTemplate.Services
 
             // Repositories / UoW
             services.AddRepositoryDI();
+
+            // Permission Service (from Shared)
+            services.AddPermissionService();
 
             // CORS
             services.AddConfiguredCors(configuration);

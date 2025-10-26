@@ -31,6 +31,9 @@ namespace ApiTemplate.Services
                 // Add the operation filter for auth requirements
                 options.OperationFilter<AuthRequirementOperationFilter>();
 
+                // Add the operation filter for resource ID header
+                options.OperationFilter<ResourceIdOperationFilter>();
+
                 options.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {

@@ -24,4 +24,8 @@
     <PackageReference Include="Microsoft.AspNetCore.RateLimiting" Version="7.0.0-rc.2.22476.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DBLayer\DBLayer.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -8,7 +8,10 @@ builder.AddGeneralDIContainer();
 
 var app = builder.Build();
 
-// Configure middleware pipeline (includes Serilog shutdown handling)
+// Apply database migrations before configuring the pipeline
+app.ApplyDatabaseMigrations();
+
+// Configure middleware pipeline (includes Serilog shutdown handling and permission checking)
 app.UseApplicationPipeline();
 
 Log.Information("Application started successfully");

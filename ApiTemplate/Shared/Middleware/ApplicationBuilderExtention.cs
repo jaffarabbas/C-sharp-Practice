@@ -27,5 +27,13 @@ namespace ApiTemplate.Middleware
         /// <returns></returns>
         public static IApplicationBuilder UseExceptionMiddleware(this IApplicationBuilder applicationBuilder)
             => applicationBuilder.UseMiddleware<GlobalExceptionsHandlingMiddleware>();
+
+        /// <summary>
+        /// Global permission checking middleware based on resource ID from headers
+        /// </summary>
+        /// <param name="applicationBuilder"></param>
+        /// <returns></returns>
+        public static IApplicationBuilder UsePermissionMiddleware(this IApplicationBuilder applicationBuilder)
+            => applicationBuilder.UseMiddleware<PermissionMiddleware>();
     }
 }

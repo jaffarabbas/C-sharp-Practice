@@ -79,6 +79,8 @@ namespace ApiTemplate.Services
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseAuthMiddleware();
+            // Global permission checking middleware (after auth, before rate limiting)
+            app.UsePermissionMiddleware();
             app.UseRateLimiter();
             app.MapControllers();
             // SignalR hubs
