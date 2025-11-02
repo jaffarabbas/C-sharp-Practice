@@ -1,4 +1,5 @@
-﻿using System;
+﻿using oop.SOLID;
+using System;
 
 namespace HelloWorld
 {
@@ -6,7 +7,10 @@ namespace HelloWorld
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            SingleResponsiblity singleResponsiblity = new SingleResponsiblity();
+            singleResponsiblity.Execute();
+            OpenClose openClose = new OpenClose();
+            openClose.CalculateArea();
         }
     }
 }
