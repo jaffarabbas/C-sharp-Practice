@@ -1,3 +1,4 @@
+using ApiTemplate.Attributes;
 using ApiTemplate.Dtos;
 using ApiTemplate.Repository;
 using ApiTemplate.Shared.Helper.Constants;
@@ -39,6 +40,7 @@ namespace ApiTemplate.Controllers
         /// Authenticates a user and returns a token.
         /// </summary>
         [SkipJwtValidation]
+        [SkipPermissionCheck]
         [EnableRateLimiting("PerIPPolicy")]
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
@@ -81,6 +83,7 @@ namespace ApiTemplate.Controllers
         /// Registers a new user account.
         /// </summary>
         [SkipJwtValidation]
+        [SkipPermissionCheck]
         [EnableRateLimiting("PerIPPolicy")]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserDto userDto)
@@ -129,6 +132,11 @@ namespace ApiTemplate.Controllers
 
                 _unitOfWork.Commit();
                 return Ok("Password changed successfully.");
+            }
+            catch (ArgumentException ex)
+            {
+                _unitOfWork.Rollback();
+                return BadRequest(ex.Message);
             }
             catch (UnauthorizedAccessException ex)
             {
@@ -248,6 +256,11 @@ namespace ApiTemplate.Controllers
 
                 _unitOfWork.Commit();
                 return Ok("Password reset successfully.");
+            }
+            catch (ArgumentException ex)
+            {
+                _unitOfWork.Rollback();
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {

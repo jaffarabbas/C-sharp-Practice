@@ -27,8 +27,7 @@ namespace Repositories
             #region Service Scanning
             // Authorization Service
             services.AddScoped<IAuthorizationService, AuthorizationService>();
-            // Register User Management Repository
-            services.AddScoped<IUserManagementRepository, UserManagementRepository>();
+            services.AddScoped<IPasswordPolicyService, PasswordPolicyService>();
             #endregion
 
             return services;

@@ -23,5 +23,7 @@ public partial class TblUser
 
     public string Salt { get; set; } = null!;
 
+    public virtual ICollection<TblResetToken> TblResetTokens { get; set; } = new List<TblResetToken>();
+
     public virtual ICollection<TblUserRole> TblUserRoles { get; set; } = new List<TblUserRole>();
 }

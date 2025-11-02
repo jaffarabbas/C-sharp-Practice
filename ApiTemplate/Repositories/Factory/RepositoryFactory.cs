@@ -1,6 +1,8 @@
 using ApiTemplate.Repository;
 using DBLayer.Models;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Repositories.Attributes;
 using Repositories.Infrastructure;
 using System.Collections.Concurrent;
@@ -100,7 +102,8 @@ namespace Repositories.Factory
 
         /// <summary>
         /// Creates a repository instance using reflection.
-        /// Automatically determines the correct constructor parameters.
+        /// Automatically resolves ALL constructor parameters using dependency injection.
+        /// FULLY DYNAMIC - no hardcoded types, infinite scalability!
         /// </summary>
         private object CreateRepositoryInstance(Type implementationType)
         {
@@ -120,27 +123,68 @@ namespace Repositories.Factory
             {
                 var paramType = parameters[i].ParameterType;
 
-                // Map known types from context
-                args[i] = paramType.Name switch
+                // Try to resolve from known context properties first (for performance and specific instances)
+                var resolvedArg = TryResolveFromContext(paramType);
+
+                if (resolvedArg != null)
                 {
-                    nameof(TestContext) or "TestContext" => _context.DbContext,
-                    nameof(IDbConnection) or "IDbConnection" => _context.DapperConnection,
-                    nameof(IDbTransaction) or "IDbTransaction" => _context.DapperTransaction,
-                    nameof(IMemoryCache) or "IMemoryCache" => _context.Cache,
-                    "IOptions`1" when paramType.IsGenericType => _context.JwtSettings,
-                    nameof(IServiceProvider) or "IServiceProvider" => _context.ServiceProvider,
-                    nameof(IUnitOfWork) or "IUnitOfWork" => _context.UnitOfWork,
-                    _ => throw new InvalidOperationException(
-                        $"Cannot resolve parameter '{parameters[i].Name}' of type '{paramType.Name}' " +
-                        $"for repository '{implementationType.Name}'. " +
-                        $"Supported types: TestContext, IDbConnection, IDbTransaction, IMemoryCache, " +
-                        $"IOptions<JWTSetting>, IServiceProvider, IUnitOfWork")
-                };
+                    args[i] = resolvedArg;
+                }
+                else
+                {
+                    // Fallback: Use IServiceProvider to resolve ANY service registered in DI
+                    // This makes the factory truly dynamic and scalable
+                    var service = _context.ServiceProvider.GetService(paramType)
+                        ?? throw new InvalidOperationException(
+                            $"Cannot resolve parameter '{parameters[i].Name}' of type '{paramType.FullName}' " +
+                            $"for repository '{implementationType.Name}'. " +
+                            $"Make sure the service is registered in the DI container.");
+
+                    args[i] = service;
+                }
             }
 
             // Create instance
             return Activator.CreateInstance(implementationType, args)
                 ?? throw new InvalidOperationException($"Failed to create instance of '{implementationType.Name}'");
+        }
+
+        /// <summary>
+        /// Tries to resolve a parameter from the repository context.
+        /// Returns null if not found, allowing fallback to IServiceProvider.
+        /// Priority order: Context properties > IServiceProvider resolution
+        /// </summary>
+        private object? TryResolveFromContext(Type paramType)
+        {
+            // Check for exact type matches from context (these are the scoped instances we want to reuse)
+            if (paramType == typeof(TestContext))
+                return _context.DbContext;
+
+            if (paramType == typeof(IDbConnection))
+                return _context.DapperConnection;
+
+            if (paramType == typeof(IDbTransaction))
+                return _context.DapperTransaction;
+
+            if (paramType == typeof(IMemoryCache))
+                return _context.Cache;
+
+            if (paramType == typeof(IServiceProvider))
+                return _context.ServiceProvider;
+
+            if (paramType == typeof(IUnitOfWork))
+                return _context.UnitOfWork;
+
+            // Handle generic IOptions<T>
+            if (paramType.IsGenericType && paramType.GetGenericTypeDefinition() == typeof(IOptions<>))
+            {
+                var optionsType = paramType.GetGenericArguments()[0];
+                if (optionsType.Name == "JWTSetting")
+                    return _context.JwtSettings;
+            }
+
+            // Not found in context, return null to trigger IServiceProvider resolution
+            return null;
         }
 
         /// <summary>

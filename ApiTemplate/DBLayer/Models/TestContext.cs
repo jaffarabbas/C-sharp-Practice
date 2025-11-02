@@ -15,13 +15,7 @@ public partial class TestContext : DbContext
     {
     }
 
-    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    // {
-    //     if (!optionsBuilder.IsConfigured)
-    //     {
-    //         optionsBuilder.UseSqlServer("Server=127.0.0.1,1433;Database=test2;User Id=sa;Password=YourStrongPassword!;TrustServerCertificate=True;");
-    //     }
-    // }
+    public virtual DbSet<ApplicationLog> ApplicationLogs { get; set; }
 
     public virtual DbSet<TblActionType> TblActionTypes { get; set; }
 
@@ -45,24 +39,46 @@ public partial class TestContext : DbContext
 
     public virtual DbSet<TblPricingList> TblPricingLists { get; set; }
 
+    public virtual DbSet<TblResetToken> TblResetTokens { get; set; }
+
     public virtual DbSet<TblResource> TblResources { get; set; }
 
     public virtual DbSet<TblRole> TblRoles { get; set; }
 
     public virtual DbSet<TblRolePermission> TblRolePermissions { get; set; }
 
+    public virtual DbSet<TblTokenType> TblTokenTypes { get; set; }
+
     public virtual DbSet<TblUser> TblUsers { get; set; }
 
     public virtual DbSet<TblUserRole> TblUserRoles { get; set; }
 
-    public virtual DbSet<TblResetToken> TblResetTokens { get; set; }
+    public virtual DbSet<TblPasswordPolicy> TblPasswordPolicies { get; set; }
 
-    public virtual DbSet<TblTokenType> TblTokenTypes { get; set; }
+    public virtual DbSet<TblApplicationFlag> TblApplicationFlags { get; set; }
 
     public virtual DbSet<Test1> Test1s { get; set; }
 
+    public virtual DbSet<VwViewUserRoleDetial> VwViewUserRoleDetials { get; set; }
+
+//     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+// #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+//         => optionsBuilder.UseSqlServer("Server=127.0.0.1,1433;Database=test2;User Id=sa;Password=YourStrongPassword!;TrustServerCertificate=True;");
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ApplicationLog>(entity =>
+        {
+            entity.Property(e => e.ActionName).HasMaxLength(200);
+            entity.Property(e => e.Application).HasMaxLength(100);
+            entity.Property(e => e.Ipaddress)
+                .HasMaxLength(50)
+                .HasColumnName("IPAddress");
+            entity.Property(e => e.RequestPath).HasMaxLength(500);
+            entity.Property(e => e.TimeStamp).HasColumnType("datetime");
+            entity.Property(e => e.UserName).HasMaxLength(100);
+        });
+
         modelBuilder.Entity<TblActionType>(entity =>
         {
             entity.HasKey(e => e.ActionTypeId).HasName("PK__tblActio__62FE4C04B5ED9D4D");
@@ -263,6 +279,10 @@ public partial class TestContext : DbContext
 
             entity.ToTable("tblPermission");
 
+            entity.HasIndex(e => e.ActionTypeId, "IX_tblPermission_ActionTypeID");
+
+            entity.HasIndex(e => e.ResourceId, "IX_tblPermission_ResourceID");
+
             entity.Property(e => e.PermissionId)
                 .ValueGeneratedNever()
                 .HasColumnName("PermissionID");
@@ -303,6 +323,40 @@ public partial class TestContext : DbContext
                 .IsUnicode(false)
                 .HasDefaultValue("");
             entity.Property(e => e.SaleRate).HasDefaultValue(0.0);
+        });
+
+        modelBuilder.Entity<TblResetToken>(entity =>
+        {
+            entity.HasKey(e => e.ResetTokenId);
+
+            entity.ToTable("tblResetToken");
+
+            entity.HasIndex(e => e.TokenType, "IX_tblResetToken_TokenType");
+
+            entity.HasIndex(e => e.UserId, "IX_tblResetToken_UserID");
+
+            entity.Property(e => e.ResetTokenId).ValueGeneratedNever();
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.ExpiresAt).HasColumnType("datetime");
+            entity.Property(e => e.Token)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+            entity.Property(e => e.TokenType)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+
+            entity.HasOne(d => d.TokenTypeNavigation).WithMany(p => p.TblResetTokens)
+                .HasForeignKey(d => d.TokenType)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ResetToken_TokenType");
+
+            entity.HasOne(d => d.User).WithMany(p => p.TblResetTokens)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ResetToken_User");
         });
 
         modelBuilder.Entity<TblResource>(entity =>
@@ -356,6 +410,7 @@ public partial class TestContext : DbContext
                     {
                         j.HasKey("ParentRoleId", "ChildRoleId").HasName("PK_RoleHierarchy");
                         j.ToTable("tblRoleHierarchy");
+                        j.HasIndex(new[] { "ChildRoleId" }, "IX_tblRoleHierarchy_ChildRoleID");
                         j.IndexerProperty<int>("ParentRoleId").HasColumnName("ParentRoleID");
                         j.IndexerProperty<int>("ChildRoleId").HasColumnName("ChildRoleID");
                     });
@@ -375,6 +430,7 @@ public partial class TestContext : DbContext
                     {
                         j.HasKey("ParentRoleId", "ChildRoleId").HasName("PK_RoleHierarchy");
                         j.ToTable("tblRoleHierarchy");
+                        j.HasIndex(new[] { "ChildRoleId" }, "IX_tblRoleHierarchy_ChildRoleID");
                         j.IndexerProperty<int>("ParentRoleId").HasColumnName("ParentRoleID");
                         j.IndexerProperty<int>("ChildRoleId").HasColumnName("ChildRoleID");
                     });
@@ -385,6 +441,10 @@ public partial class TestContext : DbContext
             entity.HasKey(e => e.RolePermissionId).HasName("PK__tblRoleP__120F469A84A97AB2");
 
             entity.ToTable("tblRolePermission");
+
+            entity.HasIndex(e => e.PermissionId, "IX_tblRolePermission_PermissionID");
+
+            entity.HasIndex(e => e.RoleId, "IX_tblRolePermission_RoleID");
 
             entity.Property(e => e.RolePermissionId)
                 .ValueGeneratedNever()
@@ -405,6 +465,20 @@ public partial class TestContext : DbContext
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_RolePermission_Role");
+        });
+
+        modelBuilder.Entity<TblTokenType>(entity =>
+        {
+            entity.HasKey(e => e.TokenType);
+
+            entity.ToTable("tblTokenType");
+
+            entity.Property(e => e.TokenType)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Description)
+                .HasMaxLength(255)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<TblUser>(entity =>
@@ -437,57 +511,15 @@ public partial class TestContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<TblResetToken>(entity =>
-        {
-            entity.HasKey(e => e.ResetTokenId);
-
-            entity.ToTable("tblResetToken");
-
-            entity.Property(e => e.ResetTokenId).ValueGeneratedNever();
-            entity.Property(e => e.UserId).HasColumnName("UserID");
-            entity.Property(e => e.TokenType)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.Token)
-                .HasMaxLength(255)
-                .IsUnicode(false);
-            entity.Property(e => e.ExpiresAt)
-                .HasColumnType("datetime");
-            entity.Property(e => e.CreatedAt)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-            entity.Property(e => e.IsUsed).HasDefaultValue(false);
-
-            entity.HasOne(d => d.User).WithMany()
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ResetToken_User");
-
-            entity.HasOne(d => d.TokenTypeNavigation).WithMany(p => p.TblResetTokens)
-                .HasForeignKey(d => d.TokenType)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_ResetToken_TokenType");
-        });
-
-        modelBuilder.Entity<TblTokenType>(entity =>
-        {
-            entity.HasKey(e => e.TokenType);
-
-            entity.ToTable("tblTokenType");
-
-            entity.Property(e => e.TokenType)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.Description)
-                .HasMaxLength(255)
-                .IsUnicode(false);
-        });
-
         modelBuilder.Entity<TblUserRole>(entity =>
         {
             entity.HasKey(e => e.UserRoleId).HasName("PK__tblUserR__3D978A55AEDF4DB3");
 
             entity.ToTable("tblUserRole");
+
+            entity.HasIndex(e => e.RoleId, "IX_tblUserRole_RoleID");
+
+            entity.HasIndex(e => e.UserId, "IX_tblUserRole_UserID");
 
             entity.Property(e => e.UserRoleId)
                 .ValueGeneratedNever()
@@ -521,6 +553,27 @@ public partial class TestContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false)
                 .HasColumnName("tname");
+        });
+
+        modelBuilder.Entity<VwViewUserRoleDetial>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("VwViewUserRoleDetial");
+
+            entity.Property(e => e.ActionTypeTitle)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.ResourceName)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.RoleTitle)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.UserName)
+                .HasMaxLength(100)
+                .IsUnicode(false);
         });
 
         OnModelCreatingPartial(modelBuilder);

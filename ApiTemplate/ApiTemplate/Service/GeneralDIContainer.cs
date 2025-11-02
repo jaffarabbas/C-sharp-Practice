@@ -35,8 +35,8 @@ namespace ApiTemplate.Services
             // Permission Service (from Shared)
             services.AddPermissionService();
 
-            // CORS
-            services.AddConfiguredCors(configuration);
+            // CORS (with security validation)
+            services.AddConfiguredCors(configuration, builder.Environment);
 
             // API Versioning
             services.AddApiVersioning(configuration);
@@ -54,7 +54,7 @@ namespace ApiTemplate.Services
 
             // Authentication
             services.AddAuthenticationSchemeService(configuration);
-            services.AddJWTAuthentication(configuration);
+            services.AddJWTAuthentication(configuration, builder.Environment);
 
             // SignalR & MemoryCache
             services.AddSignalR();
@@ -94,8 +94,36 @@ namespace ApiTemplate.Services
             // Permission Service (from Shared)
             services.AddPermissionService();
 
-            // CORS
-            services.AddConfiguredCors(configuration);
+            // CORS (legacy - without environment validation)
+            // NOTE: This obsolete method cannot use the new CORS security validation.
+            // Use the WebApplicationBuilder overload for production security.
+            var allowedOrigins = configuration
+                .GetSection("Cors:AllowedOrigins")
+                .Get<string[]>()?
+                .Where(o => !string.IsNullOrWhiteSpace(o))
+                .Select(o => o.Trim().TrimEnd('/'))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToArray();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(CorsPolicies.Default, policy =>
+                {
+                    if (allowedOrigins is { Length: > 0 })
+                    {
+                        policy.WithOrigins(allowedOrigins)
+                              .AllowAnyHeader()
+                              .AllowAnyMethod()
+                              .AllowCredentials();
+                    }
+                    else
+                    {
+                        policy.AllowAnyOrigin()
+                              .AllowAnyHeader()
+                              .AllowAnyMethod();
+                    }
+                });
+            });
 
             // API Versioning
             services.AddApiVersioning(configuration);

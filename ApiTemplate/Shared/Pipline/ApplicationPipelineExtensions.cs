@@ -62,11 +62,14 @@ namespace ApiTemplate.Services
                     });
             }
 
+            // SECURITY: Security headers middleware (should be very early in pipeline)
+            app.UseSecurityHeaders();
+
             // Performance monitoring middleware (should be early in pipeline)
-            app.UseMiddleware<PerformanceMonitoringMiddleware>();
+            app.UsePerformanceMonitoringMiddleware();
 
             // Request/Response logging middleware
-            app.UseMiddleware<RequestResponseLoggingMiddleware>();
+            app.UseRequestResponseLoggingMiddleware();
 
             // CORS
             app.UseCors(CorsPolicies.Default);
@@ -79,8 +82,11 @@ namespace ApiTemplate.Services
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseAuthMiddleware();
+
             // Global permission checking middleware (after auth, before rate limiting)
+            // Uses path-based detection for public endpoints since metadata may not be available yet
             app.UsePermissionMiddleware();
+
             app.UseRateLimiter();
             app.MapControllers();
             // SignalR hubs

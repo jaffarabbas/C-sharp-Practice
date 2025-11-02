@@ -7,6 +7,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Repositories.Attributes;
+using Repositories.Services;
 using Shared.Dtos;
 using Shared.Services;
 using System.Data;
@@ -23,9 +24,12 @@ namespace Repositories.Repository
         private readonly IUnitOfWork _unitOfWork;
         private readonly JWTSetting _setting;
 
-        // Lazy-loaded email service - only resolved when needed
+        // Lazy-loaded services - only resolved when needed
         private IEmailService? _emailService;
         private IEmailService EmailService => _emailService ??= GetService<IEmailService>();
+
+        private IPasswordPolicyService? _passwordPolicyService;
+        private IPasswordPolicyService PasswordPolicyService => _passwordPolicyService ??= GetService<IPasswordPolicyService>();
 
         public AuthRepository(
             TestContext context,
@@ -80,6 +84,15 @@ namespace Repositories.Repository
                 if (userDto == null)
                     throw new ArgumentException("User cannot be null");
 
+                // Validate password against policy (using companyId = 1 as default, adjust as needed)
+                const long defaultCompanyId = 1;
+                var passwordValidation = await PasswordPolicyService.ValidatePasswordAsync(userDto.Password, defaultCompanyId);
+
+                if (!passwordValidation.IsValid)
+                {
+                    throw new ArgumentException($"Password does not meet policy requirements: {string.Join(", ", passwordValidation.Errors)}");
+                }
+
                 // Check if username or email already exists
                 var existingUser = await _context.TblUsers
                     .FirstOrDefaultAsync(u => u.Username == userDto.Username || u.Email == userDto.Email);
@@ -115,11 +128,14 @@ namespace Repositories.Repository
                 var roleIds = new List<int>();
                 if (userDto.Roles != null && userDto.Roles.Any())
                 {
+                    // Get the starting ID ONCE before the loop
+                    long userRoleId = await roleRepo.GetMaxID("tblUserRole", "UserRoleId");
+
                     foreach (var roleDto in userDto.Roles)
                     {
                         var userRole = new TblUserRole
                         {
-                            UserRoleId = (int)await roleRepo.GetMaxID("tblUserRole", "UserRoleId"),
+                            UserRoleId = (int)userRoleId,
                             UserId = newUser.Userid,
                             RoleId = roleDto.RoleId,
                             UserRoleIsActive = true,
@@ -127,14 +143,18 @@ namespace Repositories.Repository
                         };
                         await roleRepo.AddAsync("tblUserRole", userRole);
                         roleIds.Add(roleDto.RoleId);
+
+                        // Increment ID for next iteration
+                        userRoleId++;
                     }
                 }
                 else
                 {
                     // Assign default role (assuming role ID 1 is a default role like "User")
+                    long userRoleId = await roleRepo.GetMaxID("tblUserRole", "UserRoleId");
                     var defaultRole = new TblUserRole
                     {
-                        UserRoleId = (int)await roleRepo.GetMaxID("tblUserRole", "UserRoleId"),
+                        UserRoleId = (int)userRoleId,
                         UserId = newUser.Userid,
                         RoleId = 1, // Default role
                         UserRoleIsActive = true,
@@ -179,6 +199,15 @@ namespace Repositories.Repository
                     var currentHashedPassword = HashPassword.Hash(passwordDto.CurrentPassword, currentSalt, "sha256");
                     if (user.Password != Convert.ToBase64String(currentHashedPassword))
                         throw new UnauthorizedAccessException("Current password is incorrect.");
+                }
+
+                // Validate new password against policy
+                const long defaultCompanyId = 1;
+                var passwordValidation = await PasswordPolicyService.ValidatePasswordAsync(passwordDto.NewPassword, defaultCompanyId);
+
+                if (!passwordValidation.IsValid)
+                {
+                    throw new ArgumentException($"New password does not meet policy requirements: {string.Join(", ", passwordValidation.Errors)}");
                 }
 
                 // Update password
@@ -263,6 +292,8 @@ namespace Repositories.Repository
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddHours(10),
+                Issuer = _setting.ValidIssuer,
+                Audience = _setting.ValidAudience,
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(tokenKey),
                     SecurityAlgorithms.HmacSha256Signature)
@@ -341,6 +372,15 @@ namespace Repositories.Repository
 
                 if (resetTokenRecord == null)
                     return false;
+
+                // Validate new password against policy
+                const long defaultCompanyId = 1;
+                var passwordValidation = await PasswordPolicyService.ValidatePasswordAsync(resetPasswordDto.NewPassword, defaultCompanyId);
+
+                if (!passwordValidation.IsValid)
+                {
+                    throw new ArgumentException($"New password does not meet policy requirements: {string.Join(", ", passwordValidation.Errors)}");
+                }
 
                 var userRepo = _unitOfWork.Repository<TblUser>();
                 var user = resetTokenRecord.User;

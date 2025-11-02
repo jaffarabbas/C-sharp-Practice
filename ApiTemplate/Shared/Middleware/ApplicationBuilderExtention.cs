@@ -35,5 +35,29 @@ namespace ApiTemplate.Middleware
         /// <returns></returns>
         public static IApplicationBuilder UsePermissionMiddleware(this IApplicationBuilder applicationBuilder)
             => applicationBuilder.UseMiddleware<PermissionMiddleware>();
+
+        /// <summary>
+        /// SECURITY: Adds comprehensive security headers to all responses
+        /// </summary>
+        /// <param name="applicationBuilder"></param>
+        /// <returns></returns>
+        public static IApplicationBuilder UseSecurityHeaders(this IApplicationBuilder applicationBuilder)
+            => applicationBuilder.UseMiddleware<SecurityHeadersMiddleware>();
+
+        /// <summary>
+        /// Performance monitoring middleware to track request processing times
+        /// </summary>
+        /// <param name="applicationBuilder"></param>
+        /// <returns></returns>
+        public static IApplicationBuilder UsePerformanceMonitoringMiddleware(this IApplicationBuilder applicationBuilder)
+            => applicationBuilder.UseMiddleware<PerformanceMonitoringMiddleware>();
+
+        /// <summary>
+        /// Request and Response logging middleware
+        /// </summary>
+        /// <param name="applicationBuilder"></param>
+        /// <returns></returns>
+        public static IApplicationBuilder UseRequestResponseLoggingMiddleware(this IApplicationBuilder applicationBuilder)
+            => applicationBuilder.UseMiddleware<RequestResponseLoggingMiddleware>();
     }
 }

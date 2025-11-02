@@ -1,5 +1,6 @@
 ﻿using ApiTemplate.Dtos;
 using ApiTemplate.Helper.Enum;
+using ApiTemplate.Security;
 using DBLayer.Models;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
@@ -301,7 +302,11 @@ namespace ApiTemplate.Repository
 
         public async Task<IEnumerable<T>> GetAllAsync(string table)
         {
-            var sql = $"SELECT * FROM {table}";
+            // SECURITY: Validate and quote table name to prevent SQL injection
+            SqlIdentifierValidator.ValidateIdentifier(table, nameof(table));
+            var safeTable = SqlIdentifierValidator.QuoteIdentifier(table);
+
+            var sql = $"SELECT * FROM {safeTable}";
             return await _connection.QueryAsync<T>(sql, transaction: _transaction);
         }
 
@@ -310,20 +315,35 @@ namespace ApiTemplate.Repository
             if (pageNumber <= 0) pageNumber = 1;
             if (pageSize <= 0) pageSize = 100;
 
+            // SECURITY: Validate table name and ORDER BY clause
+            SqlIdentifierValidator.ValidateIdentifier(table, nameof(table));
+            SqlIdentifierValidator.ValidateOrderByClause(orderBy, nameof(orderBy));
+
+            var safeTable = SqlIdentifierValidator.QuoteIdentifier(table);
+
             int offset = (pageNumber - 1) * pageSize;
 
-            var sql = $"SELECT * FROM {table} ORDER BY {orderBy} OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
+            var sql = $"SELECT * FROM {safeTable} ORDER BY {orderBy} OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
             return await _connection.QueryAsync<T>(sql, new { Offset = offset, PageSize = pageSize }, _transaction);
         }
 
         public async Task<T?> GetByIdAsync(string table, string keyName, object id)
         {
-            var sql = $"SELECT * FROM {table} WHERE {keyName} = @id";
+            // SECURITY: Validate table and column names
+            SqlIdentifierValidator.ValidateIdentifiers((table, nameof(table)), (keyName, nameof(keyName)));
+            var safeTable = SqlIdentifierValidator.QuoteIdentifier(table);
+            var safeKeyName = SqlIdentifierValidator.QuoteIdentifier(keyName);
+
+            var sql = $"SELECT * FROM {safeTable} WHERE {safeKeyName} = @id";
             return await _connection.QueryFirstOrDefaultAsync<T>(sql, new { id }, _transaction);
         }
 
         public async Task<int> AddAsync(string table, T entity)
         {
+            // SECURITY: Validate table name
+            SqlIdentifierValidator.ValidateIdentifier(table, nameof(table));
+            var safeTable = SqlIdentifierValidator.QuoteIdentifier(table);
+
             var props = typeof(T).GetProperties()
                 .Where(p =>
                     p.Name.ToLower() != "id" &&
@@ -331,15 +351,26 @@ namespace ApiTemplate.Repository
                     IsSimpleType(p.PropertyType)) // exclude navigation / complex / collections
                 .ToList();
 
-            var columns = string.Join(", ", props.Select(p => p.Name));
+            // SECURITY: Validate all column names
+            foreach (var prop in props)
+            {
+                SqlIdentifierValidator.ValidateIdentifier(prop.Name, $"Property {prop.Name}");
+            }
+
+            var columns = string.Join(", ", props.Select(p => SqlIdentifierValidator.QuoteIdentifier(p.Name)));
             var parameters = string.Join(", ", props.Select(p => "@" + p.Name));
 
-            var sql = $"INSERT INTO {table} ({columns}) VALUES ({parameters})";
+            var sql = $"INSERT INTO {safeTable} ({columns}) VALUES ({parameters})";
             return await _connection.ExecuteAsync(sql, entity, _transaction);
         }
 
         public async Task<int> UpdateAsync(string table, T entity, string keyName)
         {
+            // SECURITY: Validate table and key names
+            SqlIdentifierValidator.ValidateIdentifiers((table, nameof(table)), (keyName, nameof(keyName)));
+            var safeTable = SqlIdentifierValidator.QuoteIdentifier(table);
+            var safeKeyName = SqlIdentifierValidator.QuoteIdentifier(keyName);
+
             var props = typeof(T).GetProperties()
                 .Where(p =>
                     p.Name != keyName &&
@@ -347,14 +378,26 @@ namespace ApiTemplate.Repository
                     IsSimpleType(p.PropertyType))
                 .ToList();
 
-            var setClause = string.Join(", ", props.Select(p => $"{p.Name} = @{p.Name}"));
-            var sql = $"UPDATE {table} SET {setClause} WHERE {keyName} = @{keyName}";
+            // SECURITY: Validate all column names
+            foreach (var prop in props)
+            {
+                SqlIdentifierValidator.ValidateIdentifier(prop.Name, $"Property {prop.Name}");
+            }
+
+            var setClause = string.Join(", ", props.Select(p =>
+                $"{SqlIdentifierValidator.QuoteIdentifier(p.Name)} = @{p.Name}"));
+            var sql = $"UPDATE {safeTable} SET {setClause} WHERE {safeKeyName} = @{keyName}";
             return await _connection.ExecuteAsync(sql, entity, _transaction);
         }
 
         public async Task<int> DeleteAsync(string table, string keyName, object id)
         {
-            var sql = $"DELETE FROM {table} WHERE {keyName} = @id";
+            // SECURITY: Validate table and column names
+            SqlIdentifierValidator.ValidateIdentifiers((table, nameof(table)), (keyName, nameof(keyName)));
+            var safeTable = SqlIdentifierValidator.QuoteIdentifier(table);
+            var safeKeyName = SqlIdentifierValidator.QuoteIdentifier(keyName);
+
+            var sql = $"DELETE FROM {safeTable} WHERE {safeKeyName} = @id";
             return await _connection.ExecuteAsync(sql, new { id }, _transaction);
         }
 
@@ -366,7 +409,12 @@ namespace ApiTemplate.Repository
             if (string.IsNullOrWhiteSpace(columnName))
                 throw new ArgumentException("Key column name must be provided", nameof(columnName));
 
-            var sql = $"SELECT ISNULL(MAX([{columnName}]), 0) FROM [{tableName}]";
+            // SECURITY: Validate table and column names
+            SqlIdentifierValidator.ValidateIdentifiers((tableName, nameof(tableName)), (columnName, nameof(columnName)));
+            var safeTable = SqlIdentifierValidator.QuoteIdentifier(tableName);
+            var safeColumn = SqlIdentifierValidator.QuoteIdentifier(columnName);
+
+            var sql = $"SELECT ISNULL(MAX({safeColumn}), 0) FROM {safeTable}";
 
             var maxId = await _connection.ExecuteScalarAsync<long>(sql, transaction: _transaction);
             return maxId + 1;
@@ -384,12 +432,18 @@ namespace ApiTemplate.Repository
             if (string.IsNullOrWhiteSpace(orderBy))
                 throw new ArgumentException("You must provide a valid ORDER BY column for SQL Server OFFSET/FETCH to work.");
 
+            // SECURITY: Validate table name and ORDER BY clause
+            SqlIdentifierValidator.ValidateIdentifier(table, nameof(table));
+            SqlIdentifierValidator.ValidateOrderByClause(orderBy, nameof(orderBy));
+
+            var safeTable = SqlIdentifierValidator.QuoteIdentifier(table);
+
             int offset = (pageNumber - 1) * pageSize;
 
-            var countSql = $"SELECT COUNT(*) FROM {table}";
+            var countSql = $"SELECT COUNT(*) FROM {safeTable}";
             var totalCount = await _connection.QuerySingleAsync<int>(countSql, transaction: _transaction);
 
-            var sql = $@"SELECT * FROM {table}
+            var sql = $@"SELECT * FROM {safeTable}
                         ORDER BY {orderBy}
                         OFFSET @Offset ROWS
                         FETCH NEXT @PageSize ROWS ONLY";

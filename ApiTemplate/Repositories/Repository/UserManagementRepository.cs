@@ -52,20 +52,26 @@ namespace Repositories.Repository
                     TableName = "tblPermission",
                     KeyColumnName = "PermissionID"
                 };
+
+                // Get the starting ID ONCE before the loop
                 long permissionIdStart = await _unitOfWork.RepositoryWrapper<TblPermission>()
                     .GetMaxID(0, ApiTemplate.Helper.Enum.OrmType.Dapper, permissionOptions);
 
+                // Increment ID for each iteration
                 foreach (var actionTypeId in dto.ActionTypeIds)
                 {
                     var permission = new TblPermission
                     {
                         PermissionId = Convert.ToInt32(permissionIdStart),
-                        ResourceId = dto.ResourceId,
+                        ResourceId = Convert.ToInt32(resourceID),
                         ActionTypeId = actionTypeId,
                         PermissionIsActive = true,
                         PermissionCreatedAt = DateTime.UtcNow
                     };
                     await _unitOfWork.Repository<TblPermission>().AddAsync(permission);
+
+                    // Increment ID for next iteration
+                    permissionIdStart++;
                 }
                 await _unitOfWork.Repository<TblPermission>().SaveAsync();
 
@@ -75,14 +81,16 @@ namespace Repositories.Repository
                     TableName = "tblRolePermission",
                     KeyColumnName = "RolePermissionID"
                 };
-                long rolePermissionIdStart = await _unitOfWork.RepositoryWrapper<TblRolePermission>()
-                    .GetMaxID(0, ApiTemplate.Helper.Enum.OrmType.Dapper, rolePermissionOptions);
 
                 // Get permissions we just created
                 var allPermissions = await _unitOfWork.Repository<TblPermission>().GetAllAsync();
                 var createdPermissions = allPermissions
-                    .Where(p => p.ResourceId == dto.ResourceId)
+                    .Where(p => p.ResourceId == resourceID)
                     .ToList();
+
+                // Get the starting ID ONCE before the loops
+                long rolePermissionIdStart = await _unitOfWork.RepositoryWrapper<TblRolePermission>()
+                    .GetMaxID(0, ApiTemplate.Helper.Enum.OrmType.Dapper, rolePermissionOptions);
 
                 foreach (var rolePermission in dto.RolePermissions)
                 {
@@ -112,6 +120,9 @@ namespace Repositories.Repository
                             RolePermissionCreatedAt = DateTime.UtcNow
                         };
                         await _unitOfWork.Repository<TblRolePermission>().AddAsync(rolePermissionEntry);
+
+                        // Increment ID for next iteration
+                        rolePermissionIdStart++;
                     }
                 }
                 await _unitOfWork.Repository<TblRolePermission>().SaveAsync();

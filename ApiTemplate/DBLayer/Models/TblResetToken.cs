@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DBLayer.Models;
 
@@ -18,7 +19,7 @@ public partial class TblResetToken
 
     public bool IsUsed { get; set; }
 
-    public virtual TblUser User { get; set; } = null!;
-
     public virtual TblTokenType TokenTypeNavigation { get; set; } = null!;
+
+    public virtual TblUser User { get; set; } = null!;
 }
