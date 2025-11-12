@@ -1,29 +1,43 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, NgModule, Renderer2, Inject, PLATFORM_ID, } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
+import { AuthStorageService } from '../../../services/auth-storage.service';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [
     CommonModule,
-    FormsModule
+    ReactiveFormsModule
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements AfterViewInit {
-  username = '';
-  password = '';
-  rememberMe = false;
+  loginForm: FormGroup;
   showPassword = false;
   loading = false;
+  errorMessage = '';
+  successMessage = '';
   particles = Array(9).fill(0);
 
   constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private authStorage: AuthStorageService,
+    private router: Router,
     private renderer: Renderer2,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) {
+    this.loginForm = this.fb.group({
+      username: ['', [Validators.required, Validators.minLength(3)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      rememberMe: [false]
+    });
+  }
 
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
@@ -59,11 +73,97 @@ export class LoginComponent implements AfterViewInit {
   }
 
   onSubmit() {
+    // Clear previous messages
+    this.errorMessage = '';
+    this.successMessage = '';
+
+    // Check if form is valid
+    if (this.loginForm.invalid) {
+      this.errorMessage = 'Please fill in all required fields correctly.';
+      Object.keys(this.loginForm.controls).forEach(key => {
+        const control = this.loginForm.get(key);
+        if (control?.invalid) {
+          control.markAsTouched();
+        }
+      });
+      return;
+    }
+
     this.loading = true;
-    setTimeout(() => {
-      this.loading = false;
-      alert('Login successful! 🎉\n\nIn a real Angular 19 app, this would:\n• Use Angular Reactive Forms\n• Implement proper authentication\n• Route to the dashboard\n• Use Angular Material or similar UI library');
-    }, 2000);
+
+    const credentials = {
+      username: this.loginForm.value.username,
+      password: this.loginForm.value.password
+    };
+
+    this.authService.login(credentials).subscribe({
+      next: (response) => {
+        this.loading = false;
+
+        if (response.statusCode === '200' && response.data) {
+          // Save authentication data to local storage
+          const authData = {
+            token: response.data.token,
+            loginDate: response.data.loginDate,
+            roles: response.data.roles,
+            username: credentials.username
+          };
+
+          this.authStorage.saveAuthData(authData);
+
+          this.successMessage = 'Login successful! Redirecting...';
+
+          // Redirect to home page after a short delay
+          setTimeout(() => {
+            this.router.navigate(['/home']);
+          }, 1000);
+        } else {
+          this.errorMessage = response.message || 'Login failed. Please try again.';
+        }
+      },
+      error: (error) => {
+        this.loading = false;
+        console.error('Login error:', error);
+
+        if (error.status === 401) {
+          this.errorMessage = 'Invalid credentials or inactive account.';
+        } else if (error.status === 429) {
+          this.errorMessage = 'Too many login attempts. Please try again later.';
+        } else if (error.status === 0) {
+          this.errorMessage = 'Cannot connect to server. Please check your connection.';
+        } else {
+          this.errorMessage = error.error?.message || 'Login failed. Please try again later.';
+        }
+      }
+    });
+  }
+
+  // Helper methods for form validation in template
+  get username() {
+    return this.loginForm.get('username');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
+  }
+
+  isFieldInvalid(fieldName: string): boolean {
+    const field = this.loginForm.get(fieldName);
+    return !!(field && field.invalid && (field.dirty || field.touched));
+  }
+
+  getFieldError(fieldName: string): string {
+    const field = this.loginForm.get(fieldName);
+    if (field?.errors) {
+      if (field.errors['required']) {
+        return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`;
+      }
+      if (field.errors['minlength']) {
+        const minLength = field.errors['minlength'].requiredLength;
+        return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} must be at least ${minLength} characters`;
+      }
+    }
+    return '';
   }
 
   public createRipple(event: MouseEvent, element: HTMLElement, renderer: Renderer2) {

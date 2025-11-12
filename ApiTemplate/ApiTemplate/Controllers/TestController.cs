@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ApiTemplate.Shared.Dtos; // Adjust namespace if needed
 using ApiTemplate.Shared.Helper.Constants;
 using Asp.Versioning;
+using ApiTemplate.Attributes;
 
 namespace ApiTemplate.Controllers.V1
 {
@@ -10,6 +11,7 @@ namespace ApiTemplate.Controllers.V1
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiExplorerSettings(GroupName = "v1")]
+    [SkipPermissionCheck]
     [SkipJwtValidation]
     public class TestController : ControllerBase
     {
