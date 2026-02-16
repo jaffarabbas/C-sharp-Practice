@@ -1,0 +1,14 @@
+**/.git
+**/.gitignore
+**/.vs
+**/.vscode
+**/bin
+**/obj
+**/.DS_Store
+**/node_modules
+**/dist
+**/.env
+**/.env.local
+**/npm-debug.log
+**/yarn-error.log
+**/.NET

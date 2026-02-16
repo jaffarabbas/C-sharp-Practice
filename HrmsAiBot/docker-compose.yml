@@ -1,0 +1,43 @@
+services:
+  # SQL Server 2022 (latest production version)
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: hrms_sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "YourStrongPassword123!"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - hrms_network
+
+  # HrmsAiBot Application
+  hrmsaibot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hrms_app
+    depends_on:
+      - sqlserver
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Production"
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Initial Catalog=HrmsDb;User Id=sa;Password=YourStrongPassword123!;TrustServerCertificate=true;"
+      OpenAI__ApiKey: "${OPENAI_API_KEY}"
+      OpenAI__ModelId: "gpt-4o-mini"
+    ports:
+      - "5000:80"
+      - "5001:443"
+    networks:
+      - hrms_network
+    restart: unless-stopped
+
+volumes:
+  sqlserver_data:
+    driver: local
+
+networks:
+  hrms_network:
+    driver: bridge

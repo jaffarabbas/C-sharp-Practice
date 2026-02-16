@@ -1,0 +1,31 @@
+@HrmsAiBot_HostAddress = http://localhost:5077
+
+# Basic chat without plugins
+POST {{HrmsAiBot_HostAddress}}/api/chat
+Content-Type: application/json
+
+{
+  "message": "Hello, how are you?"
+}
+
+###
+
+# Chat WITH leave plugin - USE THIS for leave-related questions!
+POST {{HrmsAiBot_HostAddress}}/api/chat/with-leave
+Content-Type: application/json
+
+{
+  "message": "what is my leave balance?"
+}
+
+###
+
+# Another leave query example
+POST {{HrmsAiBot_HostAddress}}/api/chat/with-leave
+Content-Type: application/json
+
+{
+  "message": "how many days of leave do I have?"
+}
+
+###
