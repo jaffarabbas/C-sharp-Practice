@@ -14,3 +14,19 @@ J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\De
 J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\ref\InterviewPractice.dll
 J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\InterviewPractice.pdb
 J:\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\InterviewPractice.genruntimeconfig.cache
+C:\Users\Jaffar Abbas\Documents\GitHub\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\bin\Debug\net5.0\InterviewPractice.exe
+C:\Users\Jaffar Abbas\Documents\GitHub\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\bin\Debug\net5.0\InterviewPractice.deps.json
+C:\Users\Jaffar Abbas\Documents\GitHub\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\bin\Debug\net5.0\InterviewPractice.runtimeconfig.json
+C:\Users\Jaffar Abbas\Documents\GitHub\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\bin\Debug\net5.0\InterviewPractice.runtimeconfig.dev.json
+C:\Users\Jaffar Abbas\Documents\GitHub\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\bin\Debug\net5.0\InterviewPractice.dll
+C:\Users\Jaffar Abbas\Documents\GitHub\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\bin\Debug\net5.0\InterviewPractice.pdb
+C:\Users\Jaffar Abbas\Documents\GitHub\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\InterviewPractice.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jaffar Abbas\Documents\GitHub\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\InterviewPractice.AssemblyInfoInputs.cache
+C:\Users\Jaffar Abbas\Documents\GitHub\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\InterviewPractice.AssemblyInfo.cs
+C:\Users\Jaffar Abbas\Documents\GitHub\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\InterviewPractice.csproj.CoreCompileInputs.cache
+C:\Users\Jaffar Abbas\Documents\GitHub\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\InterviewPractice.sourcelink.json
+C:\Users\Jaffar Abbas\Documents\GitHub\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\InterviewPractice.dll
+C:\Users\Jaffar Abbas\Documents\GitHub\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\refint\InterviewPractice.dll
+C:\Users\Jaffar Abbas\Documents\GitHub\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\InterviewPractice.pdb
+C:\Users\Jaffar Abbas\Documents\GitHub\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\InterviewPractice.genruntimeconfig.cache
+C:\Users\Jaffar Abbas\Documents\GitHub\C-sharp-Practice\InterviewPractice\InterviewPractice\InterviewPractice\obj\Debug\net5.0\ref\InterviewPractice.dll

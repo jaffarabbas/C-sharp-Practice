@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "H9vBnc7IvANx46Y52QCpMTkkUDn1yZvODu92LkRGsJQsiJTeH/hpIwbwFdI+RSoSVGfql0jV6taMDX/TZ47mog==",
+  "dgSpecHash": "ilAq6yQpK60=",
   "success": true,
-  "projectFilePath": "J:\\C-sharp-Practice\\InterviewPractice\\InterviewPractice\\InterviewPractice\\InterviewPractice.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Jaffar Abbas\\Documents\\GitHub\\C-sharp-Practice\\InterviewPractice\\InterviewPractice\\InterviewPractice\\InterviewPractice.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
+  ],
   "logs": []
 }

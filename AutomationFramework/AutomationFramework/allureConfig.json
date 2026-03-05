@@ -1,0 +1,7 @@
+{
+  "allure": {
+    "directory": "allure-results",
+    "title": "Sauce Demo Automation Test Report",
+    "links": []
+  }
+}

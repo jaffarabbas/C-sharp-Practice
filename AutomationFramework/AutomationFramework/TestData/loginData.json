@@ -1,0 +1,15 @@
+{
+  "validLogin": {
+    "username": "standard_user",
+    "password": "secret_sauce"
+  },
+  "invalidLogin": {
+    "username": "standard_user",
+    "password": "wrong_password"
+  },
+  "checkoutInfo": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "postalCode": "12345"
+  }
+}
