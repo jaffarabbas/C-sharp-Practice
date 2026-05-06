@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package
+    Name="DeploymentTool"
+    Manufacturer="DeploymentTool"
+    Version="1.0.0"
+    UpgradeCode="787D106E-4D96-495D-AD1D-6BF027A2765F"
+    InstallerVersion="500"
+    Scope="perMachine">
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of DeploymentTool is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="INSTALLFOLDER" Name="DeploymentTool" />
+    </StandardDirectory>
+
+    <StandardDirectory Id="DesktopFolder" />
+
+    <Feature Id="MainFeature" Title="DeploymentTool" Level="1">
+      <ComponentGroupRef Id="AppFiles" />
+      <ComponentRef Id="DesktopShortcutComponent" />
+    </Feature>
+  </Package>
+
+  <Fragment>
+    <ComponentGroup Id="AppFiles" Directory="INSTALLFOLDER">
+      <Files Include="$(var.PublishDir)**" />
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <Component Id="DesktopShortcutComponent" Directory="DesktopFolder" Guid="*">
+      <Shortcut
+        Id="DesktopShortcut"
+        Name="DeploymentTool"
+        Description="DeploymentTool"
+        Target="[INSTALLFOLDER]DeploymentTool.exe"
+        WorkingDirectory="INSTALLFOLDER" />
+      <RegistryValue
+        Root="HKCU"
+        Key="Software\DeploymentTool"
+        Name="DesktopShortcut"
+        Type="integer"
+        Value="1"
+        KeyPath="yes" />
+    </Component>
+  </Fragment>
+</Wix>
