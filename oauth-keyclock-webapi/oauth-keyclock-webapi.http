@@ -1,0 +1,6 @@
+@oauth_keyclock_webapi_HostAddress = http://localhost:5033
+
+GET {{oauth_keyclock_webapi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

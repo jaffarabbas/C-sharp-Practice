@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet build *)",
+      "Bash(Get-FileHash \"D:\\\\PublishOutput\\\\ApiTemplate\\\\web.config\" -Algorithm MD5)",
+      "Bash(Get-FileHash \"D:\\\\PublishOutput\\\\ApiTemplate2\\\\web.config\" -Algorithm MD5)",
+      "Bash(Get-ChildItem -Recurse -File)",
+      "Bash(Select-Object -First 50)"
+    ]
+  }
+}

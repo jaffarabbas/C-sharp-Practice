@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver2022
+    environment:
+      SA_PASSWORD: "YourStrong@Passw0rd"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - appnet
+
+  redis:
+    image: redis:alpine
+    container_name: redis_cache
+    ports:
+      - "6379:6379"
+    networks:
+      - appnet
+
+  api:
+    build:
+      context: ./InterviewPractice
+      dockerfile: Dockerfile
+    container_name: interview_api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=test2;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=True;
+      - ConnectionStrings__Redis=redis:6379
+    ports:
+      - "8080:8080"
+    depends_on:
+      - sqlserver
+      - redis
+    networks:
+      - appnet
+
+volumes:
+  sqlserver_data:
+
+networks:
+  appnet:
+    driver: bridge

@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet build \"InterviewPractice.csproj\")",
+      "Bash(dotnet clean \"InterviewPractice.csproj\")",
+      "Read(//d/GitHub/C-sharp-Practice/**)",
+      "Read(//d/GitHub/**)",
+      "Bash(dotnet build \"InterviewPractice.csproj\" -v:detailed)",
+      "Bash(grep -i \"\\\\.cs$\")",
+      "Bash(dotnet build \"InterviewPractice.csproj\" --no-dependencies -v:detailed)"
+    ]
+  }
+}
