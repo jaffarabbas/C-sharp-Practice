@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace Mastering_Cache.Models;
+
+public partial class TblDivision
+{
+    public long DivisionId { get; set; }
+
+    public string DivisionRefNo { get; set; } = null!;
+
+    public string DivisionTitle { get; set; } = null!;
+
+    public DateTime CreationDate { get; set; }
+}

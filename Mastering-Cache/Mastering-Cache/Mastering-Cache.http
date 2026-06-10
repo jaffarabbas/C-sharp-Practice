@@ -1,0 +1,6 @@
+@Mastering_Cache_HostAddress = http://localhost:5010
+
+GET {{Mastering_Cache_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
