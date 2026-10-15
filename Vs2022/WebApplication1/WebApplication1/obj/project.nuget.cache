@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "qzq93GeDTONYxTeL9VEZODxozqZdYyk1V5bsUU5GiribDLv2INxQMEZ88LOJGMFIS6SxrJYifdd+RlGWMt2KXA==",
+  "dgSpecHash": "bPHN0kSIUl8=",
   "success": true,
-  "projectFilePath": "D:\\Github\\C-sharp-Practice\\Vs2022\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Jaffar Abbas\\Documents\\GitHub\\C-sharp-Practice\\Vs2022\\WebApplication1\\WebApplication1\\WebApplication1.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.36\\microsoft.netcore.app.ref.6.0.36.nupkg.sha512",
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.36\\microsoft.windowsdesktop.app.ref.6.0.36.nupkg.sha512",
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.36\\microsoft.aspnetcore.app.ref.6.0.36.nupkg.sha512",
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.36\\microsoft.netcore.app.host.win-x64.6.0.36.nupkg.sha512"
+  ],
   "logs": []
 }

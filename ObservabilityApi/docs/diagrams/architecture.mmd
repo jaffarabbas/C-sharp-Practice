@@ -1,0 +1,11 @@
+flowchart LR
+    Api["<b>ObservabilityApi.Api</b><br/>controllers, middleware,<br/>Serilog + OpenTelemetry wiring"]
+    App["<b>ObservabilityApi.Application</b><br/>use cases, validation,<br/>ActivitySource, business metrics"]
+    Dom["<b>ObservabilityApi.Domain</b><br/>Product aggregate + invariants<br/>(no dependencies)"]
+    Inf["<b>ObservabilityApi.Infrastructure</b><br/>EF Core / SQL Server, readiness check,<br/>SqlClient pool metrics"]
+    Sql[("SQL Server<br/>catalog.Products")]
+    Api --> App
+    Api --> Inf
+    Inf --> App
+    App --> Dom
+    Inf -. "EF Core" .-> Sql

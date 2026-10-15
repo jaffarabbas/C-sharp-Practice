@@ -1,0 +1,169 @@
+{
+  "uid": "observability-api",
+  "title": "Observability API",
+  "description": "RED metrics, latency percentiles, database, runtime and business metrics for observability-api (OTLP -> Collector -> Prometheus).",
+  "tags": ["dotnet", "opentelemetry"],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "editable": false,
+  "refresh": "10s",
+  "time": { "from": "now-30m", "to": "now" },
+  "templating": {
+    "list": [
+      {
+        "name": "instance",
+        "label": "Instance",
+        "type": "query",
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "query": { "query": "label_values(http_server_request_duration_seconds_count{job=\"observability-api\"}, instance)", "refId": "instance" },
+        "definition": "label_values(http_server_request_duration_seconds_count{job=\"observability-api\"}, instance)",
+        "includeAll": true,
+        "multi": true,
+        "allValue": ".*",
+        "current": { "selected": true, "text": ["All"], "value": ["$__all"] },
+        "refresh": 2,
+        "sort": 1
+      }
+    ]
+  },
+  "panels": [
+    { "type": "row", "title": "Traffic (RED)", "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 } },
+    {
+      "type": "stat", "title": "Request rate", "gridPos": { "h": 4, "w": 6, "x": 0, "y": 1 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "reqps", "decimals": 2 }, "overrides": [] },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "colorMode": "value", "graphMode": "area" },
+      "targets": [ { "refId": "A", "expr": "sum(rate(http_server_request_duration_seconds_count{job=\"observability-api\", instance=~\"$instance\"}[$__rate_interval]))" } ]
+    },
+    {
+      "type": "stat", "title": "Error rate (5xx share)", "gridPos": { "h": 4, "w": 6, "x": 6, "y": 1 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "percentunit", "decimals": 2, "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "orange", "value": 0.01 }, { "color": "red", "value": 0.05 } ] } }, "overrides": [] },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "colorMode": "value", "graphMode": "area" },
+      "targets": [ { "refId": "A", "expr": "(sum(rate(http_server_request_duration_seconds_count{job=\"observability-api\", instance=~\"$instance\", http_response_status_code=~\"5..\"}[$__rate_interval])) or vector(0)) / sum(rate(http_server_request_duration_seconds_count{job=\"observability-api\", instance=~\"$instance\"}[$__rate_interval]))" } ]
+    },
+    {
+      "type": "stat", "title": "p95 latency", "gridPos": { "h": 4, "w": 6, "x": 12, "y": 1 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "s", "decimals": 3, "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "orange", "value": 0.5 }, { "color": "red", "value": 1 } ] } }, "overrides": [] },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "colorMode": "value", "graphMode": "area" },
+      "targets": [ { "refId": "A", "expr": "histogram_quantile(0.95, sum by (le) (rate(http_server_request_duration_seconds_bucket{job=\"observability-api\", instance=~\"$instance\"}[$__rate_interval])))" } ]
+    },
+    {
+      "type": "stat", "title": "Products created (range)", "gridPos": { "h": 4, "w": 6, "x": 18, "y": 1 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "short", "decimals": 0 }, "overrides": [] },
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }, "colorMode": "value", "graphMode": "none" },
+      "targets": [ { "refId": "A", "expr": "sum(increase(products_created_total{job=\"observability-api\", instance=~\"$instance\"}[$__range]))" } ]
+    },
+    {
+      "type": "timeseries", "title": "Request rate by route", "gridPos": { "h": 8, "w": 12, "x": 0, "y": 5 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "reqps" }, "overrides": [] },
+      "targets": [ { "refId": "A", "expr": "sum by (http_request_method, http_route) (rate(http_server_request_duration_seconds_count{job=\"observability-api\", instance=~\"$instance\"}[$__rate_interval]))", "legendFormat": "{{http_request_method}} {{http_route}}" } ]
+    },
+    {
+      "type": "timeseries", "title": "Failed requests by status code", "gridPos": { "h": 8, "w": 12, "x": 12, "y": 5 },
+      "description": "5xx are server failures; 4xx are rejected client requests (validation, not found, conflict, rate limited).",
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "reqps" }, "overrides": [] },
+      "targets": [ { "refId": "A", "expr": "sum by (http_response_status_code) (rate(http_server_request_duration_seconds_count{job=\"observability-api\", instance=~\"$instance\", http_response_status_code=~\"[45]..\"}[$__rate_interval]))", "legendFormat": "{{http_response_status_code}}" } ]
+    },
+    {
+      "type": "timeseries", "title": "Latency p50 / p95 / p99", "gridPos": { "h": 8, "w": 12, "x": 0, "y": 13 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "refId": "A", "expr": "histogram_quantile(0.50, sum by (le) (rate(http_server_request_duration_seconds_bucket{job=\"observability-api\", instance=~\"$instance\"}[$__rate_interval])))", "legendFormat": "p50" },
+        { "refId": "B", "expr": "histogram_quantile(0.95, sum by (le) (rate(http_server_request_duration_seconds_bucket{job=\"observability-api\", instance=~\"$instance\"}[$__rate_interval])))", "legendFormat": "p95" },
+        { "refId": "C", "expr": "histogram_quantile(0.99, sum by (le) (rate(http_server_request_duration_seconds_bucket{job=\"observability-api\", instance=~\"$instance\"}[$__rate_interval])))", "legendFormat": "p99" }
+      ]
+    },
+    {
+      "type": "timeseries", "title": "p95 latency by route", "gridPos": { "h": 8, "w": 12, "x": 12, "y": 13 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "s" }, "overrides": [] },
+      "targets": [ { "refId": "A", "expr": "histogram_quantile(0.95, sum by (le, http_request_method, http_route) (rate(http_server_request_duration_seconds_bucket{job=\"observability-api\", instance=~\"$instance\"}[$__rate_interval])))", "legendFormat": "{{http_request_method}} {{http_route}}" } ]
+    },
+
+    { "type": "row", "title": "Database", "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 21 } },
+    {
+      "type": "timeseries", "title": "SQL operation p95 (OpenTelemetry SqlClient instrumentation)", "gridPos": { "h": 8, "w": 8, "x": 0, "y": 22 },
+      "description": "Source: db.client.operation.duration from OpenTelemetry.Instrumentation.SqlClient.",
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "s" }, "overrides": [] },
+      "targets": [ { "refId": "A", "expr": "histogram_quantile(0.95, sum by (le, db_query_summary) (rate(db_client_operation_duration_seconds_bucket{job=\"observability-api\", instance=~\"$instance\"}[$__rate_interval])))", "legendFormat": "{{db_query_summary}}" } ]
+    },
+    {
+      "type": "timeseries", "title": "Connection pool (SqlClient EventCounters bridge)", "gridPos": { "h": 8, "w": 8, "x": 8, "y": 22 },
+      "description": "Source: Microsoft.Data.SqlClient EventCounters, bridged to meter ObservabilityApi.SqlClient.Pool. Process-wide, sampled every 10 s.",
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "short", "decimals": 0 }, "overrides": [] },
+      "targets": [
+        { "refId": "A", "expr": "sum(sqlclient_pool_active_connections{job=\"observability-api\", instance=~\"$instance\"})", "legendFormat": "in use" },
+        { "refId": "B", "expr": "sum(sqlclient_pool_free_connections{job=\"observability-api\", instance=~\"$instance\"})", "legendFormat": "free" },
+        { "refId": "C", "expr": "sum(sqlclient_pool_pooled_connections{job=\"observability-api\", instance=~\"$instance\"})", "legendFormat": "pooled" },
+        { "refId": "D", "expr": "sum(sqlclient_pool_active_hard_connections{job=\"observability-api\", instance=~\"$instance\"})", "legendFormat": "physical" }
+      ]
+    },
+    {
+      "type": "timeseries", "title": "EF Core activity (Microsoft.EntityFrameworkCore meter)", "gridPos": { "h": 8, "w": 8, "x": 16, "y": 22 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "ops" }, "overrides": [] },
+      "targets": [
+        { "refId": "A", "expr": "sum(rate(microsoft_entityframeworkcore_queries_total{job=\"observability-api\", instance=~\"$instance\"}[$__rate_interval]))", "legendFormat": "queries/s" },
+        { "refId": "B", "expr": "sum(rate(microsoft_entityframeworkcore_savechanges_total{job=\"observability-api\", instance=~\"$instance\"}[$__rate_interval]))", "legendFormat": "SaveChanges/s" },
+        { "refId": "C", "expr": "sum(rate(microsoft_entityframeworkcore_optimistic_concurrency_failures_total{job=\"observability-api\", instance=~\"$instance\"}[$__rate_interval]))", "legendFormat": "concurrency failures/s" },
+        { "refId": "D", "expr": "sum(rate(microsoft_entityframeworkcore_execution_strategy_operation_failures_total{job=\"observability-api\", instance=~\"$instance\"}[$__rate_interval]))", "legendFormat": "transient failures (retried)/s" }
+      ]
+    },
+
+    { "type": "row", "title": "Business", "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 30 } },
+    {
+      "type": "timeseries", "title": "Product changes per minute", "gridPos": { "h": 7, "w": 24, "x": 0, "y": 31 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "short" }, "overrides": [] },
+      "targets": [
+        { "refId": "A", "expr": "sum(rate(products_created_total{job=\"observability-api\", instance=~\"$instance\"}[$__rate_interval])) * 60", "legendFormat": "created" },
+        { "refId": "B", "expr": "sum(rate(products_updated_total{job=\"observability-api\", instance=~\"$instance\"}[$__rate_interval])) * 60", "legendFormat": "updated" },
+        { "refId": "C", "expr": "sum(rate(products_deleted_total{job=\"observability-api\", instance=~\"$instance\"}[$__rate_interval])) * 60", "legendFormat": "deleted" }
+      ]
+    },
+
+    { "type": "row", "title": "Runtime and process", "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 38 } },
+    {
+      "type": "timeseries", "title": "CPU (cores used)", "gridPos": { "h": 7, "w": 6, "x": 0, "y": 39 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "short", "decimals": 2 }, "overrides": [] },
+      "targets": [ { "refId": "A", "expr": "sum by (instance) (rate(dotnet_process_cpu_time_seconds_total{job=\"observability-api\", instance=~\"$instance\"}[$__rate_interval]))", "legendFormat": "{{instance}}" } ]
+    },
+    {
+      "type": "timeseries", "title": "Memory", "gridPos": { "h": 7, "w": 6, "x": 6, "y": 39 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "bytes" }, "overrides": [] },
+      "targets": [
+        { "refId": "A", "expr": "sum by (instance) (dotnet_process_memory_working_set_bytes{job=\"observability-api\", instance=~\"$instance\"})", "legendFormat": "working set {{instance}}" },
+        { "refId": "B", "expr": "sum by (instance) (dotnet_gc_last_collection_heap_size_bytes{job=\"observability-api\", instance=~\"$instance\"})", "legendFormat": "GC heap {{instance}}" }
+      ]
+    },
+    {
+      "type": "timeseries", "title": "Thread pool", "gridPos": { "h": 7, "w": 6, "x": 12, "y": 39 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "short" }, "overrides": [] },
+      "targets": [
+        { "refId": "A", "expr": "sum by (instance) (dotnet_thread_pool_thread_count_total{job=\"observability-api\", instance=~\"$instance\"})", "legendFormat": "threads {{instance}}" },
+        { "refId": "B", "expr": "sum by (instance) (dotnet_thread_pool_queue_length_total{job=\"observability-api\", instance=~\"$instance\"})", "legendFormat": "queue {{instance}}" }
+      ]
+    },
+    {
+      "type": "timeseries", "title": "GC collections and exceptions", "gridPos": { "h": 7, "w": 6, "x": 18, "y": 39 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "ops" }, "overrides": [] },
+      "targets": [
+        { "refId": "A", "expr": "sum by (gc_heap_generation) (rate(dotnet_gc_collections_total{job=\"observability-api\", instance=~\"$instance\"}[$__rate_interval]))", "legendFormat": "GC {{gc_heap_generation}}" },
+        { "refId": "B", "expr": "sum(rate(dotnet_exceptions_total{job=\"observability-api\", instance=~\"$instance\"}[$__rate_interval]))", "legendFormat": "exceptions" }
+      ]
+    }
+  ]
+}

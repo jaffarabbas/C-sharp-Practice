@@ -1,0 +1,13 @@
+flowchart LR
+    API["<b>API</b><br/>Serilog + OpenTelemetry SDK"]
+    Seq[("<b>Seq</b><br/>structured logs")]
+    Col["<b>OpenTelemetry Collector</b><br/>memory_limiter + batch"]
+    Jaeger[("<b>Jaeger</b><br/>traces")]
+    Prom[("<b>Prometheus</b><br/>metrics")]
+    Grafana["<b>Grafana</b><br/>dashboard"]
+    API -- "logs: HTTP/CLEF, batched" --> Seq
+    API -- "traces + metrics: OTLP/gRPC :4317" --> Col
+    Col -- "traces: OTLP" --> Jaeger
+    Col -- "metrics: scrape :8889" --> Prom
+    Prom --> Grafana
+    Jaeger --> Grafana

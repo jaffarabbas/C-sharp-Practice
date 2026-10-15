@@ -1,0 +1,14 @@
+**/bin/
+**/obj/
+**/.vs/
+**/.vscode/
+**/*.user
+**/TestResults/
+tests/
+artifacts/
+deploy/
+http/
+.env
+.env.*
+!.env.example
+*.md

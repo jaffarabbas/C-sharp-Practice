@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\ObservabilityApi.Domain\ObservabilityApi.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Provider-agnostic EF Core only (DbSet/LINQ). The SQL Server provider lives in Infrastructure. -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="FluentValidation" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="ObservabilityApi.UnitTests" />
+  </ItemGroup>
+</Project>

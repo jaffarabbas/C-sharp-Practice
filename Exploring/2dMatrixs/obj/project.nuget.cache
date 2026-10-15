@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "xoaEENnF02VS8Ikhn7QAkzOW3BLOG1wFs15B0jttKEp3cWyWSFeM2b18DOV3moCPWWxVbA6hnKJfmwl3s3rqzw==",
+  "dgSpecHash": "dffEFrPLQCw=",
   "success": true,
-  "projectFilePath": "J:\\c#Work\\2dMatrixs\\2dMatrixs.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Jaffar Abbas\\Documents\\GitHub\\C-sharp-Practice\\Exploring\\2dMatrixs\\2dMatrixs.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.32\\microsoft.netcore.app.host.win-x64.3.1.32.nupkg.sha512"
+  ],
   "logs": []
 }

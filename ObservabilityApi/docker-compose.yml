@@ -1,0 +1,171 @@
+# Local observability stack. Usage (from this folder):
+#   cp .env.example .env            # then fill in the placeholders
+#   docker compose up -d --build     # API + Seq + Collector + Jaeger + Prometheus + Grafana
+#   docker compose --profile tools run --rm migrate      # apply EF Core migrations (one-off job)
+#   docker compose --profile local-sql up -d sqlserver   # optional containerized SQL Server (port 14333)
+#
+# The API uses your existing SQL Server by default (DB_CONNECTION_STRING in .env, host.docker.internal).
+name: observability-api
+
+services:
+  api:
+    build:
+      context: .
+      target: final
+    image: observability-api:local
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__Database: ${DB_CONNECTION_STRING:?Set DB_CONNECTION_STRING in .env}
+      Observability__Seq__ServerUrl: http://seq:5341
+      Observability__Seq__ApiKey: ${SEQ_API_KEY:-}
+      Observability__Otlp__Endpoint: http://otel-collector:4317
+      Observability__Metrics__ExportIntervalSeconds: "5"
+      OpenApi__Enabled: "true"
+    extra_hosts:
+      # Resolves to the Docker host on Linux too (Docker Desktop provides it automatically).
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      # "started", not "healthy": the API must come up (and stay ready) even when Seq or the Collector is down.
+      otel-collector:
+        condition: service_started
+      seq:
+        condition: service_started
+    healthcheck:
+      # The ASP.NET runtime image has bash but no curl/wget.
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/8080 && printf 'GET /health/ready HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n' >&3 && head -n1 <&3 | grep -q ' 200 '"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    # Matches .NET's default host shutdown timeout: in-flight requests drain and Serilog makes a final,
+    # bounded attempt to flush to Seq (about 4 s when Seq is unreachable) before exiting.
+    stop_grace_period: 30s
+    restart: unless-stopped
+
+  migrate:
+    profiles: ["tools"]
+    build:
+      context: .
+      target: migrator
+    image: observability-api-migrator:local
+    environment:
+      ConnectionStrings__Database: ${DB_CONNECTION_STRING:?Set DB_CONNECTION_STRING in .env}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: "no"
+
+  seq:
+    image: datalust/seq:2026.1.17182
+    environment:
+      ACCEPT_EULA: "Y"
+      # First-run only; afterwards the credential lives in the seq-data volume.
+      SEQ_FIRSTRUN_ADMINPASSWORD: ${SEQ_ADMIN_PASSWORD:?Set SEQ_ADMIN_PASSWORD in .env}
+    ports:
+      - "8081:80"      # UI and API
+      - "5341:5341"    # ingestion only (used by an API running on the host)
+    volumes:
+      - seq-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    restart: unless-stopped
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.161.0
+    command: ["--config=/etc/otelcol-contrib/config.yaml"]
+    volumes:
+      - ./deploy/otel-collector/config.yaml:/etc/otelcol-contrib/config.yaml:ro
+    ports:
+      - "4317:4317"    # OTLP gRPC (API on the host)
+      - "4318:4318"    # OTLP HTTP
+    # Distroless image (no shell), so no container healthcheck; /13133 health endpoint is available to orchestrators.
+    depends_on:
+      jaeger:
+        condition: service_healthy
+    restart: unless-stopped
+
+  jaeger:
+    image: jaegertracing/jaeger:2.21.0
+    ports:
+      - "16686:16686"  # UI (OTLP ports stay internal; the Collector is the only producer)
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:16686/"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:v3.5.5
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=7d
+    volumes:
+      - ./deploy/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    ports:
+      - "9090:9090"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:9090/-/ready"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:12.4.11
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:?Set GRAFANA_ADMIN_PASSWORD in .env}
+      # Local convenience: dashboards are viewable without logging in (read-only). Disable outside local dev.
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+    volumes:
+      - ./deploy/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./deploy/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana-data:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      prometheus:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:3000/api/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Optional: containerized SQL Server for machines without one. Host port 14333 avoids clashing with an
+  # existing server on 1433. Point DB_CONNECTION_STRING at Server=sqlserver,1433 to use it.
+  sqlserver:
+    profiles: ["local-sql"]
+    image: mcr.microsoft.com/mssql/server:2022-CU23-ubuntu-22.04
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Developer
+      MSSQL_SA_PASSWORD: ${LOCAL_SQL_SA_PASSWORD:-}
+    ports:
+      - "14333:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$${MSSQL_SA_PASSWORD}\" -C -Q 'SELECT 1' -b -o /dev/null"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 30s
+    restart: unless-stopped
+
+volumes:
+  seq-data:
+  prometheus-data:
+  grafana-data:
+  sqlserver-data:

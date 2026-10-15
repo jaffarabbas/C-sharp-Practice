@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "hyw78iZbLhFUsmMdbP1EyV9g2cULncTz0KDisvLC5pHbBxlZsEp6aOiBxwREzgz3TN5qulWI27+eOZerrrMlrg==",
+  "dgSpecHash": "Cu/ekmkBUAU=",
   "success": true,
-  "projectFilePath": "/home/darklord/Desktop/Github/C-sharp-Practice/WebApi/TestDot/TestDot.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Jaffar Abbas\\Documents\\GitHub\\C-sharp-Practice\\WebApi\\TestDot\\TestDot.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
+  ],
   "logs": []
 }

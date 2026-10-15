@@ -1,0 +1,397 @@
+{
+  "info": {
+    "name": "Observability API",
+    "_postman_id": "8f1d2c4a-3b6e-4f7a-9c1d-2e5f6a7b8c90",
+    "description": "Products CRUD API with ProblemDetails errors, correlation IDs and W3C tracing.\n\nRun the whole collection in order (Collection Runner) for a full scenario: create -> read -> update -> conflicts -> errors -> delete. Requests chain values through collection variables (productId, productVersion, originalVersion, sku).\n\nSelect an environment: 'Observability API - Docker' (http://localhost:8080) or 'Observability API - Local' (http://localhost:5080).\n\nEvery request sends an X-Correlation-ID (postman-<guid>); search it in Seq with CorrelationId = '<value>'. Error responses include traceId, which you can paste into Jaeger.\n\nNote: the API rate-limits to 100 requests per 10 s per client IP (429 ProblemDetails with Retry-After).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "sku", "value": "" },
+    { "key": "productId", "value": "" },
+    { "key": "productVersion", "value": "" },
+    { "key": "originalVersion", "value": "" }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// A fresh, valid correlation ID for every request (searchable in Seq).",
+          "pm.variables.set('correlationId', 'postman-' + pm.variables.replaceIn('{{$guid}}'));"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Valid IDs (1-64 chars of [A-Za-z0-9._:-]) must be echoed; invalid ones are replaced by the API.",
+          "const sent = pm.variables.get('correlationId');",
+          "const returned = pm.response.headers.get('X-Correlation-ID');",
+          "if (/^[A-Za-z0-9._:-]{1,64}$/.test(sent)) {",
+          "    pm.test('[common] correlation ID is echoed', () => pm.expect(returned).to.eql(sent));",
+          "}",
+          "",
+          "if (pm.response.code >= 400) {",
+          "    pm.test('[common] error is ProblemDetails with traceId and correlationId', () => {",
+          "        pm.expect(pm.response.headers.get('Content-Type')).to.include('application/problem+json');",
+          "        const p = pm.response.json();",
+          "        pm.expect(p.status).to.eql(pm.response.code);",
+          "        pm.expect(p.title).to.be.a('string').and.not.empty;",
+          "        pm.expect(p.traceId).to.match(/^[0-9a-f]{32}$/);",
+          "        pm.expect(p.correlationId).to.eql(returned);",
+          "    });",
+          "}"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Liveness",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-Correlation-ID", "value": "{{correlationId}}" } ],
+            "url": { "raw": "{{baseUrl}}/health/live", "host": ["{{baseUrl}}"], "path": ["health", "live"] },
+            "description": "Process is up. No dependency checks."
+          },
+          "event": [ { "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 Healthy', () => {",
+            "    pm.response.to.have.status(200);",
+            "    pm.expect(pm.response.json().status).to.eql('Healthy');",
+            "});"
+          ] } } ]
+        },
+        {
+          "name": "Readiness (SQL Server)",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-Correlation-ID", "value": "{{correlationId}}" } ],
+            "url": { "raw": "{{baseUrl}}/health/ready", "host": ["{{baseUrl}}"], "path": ["health", "ready"] },
+            "description": "200 when SQL Server is reachable, 503 otherwise. Seq/Collector outages do not affect it."
+          },
+          "event": [ { "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 with sqlserver check Healthy', () => {",
+            "    pm.response.to.have.status(200);",
+            "    const check = pm.response.json().checks.find(c => c.name === 'sqlserver');",
+            "    pm.expect(check.status).to.eql('Healthy');",
+            "});"
+          ] } } ]
+        }
+      ]
+    },
+    {
+      "name": "Products - happy path",
+      "item": [
+        {
+          "name": "Create product",
+          "event": [
+            { "listen": "prerequest", "script": { "type": "text/javascript", "exec": [
+              "// Unique lower-case SKU; the API normalizes it to upper case.",
+              "pm.collectionVariables.set('sku', 'pm-' + Date.now().toString(36));"
+            ] } },
+            { "listen": "test", "script": { "type": "text/javascript", "exec": [
+              "pm.test('201 Created with Location', () => {",
+              "    pm.response.to.have.status(201);",
+              "    pm.expect(pm.response.headers.get('Location')).to.include('/api/products/');",
+              "});",
+              "const p = pm.response.json();",
+              "pm.test('SKU normalized, fields returned', () => {",
+              "    pm.expect(p.sku).to.eql(pm.collectionVariables.get('sku').toUpperCase());",
+              "    pm.expect(p.name).to.eql('Postman widget');",
+              "    pm.expect(p.price).to.eql(19.99);",
+              "    pm.expect(p.version).to.be.a('string').and.not.empty;",
+              "});",
+              "pm.collectionVariables.set('productId', p.id);",
+              "pm.collectionVariables.set('productVersion', p.version);",
+              "pm.collectionVariables.set('originalVersion', p.version);"
+            ] } }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-Correlation-ID", "value": "{{correlationId}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"sku\": \"{{sku}}\",\n  \"name\": \"Postman widget\",\n  \"description\": \"Created from Postman\",\n  \"price\": 19.99\n}" },
+            "url": { "raw": "{{baseUrl}}/api/products", "host": ["{{baseUrl}}"], "path": ["api", "products"] },
+            "description": "SKU: 2-32 chars [A-Z0-9-], unique. Name: required, max 200. Description: max 2000. Price: 0-1,000,000 with max 2 decimals."
+          }
+        },
+        {
+          "name": "Get product by ID",
+          "event": [ { "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 with the created product', () => {",
+            "    pm.response.to.have.status(200);",
+            "    pm.expect(pm.response.json().id).to.eql(pm.collectionVariables.get('productId'));",
+            "});"
+          ] } } ],
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-Correlation-ID", "value": "{{correlationId}}" } ],
+            "url": { "raw": "{{baseUrl}}/api/products/{{productId}}", "host": ["{{baseUrl}}"], "path": ["api", "products", "{{productId}}"] }
+          }
+        },
+        {
+          "name": "List products (paged)",
+          "event": [ { "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 with paging metadata', () => {",
+            "    pm.response.to.have.status(200);",
+            "    const page = pm.response.json();",
+            "    pm.expect(page.page).to.eql(1);",
+            "    pm.expect(page.pageSize).to.eql(10);",
+            "    pm.expect(page.items.length).to.be.at.most(10);",
+            "    pm.expect(page.totalCount).to.be.at.least(1);",
+            "    pm.expect(page.totalPages).to.eql(Math.ceil(page.totalCount / page.pageSize));",
+            "});"
+          ] } } ],
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-Correlation-ID", "value": "{{correlationId}}" } ],
+            "url": {
+              "raw": "{{baseUrl}}/api/products?page=1&pageSize=10",
+              "host": ["{{baseUrl}}"], "path": ["api", "products"],
+              "query": [
+                { "key": "page", "value": "1", "description": "1-1000" },
+                { "key": "pageSize", "value": "10", "description": "1-100" }
+              ]
+            },
+            "description": "Newest first."
+          }
+        },
+        {
+          "name": "Update product",
+          "event": [ { "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('200 with new values and a new version', () => {",
+            "    pm.response.to.have.status(200);",
+            "    const p = pm.response.json();",
+            "    pm.expect(p.name).to.eql('Postman widget v2');",
+            "    pm.expect(p.price).to.eql(24.5);",
+            "    pm.expect(p.version).to.not.eql(pm.collectionVariables.get('originalVersion'));",
+            "    pm.collectionVariables.set('productVersion', p.version);",
+            "});"
+          ] } } ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-Correlation-ID", "value": "{{correlationId}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Postman widget v2\",\n  \"description\": \"Updated from Postman\",\n  \"price\": 24.50,\n  \"version\": \"{{productVersion}}\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/products/{{productId}}", "host": ["{{baseUrl}}"], "path": ["api", "products", "{{productId}}"] },
+            "description": "Optimistic concurrency: 'version' must be the value from the last read. SKU cannot be changed."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products - error cases",
+      "item": [
+        {
+          "name": "Update with stale version (409)",
+          "event": [ { "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('409 Conflict', () => pm.response.to.have.status(409));"
+          ] } } ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-Correlation-ID", "value": "{{correlationId}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Stale writer\",\n  \"price\": 1,\n  \"version\": \"{{originalVersion}}\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/products/{{productId}}", "host": ["{{baseUrl}}"], "path": ["api", "products", "{{productId}}"] },
+            "description": "Uses the version from before the update, so it must be rejected."
+          }
+        },
+        {
+          "name": "Create duplicate SKU (409)",
+          "event": [ { "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('409 Conflict mentioning the SKU', () => {",
+            "    pm.response.to.have.status(409);",
+            "    pm.expect(pm.response.json().detail).to.include(pm.collectionVariables.get('sku').toUpperCase());",
+            "});"
+          ] } } ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-Correlation-ID", "value": "{{correlationId}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"sku\": \"{{sku}}\",\n  \"name\": \"Duplicate\",\n  \"price\": 1\n}" },
+            "url": { "raw": "{{baseUrl}}/api/products", "host": ["{{baseUrl}}"], "path": ["api", "products"] }
+          }
+        },
+        {
+          "name": "Create invalid product (400)",
+          "event": [ { "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('400 with field errors', () => {",
+            "    pm.response.to.have.status(400);",
+            "    const errors = pm.response.json().errors;",
+            "    pm.expect(errors).to.have.property('sku');",
+            "    pm.expect(errors).to.have.property('name');",
+            "    pm.expect(errors).to.have.property('price');",
+            "});"
+          ] } } ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-Correlation-ID", "value": "{{correlationId}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{\n  \"sku\": \"!\",\n  \"name\": \"\",\n  \"price\": -1\n}" },
+            "url": { "raw": "{{baseUrl}}/api/products", "host": ["{{baseUrl}}"], "path": ["api", "products"] }
+          }
+        },
+        {
+          "name": "Malformed JSON (400)",
+          "event": [ { "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('400 Bad Request', () => pm.response.to.have.status(400));"
+          ] } } ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-Correlation-ID", "value": "{{correlationId}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{ \"sku\": " },
+            "url": { "raw": "{{baseUrl}}/api/products", "host": ["{{baseUrl}}"], "path": ["api", "products"] }
+          }
+        },
+        {
+          "name": "Page size out of range (400)",
+          "event": [ { "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('400 with pageSize error', () => {",
+            "    pm.response.to.have.status(400);",
+            "    pm.expect(pm.response.json().errors).to.have.property('pageSize');",
+            "});"
+          ] } } ],
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-Correlation-ID", "value": "{{correlationId}}" } ],
+            "url": {
+              "raw": "{{baseUrl}}/api/products?page=1&pageSize=500",
+              "host": ["{{baseUrl}}"], "path": ["api", "products"],
+              "query": [ { "key": "page", "value": "1" }, { "key": "pageSize", "value": "500" } ]
+            }
+          }
+        },
+        {
+          "name": "Get unknown product (404)",
+          "event": [ { "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('404 Not Found', () => pm.response.to.have.status(404));"
+          ] } } ],
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-Correlation-ID", "value": "{{correlationId}}" } ],
+            "url": { "raw": "{{baseUrl}}/api/products/00000000-0000-0000-0000-000000000001", "host": ["{{baseUrl}}"], "path": ["api", "products", "00000000-0000-0000-0000-000000000001"] }
+          }
+        },
+        {
+          "name": "Unsupported media type (415)",
+          "event": [ { "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('415 Unsupported Media Type', () => pm.response.to.have.status(415));"
+          ] } } ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "text/plain" },
+              { "key": "X-Correlation-ID", "value": "{{correlationId}}" }
+            ],
+            "body": { "mode": "raw", "raw": "not json" },
+            "url": { "raw": "{{baseUrl}}/api/products", "host": ["{{baseUrl}}"], "path": ["api", "products"] }
+          }
+        },
+        {
+          "name": "Method not allowed (405)",
+          "event": [ { "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('405 Method Not Allowed', () => pm.response.to.have.status(405));"
+          ] } } ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "X-Correlation-ID", "value": "{{correlationId}}" }
+            ],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/api/products", "host": ["{{baseUrl}}"], "path": ["api", "products"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tracing and correlation",
+      "item": [
+        {
+          "name": "Continue an upstream W3C trace",
+          "event": [ { "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('ProblemDetails traceId equals the incoming traceparent trace ID', () => {",
+            "    pm.response.to.have.status(404);",
+            "    pm.expect(pm.response.json().traceId).to.eql('4bf92f3577b34da6a3ce929d0e0e4736');",
+            "});"
+          ] } } ],
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "traceparent", "value": "00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01" },
+              { "key": "X-Correlation-ID", "value": "{{correlationId}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/api/products/00000000-0000-0000-0000-000000000002", "host": ["{{baseUrl}}"], "path": ["api", "products", "00000000-0000-0000-0000-000000000002"] },
+            "description": "Look up trace 4bf92f3577b34da6a3ce929d0e0e4736 in Jaeger or Seq (@TraceId = '...')."
+          }
+        },
+        {
+          "name": "Invalid correlation ID is replaced",
+          "event": [ { "listen": "prerequest", "script": { "type": "text/javascript", "exec": [
+            "pm.variables.set('correlationId', 'has spaces and is invalid');"
+          ] } }, { "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('invalid value is not echoed; a generated GUID is returned', () => {",
+            "    pm.response.to.have.status(200);",
+            "    const returned = pm.response.headers.get('X-Correlation-ID');",
+            "    pm.expect(returned).to.not.eql('has spaces and is invalid');",
+            "    pm.expect(returned).to.match(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/);",
+            "});"
+          ] } } ],
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "X-Correlation-ID", "value": "{{correlationId}}" } ],
+            "url": { "raw": "{{baseUrl}}/health/live", "host": ["{{baseUrl}}"], "path": ["health", "live"] },
+            "description": "Allowed: 1-64 chars of [A-Za-z0-9._:-]. Anything else is replaced with a new GUID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cleanup",
+      "item": [
+        {
+          "name": "Delete product",
+          "event": [ { "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('204 No Content', () => pm.response.to.have.status(204));"
+          ] } } ],
+          "request": {
+            "method": "DELETE",
+            "header": [ { "key": "X-Correlation-ID", "value": "{{correlationId}}" } ],
+            "url": { "raw": "{{baseUrl}}/api/products/{{productId}}", "host": ["{{baseUrl}}"], "path": ["api", "products", "{{productId}}"] }
+          }
+        },
+        {
+          "name": "Delete again (404)",
+          "event": [ { "listen": "test", "script": { "type": "text/javascript", "exec": [
+            "pm.test('404 Not Found', () => pm.response.to.have.status(404));"
+          ] } } ],
+          "request": {
+            "method": "DELETE",
+            "header": [ { "key": "X-Correlation-ID", "value": "{{correlationId}}" } ],
+            "url": { "raw": "{{baseUrl}}/api/products/{{productId}}", "host": ["{{baseUrl}}"], "path": ["api", "products", "{{productId}}"] }
+          }
+        }
+      ]
+    }
+  ]
+}

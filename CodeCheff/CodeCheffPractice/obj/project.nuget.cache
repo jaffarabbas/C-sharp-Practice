@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "Bqkn3pm+Msc6igRtObvrVV55OdcVx3LaE42zwkPHxP3ETCZ/LtF42dAV4duTa7peOmx/mUNiynklFCwFsD0mTA==",
+  "dgSpecHash": "rjapmiYSPlY=",
   "success": true,
-  "projectFilePath": "J:\\GitHub\\C-sharp-Practice\\CodeCheff\\CodeCheffPractice\\CodeCheffPractice.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Jaffar Abbas\\Documents\\GitHub\\C-sharp-Practice\\CodeCheff\\CodeCheffPractice\\CodeCheffPractice.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.36\\microsoft.netcore.app.ref.6.0.36.nupkg.sha512",
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.36\\microsoft.windowsdesktop.app.ref.6.0.36.nupkg.sha512",
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.36\\microsoft.aspnetcore.app.ref.6.0.36.nupkg.sha512",
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.36\\microsoft.netcore.app.host.win-x64.6.0.36.nupkg.sha512"
+  ],
   "logs": []
 }

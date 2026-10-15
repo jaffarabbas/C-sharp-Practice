@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "/hnK7TlGCZWIozWNErIt24bC/qf55AV0u+9kbbvs9Rct2I2rQVyQSanWVJsCSwdJiNnVn+ilBGH0mTfBzrE4CA==",
+  "dgSpecHash": "e2l5T+wUe0w=",
   "success": true,
-  "projectFilePath": "J:\\c#Work\\apiFirstProject\\apiFirstProject\\apiFirstProject.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Jaffar Abbas\\Documents\\GitHub\\C-sharp-Practice\\Exploring\\apiFirstProject\\apiFirstProject\\apiFirstProject.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\Jaffar Abbas\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.32\\microsoft.netcore.app.host.win-x64.3.1.32.nupkg.sha512"
+  ],
   "logs": []
 }

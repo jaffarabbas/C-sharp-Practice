@@ -1,0 +1,58 @@
+# OpenTelemetry Collector: single OTLP entry point for the API.
+#   traces  -> Jaeger (OTLP/gRPC)
+#   metrics -> Prometheus exporter, scraped by Prometheus on :8889
+# Logs are NOT routed through the Collector: Serilog ships them to Seq directly (one log pipeline, no duplicates).
+
+extensions:
+  health_check:
+    endpoint: 0.0.0.0:13133
+
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  # Protects the Collector from OOM under bursts; applied first.
+  memory_limiter:
+    check_interval: 1s
+    limit_percentage: 80
+    spike_limit_percentage: 25
+  batch:
+    send_batch_size: 1024
+    timeout: 5s
+
+exporters:
+  otlp_grpc/jaeger:
+    endpoint: jaeger:4317
+    tls:
+      insecure: true
+    sending_queue:
+      enabled: true
+      queue_size: 5000
+    retry_on_failure:
+      enabled: true
+      max_elapsed_time: 60s
+
+  prometheus:
+    endpoint: 0.0.0.0:8889
+    # Resource attributes are exposed once per series via the target_info metric instead of being copied
+    # onto every series as labels, which keeps label sets small and bounded.
+    resource_to_telemetry_conversion:
+      enabled: false
+    metric_expiration: 5m
+
+service:
+  extensions: [health_check]
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [otlp_grpc/jaeger]
+    metrics:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [prometheus]

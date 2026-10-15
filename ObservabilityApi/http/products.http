@@ -1,0 +1,82 @@
+### Observability API - example requests (VS / VS Code REST Client / Rider)
+# Host run (dotnet run): http://localhost:5080   Docker compose: http://localhost:8080
+@baseUrl = http://localhost:5080
+
+### Liveness (no dependencies)
+GET {{baseUrl}}/health/live
+
+### Readiness (SQL Server only; Seq/Collector outages do not affect it)
+GET {{baseUrl}}/health/ready
+
+### Create a product (201 + Location). Change the SKU to create another one.
+# @name create
+POST {{baseUrl}}/api/products
+Content-Type: application/json
+X-Correlation-ID: demo-create-001
+
+{
+  "sku": "demo-1001",
+  "name": "Demo widget",
+  "description": "Created from products.http",
+  "price": 12.50
+}
+
+### Get it back
+GET {{baseUrl}}/api/products/{{create.response.body.$.id}}
+X-Correlation-ID: demo-get-001
+
+### List (bounded paging: page 1..1000, pageSize 1..100)
+GET {{baseUrl}}/api/products?page=1&pageSize=10
+
+### Update with optimistic concurrency: "version" must be the value last read
+PUT {{baseUrl}}/api/products/{{create.response.body.$.id}}
+Content-Type: application/json
+X-Correlation-ID: demo-update-001
+
+{
+  "name": "Demo widget v2",
+  "description": "Updated",
+  "price": 13.00,
+  "version": "{{create.response.body.$.version}}"
+}
+
+### Same update again with the now-stale version -> 409 ProblemDetails
+PUT {{baseUrl}}/api/products/{{create.response.body.$.id}}
+Content-Type: application/json
+
+{
+  "name": "Stale writer",
+  "price": 1,
+  "version": "{{create.response.body.$.version}}"
+}
+
+### Duplicate SKU -> 409 ProblemDetails
+POST {{baseUrl}}/api/products
+Content-Type: application/json
+X-Correlation-ID: demo-conflict-001
+
+{ "sku": "DEMO-1001", "name": "Duplicate", "price": 1 }
+
+### Validation failure -> 400 ValidationProblemDetails (errors keyed by field)
+POST {{baseUrl}}/api/products
+Content-Type: application/json
+X-Correlation-ID: demo-invalid-001
+
+{ "sku": "!", "name": "", "price": -1 }
+
+### Paging out of bounds -> 400
+GET {{baseUrl}}/api/products?pageSize=500
+
+### Unknown product -> 404 ProblemDetails
+GET {{baseUrl}}/api/products/00000000-0000-0000-0000-000000000001
+X-Correlation-ID: demo-notfound-001
+
+### Continue an upstream W3C trace: the traceId in logs/Jaeger/ProblemDetails will be 4bf92f35...
+GET {{baseUrl}}/api/products/00000000-0000-0000-0000-000000000002
+traceparent: 00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01
+
+### Delete (204), then deleting again returns 404
+DELETE {{baseUrl}}/api/products/{{create.response.body.$.id}}
+
+### OpenAPI document (Development / OpenApi:Enabled=true). Interactive UI: {{baseUrl}}/scalar
+GET {{baseUrl}}/openapi/v1.json
