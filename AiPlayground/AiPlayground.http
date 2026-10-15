@@ -1,0 +1,6 @@
+@AiPlayground_HostAddress = http://localhost:5088
+
+GET {{AiPlayground_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

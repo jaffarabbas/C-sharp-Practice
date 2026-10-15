@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CodeCheffPractice")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+22b60106bb54ebf0527f7b52e9971715fd5b0a8b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bf6719059de9b8a0b928a7b923a76c4bafaa3a6d")]
 [assembly: System.Reflection.AssemblyProductAttribute("CodeCheffPractice")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CodeCheffPractice")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
