@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AptechWorkShopAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+17833784d85385016323c5e0a68c7e0e76920c1e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+43b5fe8df227900c84221e6eb2ff4a911debbb10")]
 [assembly: System.Reflection.AssemblyProductAttribute("AptechWorkShopAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AptechWorkShopAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
