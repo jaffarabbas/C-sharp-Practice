@@ -1,0 +1,17 @@
+services:
+  rabbitmq:
+    image: rabbitmq:4-management   # broker + web UI
+    container_name: hrlab-rabbitmq
+    ports:
+      - "5672:5672"    # AMQP: your .NET apps connect here
+      - "15672:15672"  # Management UI: http://localhost:15672  (guest / guest)
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq   # durable queues + persistent messages survive restarts
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  rabbitmq-data:

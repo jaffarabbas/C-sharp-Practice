@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/HrLab.Api/HrLab.Api.csproj" />
+    <Project Path="src/HrLab.Messaging/HrLab.Messaging.csproj" />
+    <Project Path="src/HrLab.NotificationWorker/HrLab.NotificationWorker.csproj" />
+    <Project Path="src/HrLab.PayrollWorker/HrLab.PayrollWorker.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,25 @@
+### Open this file in Visual Studio / VS Code (REST Client) and click "Send Request".
+@api = http://localhost:5080
+
+### 1. Approve one leave (works everywhere)
+POST {{api}}/leaves/7/approve
+Content-Type: application/json
+
+{
+  "employeeName": "Ali Khan",
+  "fromDate": "2026-10-26",
+  "toDate": "2026-10-28",
+  "approvedBy": "Jaffar"
+}
+
+### 2. Approve a leave for employee 26: payroll succeeds, notifications retries 3x then parks it
+POST {{api}}/leaves/26/approve
+Content-Type: application/json
+
+{}
+
+### 3. Approve 50 leaves at once (watch the queues in the UI, run 2 payroll workers)
+POST {{api}}/leaves/bulk?count=50
+
+### 4. Move parked notification messages back into the main queue
+POST {{api}}/admin/redrive/notifications.leave-approved
