@@ -18,7 +18,8 @@ Work on a branch. Never delete a settings file before its values are in the shar
 3. Diff all `appsettings.json` files against each other, then all `appsettings.Development.json`, etc. Report every key that differs between services and **ask the user** how to handle it before continuing. Do not assume "all the same" is literally true.
 4. Collect each app's ports from `Properties/launchSettings.json` (`applicationUrl`) and any extra `environmentVariables`.
 5. Find secrets (passwords, keys, tokens) in the JSON. These go to user-secrets / environment variables, not the shared file. Tell the user which ones.
-6. Check for an existing `Directory.Build.props`, `Directory.Packages.props`, and the gateway type (YARP, Ocelot, custom). Merge into existing files rather than overwriting.
+6. Search for code that reads settings files directly instead of through `IConfiguration`: `appsettings.json`, `AddJsonFile`, `new ConfigurationBuilder()`, `File.ReadAllText(` on config files. Typical hits: EF Core `IDesignTimeDbContextFactory` (breaks `dotnet ef`), static config helpers, worker services built with `Host.CreateApplicationBuilder`/`Host.CreateDefaultBuilder` (need an `IHostApplicationBuilder`/`IHostBuilder` version of the extension). Each must also load `Path.Combine(AppContext.BaseDirectory, "appsettings.Shared.json")` before its own file, or switch to the host's `IConfiguration`. List them for the user.
+7. Check for an existing `Directory.Build.props`, `Directory.Packages.props`, and the gateway type (YARP, Ocelot, custom). Merge into existing files rather than overwriting.
 
 Show the user a short summary of findings and the plan; proceed after confirmation.
 
@@ -87,13 +88,15 @@ public static class SharedConfigurationExtensions
         builder.Configuration.Sources.Insert(1, Json(files, $"appsettings.Shared.{environment}.json", optional: true));
 
         // In Development the port comes from Services:<ProjectName> instead of launchSettings.json.
-        // Elsewhere those entries are addresses other services call (e.g. http://employee-api:8080),
-        // so the host decides the binding (ASPNETCORE_URLS / ASPNETCORE_HTTP_PORTS / IIS).
+        // It deliberately wins over ASPNETCORE_URLS: Visual Studio sets that to https://localhost:5001;http://localhost:5000
+        // when a profile has no applicationUrl, which would put every service on the same port.
+        // Docker sets ASPNETCORE_HTTP_PORTS instead, so that one is still respected.
+        // Outside Development these entries are addresses other services call (e.g. http://employee-api:8080),
+        // so the host decides the binding.
         var url = builder.Configuration[$"Services:{builder.Environment.ApplicationName}"];
-        var hostHasUrl = !string.IsNullOrEmpty(builder.Configuration["urls"])
-                         || !string.IsNullOrEmpty(builder.Configuration["http_ports"]);
+        var runningInContainer = !string.IsNullOrEmpty(builder.Configuration["http_ports"]);
 
-        if (builder.Environment.IsDevelopment() && !string.IsNullOrEmpty(url) && !hostHasUrl)
+        if (builder.Environment.IsDevelopment() && !string.IsNullOrEmpty(url) && !runningInContainer)
             builder.WebHost.UseUrls(url);
 
         return builder;
@@ -197,6 +200,26 @@ Create `Directory.Packages.props` with `<ManagePackageVersionsCentrally>true</Ma
     { "Path": "src\\Services\\Employee.Api\\Employee.Api.csproj", "Action": "Start" }
 ] } ]
 ```
+
+## 9b. Optional: .NET Aspire as a second way to run (.NET 8+ only)
+
+Only if the user asks. It must not replace the steps above; both ways of running must keep working.
+
+1. `dotnet new install Aspire.ProjectTemplates`, then `dotnet new aspire-apphost` and `dotnet new aspire-servicedefaults`. With central package management, move the ServiceDefaults template's `Version` attributes into `Directory.Packages.props`.
+2. Every app references ServiceDefaults and calls `builder.AddServiceDefaults();` (after `AddSharedConfiguration()`) and `app.MapDefaultEndpoints();`. Warn the user: this adds retries/timeouts to every `HttpClient` and `/health` + `/alive` in Development.
+3. AppHost references every app and loads `appsettings.Shared.json` + `.{Env}.json` from `AppContext.BaseDirectory` (Insert at 0/1), so it shares the port map and connection string.
+4. In `AddSharedConfiguration()`, skip `UseUrls` when `Hosting:Orchestrated` is `true`. Each project in AppHost:
+
+```csharp
+builder.AddProject<TProject>(name)
+    .WithHttpEndpoint(port: new Uri(builder.Configuration[$"Services:{projectName}"]!).Port) // proxy on the usual port
+    .WithEnvironment("Hosting__Orchestrated", "true")
+    .WithReference(builder.AddConnectionString("HrDb"));   // create the connection-string resource once and reuse it
+```
+
+   `WithHttpEndpoint` is required because the launch profiles have no `applicationUrl`, so Aspire finds no endpoint otherwise. Add `.WithReference(x).WaitFor(x)` for gateway → services and web → gateway.
+5. Add an "Aspire" entry (AppHost only) to the `.slnLaunch`.
+6. Verify both ways: the five-app startup still binds the shared ports; AppHost alone serves the gateway and web on the same ports.
 
 ## 10. Verify
 

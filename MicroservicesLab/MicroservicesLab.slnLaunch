@@ -2,11 +2,35 @@
   {
     "Name": "All services",
     "Projects": [
-      { "Path": "src\\Services\\Employee.Api\\Employee.Api.csproj", "Action": "Start" },
-      { "Path": "src\\Services\\Payroll.Api\\Payroll.Api.csproj", "Action": "Start" },
-      { "Path": "src\\Services\\Leave.Api\\Leave.Api.csproj", "Action": "Start" },
-      { "Path": "src\\Gateway\\ApiGateway\\ApiGateway.csproj", "Action": "Start" },
-      { "Path": "src\\Web\\WebPortal\\WebPortal.csproj", "Action": "Start" }
+      {
+        "Path": "src\\Services\\Employee.Api\\Employee.Api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\Services\\Payroll.Api\\Payroll.Api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\Services\\Leave.Api\\Leave.Api.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\Gateway\\ApiGateway\\ApiGateway.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\Web\\WebPortal\\WebPortal.csproj",
+        "Action": "Start"
+      }
+    ]
+  },
+  {
+    "Name": "Aspire",
+    "Projects": [
+      {
+        "Path": "src\\Aspire\\AppHost\\AppHost.csproj",
+        "Action": "Start"
+      }
     ]
   }
 ]

@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BuildingBlocks\BuildingBlocks\BuildingBlocks.csproj" />
+    <ProjectReference Include="..\..\Aspire\ServiceDefaults\ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>

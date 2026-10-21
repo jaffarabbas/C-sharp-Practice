@@ -2,6 +2,7 @@
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddSharedConfiguration();
+builder.AddServiceDefaults();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -9,6 +10,8 @@ builder.Services.AddHttpClient("gateway", client =>
     client.BaseAddress = new Uri(builder.Configuration["Services:ApiGateway"]!.TrimEnd('/') + "/"));
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

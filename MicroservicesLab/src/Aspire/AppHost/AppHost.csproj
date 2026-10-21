@@ -1,0 +1,20 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.6.2">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Services\Employee.Api\Employee.Api.csproj" />
+    <ProjectReference Include="..\..\Services\Payroll.Api\Payroll.Api.csproj" />
+    <ProjectReference Include="..\..\Services\Leave.Api\Leave.Api.csproj" />
+    <ProjectReference Include="..\..\Gateway\ApiGateway\ApiGateway.csproj" />
+    <ProjectReference Include="..\..\Web\WebPortal\WebPortal.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AspireUseCliBundle>true</AspireUseCliBundle>
+    <UserSecretsId>d7849563-71e9-407a-af0d-d32b1494af7f</UserSecretsId>
+  </PropertyGroup>
+
+</Project>

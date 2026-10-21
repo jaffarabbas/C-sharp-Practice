@@ -1,5 +1,9 @@
 <Solution>
   <Folder Name="/src/" />
+  <Folder Name="/src/Aspire/">
+    <Project Path="src/Aspire/AppHost/AppHost.csproj" />
+    <Project Path="src/Aspire/ServiceDefaults/ServiceDefaults.csproj" />
+  </Folder>
   <Folder Name="/src/BuildingBlocks/">
     <Project Path="src/BuildingBlocks/BuildingBlocks/BuildingBlocks.csproj" />
   </Folder>
