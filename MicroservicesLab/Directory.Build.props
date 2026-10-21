@@ -1,0 +1,9 @@
+<Project>
+  <!-- One appsettings for every app: config/appsettings.Shared*.json is copied into each project's bin folder. -->
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)config\appsettings.Shared*.json"
+          Link="%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest"
+          CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

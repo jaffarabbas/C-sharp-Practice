@@ -1,0 +1,16 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Service status through the gateway:</p>
+    <table class="table w-auto mx-auto">
+        @foreach (var (service, status) in Model.Results)
+        {
+            <tr><th>@service</th><td>@status</td></tr>
+        }
+    </table>
+</div>

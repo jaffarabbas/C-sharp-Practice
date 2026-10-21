@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/BuildingBlocks/">
+    <Project Path="src/BuildingBlocks/BuildingBlocks/BuildingBlocks.csproj" />
+  </Folder>
+  <Folder Name="/src/Gateway/">
+    <Project Path="src/Gateway/ApiGateway/ApiGateway.csproj" />
+  </Folder>
+  <Folder Name="/src/Services/">
+    <Project Path="src/Services/Employee.Api/Employee.Api.csproj" />
+    <Project Path="src/Services/Leave.Api/Leave.Api.csproj" />
+    <Project Path="src/Services/Payroll.Api/Payroll.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Web/">
+    <Project Path="src/Web/WebPortal/WebPortal.csproj" />
+  </Folder>
+</Solution>

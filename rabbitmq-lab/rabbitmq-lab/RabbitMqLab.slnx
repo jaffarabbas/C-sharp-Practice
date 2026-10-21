@@ -5,4 +5,5 @@
     <Project Path="src/HrLab.NotificationWorker/HrLab.NotificationWorker.csproj" />
     <Project Path="src/HrLab.PayrollWorker/HrLab.PayrollWorker.csproj" />
   </Folder>
+  <Project Path="../../MicroservicesLab/src/BuildingBlocks/BuildingBlocks/BuildingBlocks.csproj" />
 </Solution>
